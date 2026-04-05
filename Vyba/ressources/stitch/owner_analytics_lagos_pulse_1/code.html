@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lagos Pulse | Venue Owner Analytics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#ffb148",
+                    "surface-bright": "#1f2b49",
+                    "on-tertiary-container": "#4a2c00",
+                    "on-tertiary-fixed-variant": "#563400",
+                    "tertiary-dim": "#e79400",
+                    "on-secondary-container": "#e1ffec",
+                    "on-primary-fixed": "#000000",
+                    "primary": "#a3a6ff",
+                    "primary-dim": "#6063ee",
+                    "secondary-container": "#006c49",
+                    "surface": "#060e20",
+                    "error-dim": "#d73357",
+                    "surface-container-low": "#091328",
+                    "surface-tint": "#a3a6ff",
+                    "primary-fixed-dim": "#8387ff",
+                    "tertiary-fixed": "#f8a010",
+                    "on-surface-variant": "#a3aac4",
+                    "on-background": "#dee5ff",
+                    "secondary-dim": "#58e7ab",
+                    "on-primary-fixed-variant": "#0e009d",
+                    "secondary": "#69f6b8",
+                    "inverse-on-surface": "#4d556b",
+                    "on-surface": "#dee5ff",
+                    "on-error-container": "#ffb2b9",
+                    "surface-container-high": "#141f38",
+                    "background": "#060e20",
+                    "primary-fixed": "#9396ff",
+                    "outline": "#6d758c",
+                    "error-container": "#a70138",
+                    "on-tertiary": "#573500",
+                    "tertiary-container": "#f8a010",
+                    "secondary-fixed-dim": "#58e7ab",
+                    "surface-container-highest": "#192540",
+                    "tertiary-fixed-dim": "#e79400",
+                    "on-error": "#490013",
+                    "on-secondary-fixed": "#00452d",
+                    "on-tertiary-fixed": "#2a1700",
+                    "on-primary": "#0f00a4",
+                    "inverse-surface": "#faf8ff",
+                    "secondary-fixed": "#69f6b8",
+                    "primary-container": "#9396ff",
+                    "outline-variant": "#40485d",
+                    "surface-variant": "#192540",
+                    "surface-dim": "#060e20",
+                    "on-primary-container": "#0a0081",
+                    "error": "#ff6e84",
+                    "surface-container-lowest": "#000000",
+                    "surface-container": "#0f1930",
+                    "on-secondary-fixed-variant": "#006544",
+                    "on-secondary": "#005a3c",
+                    "inverse-primary": "#494bd7"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Epilogue"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(25, 37, 64, 0.6);
+            backdrop-filter: blur(20px);
+        }
+        .pulse-gradient {
+            background: linear-gradient(135deg, #a3a6ff 0%, #6063ee 100%);
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary selection:text-on-primary">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-slate-950/60 backdrop-blur-xl flex items-center justify-between px-6 h-16 w-full shadow-[0_24px_24px_-4px_rgba(222,229,255,0.08)]">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-primary-dim/30">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Close up portrait of a confident West African man in stylish modern attire against a softly blurred city background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChg8l290mWZ-6kiW7E7KICZLRcfn4RiRQ8FXbQvHc-i4cMC9APCitHRAoHQPhevlP80DVfoIe4gofgK-c2tXuwRfMT_Tx8oYZzrA_aPIe2znT24CSIpFeQEkOI3HjmsxDMwsfncuoLxTqRlzef7nDuxbL0UT-Xo6ASA6Tz9kCGrH5cfiOmcFa2erOU2vbgOBHOxGPZrAd-SDtVxH5-EcyYaNYe1fvVNW6b8rEBoiY1ncd31nW6yyWAu_wR0khT8IyHT6CtehbFRZof"/>
+</div>
+<span class="font-epilogue tracking-tight headline-lg text-indigo-400 text-xl font-bold italic">Lagos Pulse</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-indigo-400 hover:opacity-80 transition-opacity cursor-pointer">notifications</span>
+</div>
+</nav>
+<div class="flex pt-16 min-h-screen">
+<!-- Sidebar Navigation (Desktop) -->
+<aside class="hidden md:flex flex-col h-[calc(100vh-64px)] w-80 bg-slate-900 shadow-2xl p-6 sticky top-16">
+<div class="mb-10 flex items-center gap-4 px-4">
+<div class="w-12 h-12 bg-surface-container-highest rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl">nightlife</span>
+</div>
+<div>
+<h3 class="font-epilogue text-indigo-400 font-black text-lg">Club Quilox</h3>
+<p class="text-slate-400 text-xs uppercase tracking-widest">Owner Portal</p>
+</div>
+</div>
+<nav class="space-y-2">
+<a class="flex items-center gap-3 text-slate-300 px-4 py-3 hover:bg-slate-800 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="military_tech">military_tech</span>
+<span class="font-medium">VIP Tiers</span>
+</a>
+<a class="flex items-center gap-3 bg-gradient-to-r from-indigo-500 to-indigo-700 text-white font-bold px-4 py-3 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+<span class="font-medium">Venue Analytics</span>
+</a>
+<a class="flex items-center gap-3 text-slate-300 px-4 py-3 hover:bg-slate-800 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-medium">Revenue</span>
+</a>
+<a class="flex items-center gap-3 text-slate-300 px-4 py-3 hover:bg-slate-800 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="badge">badge</span>
+<span class="font-medium">Staff Access</span>
+</a>
+<a class="flex items-center gap-3 text-slate-300 px-4 py-3 hover:bg-slate-800 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-medium">Settings</span>
+</a>
+</nav>
+<div class="mt-auto p-4 bg-surface-container-low rounded-2xl">
+<div class="flex justify-between items-center mb-2">
+<span class="text-[10px] uppercase tracking-tighter text-on-surface-variant font-bold">Monthly Usage</span>
+<span class="text-[10px] text-primary">82%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 82%"></div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 p-6 md:p-10 mb-24 md:mb-0">
+<!-- Header Section -->
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+<div>
+<h1 class="font-headline text-4xl md:text-5xl font-black text-on-surface tracking-tighter mb-2">Venue Analytics</h1>
+<p class="text-on-surface-variant font-body">Real-time performance tracking for Club Quilox, Lagos.</p>
+</div>
+<!-- Time Range Selector -->
+<div class="inline-flex p-1 bg-surface-container-highest rounded-xl">
+<button class="px-5 py-2 rounded-lg text-sm font-semibold text-slate-400 hover:text-on-surface transition-colors">7d</button>
+<button class="px-5 py-2 rounded-lg text-sm font-semibold bg-primary text-on-primary-fixed shadow-lg shadow-primary/20">30d</button>
+<button class="px-5 py-2 rounded-lg text-sm font-semibold text-slate-400 hover:text-on-surface transition-colors">90d</button>
+</div>
+</header>
+<!-- Key Metrics Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+<!-- Profile Views -->
+<div class="glass-card p-6 rounded-2xl border-l-4 border-primary">
+<div class="flex justify-between items-start mb-4">
+<p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest">Profile Views</p>
+<span class="text-secondary text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> 12%
+                        </span>
+</div>
+<h2 class="text-3xl font-headline font-black mb-4">24.8k</h2>
+<div class="flex items-end gap-1 h-12">
+<div class="flex-1 bg-primary/20 rounded-t h-[40%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t h-[60%]"></div>
+<div class="flex-1 bg-primary/40 rounded-t h-[50%]"></div>
+<div class="flex-1 bg-primary/60 rounded-t h-[80%]"></div>
+<div class="flex-1 bg-primary/40 rounded-t h-[70%]"></div>
+<div class="flex-1 bg-primary rounded-t h-[100%]"></div>
+</div>
+</div>
+<!-- Total Bookings -->
+<div class="glass-card p-6 rounded-2xl">
+<div class="flex justify-between items-start mb-4">
+<p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest">Total Bookings</p>
+<span class="text-secondary text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> 8.4%
+                        </span>
+</div>
+<h2 class="text-3xl font-headline font-black mb-4">1,402</h2>
+<div class="flex items-end gap-1 h-12">
+<div class="flex-1 bg-secondary/20 rounded-t h-[30%]"></div>
+<div class="flex-1 bg-secondary/40 rounded-t h-[45%]"></div>
+<div class="flex-1 bg-secondary/30 rounded-t h-[60%]"></div>
+<div class="flex-1 bg-secondary/50 rounded-t h-[55%]"></div>
+<div class="flex-1 bg-secondary/70 rounded-t h-[85%]"></div>
+<div class="flex-1 bg-secondary rounded-t h-[95%]"></div>
+</div>
+</div>
+<!-- Conversion Rate -->
+<div class="glass-card p-6 rounded-2xl">
+<div class="flex justify-between items-start mb-4">
+<p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest">Conversion Rate</p>
+<span class="text-error-dim text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_down</span> 0.2%
+                        </span>
+</div>
+<h2 class="text-3xl font-headline font-black mb-4">5.65%</h2>
+<div class="flex items-end gap-1 h-12">
+<div class="flex-1 bg-on-surface-variant/20 rounded-t h-[80%]"></div>
+<div class="flex-1 bg-on-surface-variant/20 rounded-t h-[75%]"></div>
+<div class="flex-1 bg-on-surface-variant/20 rounded-t h-[82%]"></div>
+<div class="flex-1 bg-on-surface-variant/20 rounded-t h-[78%]"></div>
+<div class="flex-1 bg-on-surface-variant/20 rounded-t h-[76%]"></div>
+<div class="flex-1 bg-on-surface-variant/40 rounded-t h-[74%]"></div>
+</div>
+</div>
+<!-- Avg Rating -->
+<div class="glass-card p-6 rounded-2xl">
+<div class="flex justify-between items-start mb-4">
+<p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest">Avg Rating</p>
+<span class="text-tertiary text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">star</span> No Change
+                        </span>
+</div>
+<h2 class="text-3xl font-headline font-black mb-4">4.8</h2>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 0.8;">star</span>
+</div>
+</div>
+</div>
+<!-- Main Charts Row -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
+<!-- Bar Chart: Bookings Over Time -->
+<div class="lg:col-span-2 glass-card p-8 rounded-3xl">
+<div class="flex justify-between items-center mb-8">
+<h3 class="font-headline text-xl font-bold">Bookings Trend</h3>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">more_vert</span>
+</div>
+<div class="relative h-64 flex items-end justify-between gap-2">
+<!-- Bar elements -->
+<div class="group relative flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary/20 rounded-lg h-24 group-hover:bg-primary transition-colors cursor-pointer"></div>
+<span class="text-[10px] text-on-surface-variant uppercase font-bold">Mon</span>
+</div>
+<div class="group relative flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary/20 rounded-lg h-32 group-hover:bg-primary transition-colors cursor-pointer"></div>
+<span class="text-[10px] text-on-surface-variant uppercase font-bold">Tue</span>
+</div>
+<div class="group relative flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary/20 rounded-lg h-28 group-hover:bg-primary transition-colors cursor-pointer"></div>
+<span class="text-[10px] text-on-surface-variant uppercase font-bold">Wed</span>
+</div>
+<div class="group relative flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary/20 rounded-lg h-44 group-hover:bg-primary transition-colors cursor-pointer"></div>
+<span class="text-[10px] text-on-surface-variant uppercase font-bold">Thu</span>
+</div>
+<div class="group relative flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary/40 rounded-lg h-56 group-hover:bg-primary transition-colors cursor-pointer"></div>
+<span class="text-[10px] text-on-surface-variant uppercase font-bold">Fri</span>
+</div>
+<div class="group relative flex-1 flex flex-col items-center gap-2">
+<div class="w-full pulse-gradient rounded-lg h-60 group-hover:opacity-80 transition-colors cursor-pointer"></div>
+<span class="text-[10px] text-primary uppercase font-bold">Sat</span>
+</div>
+<div class="group relative flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary/30 rounded-lg h-40 group-hover:bg-primary transition-colors cursor-pointer"></div>
+<span class="text-[10px] text-on-surface-variant uppercase font-bold">Sun</span>
+</div>
+</div>
+</div>
+<!-- Pie Chart: Referral Sources -->
+<div class="glass-card p-8 rounded-3xl flex flex-col">
+<h3 class="font-headline text-xl font-bold mb-8">Traffic Sources</h3>
+<div class="flex-1 flex flex-col justify-center gap-8">
+<div class="relative w-48 h-48 mx-auto">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<circle cx="18" cy="18" fill="transparent" r="16" stroke="rgba(163, 166, 255, 0.1)" stroke-width="4"></circle>
+<circle cx="18" cy="18" fill="transparent" r="16" stroke="#a3a6ff" stroke-dasharray="65 100" stroke-width="4"></circle>
+<circle cx="18" cy="18" fill="transparent" r="16" stroke="#ffb148" stroke-dasharray="20 100" stroke-dashoffset="-65" stroke-width="4"></circle>
+<circle cx="18" cy="18" fill="transparent" r="16" stroke="#69f6b8" stroke-dasharray="15 100" stroke-dashoffset="-85" stroke-width="4"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center flex-col">
+<span class="text-2xl font-black">2.4k</span>
+<span class="text-[10px] uppercase text-on-surface-variant">Visits</span>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="text-sm font-medium">In-App Search</span>
+</div>
+<span class="text-sm font-bold">65%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-tertiary"></div>
+<span class="text-sm font-medium">Social Links</span>
+</div>
+<span class="text-sm font-bold">20%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+<span class="text-sm font-medium">Direct URL</span>
+</div>
+<span class="text-sm font-bold">15%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Heatmap Section -->
+<section class="glass-card p-8 rounded-3xl mb-12">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h3 class="font-headline text-xl font-bold">Heatmap: Peak Activity Hours</h3>
+<p class="text-on-surface-variant text-sm mt-1">Darker colors represent higher foot traffic.</p>
+</div>
+<div class="flex gap-2 text-[10px] items-center font-bold">
+<span>LOW</span>
+<div class="flex gap-0.5">
+<div class="w-4 h-4 rounded bg-primary/10"></div>
+<div class="w-4 h-4 rounded bg-primary/30"></div>
+<div class="w-4 h-4 rounded bg-primary/60"></div>
+<div class="w-4 h-4 rounded bg-primary"></div>
+</div>
+<span>HIGH</span>
+</div>
+</div>
+<div class="overflow-x-auto no-scrollbar">
+<div class="min-w-[800px]">
+<div class="grid grid-cols-[80px_repeat(12,1fr)] gap-2">
+<!-- Time Labels -->
+<div></div>
+<div class="text-[10px] text-center font-bold text-on-surface-variant">8PM</div>
+<div class="text-[10px] text-center font-bold text-on-surface-variant">9PM</div>
+<div class="text-[10px] text-center font-bold text-on-surface-variant">10PM</div>
+<div class="text-[10px] text-center font-bold text-on-surface-variant">11PM</div>
+<div class="text-[10px] text-center font-bold text-on-surface-variant">12AM</div>
+<div class="text-[10px] text-center font-bold text-on-surface-variant">1AM</div>
+<div class="text-[10px] text-center font-bold text-on-surface-variant">2AM</div>
+<div class="text-[10px] text-center font-bold text-on-surface-variant">3AM</div>
+<div class="text-[10px] text-center font-bold text-on-surface-variant">4AM</div>
+<div class="text-[10px] text-center font-bold text-on-surface-variant">5AM</div>
+<div class="text-[10px] text-center font-bold text-on-surface-variant">6AM</div>
+<div class="text-[10px] text-center font-bold text-on-surface-variant">7AM</div>
+<!-- Fri Row -->
+<div class="text-[10px] font-bold text-on-surface-variant flex items-center">FRIDAY</div>
+<div class="h-10 rounded bg-primary/10"></div>
+<div class="h-10 rounded bg-primary/20"></div>
+<div class="h-10 rounded bg-primary/30"></div>
+<div class="h-10 rounded bg-primary/60"></div>
+<div class="h-10 rounded bg-primary/80"></div>
+<div class="h-10 rounded bg-primary"></div>
+<div class="h-10 rounded bg-primary"></div>
+<div class="h-10 rounded bg-primary/90"></div>
+<div class="h-10 rounded bg-primary/60"></div>
+<div class="h-10 rounded bg-primary/20"></div>
+<div class="h-10 rounded bg-primary/10"></div>
+<div class="h-10 rounded bg-primary/10"></div>
+<!-- Sat Row -->
+<div class="text-[10px] font-bold text-on-surface-variant flex items-center">SATURDAY</div>
+<div class="h-10 rounded bg-primary/20"></div>
+<div class="h-10 rounded bg-primary/40"></div>
+<div class="h-10 rounded bg-primary/60"></div>
+<div class="h-10 rounded bg-primary/90"></div>
+<div class="h-10 rounded bg-primary"></div>
+<div class="h-10 rounded bg-primary"></div>
+<div class="h-10 rounded bg-primary"></div>
+<div class="h-10 rounded bg-primary"></div>
+<div class="h-10 rounded bg-primary/80"></div>
+<div class="h-10 rounded bg-primary/40"></div>
+<div class="h-10 rounded bg-primary/20"></div>
+<div class="h-10 rounded bg-primary/10"></div>
+<!-- Sun Row -->
+<div class="text-[10px] font-bold text-on-surface-variant flex items-center">SUNDAY</div>
+<div class="h-10 rounded bg-primary/30"></div>
+<div class="h-10 rounded bg-primary/50"></div>
+<div class="h-10 rounded bg-primary/80"></div>
+<div class="h-10 rounded bg-primary/60"></div>
+<div class="h-10 rounded bg-primary/40"></div>
+<div class="h-10 rounded bg-primary/20"></div>
+<div class="h-10 rounded bg-primary/10"></div>
+<div class="h-10 rounded bg-primary/10"></div>
+<div class="h-10 rounded bg-primary/5"></div>
+<div class="h-10 rounded bg-primary/5"></div>
+<div class="h-10 rounded bg-primary/5"></div>
+<div class="h-10 rounded bg-primary/5"></div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center h-20 px-4 pb-safe bg-slate-950/60 backdrop-blur-xl z-50 rounded-t-2xl">
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-indigo-300 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-inter text-[10px] uppercase tracking-[0.1em] font-semibold mt-1">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-indigo-300 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="confirmation_number">confirmation_number</span>
+<span class="font-inter text-[10px] uppercase tracking-[0.1em] font-semibold mt-1">Bookings</span>
+</a>
+<a class="flex flex-col items-center justify-center text-indigo-400 bg-indigo-500/10 rounded-xl py-1 px-3 active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-inter text-[10px] uppercase tracking-[0.1em] font-semibold mt-1">Insights</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-indigo-300 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="font-inter text-[10px] uppercase tracking-[0.1em] font-semibold mt-1">Hub</span>
+</a>
+</nav>
+</body></html>

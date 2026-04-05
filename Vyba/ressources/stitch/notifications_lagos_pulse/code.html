@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#f8a010",
+                    "surface-tint": "#a3a6ff",
+                    "primary-fixed-dim": "#8387ff",
+                    "error-container": "#a70138",
+                    "tertiary-dim": "#e79400",
+                    "error-dim": "#d73357",
+                    "tertiary-container": "#f8a010",
+                    "on-primary-fixed": "#000000",
+                    "on-tertiary-fixed-variant": "#563400",
+                    "surface-container-low": "#091328",
+                    "on-secondary": "#005a3c",
+                    "on-secondary-container": "#e1ffec",
+                    "primary-dim": "#6063ee",
+                    "secondary": "#69f6b8",
+                    "outline-variant": "#40485d",
+                    "tertiary-fixed-dim": "#e79400",
+                    "on-error": "#490013",
+                    "outline": "#6d758c",
+                    "tertiary": "#ffb148",
+                    "primary": "#a3a6ff",
+                    "surface-container-high": "#141f38",
+                    "background": "#060e20",
+                    "error": "#ff6e84",
+                    "secondary-dim": "#58e7ab",
+                    "surface-container-highest": "#192540",
+                    "surface-container": "#0f1930",
+                    "on-tertiary-fixed": "#2a1700",
+                    "on-tertiary": "#573500",
+                    "secondary-fixed": "#69f6b8",
+                    "on-error-container": "#ffb2b9",
+                    "on-surface": "#dee5ff",
+                    "secondary-container": "#006c49",
+                    "surface-variant": "#192540",
+                    "surface-container-lowest": "#000000",
+                    "on-tertiary-container": "#4a2c00",
+                    "secondary-fixed-dim": "#58e7ab",
+                    "primary-fixed": "#9396ff",
+                    "on-primary-container": "#0a0081",
+                    "on-secondary-fixed-variant": "#006544",
+                    "surface-bright": "#1f2b49",
+                    "primary-container": "#9396ff",
+                    "on-surface-variant": "#a3aac4",
+                    "on-secondary-fixed": "#00452d",
+                    "on-primary-fixed-variant": "#0e009d",
+                    "inverse-on-surface": "#4d556b",
+                    "on-background": "#dee5ff",
+                    "inverse-primary": "#494bd7",
+                    "on-primary": "#0f00a4",
+                    "surface": "#060e20",
+                    "inverse-surface": "#faf8ff",
+                    "surface-dim": "#060e20"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Epilogue"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(25, 37, 64, 0.6);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-slate-950/60 backdrop-blur-xl fixed top-0 w-full z-50 bg-gradient-to-b from-slate-900/50 to-transparent shadow-none">
+<div class="flex items-center justify-between px-6 py-4 w-full">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-indigo-500" data-icon="location_on">location_on</span>
+<span class="font-['Epilogue'] uppercase tracking-[0.1em] text-sm font-bold text-slate-400">LAGOS</span>
+</div>
+<h1 class="font-['Epilogue'] text-lg font-extrabold tracking-tighter text-indigo-400">Notifications - Lagos Pulse</h1>
+<div class="w-8 h-8 rounded-full overflow-hidden scale-95 active:scale-90 transition-transform">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="Close-up portrait of a stylish young West African woman with braided hair against a soft urban background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkzw6XUKpbpnJzpsENmd-TDM2krxwDnhfhlQKkF_1mu5AcJutyimXbsGltH-2MbkYFe05LbUHrKBevkAtFJCraa5eV2ZFITw_NE3z2NCkSRXN7lba64hnEu03dCACVvHBUryTylpM6MgbqkqTzy0q7r6qsOBuLsZhqQru5ajK9txNiYMlk-2azBOrHQQioqdZutLVzQ9ytphB5JUjLN-d5LGsrZEUR7SJXd8zFLPJt80HSb5gdF1gNPWQzLbR9g13doDRwoc1-J1LP"/>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-2xl mx-auto">
+<!-- Today Section -->
+<section class="mb-10">
+<h2 class="font-label text-xs font-semibold uppercase tracking-[0.2em] text-on-surface-variant mb-6 flex items-center gap-3">
+                Today
+                <span class="h-px flex-1 bg-outline-variant/20"></span>
+</h2>
+<div class="space-y-4">
+<!-- Booking Confirmation -->
+<div class="glass-panel p-4 rounded-xl flex gap-4 relative overflow-hidden group hover:bg-surface-container-high transition-colors">
+<div class="relative flex-shrink-0">
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full border-2 border-background"></div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline text-md font-bold text-on-surface leading-tight">Booking Confirmed</h3>
+<span class="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">10:45 AM</span>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed">Your VIP table at <span class="text-primary font-semibold">Zaza Lagos</span> has been confirmed for tonight at 11:30 PM.</p>
+</div>
+</div>
+<!-- Review Reply -->
+<div class="glass-panel p-4 rounded-xl flex gap-4 relative group hover:bg-surface-container-high transition-colors">
+<div class="relative flex-shrink-0">
+<img alt="User Avatar" class="w-12 h-12 rounded-xl object-cover" data-alt="Portrait of a smiling young African man in a trendy denim jacket, studio lighting with cool tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEWDERk9z5oyBbSWprDzjoKdKJ2LOFwJ0qZoVqU9D2KysPuz1MMMiEZLE1YJoNlUPEmS7sxp02sdArCpv3_-6vr9gE9BHSPLMqG7Nco5tjB31VfRVegbogjJddoPonlhVgrWFhCCnV23u0d5I19AxxOPCzgXrztnj0je3LwYUoaHJwzzUqb6p-br2bv3UWWDFwmIHLPAjzfoKnF6LBgYn1BwITnlCWBQsPLWhvRkAyieoGYF5D7HYsfp8hO-4Rr8klWfuivSStrBun"/>
+<div class="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full border-2 border-background"></div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline text-md font-bold text-on-surface leading-tight">Tunde O. replied to you</h3>
+<span class="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">2:15 PM</span>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed">"The cocktails at Moist Beach Club are definitely worth the wait! Glad you enjoyed it too."</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Yesterday Section -->
+<section class="mb-10">
+<h2 class="font-label text-xs font-semibold uppercase tracking-[0.2em] text-on-surface-variant mb-6 flex items-center gap-3">
+                Yesterday
+                <span class="h-px flex-1 bg-outline-variant/20"></span>
+</h2>
+<div class="space-y-4">
+<!-- Promotion -->
+<div class="glass-panel p-4 rounded-xl flex gap-4 relative group hover:bg-surface-container-high transition-colors border-l-2 border-tertiary-fixed/30">
+<div class="flex-shrink-0">
+<div class="w-12 h-12 rounded-xl bg-tertiary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary" data-icon="campaign" style="font-variation-settings: 'FILL' 1;">campaign</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline text-md font-bold text-tertiary leading-tight">Exclusive Flash Sale</h3>
+<span class="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">Yesterday</span>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed">Flash Deal: 20% off all pre-booked bottles at <span class="text-on-surface font-semibold">Velvet</span> this weekend only. Use code <span class="text-tertiary-fixed font-bold tracking-widest">LAGOSNIGHTS</span>.</p>
+</div>
+</div>
+<!-- Booking Confirmation -->
+<div class="glass-panel p-4 rounded-xl flex gap-4 opacity-70 group hover:bg-surface-container-high transition-colors">
+<div class="flex-shrink-0">
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-outline" data-icon="check_circle">check_circle</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline text-md font-bold text-on-surface leading-tight">Booking Completed</h3>
+<span class="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">Yesterday</span>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed">Hope you enjoyed your night at Shiro Restaurant! Share your experience with a review.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Earlier Section -->
+<section>
+<h2 class="font-label text-xs font-semibold uppercase tracking-[0.2em] text-on-surface-variant mb-6 flex items-center gap-3">
+                Earlier
+                <span class="h-px flex-1 bg-outline-variant/20"></span>
+</h2>
+<div class="space-y-4">
+<div class="glass-panel p-4 rounded-xl flex gap-4 opacity-70 group hover:bg-surface-container-high transition-colors">
+<div class="flex-shrink-0">
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-outline" data-icon="stars" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline text-md font-bold text-on-surface leading-tight">New Badge Earned</h3>
+<span class="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">Oct 24</span>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed">Congrats! You've unlocked the <span class="text-primary-fixed font-semibold">"Lagos Legend"</span> badge for visiting 10 venues this month.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-slate-950/60 backdrop-blur-2xl border-t border-indigo-500/10 z-50 rounded-t-2xl shadow-[0_-8px_30px_rgb(0,0,0,0.12)]">
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-indigo-200 transition-all active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-widest mt-1">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-indigo-200 transition-all active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dynamic_feed">dynamic_feed</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-widest mt-1">Feed</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-indigo-200 transition-all active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="confirmation_number">confirmation_number</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-widest mt-1">Bookings</span>
+</a>
+<!-- Active Tab: Profile (Notifications often grouped here or as a primary hub) -->
+<a class="flex flex-col items-center justify-center text-indigo-400 bg-indigo-500/10 rounded-xl px-3 py-1 active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-widest mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

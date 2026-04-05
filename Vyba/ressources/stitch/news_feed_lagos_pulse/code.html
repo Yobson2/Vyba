@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lagos Pulse | News Feed</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#000000",
+                        "error": "#ff6e84",
+                        "secondary-fixed-dim": "#58e7ab",
+                        "outline": "#6d758c",
+                        "surface": "#060e20",
+                        "secondary": "#69f6b8",
+                        "surface-container-lowest": "#000000",
+                        "on-primary-fixed-variant": "#0e009d",
+                        "surface-bright": "#1f2b49",
+                        "on-secondary-fixed-variant": "#006544",
+                        "secondary-container": "#006c49",
+                        "inverse-primary": "#494bd7",
+                        "error-container": "#a70138",
+                        "surface-tint": "#a3a6ff",
+                        "outline-variant": "#40485d",
+                        "tertiary-container": "#f8a010",
+                        "on-surface": "#dee5ff",
+                        "surface-dim": "#060e20",
+                        "inverse-on-surface": "#4d556b",
+                        "surface-variant": "#192540",
+                        "tertiary-dim": "#e79400",
+                        "primary-container": "#9396ff",
+                        "on-background": "#dee5ff",
+                        "surface-container": "#0f1930",
+                        "surface-container-low": "#091328",
+                        "on-error-container": "#ffb2b9",
+                        "on-secondary": "#005a3c",
+                        "primary-fixed": "#9396ff",
+                        "error-dim": "#d73357",
+                        "on-tertiary-fixed": "#2a1700",
+                        "on-secondary-container": "#e1ffec",
+                        "tertiary": "#ffb148",
+                        "on-primary": "#0f00a4",
+                        "tertiary-fixed": "#f8a010",
+                        "on-tertiary-container": "#4a2c00",
+                        "on-error": "#490013",
+                        "on-tertiary": "#573500",
+                        "tertiary-fixed-dim": "#e79400",
+                        "secondary-dim": "#58e7ab",
+                        "on-primary-container": "#0a0081",
+                        "inverse-surface": "#faf8ff",
+                        "primary-fixed-dim": "#8387ff",
+                        "primary": "#a3a6ff",
+                        "on-tertiary-fixed-variant": "#563400",
+                        "surface-container-high": "#141f38",
+                        "primary-dim": "#6063ee",
+                        "on-surface-variant": "#a3aac4",
+                        "secondary-fixed": "#69f6b8",
+                        "on-secondary-fixed": "#00452d",
+                        "surface-container-highest": "#192540"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Epilogue"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .font-epilogue { font-family: 'Epilogue', sans-serif; }
+        .glass-panel {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-950/60 backdrop-blur-xl flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-indigo-500" data-icon="location_on">location_on</span>
+<h1 class="text-xl font-bold tracking-tighter text-indigo-400 font-epilogue">Lagos Pulse</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-400 hover:text-indigo-300 transition-colors cursor-pointer" data-icon="search">search</span>
+</div>
+</header>
+<main class="pt-20 pb-32 px-4 max-w-2xl mx-auto space-y-8">
+<!-- Pull to Refresh Indicator (Simulated) -->
+<div class="flex justify-center py-2">
+<div class="animate-bounce bg-surface-container-high p-2 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="refresh">refresh</span>
+</div>
+</div>
+<!-- Promo Card -->
+<article class="bg-surface-container-high rounded-xl overflow-hidden shadow-2xl relative">
+<div class="p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full bg-surface-container-highest" data-alt="minimalist modern luxury venue logo with gold accents on deep black background circular crop" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAM81sdaA32OWeOT2l0EdX4VdjfW5O2LCoRJ4_7y2ncWaRgTNjVxnMXQGOsbUqcc55TFvgRr_AQqBQRbPNoWeG_175C9Ad3uuZm7ZZmRQQMbE5PDCDO4TJ11d_7aDoXXuRkG3zFBKmv7-w4qwVqMoz83p6-u8dlqy4YwekKeVwsK2Y5NAY-E1QjS2LGP80f8HdbhxSVFLaGnYBOgaoS51fcmEoSd4pkSoOUKileBMYnoiNsN7h-Mt27qAbJHl8JMsAoCqZmylPmOzua"/>
+<div>
+<h3 class="font-bold text-sm tracking-tight">Zaza Lounge</h3>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest font-bold">Victoria Island</p>
+</div>
+</div>
+<div class="bg-tertiary-container/20 text-tertiary px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase">
+                    PROMO
+                </div>
+</div>
+<div class="relative aspect-video overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="dramatic lighting of craft cocktails being served in a moody neon-lit lounge with velvet textures and amber glow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYgMoaL0pfoYKK6cYA0q_jm-oMWgGnlAW-5hKPGg5XD1-3cSIW_ZaR0PZAP8NwRDuWRihzU4beFfGaxO9LkqYXKYAIyjYWuAFkro3A7cpcVvphWZaV5pNvUJaiS57BV3GID2ETGcIXMU_yPHdy3CrKfE3-JQQmKaSF8lDh8xn-bzZJ5PYRp_HgqP4fPtnzwvbpj4ZkNgS_Ukh0rFEBUSq9o0mVquEOuOxHF28F4Ug1EOSD1r02YGs2weix2wHUA_-vobDdMzniHrlY"/>
+<div class="absolute bottom-4 left-4 bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1.5 rounded-lg text-xs font-bold shadow-lg">
+                    Valid until 8:00 PM
+                </div>
+</div>
+<div class="p-5 space-y-3">
+<div class="space-y-1">
+<h2 class="headline-lg font-headline font-extrabold text-2xl tracking-tight">Happy Hour Special</h2>
+<p class="text-on-surface-variant text-sm leading-relaxed">Join us for 50% off on all signature cocktails and premium spirits every weekday. Experience the rhythm of Lagos with our curated house mixes.</p>
+</div>
+<div class="flex justify-between items-center pt-2">
+<button class="bg-gradient-to-br from-primary to-primary-dim text-on-primary-fixed px-6 py-2.5 rounded-xl font-bold text-sm shadow-lg active:scale-95 transition-all">
+                        Book Now
+                    </button>
+<div class="flex gap-4 text-on-surface-variant">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors" data-icon="share">share</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors" data-icon="bookmark">bookmark</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Event Card -->
+<article class="bg-surface-container-high rounded-xl overflow-hidden shadow-2xl">
+<div class="relative aspect-[4/5] overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="vibrant nightlife scene with silhouetted crowd dancing under purple and blue stage lights and laser beams" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6fvHfmiHaSURUH52vs0hkDGNMfUJ5Vt_rynINfiUiClIUalVPZhcBHufQnO87B7NFFd7otTr0sXI_4xvFdg8IxsZt18fe6wpt_xQUwqSUOoPaYVO4_7qAS0xXD6h0tXPxyszga_1wgnBcCzhjJBA-rX0L8-kbZ78wLGkD78MdRRNwCzinMd_JI5fm49z1oUSkbUmyx42MevPLeg8Gvvm_oStNtrmYGdUI-eMeB4XjxnMfXRwoCIRd8qVCzgJlTpOIGVJNxLMDAByU"/>
+<!-- Overlay Elements -->
+<div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-black/40"></div>
+<div class="absolute top-4 left-4 right-4 flex justify-between items-start">
+<div class="bg-white/10 glass-panel border border-white/10 px-3 py-2 rounded-xl flex flex-col items-center min-w-[50px]">
+<span class="text-[10px] font-bold uppercase tracking-tighter text-indigo-300">Oct</span>
+<span class="text-xl font-black text-white">24</span>
+</div>
+<div class="flex gap-2">
+<span class="material-symbols-outlined bg-black/40 p-2 rounded-full text-white glass-panel" data-icon="favorite">favorite</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 right-0 p-6 space-y-4">
+<div class="space-y-1">
+<p class="text-secondary font-bold text-[10px] uppercase tracking-[0.2em]">The Good Beach • 10 PM</p>
+<h2 class="text-3xl font-headline font-black text-white leading-tight tracking-tighter">Live Afrobeat Night</h2>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center">
+<div class="flex -space-x-3">
+<img class="w-8 h-8 rounded-full border-2 border-surface-container" data-alt="portrait of a young smiling woman with braided hair" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAm-tUhDv-q77T1WXMRc0-DUNYSCRg7sJpfYpHTDXX_6E3VYzXzdAFyjemD8ofnD7giMXRZDF1z5TkpITHVju5DsuprynnOJ5R3OJsaLq-_JZP2tfKr3GEmseKGdLmyB6Z2cGzIT0kmsRMj3mYGUYUAi7aeb9EMOSGkH2vMvUiivImvo4hWE5TwLzpLqKFL-arojTHkQBgi04aaIP1fCV7bdDU0id2HFafI1jLToYUCzjedLeiumAojcgCTg_L7i484peeAwfCX0j_V"/>
+<img class="w-8 h-8 rounded-full border-2 border-surface-container" data-alt="portrait of a young stylish man with glasses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBX6g20QpvAvuNxDggP7QOuO4TrLABwUJca8Aed0rKZ1GMW4hxU8pE3jaXGe8ZJ1B2MiR87SwwMXJG_Y1wb2y1XqUI6nH95tslmn9iEyyCZpofRd4s4x6uphWII4bajfd0r8wktUITXzC32DyWHOxjvr1VTcoHopyofw8n47mUL4L_uD9vyZSQYqZRuewthKkNhf3SHMwzVoQ-vT90cyjMpWvlVSkT6XUiig6uTyrFkRDswSDnTM7QtcQFgx21itqc7Vr1MHIOT5lRq"/>
+<img class="w-8 h-8 rounded-full border-2 border-surface-container" data-alt="portrait of a woman with vibrant makeup" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDa3yGgNzoOyC32VWam7Xwhd8WPQR4NmxNVyOcxeIVgiUvEnUkdjTDAvyiRbr0v-3b0FTwf_pcLC7OcVuRBivANzcAe-9_OWoUE6uSF9v9wUHoSgspxfANCLNhi1DNXErcYsZBeCfqUBy-VUcw0nq5n3xTCj64tlIohO464G5Mp8pcYSxd1ohTqXKfeLNrd8cajRNodFS37laC3WpENZx77VRz1tcr1tVlIGshU2wwiDrSY_799lqdgcSqilSK6cUgKjYtsSTQOFfk"/>
+<div class="w-8 h-8 rounded-full border-2 border-surface-container bg-surface-variant flex items-center justify-center text-[10px] font-bold text-primary">+120</div>
+</div>
+<span class="ml-3 text-xs text-on-surface-variant font-medium">Interested</span>
+</div>
+<div class="flex items-center gap-2 bg-primary/20 hover:bg-primary/30 cursor-pointer transition-all border border-primary/20 px-4 py-2 rounded-xl group">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-primary font-bold text-sm">Interested</span>
+</div>
+</div>
+</div>
+</div>
+</article>
+<!-- Shimmer States / Infinite Scroll (Simulated) -->
+<div class="space-y-6 opacity-40">
+<div class="animate-pulse bg-surface-container-high rounded-xl h-48"></div>
+<div class="animate-pulse bg-surface-container-high rounded-xl h-48"></div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full bg-slate-950/60 backdrop-blur-xl flex justify-around items-center px-4 pt-3 pb-6 z-50 rounded-t-3xl shadow-[0_-4px_24px_-4px_rgba(0,0,0,0.5)]">
+<div class="flex flex-col items-center justify-center text-slate-500 hover:bg-slate-800/50 transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-bold mt-1">Explore</span>
+</div>
+<div class="flex flex-col items-center justify-center text-indigo-400 bg-indigo-500/10 rounded-xl px-4 py-1 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="dynamic_feed">dynamic_feed</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-bold mt-1">Feed</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 hover:bg-slate-800/50 transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="confirmation_number">confirmation_number</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-bold mt-1">Bookings</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 hover:bg-slate-800/50 transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-bold mt-1">Profile</span>
+</div>
+</nav>
+<!-- Contextual FAB (Suppressed on Feed as per standard patterns, but here if needed for action) -->
+<!-- The prompt doesn't explicitly ask for FAB on feed, suppressing as per "Contextual FAB Suppression" rule -->
+</body></html>

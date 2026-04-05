@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lagos Pulse - Profile Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#000000",
+                        "on-primary": "#0f00a4",
+                        "primary": "#a3a6ff",
+                        "surface-container": "#0f1930",
+                        "inverse-surface": "#faf8ff",
+                        "on-tertiary-fixed": "#2a1700",
+                        "tertiary-fixed": "#f8a010",
+                        "secondary-dim": "#58e7ab",
+                        "on-surface-variant": "#a3aac4",
+                        "on-error-container": "#ffb2b9",
+                        "tertiary-fixed-dim": "#e79400",
+                        "secondary-fixed-dim": "#58e7ab",
+                        "outline": "#6d758c",
+                        "secondary-container": "#006c49",
+                        "error": "#ff6e84",
+                        "on-secondary-fixed-variant": "#006544",
+                        "on-primary-fixed": "#000000",
+                        "on-tertiary-container": "#4a2c00",
+                        "primary-fixed": "#9396ff",
+                        "surface-tint": "#a3a6ff",
+                        "surface-variant": "#192540",
+                        "tertiary-dim": "#e79400",
+                        "secondary-fixed": "#69f6b8",
+                        "error-dim": "#d73357",
+                        "on-surface": "#dee5ff",
+                        "surface-dim": "#060e20",
+                        "secondary": "#69f6b8",
+                        "background": "#060e20",
+                        "on-tertiary-fixed-variant": "#563400",
+                        "on-secondary-fixed": "#00452d",
+                        "on-error": "#490013",
+                        "inverse-on-surface": "#4d556b",
+                        "primary-dim": "#6063ee",
+                        "on-secondary": "#005a3c",
+                        "inverse-primary": "#494bd7",
+                        "on-secondary-container": "#e1ffec",
+                        "tertiary-container": "#f8a010",
+                        "tertiary": "#ffb148",
+                        "on-primary-container": "#0a0081",
+                        "surface": "#060e20",
+                        "primary-container": "#9396ff",
+                        "surface-container-highest": "#192540",
+                        "surface-bright": "#1f2b49",
+                        "on-primary-fixed-variant": "#0e009d",
+                        "outline-variant": "#40485d",
+                        "primary-fixed-dim": "#8387ff",
+                        "surface-container-low": "#091328",
+                        "surface-container-high": "#141f38",
+                        "error-container": "#a70138",
+                        "on-tertiary": "#573500",
+                        "on-background": "#dee5ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Epilogue"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-header {
+            background: rgba(15, 25, 48, 0.6);
+            backdrop-filter: blur(20px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-input:focus {
+            border-bottom: 2px solid #a3a6ff;
+            outline: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary">
+<!-- Top Navigation Anchor -->
+<header class="fixed top-0 w-full z-50 glass-header flex justify-between items-center px-6 py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-indigo-400" data-icon="location_on">location_on</span>
+<h1 class="text-indigo-500 font-headline font-bold tracking-tighter text-xl">Lagos Pulse</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-slate-400 hover:text-indigo-400 transition-colors font-medium" href="#">Explore</a>
+<a class="text-slate-400 hover:text-indigo-400 transition-colors font-medium" href="#">Feed</a>
+<a class="text-indigo-400 font-bold" href="#">Profile</a>
+</div>
+<img alt="Profile" class="w-10 h-10 rounded-full border-2 border-primary/20" data-alt="vibrant portrait of a stylish young West African woman with neon lighting reflecting on her skin against a dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5WsYvaSNSt7AsXnk9Dtoq1fap5EbXeuZ7rGhBEmPTIi3m9BPRSe-NlfAnpnyXSYEplNcXv4uSBw_eq48OxnWjUiTJb97gFXQqlssAdgAuozdziR8nhK3A-qlqYAQfC33YTjgyWi-ukwQywLTqBRByyamc91WbRrUY9mxNQbwVJgSpWMjyc5aWU8RmerQ67zmcNRRIDH22L8X1MUcHZT3Uar-3F73bhLuC_EufZnCfdPlBfWEnYbH_cBAQMpgJNbTowrcFGRVcf-1K"/>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-4xl mx-auto">
+<!-- Hero Header -->
+<section class="mb-12 flex flex-col md:flex-row items-center gap-8 animate-fade-in">
+<div class="relative">
+<div class="w-32 h-32 rounded-3xl overflow-hidden shadow-2xl ring-4 ring-primary/10">
+<img alt="Tobi Adeyemi" class="w-full h-full object-cover" data-alt="close up professional portrait of a confident fashion-forward woman in Lagos with warm editorial lighting and soft background blur" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzR-OX3uWueWRbDSON5uylupcpWNbRyqcq25mKRzy-T2EzcxsUKNtFEAmjRYlW4H2-3gaA-PoRjYPlw0F0pbjA3dmRRl61Ee8HVUPQN4hAKVRU0_cFCBeHseV8_KlsAAeqnrydfPUmiTdACbyJfLOqV89BxySlqcuOWfxYXZsY1PQx53unJ3KRwhlTvVEfnh4QYtPBKmQcAl9bhbfgANq17WJmRYQFU7gaLvlqA95GNtF1GsuD0oK-NEIRViq7sTQ3_HJkcEb5hLwe"/>
+</div>
+<button class="absolute -bottom-2 -right-2 bg-primary p-2 rounded-xl text-on-primary shadow-lg hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+</button>
+</div>
+<div class="text-center md:text-left">
+<h2 class="font-headline font-extrabold text-4xl md:text-5xl tracking-tight mb-2">Tobi Adeyemi</h2>
+<p class="text-on-surface-variant font-medium tracking-wide uppercase text-xs">Platinum Member • Lagos, NG</p>
+</div>
+</section>
+<!-- Bento Grid Settings -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Account Information -->
+<section class="md:col-span-8 bg-surface-container-low rounded-[2rem] p-8 transition-all hover:bg-surface-container">
+<div class="flex items-center gap-4 mb-8">
+<div class="bg-primary/10 p-3 rounded-2xl">
+<span class="material-symbols-outlined text-primary" data-icon="person_outline">person_outline</span>
+</div>
+<h3 class="font-headline font-bold text-2xl">Account Information</h3>
+</div>
+<div class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant ml-1">Full Name</label>
+<input class="w-full bg-surface-container-highest border-none rounded-xl px-4 py-3 text-on-surface editorial-input" type="text" value="Tobi Adeyemi"/>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant ml-1">Email Address</label>
+<input class="w-full bg-surface-container-highest border-none rounded-xl px-4 py-3 text-on-surface editorial-input" type="email" value="tobi.adeyemi@pulse.com"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant ml-1">Bio</label>
+<textarea class="w-full bg-surface-container-highest border-none rounded-xl px-4 py-3 text-on-surface editorial-input h-24 resize-none">Life's a party. Currently exploring the best late-night spots in Victoria Island.</textarea>
+</div>
+</div>
+</section>
+<!-- Language & Theme Side Panel -->
+<div class="md:col-span-4 space-y-6">
+<!-- Theme Picker -->
+<section class="bg-surface-container-low rounded-[2rem] p-6">
+<h4 class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant mb-4">Appearance</h4>
+<div class="flex flex-col gap-3">
+<button class="flex items-center justify-between p-3 rounded-2xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span>
+<span class="text-sm font-semibold">Dark</span>
+</div>
+<span class="material-symbols-outlined text-xs" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</button>
+<button class="flex items-center gap-3 p-3 rounded-2xl text-slate-400 hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined" data-icon="light_mode">light_mode</span>
+<span class="text-sm font-semibold">Light</span>
+</button>
+<button class="flex items-center gap-3 p-3 rounded-2xl text-slate-400 hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined" data-icon="settings_brightness">settings_brightness</span>
+<span class="text-sm font-semibold">System</span>
+</button>
+</div>
+</section>
+<!-- Language Selector -->
+<section class="bg-surface-container-low rounded-[2rem] p-6">
+<h4 class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant mb-4">Language</h4>
+<div class="flex gap-2">
+<button class="flex-1 py-3 rounded-2xl bg-primary text-on-primary font-bold text-sm">EN</button>
+<button class="flex-1 py-3 rounded-2xl bg-surface-container-highest text-slate-400 font-bold text-sm hover:text-on-surface transition-colors">FR</button>
+</div>
+</section>
+</div>
+<!-- Security Section -->
+<section class="md:col-span-6 bg-surface-container-low rounded-[2rem] p-8 transition-all hover:bg-surface-container">
+<div class="flex items-center gap-4 mb-8">
+<div class="bg-secondary/10 p-3 rounded-2xl">
+<span class="material-symbols-outlined text-secondary" data-icon="security">security</span>
+</div>
+<h3 class="font-headline font-bold text-2xl">Security</h3>
+</div>
+<div class="space-y-4">
+<button class="w-full flex items-center justify-between p-4 rounded-2xl bg-surface-container-highest hover:bg-surface-variant transition-colors group">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-500 group-hover:text-primary transition-colors" data-icon="password">password</span>
+<span class="font-semibold text-sm">Change Password</span>
+</div>
+<span class="material-symbols-outlined text-slate-500" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-4 rounded-2xl bg-surface-container-highest hover:bg-surface-variant transition-colors group">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-500 group-hover:text-primary transition-colors" data-icon="two_factor_authentication">authenticator</span>
+<span class="font-semibold text-sm">Two-Factor Auth</span>
+</div>
+<div class="bg-secondary/20 px-3 py-1 rounded-full">
+<span class="text-[10px] font-bold text-secondary uppercase tracking-tight">Active</span>
+</div>
+</button>
+</div>
+</section>
+<!-- Notifications Section -->
+<section class="md:col-span-6 bg-surface-container-low rounded-[2rem] p-8 transition-all hover:bg-surface-container">
+<div class="flex items-center gap-4 mb-8">
+<div class="bg-tertiary/10 p-3 rounded-2xl">
+<span class="material-symbols-outlined text-tertiary" data-icon="notifications_active">notifications_active</span>
+</div>
+<h3 class="font-headline font-bold text-2xl">Notifications</h3>
+</div>
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<div>
+<p class="font-bold text-sm">Push Notifications</p>
+<p class="text-xs text-on-surface-variant">Real-time alerts for bookings</p>
+</div>
+<div class="w-12 h-6 bg-primary rounded-full relative p-1 cursor-pointer">
+<div class="w-4 h-4 bg-white rounded-full absolute right-1"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<p class="font-bold text-sm">Email Digest</p>
+<p class="text-xs text-on-surface-variant">Weekly roundup of hottest events</p>
+</div>
+<div class="w-12 h-6 bg-surface-container-highest rounded-full relative p-1 cursor-pointer">
+<div class="w-4 h-4 bg-slate-600 rounded-full absolute left-1"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Dangerous Area / Logout -->
+<section class="md:col-span-12 mt-4">
+<div class="bg-surface-container-low rounded-[2rem] p-6 flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-500" data-icon="info">info</span>
+<p class="text-on-surface-variant text-sm">Member since September 2023. View <a class="text-primary hover:underline" href="#">Privacy Policy</a></p>
+</div>
+<button class="flex items-center gap-3 px-8 py-4 rounded-2xl bg-error/10 text-error font-bold hover:bg-error hover:text-white transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Logout Account</span>
+</button>
+</div>
+</section>
+</div>
+</main>
+<!-- Bottom Navigation Shell (Mobile only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pt-3 pb-8 bg-slate-950/60 backdrop-blur-xl z-50 rounded-t-3xl shadow-[0_-8px_30px_rgb(0,0,0,0.12)]">
+<div class="flex flex-col items-center justify-center text-slate-500 hover:text-indigo-400 transition-all">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-semibold mt-1">Explore</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 hover:text-indigo-400 transition-all">
+<span class="material-symbols-outlined" data-icon="dynamic_feed">dynamic_feed</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-semibold mt-1">Feed</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 hover:text-indigo-400 transition-all">
+<span class="material-symbols-outlined" data-icon="confirmation_number">confirmation_number</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-semibold mt-1">Bookings</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-indigo-500/20 text-indigo-300 rounded-xl px-4 py-1 active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-semibold mt-1">Profile</span>
+</div>
+</nav>
+</body></html>

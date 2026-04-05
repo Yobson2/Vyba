@@ -1,0 +1,27 @@
+# Native splash screen configuration.
+#
+# 1. (Optional) Place splash image at: assets/images/splash.png
+# 2. Run: dart run flutter_native_splash:create (or: make splash)
+#
+# See: https://pub.dev/packages/flutter_native_splash
+
+flutter_native_splash:
+  # Background color for light mode
+  color: "#FFFFFF"
+
+  # Background color for dark mode
+  color_dark: "#1C1B1F"
+
+  # Optional splash image (centered on screen)
+  # image: assets/images/splash.png
+  # image_dark: assets/images/splash_dark.png
+
+  # Android 12+ splash screen
+  android_12:
+    color: "#FFFFFF"
+    color_dark: "#1C1B1F"
+    # icon_background_color: "#6750A4"
+    # image: assets/images/splash_android12.png
+
+  # Keep splash visible until app is ready (removed manually in code)
+  # fullscreen: true

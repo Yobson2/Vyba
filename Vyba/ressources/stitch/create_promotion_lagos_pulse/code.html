@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Promotion Creator | Lagos Pulse</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#006c49",
+                        "on-background": "#dee5ff",
+                        "inverse-on-surface": "#4d556b",
+                        "outline": "#6d758c",
+                        "surface-dim": "#060e20",
+                        "inverse-surface": "#faf8ff",
+                        "surface-container-lowest": "#000000",
+                        "on-primary": "#0f00a4",
+                        "on-secondary": "#005a3c",
+                        "primary-fixed": "#9396ff",
+                        "secondary-fixed": "#69f6b8",
+                        "primary-fixed-dim": "#8387ff",
+                        "inverse-primary": "#494bd7",
+                        "on-tertiary": "#573500",
+                        "primary-container": "#9396ff",
+                        "error-container": "#a70138",
+                        "on-primary-fixed": "#000000",
+                        "on-secondary-fixed": "#00452d",
+                        "surface-tint": "#a3a6ff",
+                        "on-tertiary-container": "#4a2c00",
+                        "primary": "#a3a6ff",
+                        "surface-container": "#0f1930",
+                        "on-primary-container": "#0a0081",
+                        "secondary-dim": "#58e7ab",
+                        "surface-container-high": "#141f38",
+                        "background": "#060e20",
+                        "on-tertiary-fixed-variant": "#563400",
+                        "surface-bright": "#1f2b49",
+                        "on-error": "#490013",
+                        "outline-variant": "#40485d",
+                        "tertiary-fixed": "#f8a010",
+                        "surface": "#060e20",
+                        "on-surface-variant": "#a3aac4",
+                        "surface-container-highest": "#192540",
+                        "error-dim": "#d73357",
+                        "surface-container-low": "#091328",
+                        "tertiary": "#ffb148",
+                        "tertiary-dim": "#e79400",
+                        "surface-variant": "#192540",
+                        "on-secondary-container": "#e1ffec",
+                        "error": "#ff6e84",
+                        "secondary": "#69f6b8",
+                        "on-primary-fixed-variant": "#0e009d",
+                        "tertiary-container": "#f8a010",
+                        "on-surface": "#dee5ff",
+                        "on-error-container": "#ffb2b9",
+                        "on-tertiary-fixed": "#2a1700",
+                        "primary-dim": "#6063ee",
+                        "on-secondary-fixed-variant": "#006544",
+                        "tertiary-fixed-dim": "#e79400",
+                        "secondary-fixed-dim": "#58e7ab"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Epilogue"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(25, 37, 64, 0.6);
+            backdrop-filter: blur(20px);
+        }
+        .neon-gradient {
+            background: linear-gradient(135deg, #a3a6ff 0%, #6063ee 100%);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #060e20;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #192540;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body custom-scrollbar">
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 w-full bg-slate-950/60 backdrop-blur-xl tonal-shift bg-slate-900/40">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-indigo-500">arrow_back</span>
+<h1 class="text-xl font-bold tracking-tighter text-indigo-400 font-headline">Lagos Pulse</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-400 hover:text-indigo-300 transition-colors">search</span>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border border-outline-variant/30 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of a professional African man in a clean studio setting with soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGfOZrLeFw9EwmuRElhjhTxgoUzugIqj8gkZNhGFLZE-n5KUBYg4N-R7Q7MuZ2FHRsFOLHGe3phTNQ4Rfjg6x3DGUrINzp13Hcz-AB3ajOm2OamOXOWlEa50DQJdnQdj8WPkuaEtfpp4U7QM7UJIYuMzGPwZElGE2wecaRSZDUi1_GUQxkzRQwhqXQDwQBIZkneFM7TDHnbNtCggSesZyRE4-p8MO348Y0hY8FEwqGR12itzTt9I1v8ln9wZ47Y_iOdzn4uh_yXu7b"/>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-2xl mx-auto">
+<header class="mb-8">
+<span class="text-[10px] uppercase tracking-[0.2em] font-bold text-tertiary mb-2 block">Studio / Campaigns</span>
+<h2 class="text-4xl font-headline font-extrabold tracking-tight text-on-background mb-2">Create Promotion</h2>
+<p class="text-on-surface-variant text-sm leading-relaxed">Design an exclusive offer to attract more guests to your venue tonight.</p>
+</header>
+<section class="space-y-8">
+<div class="group">
+<label class="block text-[10px] uppercase tracking-widest font-bold text-on-surface-variant mb-3">Promotion Title</label>
+<input class="w-full bg-surface-container-highest border-0 border-b-2 border-transparent focus:border-primary focus:ring-0 px-0 py-4 text-xl font-headline font-bold text-on-surface transition-all placeholder:text-on-surface-variant/30" placeholder="e.g. Happy Hour Special" type="text"/>
+</div>
+<div class="space-y-3">
+<label class="block text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Promo Visual (16:9)</label>
+<div class="relative w-full aspect-video rounded-xl overflow-hidden bg-surface-container-low border-2 border-dashed border-outline-variant/30 flex flex-col items-center justify-center group cursor-pointer hover:border-primary/50 transition-all">
+<img class="absolute inset-0 w-full h-full object-cover opacity-20 grayscale group-hover:grayscale-0 group-hover:opacity-40 transition-all" data-alt="Close up of a vibrant purple cocktail with neon lights reflecting in the glass in a dark moody atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZic03gLT5O1zFtyuGHUBz6YNDpZygCxaKtNlVbQPAZq8IxvrDvESwsq423Y3yXCGNO5jI_Hqr4wTF8ASzcfuorocc4q0IGfaLYaJApT8hGZ9rsDrwPx6GBsP7b2ceKaKXjdHU7tnW8_FqHN1kJZprX5QqIMhdHfhmzRYa9jnfkqA2Gc-HplQbx6txfoNVlfn1-Jh9UfVIWiv8AfaWXCmKRJ7yeMCzPSfQjTtSRnFyF3ZReRsUSStU7SvhJqAsWsuwqW4IwXrhDXA9"/>
+<div class="relative z-10 flex flex-col items-center">
+<span class="material-symbols-outlined text-primary text-4xl mb-2">add_a_photo</span>
+<span class="text-sm font-medium text-on-surface-variant">Tap to upload promo image</span>
+<span class="text-[10px] text-on-surface-variant/50 mt-1">Recommended: 1920x1080px</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-6">
+<div class="space-y-3">
+<label class="block text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Promotion Type</label>
+<div class="grid grid-cols-3 gap-3">
+<button class="flex flex-col items-center justify-center p-4 rounded-xl bg-primary/10 border-2 border-primary/40 text-primary transition-all">
+<span class="material-symbols-outlined mb-2">local_bar</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Happy Hour</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 rounded-xl bg-surface-container-high border-2 border-transparent text-on-surface-variant hover:bg-surface-container-highest transition-all">
+<span class="material-symbols-outlined mb-2">event</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Event</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 rounded-xl bg-surface-container-high border-2 border-transparent text-on-surface-variant hover:bg-surface-container-highest transition-all">
+<span class="material-symbols-outlined mb-2">percent</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Discount</span>
+</button>
+</div>
+</div>
+<div class="space-y-3">
+<label class="block text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Description</label>
+<textarea class="w-full bg-surface-container-low border-0 rounded-xl focus:ring-2 focus:ring-primary/20 text-on-surface p-4 placeholder:text-on-surface-variant/30" placeholder="Describe the offer details, terms, and what makes it special..." rows="4"></textarea>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-3">
+<label class="block text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Start Date</label>
+<div class="relative">
+<input class="w-full bg-surface-container-low border-0 rounded-xl focus:ring-2 focus:ring-primary/20 text-on-surface p-4 appearance-none" type="date"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-primary pointer-events-none">calendar_today</span>
+</div>
+</div>
+<div class="space-y-3">
+<label class="block text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Start Time</label>
+<div class="relative">
+<input class="w-full bg-surface-container-low border-0 rounded-xl focus:ring-2 focus:ring-primary/20 text-on-surface p-4 appearance-none" type="time"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-primary pointer-events-none">schedule</span>
+</div>
+</div>
+</div>
+<div class="p-6 rounded-2xl bg-surface-container-low border border-outline-variant/10 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">stars</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-on-surface">Premium Boost</h4>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider">Highlight this promo to top of feed</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
+</main>
+<footer class="fixed bottom-0 left-0 w-full glass-panel px-6 py-6 z-50 flex items-center gap-4">
+<button class="flex-1 neon-gradient py-4 rounded-xl text-on-primary-fixed font-headline font-extrabold tracking-tight flex items-center justify-center gap-2 shadow-[0_8px_24px_-4px_rgba(163,166,255,0.4)] scale-100 active:scale-95 transition-transform">
+            Publish Promotion
+            <span class="material-symbols-outlined">rocket_launch</span>
+</button>
+</footer>
+<nav class="hidden md:flex fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pt-3 pb-6 bg-slate-950/60 backdrop-blur-xl tonal-shift bg-slate-900/80 shadow-[0_-4px_24px_-4px_rgba(0,0,0,0.5)] rounded-t-3xl">
+<div class="flex flex-col items-center justify-center text-slate-500 hover:bg-slate-800/50 transition-all">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-bold">Explore</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 hover:bg-slate-800/50 transition-all">
+<span class="material-symbols-outlined">dynamic_feed</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-bold">Feed</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 hover:bg-slate-800/50 transition-all">
+<span class="material-symbols-outlined">confirmation_number</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-bold">Bookings</span>
+</div>
+<div class="flex flex-col items-center justify-center text-indigo-400 bg-indigo-500/10 rounded-xl px-4 py-1">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-bold">Studio</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 hover:bg-slate-800/50 transition-all">
+<span class="material-symbols-outlined">person</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-bold">Profile</span>
+</div>
+</nav>
+<div class="md:hidden">
+<div class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pt-3 pb-6 bg-slate-950/60 backdrop-blur-xl tonal-shift bg-slate-900/80 shadow-[0_-4px_24px_-4px_rgba(0,0,0,0.5)] rounded-t-3xl z-40 h-20 opacity-0 pointer-events-none">
+</div>
+</div>
+</body></html>

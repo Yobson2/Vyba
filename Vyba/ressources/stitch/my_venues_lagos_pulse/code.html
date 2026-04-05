@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lagos Pulse | My Establishments</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#000000",
+                        "on-primary": "#0f00a4",
+                        "primary": "#a3a6ff",
+                        "surface-container": "#0f1930",
+                        "inverse-surface": "#faf8ff",
+                        "on-tertiary-fixed": "#2a1700",
+                        "tertiary-fixed": "#f8a010",
+                        "secondary-dim": "#58e7ab",
+                        "on-surface-variant": "#a3aac4",
+                        "on-error-container": "#ffb2b9",
+                        "tertiary-fixed-dim": "#e79400",
+                        "secondary-fixed-dim": "#58e7ab",
+                        "outline": "#6d758c",
+                        "secondary-container": "#006c49",
+                        "error": "#ff6e84",
+                        "on-secondary-fixed-variant": "#006544",
+                        "on-primary-fixed": "#000000",
+                        "on-tertiary-container": "#4a2c00",
+                        "primary-fixed": "#9396ff",
+                        "surface-tint": "#a3a6ff",
+                        "surface-variant": "#192540",
+                        "tertiary-dim": "#e79400",
+                        "secondary-fixed": "#69f6b8",
+                        "error-dim": "#d73357",
+                        "on-surface": "#dee5ff",
+                        "surface-dim": "#060e20",
+                        "secondary": "#69f6b8",
+                        "background": "#060e20",
+                        "on-tertiary-fixed-variant": "#563400",
+                        "on-secondary-fixed": "#00452d",
+                        "on-error": "#490013",
+                        "inverse-on-surface": "#4d556b",
+                        "primary-dim": "#6063ee",
+                        "on-secondary": "#005a3c",
+                        "inverse-primary": "#494bd7",
+                        "on-secondary-container": "#e1ffec",
+                        "tertiary-container": "#f8a010",
+                        "tertiary": "#ffb148",
+                        "on-primary-container": "#0a0081",
+                        "surface": "#060e20",
+                        "primary-container": "#9396ff",
+                        "surface-container-highest": "#192540",
+                        "surface-bright": "#1f2b49",
+                        "on-primary-fixed-variant": "#0e009d",
+                        "outline-variant": "#40485d",
+                        "primary-fixed-dim": "#8387ff",
+                        "surface-container-low": "#091328",
+                        "surface-container-high": "#141f38",
+                        "error-container": "#a70138",
+                        "on-tertiary": "#573500",
+                        "on-background": "#dee5ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Epilogue"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(25, 37, 64, 0.6);
+            backdrop-filter: blur(20px);
+        }
+        .editorial-gradient {
+            background: linear-gradient(135deg, #a3a6ff 0%, #6063ee 100%);
+        }
+        .cinematic-overlay {
+            background: linear-gradient(to top, rgba(15, 25, 48, 0.95) 0%, rgba(15, 25, 48, 0.4) 50%, transparent 100%);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body min-h-screen pb-32">
+<!-- Top Navigation Anchor -->
+<header class="fixed top-0 w-full z-50 bg-slate-950/60 backdrop-blur-xl">
+<div class="flex justify-between items-center px-6 py-4 w-full">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-indigo-400">location_on</span>
+<h1 class="text-indigo-500 font-bold tracking-tighter font-headline text-xl">Lagos Tonight</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex gap-6">
+<a class="text-slate-400 font-inter text-[12px] uppercase tracking-widest font-semibold hover:text-indigo-400 transition-colors" href="#">Explore</a>
+<a class="text-indigo-400 font-bold font-inter text-[12px] uppercase tracking-widest" href="#">Manage</a>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20">
+<img alt="Owner Profile" data-alt="portrait of a confident West African man in professional attire with soft studio lighting and dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAs9-4pVEBV3YQjrqiHWqxai5p5L7FWhT229VhvTI_YyQJL707KrfYwo5jxlxtUrn1ZIULvEoM0iyfSHZP2J0sM1iDu0NuOYEmi4c4dHUfbcsD9jAXJtdxe1eSWFAKdpaFmZ_UPq1uCH1rlFcuXRV7PDu0EW5xn9OatUZL8ToQvals5Q4MmZ-RhamAMxsZCBxM8ev1cVBBcvAwjxQThniA52YA5x-HHciMpOb4y8FEBBHHbTo3bRwxsEhrE7WIDuxrzgFEkX0ARTudX"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-28 px-6 max-w-5xl mx-auto">
+<!-- Section Header -->
+<div class="mb-12">
+<span class="text-tertiary-fixed font-label text-[10px] uppercase tracking-[0.2em] font-black">Owner Dashboard</span>
+<h2 class="font-headline text-4xl md:text-5xl font-extrabold tracking-tight mt-2">My Establishments</h2>
+<p class="text-on-surface-variant mt-4 font-body max-w-md">Select a venue to manage reservations, staff access, and tonight's guest list.</p>
+</div>
+<!-- Bento Layout for Venue Selection -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Venue Card 1: The Premium Anchor -->
+<div class="relative aspect-[3/4] rounded-2xl overflow-hidden group bg-surface-container-high transition-transform duration-300 hover:scale-[1.02]">
+<img class="absolute inset-0 w-full h-full object-cover" data-alt="ultra-modern luxury lounge interior in Lagos with neon blue accents, velvet seating, and ambient warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZKBTSmKKN9fLITCY1-mYjh4lo_NAsrnJqNb8mW3ZRPDOGahhVnzVQFEhwoBqNWs0PmxTIhYYzpeHCUyNOmRluX_7vVC3uk_Trutvccu0Rb_QEJFHxdJOoNMDN5cNqorh-O2hkNzVQ0uqpg_Q86yeu02sr2gjMwrCNNigJcLloZJuht86zKalWZWGB_t0_e5VOtmbINeFs0qAq_41KYT0bmU-TRcsVh3PA-HhDFeNptCYWUfp-9aCtcEf2PIJ0GlJsKlimNAfwgLcL"/>
+<div class="absolute inset-0 cinematic-overlay"></div>
+<!-- Status Chip -->
+<div class="absolute top-4 right-4">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest backdrop-blur-md bg-secondary-container/80">
+                        Live Now
+                    </span>
+</div>
+<div class="absolute bottom-0 left-0 p-6 w-full">
+<h3 class="font-headline text-2xl font-bold mb-1">Zaza Lounge</h3>
+<div class="flex items-center gap-2 mb-6 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">confirmation_number</span>
+<span class="text-xs font-label uppercase tracking-wider">142 Bookings Today</span>
+</div>
+<button class="w-full editorial-gradient py-3 rounded-xl text-on-primary-fixed font-bold flex items-center justify-center gap-2 active:scale-95 transition-transform">
+                        Manage Venue
+                        <span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Venue Card 2 -->
+<div class="relative aspect-[3/4] rounded-2xl overflow-hidden group bg-surface-container-high transition-transform duration-300 hover:scale-[1.02]">
+<img class="absolute inset-0 w-full h-full object-cover" data-alt="vibrant cocktail bar at night with amber lighting, rows of premium spirits, and blurred movement of people" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDI0HL_hOePQI0z22gBmjn_hic3k8unB2PXYk-Vbb6vL47nMsKuVe98O3c1oNGPhE60Ef1jzMqqsM51kPP6-cWZLxwGxEyrEaC8tWXFbKXFWiZvu1J1AbQNzJ0dsSpuu-CGT1wQeAhl09eb3dvaE2RJiidE_r6zOTbMgPZxSBwNhApxXGGgCRjCjqOUws7pPFlbMlyGuuVt0Wo0zZ2sCsvt1gJ4EZO7XPMrHKFXvlpJl_zo1_DFFxVRshXak_VV49xuszqrtYln7r7z"/>
+<div class="absolute inset-0 cinematic-overlay"></div>
+<div class="absolute top-4 right-4">
+<span class="bg-surface-variant/80 text-on-surface-variant px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest backdrop-blur-md">
+                        Closed
+                    </span>
+</div>
+<div class="absolute bottom-0 left-0 p-6 w-full">
+<h3 class="font-headline text-2xl font-bold mb-1">Amber Bar</h3>
+<div class="flex items-center gap-2 mb-6 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">person</span>
+<span class="text-xs font-label uppercase tracking-wider">Staff: 12 Active</span>
+</div>
+<button class="w-full bg-surface-container-highest border border-outline-variant/30 py-3 rounded-xl text-on-surface font-bold flex items-center justify-center gap-2 active:scale-95 transition-transform hover:bg-surface-container-highest/80">
+                        Manage Venue
+                        <span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Venue Card 3: Asymmetric Utility Card -->
+<div class="bg-surface-container-low rounded-2xl p-6 flex flex-col justify-between border-t border-l border-outline-variant/10">
+<div>
+<div class="w-16 h-16 rounded-2xl bg-primary-container/20 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">insights</span>
+</div>
+<h3 class="font-headline text-2xl font-bold mb-2">Network View</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">Aggregate analytics across all 3 of your active Lagos locations.</p>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-center p-3 bg-surface-container rounded-lg">
+<span class="text-xs font-label uppercase tracking-tighter">Total Revenue</span>
+<span class="text-secondary font-bold">₦2.4M</span>
+</div>
+<button class="w-full text-indigo-400 font-bold py-2 text-sm flex items-center justify-center gap-1 hover:bg-indigo-500/10 rounded-lg transition-colors">
+                        View Network Reports
+                        <span class="material-symbols-outlined text-sm">north_east</span>
+</button>
+</div>
+</div>
+<!-- Venue Card 4 -->
+<div class="relative aspect-[3/4] rounded-2xl overflow-hidden group bg-surface-container-high transition-transform duration-300 hover:scale-[1.02]">
+<img class="absolute inset-0 w-full h-full object-cover" data-alt="luxury rooftop pool bar at sunset with views of the Lagos city skyline and purple-pink twilight sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyVH2txKcmZuK8PKlED7-J1c2yDSxCNaEPAJNSCYE7UV17ZkWZdp1_X-_MosGo-WV2rX9KQm_eXOBnDl8h85oCQ4g2OBQHL_Qn92rfKZEM7lzZ67J4getgAdXahGL-QLLwS-s5lc5K-8Cp8_M00Lxq_mYhqwhHybPC1hSTCx6861ppYL-tTfX252AsRXOntnhCsrk9hpU8xAX7LTVElH1w4Mv9ML0LJ1_FJp-Ar33v63MN1fceB0JgvEyaWD-bj_EUxXIh4goFUwr3"/>
+<div class="absolute inset-0 cinematic-overlay"></div>
+<div class="absolute top-4 right-4">
+<span class="bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest backdrop-blur-md bg-tertiary-fixed/80">
+                        Event Soon
+                    </span>
+</div>
+<div class="absolute bottom-0 left-0 p-6 w-full">
+<h3 class="font-headline text-2xl font-bold mb-1">The Sky Garden</h3>
+<div class="flex items-center gap-2 mb-6 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">celebration</span>
+<span class="text-xs font-label uppercase tracking-wider">Afrobeats Night Tonight</span>
+</div>
+<button class="w-full bg-surface-container-highest border border-outline-variant/30 py-3 rounded-xl text-on-surface font-bold flex items-center justify-center gap-2 active:scale-95 transition-transform hover:bg-surface-container-highest/80">
+                        Manage Venue
+                        <span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Add New Venue Placeholder (Semantic Empty State) -->
+<div class="relative aspect-[3/4] rounded-2xl border-2 border-dashed border-outline-variant/30 flex flex-col items-center justify-center p-8 text-center bg-surface-container-low/30">
+<div class="w-20 h-20 rounded-full bg-surface-container-highest flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-4xl text-outline">add_business</span>
+</div>
+<h3 class="font-headline text-xl font-bold mb-2">Expansion?</h3>
+<p class="text-on-surface-variant text-sm mb-6">Add your next hotspot to the Lagos Pulse network and reach thousands of guests.</p>
+<button class="px-6 py-2 border border-primary text-primary rounded-full text-xs font-bold uppercase tracking-widest hover:bg-primary/10 transition-colors">
+                    Add New Venue
+                </button>
+</div>
+</div>
+</main>
+<!-- Floating Action Button (FAB) -->
+<button class="fixed bottom-28 right-6 w-16 h-16 editorial-gradient text-on-primary-fixed rounded-2xl shadow-2xl flex items-center justify-center z-[60] active:scale-90 transition-transform shadow-primary/20">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+<!-- Bottom Navigation Shell (Destination Anchor) -->
+<nav class="fixed bottom-0 left-0 w-full z-50">
+<div class="bg-slate-950/60 backdrop-blur-xl shadow-[0_-8px_30px_rgb(0,0,0,0.12)] rounded-t-3xl flex justify-around items-center px-4 pt-3 pb-8">
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-indigo-400 transition-all" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-semibold mt-1">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-indigo-400 transition-all" href="#">
+<span class="material-symbols-outlined">dynamic_feed</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-semibold mt-1">Feed</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-indigo-400 transition-all" href="#">
+<span class="material-symbols-outlined">confirmation_number</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-semibold mt-1">Bookings</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-indigo-500/20 text-indigo-300 rounded-xl px-4 py-1" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-semibold mt-1">Profile</span>
+</a>
+</div>
+</nav>
+</body></html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lagos Pulse - Venue Details</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;800;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#000000",
+                    "error": "#ff6e84",
+                    "secondary-fixed-dim": "#58e7ab",
+                    "outline": "#6d758c",
+                    "surface": "#060e20",
+                    "secondary": "#69f6b8",
+                    "surface-container-lowest": "#000000",
+                    "on-primary-fixed-variant": "#0e009d",
+                    "surface-bright": "#1f2b49",
+                    "on-secondary-fixed-variant": "#006544",
+                    "secondary-container": "#006c49",
+                    "inverse-primary": "#494bd7",
+                    "error-container": "#a70138",
+                    "surface-tint": "#a3a6ff",
+                    "outline-variant": "#40485d",
+                    "tertiary-container": "#f8a010",
+                    "on-surface": "#dee5ff",
+                    "surface-dim": "#060e20",
+                    "inverse-on-surface": "#4d556b",
+                    "surface-variant": "#192540",
+                    "tertiary-dim": "#e79400",
+                    "primary-container": "#9396ff",
+                    "on-background": "#dee5ff",
+                    "surface-container": "#0f1930",
+                    "surface-container-low": "#091328",
+                    "on-error-container": "#ffb2b9",
+                    "on-secondary": "#005a3c",
+                    "primary-fixed": "#9396ff",
+                    "error-dim": "#d73357",
+                    "on-tertiary-fixed": "#2a1700",
+                    "on-secondary-container": "#e1ffec",
+                    "tertiary": "#ffb148",
+                    "on-primary": "#0f00a4",
+                    "tertiary-fixed": "#f8a010",
+                    "on-tertiary-container": "#4a2c00",
+                    "on-error": "#490013",
+                    "on-tertiary": "#573500",
+                    "tertiary-fixed-dim": "#e79400",
+                    "secondary-dim": "#58e7ab",
+                    "on-primary-container": "#0a0081",
+                    "inverse-surface": "#faf8ff",
+                    "primary-fixed-dim": "#8387ff",
+                    "primary": "#a3a6ff",
+                    "on-tertiary-fixed-variant": "#563400",
+                    "surface-container-high": "#141f38",
+                    "primary-dim": "#6063ee",
+                    "on-surface-variant": "#a3aac4",
+                    "secondary-fixed": "#69f6b8",
+                    "on-secondary-fixed": "#00452d",
+                    "surface-container-highest": "#192540"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Epilogue"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary selection:text-on-primary">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-950/60 backdrop-blur-xl flex justify-between items-center px-6 h-16 w-full tonal-shift bg-slate-900/40 shadow-none">
+<div class="flex items-center gap-4">
+<button class="text-indigo-400 hover:text-indigo-300 transition-colors scale-95 active:duration-150">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-xl font-bold tracking-tighter text-indigo-400 font-epilogue headline-lg">Lagos Pulse</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-400 hover:text-indigo-300 transition-colors scale-95 active:duration-150">
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+</header>
+<main class="pb-32">
+<!-- Hero Image Carousel Section -->
+<section class="relative w-full h-[530px] overflow-hidden">
+<img alt="The Vibe Lounge" class="w-full h-full object-cover" data-alt="dramatic wide angle shot of a luxury neon-lit nightclub interior in Lagos with purple and indigo spotlights and sleek velvet seating" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtG_5QS9MBzzzBwT4cpL8QACqaSce9dcFQtwMYXMIVXIhJ7z2BiepLnY-LdNxVarX7bIFgLMtMVaUURznZhavElGD8YndOm1C9icuPgsNKAtw1hhbY7QbRQXiwxIKGm-b9PuWXkRastuUShUJ-PQodgVkf8UeBW8Lht2c1AX3LuR4gIYvgeBXol4r1ktkKCkmR-lhL2q0MpK4kkcSZeOGIkppD03GLWg8P_tcG1kuJ1kETZXChM7YvW8F2rwSJxQZqouuVmCnIVpdE"/>
+<!-- Hero Overlays -->
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-black/30"></div>
+<div class="absolute top-20 right-4 flex flex-col gap-3">
+<button class="bg-surface/40 backdrop-blur-md p-3 rounded-xl text-on-surface hover:bg-surface/60 transition-all shadow-lg">
+<span class="material-symbols-outlined">share</span>
+</button>
+<button class="bg-surface/40 backdrop-blur-md p-3 rounded-xl text-primary hover:bg-surface/60 transition-all shadow-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+<!-- Carousel Indicators -->
+<div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex gap-2">
+<span class="w-8 h-1.5 rounded-full bg-primary shadow-[0_0_8px_rgba(163,166,255,0.6)]"></span>
+<span class="w-2 h-1.5 rounded-full bg-surface-container-highest"></span>
+<span class="w-2 h-1.5 rounded-full bg-surface-container-highest"></span>
+</div>
+</section>
+<!-- Info Block -->
+<section class="px-6 -mt-10 relative z-10">
+<div class="bg-surface-container-high p-6 rounded-xl shadow-2xl border-none">
+<div class="flex justify-between items-start mb-2">
+<div>
+<span class="text-[10px] uppercase tracking-widest font-bold text-tertiary mb-1 block">PREMIUM NIGHTLIFE</span>
+<h2 class="font-headline font-extrabold text-3xl text-on-surface tracking-tighter">The Vibe Lounge</h2>
+</div>
+<div class="flex items-center bg-surface-container-highest px-3 py-1.5 rounded-lg border border-outline-variant/15">
+<span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="ml-1 font-bold text-sm">4.9</span>
+</div>
+</div>
+<p class="text-on-surface-variant flex items-center gap-2 text-sm mb-4">
+<span class="material-symbols-outlined text-primary text-lg">location_on</span>
+                    Victoria Island, Lagos, Nigeria
+                </p>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-[11px] font-bold uppercase tracking-wider">
+                        Open · Closes at 2:00 AM
+                    </span>
+<span class="text-on-surface-variant text-sm">• Lagos' Most Exclusive Spot</span>
+</div>
+</div>
+</section>
+<!-- Quick Actions -->
+<section class="px-6 mt-8 flex gap-3 overflow-x-auto hide-scrollbar">
+<button class="flex-1 min-w-[120px] py-4 rounded-xl bg-gradient-to-br from-primary to-primary-dim text-on-primary-fixed font-bold flex items-center justify-center gap-2 shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-xl">confirmation_number</span>
+                Reserve
+            </button>
+<button class="flex-1 min-w-[60px] py-4 rounded-xl bg-surface-container-low text-on-surface font-medium flex items-center justify-center gap-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-xl">call</span>
+                Call
+            </button>
+<button class="flex-1 min-w-[60px] py-4 rounded-xl bg-surface-container-low text-on-surface font-medium flex items-center justify-center gap-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-xl">directions</span>
+                Go
+            </button>
+</section>
+<!-- Tabs -->
+<section class="mt-10 px-6">
+<div class="flex gap-8 border-b border-outline-variant/15 overflow-x-auto hide-scrollbar">
+<button class="pb-3 border-b-2 border-primary text-primary font-bold text-sm tracking-wide">About</button>
+<button class="pb-3 border-b-2 border-transparent text-on-surface-variant font-medium text-sm tracking-wide hover:text-on-surface transition-colors">Menu</button>
+<button class="pb-3 border-b-2 border-transparent text-on-surface-variant font-medium text-sm tracking-wide hover:text-on-surface transition-colors">Events</button>
+<button class="pb-3 border-b-2 border-transparent text-on-surface-variant font-medium text-sm tracking-wide hover:text-on-surface transition-colors">Reviews</button>
+</div>
+</section>
+<!-- About Content Section -->
+<section class="px-6 mt-8">
+<div class="space-y-8">
+<div>
+<h3 class="font-headline font-bold text-xl text-on-surface mb-3">The Experience</h3>
+<p class="text-on-surface-variant leading-relaxed text-base">
+                        Set in the heart of Victoria Island, The Vibe Lounge offers an immersive night of luxury, curated cocktails, and West Africa's finest DJs. Experience an editorial-grade atmosphere with neon-infused aesthetics and VIP treatment that defines the Lagos night.
+                    </p>
+</div>
+<div>
+<h3 class="font-headline font-bold text-sm uppercase tracking-widest text-outline-variant mb-4">Amenities</h3>
+<div class="flex flex-wrap gap-3">
+<div class="flex items-center gap-2 px-4 py-2 bg-surface-container rounded-xl border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary">wifi</span>
+<span class="text-xs font-medium">Free WiFi</span>
+</div>
+<div class="flex items-center gap-2 px-4 py-2 bg-surface-container rounded-xl border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary">local_parking</span>
+<span class="text-xs font-medium">Valet Parking</span>
+</div>
+<div class="flex items-center gap-2 px-4 py-2 bg-surface-container rounded-xl border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary">deck</span>
+<span class="text-xs font-medium">Outdoor Deck</span>
+</div>
+<div class="flex items-center gap-2 px-4 py-2 bg-surface-container rounded-xl border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary">restaurant</span>
+<span class="text-xs font-medium">Full Kitchen</span>
+</div>
+</div>
+</div>
+<div>
+<h3 class="font-headline font-bold text-xl text-on-surface mb-4">Gallery</h3>
+<div class="grid grid-cols-2 gap-3">
+<div class="col-span-1 h-48 rounded-xl overflow-hidden shadow-lg transform rotate-[-1deg] translate-y-1">
+<img alt="Club Detail 1" class="w-full h-full object-cover" data-alt="close-up of vibrant neon signage on a dark brick wall reflecting on polished surfaces" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWRqMYrVLSoxBUdLZ2RbwJp34-4Rrh_YpCFhrym8B6L084ESbXY5CyZEcmOK3Qiy_U4fD89EyJPkp6bXYtC1c9vsZ7-n7VtTV7OqJCobGu65ovJnvck4Z8w1mxscCEh-0pzGVCawZCOX4yWaAiM7JhFp2yw3gSGSLXSaDqodR4lUqhfLqMU0KuQ4hRM-aQ1MreZahqnSY48N2Gp8a9375h8hI3SUMd0Cstpx_c6yFzQ_oZkVzvta7Vw1-w6rOjbkuhkyFUiZRVCygZ"/>
+</div>
+<div class="col-span-1 h-64 rounded-xl overflow-hidden shadow-lg transform rotate-[2deg] -translate-y-4">
+<img alt="Club Detail 2" class="w-full h-full object-cover" data-alt="stylish group of people enjoying colorful artisanal cocktails at a glowing bar with soft lens flare" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIoWr2iBqR-4reFKmu3ZzWw2uBcIHJfdZgMS9osTOik_G6CnBoh89S7E3XBHk03GelQk9ukTQoJNV4aiBM8vT1P1mP7e_xsv78qaugqJs-9upFzpaV0tssCF5BT_k5h9X9tG-pxhHzx6vDSUWhVmg-dwKdzBVXCSKoXxcT6QD3CVFIXQjaJnH3xjxmBTcTzg6kibhCflKvAmTeHK-7bpJai-5pbznwDyc0nrDeOnNMz7FQ0UrM2iwTUjpAeYv4TmBWq4iP5TO8-Jgi"/>
+</div>
+<div class="col-span-2 h-40 rounded-xl overflow-hidden shadow-lg">
+<img alt="Club Detail 3" class="w-full h-full object-cover" data-alt="high-energy crowd on a dance floor illuminated by dramatic purple and blue laser lights in a premium venue" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD59-JN4JbemK9vQTiytAVoriOG5fVIxdKMc0SkSFy2f_wQ1UXr7hTsyGn5TSFlorsLlNHRjcPmfzc9yJMSc3VnYoutu6VaZSaAQFRbJpTuXJCBdXLfISeU-XEa8EjbgYxmGs72-lcsSRCw53mW8yMROwLGm2ro1g-GgaH6yGjMT63dRNeg6Y-evs2nKrQpHQ9qdEP8vfmKyuvhoqvozcTPd0YtkILZ-Xtc56noNUVqmxwAKeCOvO1zD0iLwEihnCwVeoz0aVtkZXFA"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Sticky Bottom Bar -->
+<div class="fixed bottom-[88px] left-0 w-full px-6 z-40 md:hidden">
+<button class="w-full py-5 rounded-2xl bg-gradient-to-r from-primary to-primary-dim text-on-primary-fixed font-black text-lg tracking-tighter uppercase shadow-[0_8px_32px_rgba(99,102,241,0.4)] flex items-center justify-center gap-3">
+            Reserve a Table
+            <span class="material-symbols-outlined">arrow_forward_ios</span>
+</button>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pt-3 pb-6 bg-slate-950/60 backdrop-blur-xl z-50 rounded-t-3xl tonal-shift bg-slate-900/80 shadow-[0_-4px_24px_-4px_rgba(0,0,0,0.5)]">
+<a class="flex flex-col items-center justify-center text-indigo-400 bg-indigo-500/10 rounded-xl px-4 py-1 hover:bg-slate-800/50 transition-all scale-90 active:duration-200" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-bold">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:bg-slate-800/50 transition-all scale-90 active:duration-200" href="#">
+<span class="material-symbols-outlined">dynamic_feed</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-bold">Feed</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:bg-slate-800/50 transition-all scale-90 active:duration-200" href="#">
+<span class="material-symbols-outlined">confirmation_number</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-bold">Bookings</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:bg-slate-800/50 transition-all scale-90 active:duration-200" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-bold">Profile</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,111 @@
+{
+  "@@locale": "en",
+
+  "appTitle": "Vyba",
+
+  "commonOk": "OK",
+  "commonCancel": "Cancel",
+  "commonSave": "Save",
+  "commonDelete": "Delete",
+  "commonEdit": "Edit",
+  "commonClose": "Close",
+  "commonRetry": "Retry",
+  "commonNext": "Next",
+  "commonBack": "Back",
+  "commonSkip": "Skip",
+  "commonDone": "Done",
+  "commonSearch": "Search",
+  "commonLoading": "Loading...",
+  "commonNoResults": "No results found",
+  "commonSeeAll": "See all",
+  "commonOr": "Or",
+
+  "errorGeneric": "Something went wrong. Please try again.",
+  "errorNetwork": "No internet connection. Please check your network.",
+  "errorServer": "Server error. Please try again later.",
+  "errorUnauthorized": "Session expired. Please log in again.",
+  "errorValidation": "Please check your input and try again.",
+  "errorTimeout": "Request timed out. Please try again.",
+
+  "authLogin": "Log In",
+  "authRegister": "Sign Up",
+  "authLogout": "Log Out",
+  "authForgotPassword": "Forgot Password?",
+  "authResetPassword": "Reset Password",
+  "authEmail": "Email",
+  "authPassword": "Password",
+  "authConfirmPassword": "Confirm Password",
+  "authName": "Full Name",
+  "authLoginSubtitle": "Welcome back! Please sign in to continue.",
+  "authRegisterSubtitle": "Create an account to get started.",
+  "authForgotPasswordSubtitle": "Enter your email and we'll send you a code to reset your password.",
+  "authNoAccount": "Don't have an account? ",
+  "authHaveAccount": "Already have an account? ",
+  "authOtpTitle": "Verify Your Email",
+  "authOtpSubtitle": "Enter the 6-digit code sent to {email}",
+  "@authOtpSubtitle": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "authOtpResend": "Didn't receive the code? Resend",
+  "authLoginWithGoogle": "Continue with Google",
+  "authLoginWithApple": "Continue with Apple",
+  "authTerms": "By continuing, you agree to our Terms of Service and Privacy Policy.",
+
+  "validationRequired": "This field is required",
+  "validationEmail": "Please enter a valid email address",
+  "validationPasswordLength": "Password must be at least 8 characters",
+  "validationPasswordMatch": "Passwords do not match",
+
+  "onboardingTitle1": "Welcome",
+  "onboardingDesc1": "Discover a new way to manage your tasks and boost productivity.",
+  "onboardingTitle2": "Stay Organized",
+  "onboardingDesc2": "Keep everything in one place with our intuitive interface.",
+  "onboardingTitle3": "Get Started",
+  "onboardingDesc3": "Create your account and start your journey today.",
+  "onboardingGetStarted": "Get Started",
+
+  "homeTitle": "Home",
+  "homeGreeting": "Hello, {name}!",
+  "@homeGreeting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+
+  "profileTitle": "Profile",
+  "profileEditProfile": "Edit Profile",
+  "profileChangePassword": "Change Password",
+  "profileLogout": "Logout",
+
+  "settingsTitle": "Settings",
+  "settingsAppearance": "Appearance",
+  "settingsTheme": "Theme",
+  "settingsThemeSystem": "System",
+  "settingsThemeLight": "Light",
+  "settingsThemeDark": "Dark",
+  "settingsLanguage": "Language",
+  "settingsLanguageEn": "English",
+  "settingsLanguageFr": "French",
+  "settingsAbout": "About",
+  "settingsVersion": "Version {version}",
+  "@settingsVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsTerms": "Terms of Service",
+  "settingsPrivacy": "Privacy Policy",
+
+  "offlineBanner": "You are offline",
+
+  "emptyStateTitle": "Nothing here yet",
+  "emptyStateSubtitle": "Check back later for updates."
+}

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lagos Pulse - Venue Menu</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-lowest": "#000000",
+                    "on-primary": "#0f00a4",
+                    "primary": "#a3a6ff",
+                    "surface-container": "#0f1930",
+                    "inverse-surface": "#faf8ff",
+                    "on-tertiary-fixed": "#2a1700",
+                    "tertiary-fixed": "#f8a010",
+                    "secondary-dim": "#58e7ab",
+                    "on-surface-variant": "#a3aac4",
+                    "on-error-container": "#ffb2b9",
+                    "tertiary-fixed-dim": "#e79400",
+                    "secondary-fixed-dim": "#58e7ab",
+                    "outline": "#6d758c",
+                    "secondary-container": "#006c49",
+                    "error": "#ff6e84",
+                    "on-secondary-fixed-variant": "#006544",
+                    "on-primary-fixed": "#000000",
+                    "on-tertiary-container": "#4a2c00",
+                    "primary-fixed": "#9396ff",
+                    "surface-tint": "#a3a6ff",
+                    "surface-variant": "#192540",
+                    "tertiary-dim": "#e79400",
+                    "secondary-fixed": "#69f6b8",
+                    "error-dim": "#d73357",
+                    "on-surface": "#dee5ff",
+                    "surface-dim": "#060e20",
+                    "secondary": "#69f6b8",
+                    "background": "#060e20",
+                    "on-tertiary-fixed-variant": "#563400",
+                    "on-secondary-fixed": "#00452d",
+                    "on-error": "#490013",
+                    "inverse-on-surface": "#4d556b",
+                    "primary-dim": "#6063ee",
+                    "on-secondary": "#005a3c",
+                    "inverse-primary": "#494bd7",
+                    "on-secondary-container": "#e1ffec",
+                    "tertiary-container": "#f8a010",
+                    "tertiary": "#ffb148",
+                    "on-primary-container": "#0a0081",
+                    "surface": "#060e20",
+                    "primary-container": "#9396ff",
+                    "surface-container-highest": "#192540",
+                    "surface-bright": "#1f2b49",
+                    "on-primary-fixed-variant": "#0e009d",
+                    "outline-variant": "#40485d",
+                    "primary-fixed-dim": "#8387ff",
+                    "surface-container-low": "#091328",
+                    "surface-container-high": "#141f38",
+                    "error-container": "#a70138",
+                    "on-tertiary": "#573500",
+                    "on-background": "#dee5ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Epilogue"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #060e20; color: #dee5ff; font-family: 'Inter', sans-serif; }
+        .glass { background: rgba(25, 37, 64, 0.6); backdrop-filter: blur(20px); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .headline-lg { font-size: 2rem; line-height: 2.25rem; }
+        .title-md { font-size: 1.125rem; font-weight: 600; }
+        .label-sm { font-size: 0.75rem; letter-spacing: 0.1em; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface pb-24">
+<!-- Sticky Header -->
+<header class="fixed top-0 w-full z-50 glass flex justify-between items-center px-6 py-4">
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/10 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-on-surface">arrow_back</span>
+</button>
+<div>
+<h1 class="text-indigo-500 font-bold tracking-tighter font-headline text-xl">Lagos Tonight</h1>
+<p class="text-slate-400 text-xs font-semibold uppercase tracking-widest">Skyview Lounge Menu</p>
+</div>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-indigo-500/30">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="close-up portrait of a stylish young man with a confident expression in a high-end dimly lit lounge setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBA-4joPI4PXfCRUaTgL2NgJYQAKzSOMTK4nGBF_zzcyWrp45jjYoyw0aXk431VnOsIQ2m30gzPPXsWL_tKXai0aak9GFwK1edmct81BqM7IOdZiZTjvvtOn_S9kHD1kuu4Ye9qK8sitgfpkzPnnqmjxEf3QwB5AIfL7e25BGNms1BDro5bbDcAstFXocD-_dpWB45SUGYPt7ulvjXOlVbYhhkGMRRftWePMYYHOjw3cFj6D5-A6_eBi9jHN-upSCNYJxVFv6VKXMJO"/>
+</div>
+</header>
+<main class="pt-24 px-6 max-w-4xl mx-auto">
+<!-- Search & Filter Bar -->
+<section class="mb-10">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container-highest border-none rounded-xl py-4 pl-12 pr-4 text-on-surface focus:ring-2 focus:ring-primary placeholder:text-slate-500 transition-all" placeholder="Search drinks, dishes, or spirits..." type="text"/>
+</div>
+<!-- Category Quick Scroll -->
+<div class="flex gap-3 mt-6 overflow-x-auto no-scrollbar pb-2">
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-primary text-on-primary-container font-bold text-sm">All</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-medium text-sm hover:bg-surface-variant transition-colors">Cocktails</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-medium text-sm hover:bg-surface-variant transition-colors">Small Chops</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-medium text-sm hover:bg-surface-variant transition-colors">Premium Spirits</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-medium text-sm hover:bg-surface-variant transition-colors">Wines</button>
+</div>
+</section>
+<!-- Signature Cocktails Section -->
+<section class="mb-12">
+<div class="flex items-center justify-between mb-6">
+<h2 class="font-headline font-extrabold text-2xl tracking-tight text-on-surface">Signature Cocktails</h2>
+<span class="label-sm text-tertiary-fixed font-bold uppercase tracking-widest bg-tertiary-fixed/10 px-3 py-1 rounded-full">Must Try</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Cocktail Item 1 -->
+<div class="bg-surface-container-low rounded-2xl overflow-hidden flex h-36 group">
+<div class="w-1/3 h-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="a vibrant purple cocktail in a coupe glass with a lime twist garnish against a dark moody nightclub background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2Zi_NhBGHZsWBSOAIqnFjpcqaSNkglmsbonkV4LRzZbmfaa_HmQPAkDqB6SBxOqN-RM_eoKFlGztynwfM9CYNXxLyqbUO-aGrK8Dh-HW31WEF2fiKOSuVMUT6pzqoTgBgvcRzh3osiIWxn5h3gn9CZSBGZc2QlezxKTWUmtYjFkFWenaMyVWITlHzZdhoYWdsF7Zpzso5NwWyeJez1w1exgbPzcGytO5kQFRoNtIQ2O0ArILdkG2ntGDvTTEaPrW8OiX7bNqcWX3q"/>
+</div>
+<div class="w-2/3 p-4 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-on-surface">Lagos Sunset</h3>
+<span class="text-primary font-bold">₦12,500</span>
+</div>
+<p class="text-xs text-on-surface-variant mt-1 line-clamp-2">Hibiscus infused gin, citrus, agave, and a splash of sparkling rosé.</p>
+</div>
+<div class="flex gap-2">
+<span class="text-[10px] uppercase font-bold text-secondary tracking-tighter">Popular</span>
+</div>
+</div>
+</div>
+<!-- Cocktail Item 2 -->
+<div class="bg-surface-container-low rounded-2xl overflow-hidden flex h-36 group">
+<div class="w-1/3 h-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="a smoky whiskey cocktail in a heavy crystal glass on a dark wood bar with amber glowing lights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBH4MmJ_oltvEw7Kov_PuuLHFt3pZqglMtVMvP8Wvy91_2LNJcXYW6AJsYOd_QFeTGS-ZSRj3mGzCtE-jVxF9qejGM9_m9lan9enDLDdX9yEp5ET38db9uBj1nfFPKSwhKGkG6jW-IIFwppktvmqkteY_Qk2rF4yR21X6R5mMs3MMVKn36Dd3myI_M1K03pWqIWb-Vh_wIxO0NMTScWWj8jgEXG8NR1yH__xQmSS0IVt62epdo1AKdghH4har9j2H5y8_kZa7PvqRJ_"/>
+</div>
+<div class="w-2/3 p-4 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-on-surface">Eko Old Fashioned</h3>
+<span class="text-primary font-bold">₦15,000</span>
+</div>
+<p class="text-xs text-on-surface-variant mt-1 line-clamp-2">Bourbon, chocolate bitters, palm sugar, and hickory smoke.</p>
+</div>
+<div class="flex gap-2">
+<span class="text-[10px] uppercase font-bold text-tertiary tracking-tighter">Strong</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Small Chops Bento Grid -->
+<section class="mb-12">
+<h2 class="font-headline font-extrabold text-2xl tracking-tight text-on-surface mb-6">Small Chops &amp; Bites</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<!-- Large Item -->
+<div class="col-span-2 row-span-2 relative rounded-3xl overflow-hidden h-72 group shadow-2xl">
+<img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="platter of spicy nigerian grilled chicken wings with colorful garnish and dipping sauce on a dark slate plate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9Oo5KO6ocZgReQdMC-Re-QoMmUgtoM3d9LKoEBGVU7M038aA6liUyy7JkaVmwj5EQuYT6s023wvVTmRRXfX3GckGYrRvqrDojhtHiNVWywB0hLyJk999un8VjiKUqvXBgahIqI1Sb5AjLfp4nYzcaWF57W1wAWUuhX5wHwMew0LnfjC2PClf196dpjYjQBrN_Uww3FMnQwbg77W6PTAy9pjSHTlPRmc_JE9FBZCKvCukkxv9oqP4EVbBdPCvQuoRQ0XGSySUREL2t"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+<div class="absolute bottom-4 left-4 right-4">
+<h3 class="font-bold text-white text-lg">Spicy Suya Wings</h3>
+<p class="text-white/70 text-xs mt-1">12pcs glazed in yaji spice</p>
+<div class="flex justify-between items-center mt-3">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[10px] font-bold">AVAILABLE</span>
+<span class="text-white font-bold">₦8,500</span>
+</div>
+</div>
+</div>
+<!-- Small Item 1 -->
+<div class="bg-surface-container-high rounded-2xl p-4 flex flex-col justify-between h-34 border border-outline-variant/10">
+<div>
+<h3 class="font-bold text-on-surface text-sm">Spring Rolls</h3>
+<p class="text-[10px] text-on-surface-variant mt-1">Veggie medley (4pcs)</p>
+</div>
+<span class="text-primary font-bold text-sm">₦4,000</span>
+</div>
+<!-- Small Item 2 -->
+<div class="bg-surface-container-high rounded-2xl p-4 flex flex-col justify-between h-34 border border-outline-variant/10">
+<div>
+<h3 class="font-bold text-on-surface text-sm">Prawn Crackers</h3>
+<p class="text-[10px] text-on-surface-variant mt-1">Light &amp; crispy</p>
+</div>
+<span class="text-primary font-bold text-sm">₦3,500</span>
+</div>
+<!-- Small Item 3 -->
+<div class="bg-surface-container-high rounded-2xl p-4 flex flex-col justify-between h-34 border border-outline-variant/10">
+<div>
+<h3 class="font-bold text-on-surface text-sm">Mosa Pops</h3>
+<p class="text-[10px] text-on-surface-variant mt-1">Plantain fritters (6pcs)</p>
+</div>
+<span class="text-primary font-bold text-sm">₦5,500</span>
+</div>
+<!-- Small Item 4 -->
+<div class="bg-surface-container-high rounded-2xl p-4 flex flex-col justify-between h-34 border border-outline-variant/10">
+<div>
+<h3 class="font-bold text-on-surface text-sm">Gizzdodo</h3>
+<p class="text-[10px] text-on-surface-variant mt-1">Spicy gizzard &amp; dodo</p>
+</div>
+<span class="text-primary font-bold text-sm">₦7,000</span>
+</div>
+</div>
+</section>
+<!-- Premium Spirits List -->
+<section class="mb-20">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-tertiary-fixed">liquor</span>
+<h2 class="font-headline font-extrabold text-2xl tracking-tight text-on-surface">Premium Spirits</h2>
+</div>
+<div class="space-y-4">
+<!-- Spirit Row 1 -->
+<div class="flex items-center justify-between p-5 bg-surface-container-low rounded-2xl border-l-4 border-indigo-500/40">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-variant rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">wine_bar</span>
+</div>
+<div>
+<h3 class="font-bold text-on-surface">Don Julio 1942</h3>
+<p class="text-xs text-on-surface-variant uppercase tracking-widest font-semibold">Tequila Anejo</p>
+</div>
+</div>
+<div class="text-right">
+<div class="text-primary font-black text-lg">₦450,000</div>
+<div class="text-[10px] text-slate-500 font-bold">PER BOTTLE</div>
+</div>
+</div>
+<!-- Spirit Row 2 -->
+<div class="flex items-center justify-between p-5 bg-surface-container-low rounded-2xl border-l-4 border-transparent">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-variant rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">liquor</span>
+</div>
+<div>
+<h3 class="font-bold text-on-surface">Hennessy XO</h3>
+<p class="text-xs text-on-surface-variant uppercase tracking-widest font-semibold">Cognac</p>
+</div>
+</div>
+<div class="text-right">
+<div class="text-primary font-black text-lg">₦380,000</div>
+<div class="text-[10px] text-slate-500 font-bold">PER BOTTLE</div>
+</div>
+</div>
+<!-- Spirit Row 3 -->
+<div class="flex items-center justify-between p-5 bg-surface-container-low rounded-2xl border-l-4 border-transparent">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-variant rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">glass</span>
+</div>
+<div>
+<h3 class="font-bold text-on-surface">Blue Label</h3>
+<p class="text-xs text-on-surface-variant uppercase tracking-widest font-semibold">Scotch Whisky</p>
+</div>
+</div>
+<div class="text-right">
+<div class="text-primary font-black text-lg">₦420,000</div>
+<div class="text-[10px] text-slate-500 font-bold">PER BOTTLE</div>
+</div>
+</div>
+</div>
+<button class="w-full mt-8 py-4 bg-gradient-to-r from-primary to-primary-dim text-on-primary-fixed font-black uppercase tracking-widest rounded-xl shadow-lg shadow-primary/20 active:scale-[0.98] transition-transform">
+                Request Table Service
+            </button>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full glass flex justify-around items-center px-4 pt-3 pb-8 z-50 rounded-t-3xl shadow-[0_-8px_30px_rgb(0,0,0,0.12)]">
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-indigo-400 transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-semibold mt-1">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-indigo-400 transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">dynamic_feed</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-semibold mt-1">Feed</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-indigo-500/20 text-indigo-300 rounded-xl px-4 py-1 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-semibold mt-1">Bookings</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-indigo-400 transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-semibold mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

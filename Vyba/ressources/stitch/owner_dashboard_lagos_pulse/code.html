@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Venue Owner Dashboard - Lagos Pulse</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#141f38",
+                    "on-primary-container": "#0a0081",
+                    "surface-dim": "#060e20",
+                    "primary-fixed-dim": "#8387ff",
+                    "primary-container": "#9396ff",
+                    "on-primary-fixed": "#000000",
+                    "background": "#060e20",
+                    "surface-container": "#0f1930",
+                    "on-secondary": "#005a3c",
+                    "on-primary-fixed-variant": "#0e009d",
+                    "surface-container-lowest": "#000000",
+                    "on-error-container": "#ffb2b9",
+                    "secondary-container": "#006c49",
+                    "tertiary-container": "#f8a010",
+                    "on-error": "#490013",
+                    "secondary-fixed": "#69f6b8",
+                    "inverse-on-surface": "#4d556b",
+                    "tertiary-dim": "#e79400",
+                    "on-secondary-fixed-variant": "#006544",
+                    "surface-variant": "#192540",
+                    "on-tertiary-fixed-variant": "#563400",
+                    "tertiary-fixed-dim": "#e79400",
+                    "secondary": "#69f6b8",
+                    "error-dim": "#d73357",
+                    "outline": "#6d758c",
+                    "primary": "#a3a6ff",
+                    "on-primary": "#0f00a4",
+                    "surface-container-low": "#091328",
+                    "surface": "#060e20",
+                    "surface-container-highest": "#192540",
+                    "secondary-dim": "#58e7ab",
+                    "on-tertiary-fixed": "#2a1700",
+                    "error": "#ff6e84",
+                    "on-secondary-fixed": "#00452d",
+                    "on-surface": "#dee5ff",
+                    "inverse-primary": "#494bd7",
+                    "primary-fixed": "#9396ff",
+                    "primary-dim": "#6063ee",
+                    "on-tertiary": "#573500",
+                    "tertiary-fixed": "#f8a010",
+                    "tertiary": "#ffb148",
+                    "surface-bright": "#1f2b49",
+                    "on-tertiary-container": "#4a2c00",
+                    "on-surface-variant": "#a3aac4",
+                    "outline-variant": "#40485d",
+                    "secondary-fixed-dim": "#58e7ab",
+                    "on-background": "#dee5ff",
+                    "error-container": "#a70138",
+                    "surface-tint": "#a3a6ff",
+                    "on-secondary-container": "#e1ffec",
+                    "inverse-surface": "#faf8ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Epilogue"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-header {
+            background: rgba(6, 14, 32, 0.6);
+            backdrop-filter: blur(20px);
+        }
+        .editorial-gradient {
+            background: linear-gradient(135deg, #a3a6ff 0%, #6063ee 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body pb-32">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-slate-950/60 backdrop-blur-xl flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-indigo-500" data-icon="location_on">location_on</span>
+<span class="text-xl font-bold tracking-tighter text-indigo-400 font-epilogue">Lagos Pulse</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-400 hover:text-indigo-300 transition-colors cursor-pointer" data-icon="search">search</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border-2 border-primary/20">
+<img alt="Owner Profile" data-alt="portrait of a confident man with a warm smile in professional attire with soft bokeh background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDt5SzEanYL5-Pt-F0FkAXkC6TPxnriwy_yEUSUqa733KYkYpmR3Ttf0dSzr-qb-VQfUrvJ7hYg2XPDzF0rx9XVXkTuFkzxxlS_NZThLxL6VoTdtNHrbZp1IOYwnGf6xHeg7ugx1-05oggY_rxl96Oh0tpq9NxnZTgVuhqmi7uHQ9-VsT-wEjC10i7y2xHHIr4Muw6gyxCW3T03vlpNpbEGieIdA6lPJ9lLjDfod-HPAiJKJmqUeTQZW3FoOavprIM8MP-_UqzoIvlj"/>
+</div>
+</div>
+</nav>
+<main class="mt-20 px-6 space-y-8 max-w-5xl mx-auto">
+<!-- Header Section -->
+<header class="space-y-1">
+<h1 class="font-headline text-4xl font-extrabold tracking-tight text-on-surface">Good evening, Malik</h1>
+<p class="font-label text-sm uppercase tracking-[0.2em] text-primary font-bold">The Vibe Lounge</p>
+</header>
+<!-- Stats Row: Bento Grid Style -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="bg-surface-container-low p-6 rounded-xl space-y-2 border-l-4 border-primary">
+<span class="font-label text-xs uppercase tracking-widest text-on-surface-variant font-bold">Today's Bookings</span>
+<div class="flex items-end justify-between">
+<p class="text-4xl font-headline font-bold">24</p>
+<span class="text-secondary font-bold text-xs flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span> +12%
+                    </span>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl space-y-2 border-l-4 border-tertiary">
+<span class="font-label text-xs uppercase tracking-widest text-on-surface-variant font-bold">Active Promos</span>
+<div class="flex items-end justify-between">
+<p class="text-4xl font-headline font-bold">03</p>
+<span class="material-symbols-outlined text-tertiary" data-icon="campaign">campaign</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl space-y-2 border-l-4 border-secondary">
+<span class="font-label text-xs uppercase tracking-widest text-on-surface-variant font-bold">This Week's Views</span>
+<div class="flex items-end justify-between">
+<p class="text-4xl font-headline font-bold">1.2k</p>
+<span class="text-secondary font-bold text-xs flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="visibility">visibility</span> Live
+                    </span>
+</div>
+</div>
+</div>
+<!-- Content Layout: Asymmetric -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Quick Actions Grid (Left Column) -->
+<div class="lg:col-span-8 space-y-8">
+<section>
+<h2 class="font-headline text-xl font-bold mb-4">Quick Studio Actions</h2>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+<button class="editorial-gradient aspect-square flex flex-col items-center justify-center gap-3 rounded-xl p-4 active:scale-95 transition-all group">
+<span class="material-symbols-outlined text-3xl" data-icon="add_circle">add_circle</span>
+<span class="font-label text-[10px] uppercase font-extrabold tracking-widest text-center leading-tight">Add Promo</span>
+</button>
+<button class="bg-surface-container-high border-b-2 border-transparent hover:border-primary aspect-square flex flex-col items-center justify-center gap-3 rounded-xl p-4 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-3xl text-primary" data-icon="calendar_today">calendar_today</span>
+<span class="font-label text-[10px] uppercase font-extrabold tracking-widest text-center leading-tight text-on-surface">Update Availability</span>
+</button>
+<button class="bg-surface-container-high border-b-2 border-transparent hover:border-primary aspect-square flex flex-col items-center justify-center gap-3 rounded-xl p-4 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-3xl text-primary" data-icon="bar_chart">bar_chart</span>
+<span class="font-label text-[10px] uppercase font-extrabold tracking-widest text-center leading-tight text-on-surface">View Analytics</span>
+</button>
+</div>
+</section>
+<section class="space-y-4">
+<div class="flex justify-between items-center">
+<h2 class="font-headline text-xl font-bold">Upcoming Bookings</h2>
+<span class="text-primary font-bold text-xs uppercase tracking-widest cursor-pointer">View All</span>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-4 bg-surface-container p-4 rounded-xl">
+<div class="w-12 h-12 rounded-lg overflow-hidden bg-surface-variant flex-shrink-0">
+<img alt="Guest 1" data-alt="portrait of a young stylish man in high-end streetwear fashion with soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPxJOYwXUuA6FOwo7HJqYz2w-TNZbOklQJRSxaXWBUMV0mvJEtxEP9QVXpMwsbrZRVVkTVyP58kELFAoceVr9x3_ISixdHCo06SNQekP4kzuoFMZq3CrawWqbk3dsqWM_omsyAyCxNJi3-f-PJAhzb16fGEE040m5OPnRrkTFPMpalny23iWWE6qDx9y5c6A33yW8bBVdfJ45bzDzVUEGVrp6ulI4P-a-IPOsPldlfR5A0LxeNsVJwIEtiU93ZWUQ5B8UaYlwvzG60"/>
+</div>
+<div class="flex-grow">
+<h4 class="font-bold text-sm">Adewale Johnson</h4>
+<p class="text-xs text-on-surface-variant">VIP Table • 4 Guests</p>
+</div>
+<div class="text-right">
+<p class="font-bold text-sm text-primary">22:30</p>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-tighter">Tonight</p>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-surface-container p-4 rounded-xl">
+<div class="w-12 h-12 rounded-lg overflow-hidden bg-surface-variant flex-shrink-0">
+<img alt="Guest 2" data-alt="editorial portrait of a woman with elegant accessories in a dark moody atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAS2679qVuRuaZgo47a3Ul6a5NO3Ne2A9ScwXLa_oBuVEJ0pn6kVJ2SZouJ9ZIZRgMycyQ7Ve3IJLBOE6DAt7HMn5JaMSH-0pNtChug-M_KTjLbFoBUen3cbAmk50k8qZVr1Jnc4q9fmpth5UxKmHktl_nGPg5C71OT6MtUp2EMXl863gPQ6hV60eEl0COdVpE1I8nn67a433NM0Dk0cgKZ95LGZeJbMfosybjSsEp4kY1iUuj8WM-6hS26AxfcMwB46-Sm4PupUCl6"/>
+</div>
+<div class="flex-grow">
+<h4 class="font-bold text-sm">Zainab Alabi</h4>
+<p class="text-xs text-on-surface-variant">Lounge • 2 Guests</p>
+</div>
+<div class="text-right">
+<p class="font-bold text-sm text-primary">23:00</p>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold tracking-tighter">Tonight</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Activity Feed (Right Column) -->
+<aside class="lg:col-span-4 bg-surface-container-low rounded-2xl p-6 h-fit space-y-6">
+<h2 class="font-headline text-xl font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="notifications_active">notifications_active</span>
+                    Activity
+                </h2>
+<div class="space-y-6 relative before:content-[''] before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-surface-variant">
+<div class="relative pl-8">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-primary-dim flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-white" data-icon="rate_review" style="font-variation-settings: 'FILL' 1;">rate_review</span>
+</div>
+<p class="text-xs font-medium"><span class="font-bold text-on-surface">New Review:</span> "Amazing vibe and the cocktails are 10/10!"</p>
+<p class="text-[10px] text-on-surface-variant mt-1 uppercase tracking-widest font-bold">2 mins ago</p>
+</div>
+<div class="relative pl-8">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-on-secondary-container" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<p class="text-xs font-medium"><span class="font-bold text-on-surface">System:</span> Availability updated for Weekend Glow Party.</p>
+<p class="text-[10px] text-on-surface-variant mt-1 uppercase tracking-widest font-bold">1 hour ago</p>
+</div>
+<div class="relative pl-8">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-tertiary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-on-tertiary-container" data-icon="local_activity" style="font-variation-settings: 'FILL' 1;">local_activity</span>
+</div>
+<p class="text-xs font-medium"><span class="font-bold text-on-surface">Sale:</span> 5 early-bird tickets sold for Lagos Unplugged.</p>
+<p class="text-[10px] text-on-surface-variant mt-1 uppercase tracking-widest font-bold">3 hours ago</p>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- FAB: Floating Contextual Action -->
+<button class="fixed bottom-24 right-6 w-14 h-14 editorial-gradient rounded-2xl shadow-xl flex items-center justify-center z-40 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-3xl" data-icon="add">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pt-3 pb-6 bg-slate-950/60 backdrop-blur-xl z-50 rounded-t-3xl shadow-[0_-4px_24px_-4px_rgba(0,0,0,0.5)]">
+<div class="flex flex-col items-center justify-center text-slate-500 hover:bg-slate-800/50 transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-bold">Explore</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 hover:bg-slate-800/50 transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="dynamic_feed">dynamic_feed</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-bold">Feed</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 hover:bg-slate-800/50 transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="confirmation_number">confirmation_number</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-bold">Bookings</span>
+</div>
+<!-- ACTIVE TAB: Studio -->
+<div class="flex flex-col items-center justify-center text-indigo-400 bg-indigo-500/10 rounded-xl px-4 py-1 active:scale-90 active:duration-200 transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="analytics" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-bold">Studio</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 hover:bg-slate-800/50 transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-bold">Profile</span>
+</div>
+</nav>
+</body></html>

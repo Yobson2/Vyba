@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;800;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-lowest": "#000000",
+                    "on-primary": "#0f00a4",
+                    "primary": "#a3a6ff",
+                    "surface-container": "#0f1930",
+                    "inverse-surface": "#faf8ff",
+                    "on-tertiary-fixed": "#2a1700",
+                    "tertiary-fixed": "#f8a010",
+                    "secondary-dim": "#58e7ab",
+                    "on-surface-variant": "#a3aac4",
+                    "on-error-container": "#ffb2b9",
+                    "tertiary-fixed-dim": "#e79400",
+                    "secondary-fixed-dim": "#58e7ab",
+                    "outline": "#6d758c",
+                    "secondary-container": "#006c49",
+                    "error": "#ff6e84",
+                    "on-secondary-fixed-variant": "#006544",
+                    "on-primary-fixed": "#000000",
+                    "on-tertiary-container": "#4a2c00",
+                    "primary-fixed": "#9396ff",
+                    "surface-tint": "#a3a6ff",
+                    "surface-variant": "#192540",
+                    "tertiary-dim": "#e79400",
+                    "secondary-fixed": "#69f6b8",
+                    "error-dim": "#d73357",
+                    "on-surface": "#dee5ff",
+                    "surface-dim": "#060e20",
+                    "secondary": "#69f6b8",
+                    "background": "#060e20",
+                    "on-tertiary-fixed-variant": "#563400",
+                    "on-secondary-fixed": "#00452d",
+                    "on-error": "#490013",
+                    "inverse-on-surface": "#4d556b",
+                    "primary-dim": "#6063ee",
+                    "on-secondary": "#005a3c",
+                    "inverse-primary": "#494bd7",
+                    "on-secondary-container": "#e1ffec",
+                    "tertiary-container": "#f8a010",
+                    "tertiary": "#ffb148",
+                    "on-primary-container": "#0a0081",
+                    "surface": "#060e20",
+                    "primary-container": "#9396ff",
+                    "surface-container-highest": "#192540",
+                    "surface-bright": "#1f2b49",
+                    "on-primary-fixed-variant": "#0e009d",
+                    "outline-variant": "#40485d",
+                    "primary-fixed-dim": "#8387ff",
+                    "surface-container-low": "#091328",
+                    "surface-container-high": "#141f38",
+                    "error-container": "#a70138",
+                    "on-tertiary": "#573500",
+                    "on-background": "#dee5ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Epilogue"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        .glass-header {
+            background: rgba(15, 25, 48, 0.6);
+            backdrop-filter: blur(20px);
+        }
+        .editorial-scrim {
+            background: linear-gradient(to top, rgba(6, 14, 32, 0.9) 0%, rgba(6, 14, 32, 0) 70%);
+        }
+        .button-pulse-gradient {
+            background: linear-gradient(135deg, #a3a6ff 0%, #6063ee 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary">
+<!-- TopAppBar Shell -->
+<header class="fixed top-0 w-full z-50 bg-slate-950/60 backdrop-blur-xl flex justify-between items-center px-6 py-4 w-full">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-indigo-400" data-icon="location_on">location_on</span>
+<h1 class="text-indigo-500 font-bold tracking-tighter font-headline text-xl">Lagos Tonight</h1>
+</div>
+<div class="hidden md:flex gap-8">
+<a class="text-slate-400 font-inter text-xs uppercase tracking-widest font-semibold hover:text-indigo-400 transition-all" href="#">Explore</a>
+<a class="text-slate-400 font-inter text-xs uppercase tracking-widest font-semibold hover:text-indigo-400 transition-all" href="#">Feed</a>
+<a class="text-slate-400 font-inter text-xs uppercase tracking-widest font-semibold hover:text-indigo-400 transition-all" href="#">Bookings</a>
+<a class="text-indigo-400 font-bold font-inter text-xs uppercase tracking-widest transition-all" href="#">Profile</a>
+</div>
+<div class="h-10 w-10 rounded-full overflow-hidden border-2 border-primary/20">
+<img alt="Profile" class="h-full w-full object-cover" data-alt="close-up portrait of a stylish woman with modern jewelry in cinematic cool lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnuRSR36Jxz8BNwAsXLO-5grKcCL4CRkyB6y-jYUIJNJXQ4d-dokPNXL7rOoIsvDWZSAj1E4nvfAJWX4IAVE19s_U9i7bS2aynEvTdsqdd4KZ8Jn5kdj0GX8I0LO6QeYLMXFwuHsncPLDnMCFzdN4PQ7ReGKf4C3NhpD9EeHk2qbAoUcHXIZrgvhc7i_1s2ctnpMX8jBcArCdmDNYg7d9tiZsTsz01ikCtcO8qsuALGqSCA7VZd3GA_RtSWG-ji00TpXJJPQgX26Xk"/>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-7xl mx-auto">
+<!-- Header Section -->
+<div class="mb-10">
+<h2 class="font-headline text-4xl md:text-6xl font-black tracking-tight text-on-surface mb-2">My Favorites</h2>
+<p class="text-on-surface-variant font-body text-lg">Your curated collection of Lagos' most vibrant nights.</p>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Cinematic Card 1: Large Featured -->
+<div class="lg:col-span-2 group relative overflow-hidden rounded-xl bg-surface-container-high transition-transform duration-300 hover:-translate-y-1">
+<div class="aspect-[16/10] w-full relative">
+<img alt="Zaza Lagos" class="h-full w-full object-cover" data-alt="vibrant luxury nightclub interior with neon purple lighting, plush velvet seating, and sophisticated crowd in Lagos" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSWn2Bxj8J6kdZCRTwQrLvX-pHGVMRPDr8Qum5QfxWSuKceCIvq4H2t9RZ3zg8BWEqR3esfAV0x4BA2tSTWFJdixlXZVDDsHr_6ix8Vz-Cfrsh0FRbhYzFnSZRUMe1jr69X81_OTzN3GQwsKhgX5CknjosUjjD3wC49lyOEA4Aes2ALdjU5BPLKW-nGEaoquOgcbAae_IGO9r5oxtdXX8GhWZooW44BqdgkKFr9ofVkWyrOOWDg6nakBycZ_nIydbI0RY1DcNihJpr"/>
+<div class="absolute inset-0 editorial-scrim"></div>
+</div>
+<!-- Status Chip -->
+<div class="absolute top-4 right-4 bg-secondary-container text-on-secondary-container px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase backdrop-blur-md">
+                    Open Now
+                </div>
+<!-- Heart Action -->
+<button class="absolute top-4 left-4 h-10 w-10 flex items-center justify-center rounded-full bg-slate-950/40 text-primary backdrop-blur-md hover:bg-error/20 hover:text-error transition-colors">
+<span class="material-symbols-outlined fill-icon" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+<div class="absolute bottom-0 left-0 p-8 w-full flex justify-between items-end">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-tertiary text-sm fill-icon" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-tertiary font-bold">4.9</span>
+<span class="text-on-surface-variant text-sm tracking-widest uppercase font-label">• Victoria Island</span>
+</div>
+<h3 class="font-headline text-3xl font-black text-on-surface leading-tight">Zaza Lagos Lounge</h3>
+</div>
+<button class="button-pulse-gradient text-on-primary-fixed px-6 py-3 rounded-xl font-headline font-bold text-sm tracking-tight shadow-[0_8px_24px_-4px_rgba(163,166,255,0.4)] active:scale-95 transition-transform">
+                        Book Table
+                    </button>
+</div>
+</div>
+<!-- Standard Cinematic Card 2 -->
+<div class="group relative overflow-hidden rounded-xl bg-surface-container-high transition-transform duration-300 hover:-translate-y-1">
+<div class="aspect-[4/5] w-full relative">
+<img alt="Velvet Bar" class="h-full w-full object-cover" data-alt="moody high-end cocktail bar with warm amber lighting, artisan crystal glasses, and dark wood textures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0TI9S4WyX7OtFVsSyW7lH3Q4tZegOoGJdSAVKRgnOMCQFFMLcJlplbA16AHbSd8d9WGtCp1rYgYAEi4XWC_HCj22oqcqqQhpaKZgI0c1DuRXMY77gR7sfHyV_6S1iRQsNP8d5nTJzhoXWBkKRqw9Akb5rlWNuTHRzk3I5XF0FBoZFSVEHyQwJnt0fTkRQ-_Ek0cSc7Sv-SwbSBX-Dp7AWPOBylSuByg2DhmDFMFwMXuNx7sCK_hPe1WNZUuSxUYmiQ1UEPJbBbWJ7"/>
+<div class="absolute inset-0 editorial-scrim"></div>
+</div>
+<button class="absolute top-4 left-4 h-10 w-10 flex items-center justify-center rounded-full bg-slate-950/40 text-primary backdrop-blur-md hover:bg-error/20 hover:text-error transition-colors">
+<span class="material-symbols-outlined fill-icon" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+<div class="absolute bottom-0 left-0 p-6 w-full">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-tertiary text-xs fill-icon" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-tertiary font-bold text-sm">4.7</span>
+<span class="text-on-surface-variant text-xs tracking-widest uppercase font-label">• Ikoyi</span>
+</div>
+<h3 class="font-headline text-2xl font-black text-on-surface mb-4">Velvet Room</h3>
+<button class="w-full bg-surface-variant/80 backdrop-blur-md text-on-surface border border-outline-variant/30 py-3 rounded-xl font-headline font-bold text-sm hover:bg-primary/20 transition-colors">
+                        Quick Book
+                    </button>
+</div>
+</div>
+<!-- Standard Cinematic Card 3 -->
+<div class="group relative overflow-hidden rounded-xl bg-surface-container-high transition-transform duration-300 hover:-translate-y-1">
+<div class="aspect-[4/5] w-full relative">
+<img alt="Atmosphere" class="h-full w-full object-cover" data-alt="rooftop bar overlooking Lagos city skyline at night with modern outdoor furniture and string lights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA39a1vvlX-B1IlxPY9thfmd5Cd_uu0x0C7YOahUYIT_ITDpmRh8mIO2sNM9PHU-ATRRUp6gpsWBpsZyLfcp3q4AP4xSfXf5o3-1TmzzvjvX6MqiTtwZVukj4ZNHMH9CWR-ylyI-0qeqyYVAPck4iQGlEdOkweK88mwXaYK0DHUK3pnuQWhem7S526NXirah07RM3kdKxds6pfRF4Vpm6HYe7WIQ-Gcqkacf7ou-kuLhqb_SRltVQPQb9_mEByisAflJiQXDftRlWrX"/>
+<div class="absolute inset-0 editorial-scrim"></div>
+</div>
+<button class="absolute top-4 left-4 h-10 w-10 flex items-center justify-center rounded-full bg-slate-950/40 text-primary backdrop-blur-md hover:bg-error/20 hover:text-error transition-colors">
+<span class="material-symbols-outlined fill-icon" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+<div class="absolute bottom-0 left-0 p-6 w-full">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-tertiary text-xs fill-icon" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-tertiary font-bold text-sm">4.8</span>
+<span class="text-on-surface-variant text-xs tracking-widest uppercase font-label">• Lekki Phase 1</span>
+</div>
+<h3 class="font-headline text-2xl font-black text-on-surface mb-4">Atmosphere Rooftop</h3>
+<button class="w-full bg-surface-variant/80 backdrop-blur-md text-on-surface border border-outline-variant/30 py-3 rounded-xl font-headline font-bold text-sm hover:bg-primary/20 transition-colors">
+                        Quick Book
+                    </button>
+</div>
+</div>
+<!-- Standard Cinematic Card 4 -->
+<div class="group relative overflow-hidden rounded-xl bg-surface-container-high transition-transform duration-300 hover:-translate-y-1">
+<div class="aspect-[4/5] w-full relative">
+<img alt="Shiro" class="h-full w-full object-cover" data-alt="dramatic pan-asian restaurant interior with tall ceilings, giant stone statues, and moody accent lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvPm7uCxydT9_VtGrBA9J2g6qOz0KKrbtlLLLKXAcd9Roqhjv5ioCsnbFRlSxeDG4a9El2nmpS4yAaZ4bzS6ONYKivEriPHmLYxOqN-zk7SJzi2SLZUFlr3wVPxHPHslDom01Bzch88coJL4I4Gr0tIAPhhRF21hmFAWz2KBkfap5SPmSPUzkIBQMzTw0sSJ7hfaxO3kifBf_X3IEvdlwCDdp9bbmkcBLvmIwjMYTaCYEKoIkld44FgsMIQ2on8ArwNZPWI-5bOGm3"/>
+<div class="absolute inset-0 editorial-scrim"></div>
+</div>
+<button class="absolute top-4 left-4 h-10 w-10 flex items-center justify-center rounded-full bg-slate-950/40 text-primary backdrop-blur-md hover:bg-error/20 hover:text-error transition-colors">
+<span class="material-symbols-outlined fill-icon" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+<div class="absolute bottom-0 left-0 p-6 w-full">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-tertiary text-xs fill-icon" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-tertiary font-bold text-sm">4.9</span>
+<span class="text-on-surface-variant text-xs tracking-widest uppercase font-label">• Landmark Beach</span>
+</div>
+<h3 class="font-headline text-2xl font-black text-on-surface mb-4">Shiro Lagos</h3>
+<button class="w-full bg-surface-variant/80 backdrop-blur-md text-on-surface border border-outline-variant/30 py-3 rounded-xl font-headline font-bold text-sm hover:bg-primary/20 transition-colors">
+                        Quick Book
+                    </button>
+</div>
+</div>
+<!-- Asymmetric Grid Filler / Promotional -->
+<div class="lg:col-span-1 flex flex-col justify-center p-8 rounded-xl bg-gradient-to-br from-indigo-500/10 to-transparent border border-indigo-500/10">
+<span class="material-symbols-outlined text-indigo-400 text-5xl mb-6" data-icon="auto_awesome">auto_awesome</span>
+<h3 class="font-headline text-2xl font-bold mb-4">Discover More</h3>
+<p class="text-on-surface-variant mb-8 leading-relaxed">Our curators just added 12 new exclusive spots in Victoria Island. Ready for something new?</p>
+<button class="text-indigo-400 font-bold uppercase tracking-widest text-xs flex items-center gap-2 group">
+                    Explore Trends 
+                    <span class="material-symbols-outlined transition-transform group-hover:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Optional Empty State Mockup (Commented out in logic, visible if no data) -->
+<!-- 
+        <div class="flex flex-col items-center justify-center py-40 text-center">
+            <div class="h-24 w-24 rounded-full bg-surface-container-high flex items-center justify-center mb-8 border border-outline-variant/20">
+                <span class="material-symbols-outlined text-primary text-5xl" data-icon="favorite">favorite</span>
+            </div>
+            <h3 class="font-headline text-2xl font-bold mb-2 text-on-surface">No Favorites Yet</h3>
+            <p class="text-on-surface-variant max-w-xs mx-auto">Save venues you love for quick access and priority booking alerts.</p>
+            <button class="mt-8 button-pulse-gradient text-on-primary-fixed px-10 py-4 rounded-xl font-headline font-black uppercase tracking-tighter">Start Exploring</button>
+        </div>
+        -->
+</main>
+<!-- BottomNavBar Shell -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pt-3 pb-8 bg-slate-950/60 backdrop-blur-xl z-50 rounded-t-3xl shadow-[0_-8px_30px_rgb(0,0,0,0.12)]">
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-indigo-400 transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-semibold mt-1">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-indigo-400 transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="dynamic_feed">dynamic_feed</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-semibold mt-1">Feed</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-indigo-400 transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="confirmation_number">confirmation_number</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-semibold mt-1">Bookings</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-indigo-500/20 text-indigo-300 rounded-xl px-4 py-1 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined fill-icon" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-semibold mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

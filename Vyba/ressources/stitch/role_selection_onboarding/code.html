@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lagos Pulse | Role Selection</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error-dim": "#d73357",
+                    "background": "#060e20",
+                    "surface-container": "#0f1930",
+                    "secondary-fixed": "#69f6b8",
+                    "secondary": "#69f6b8",
+                    "on-surface": "#dee5ff",
+                    "error": "#ff6e84",
+                    "on-primary": "#0f00a4",
+                    "tertiary-fixed-dim": "#e79400",
+                    "surface-variant": "#192540",
+                    "secondary-fixed-dim": "#58e7ab",
+                    "primary-dim": "#6063ee",
+                    "error-container": "#a70138",
+                    "surface-container-high": "#141f38",
+                    "surface-container-highest": "#192540",
+                    "primary-fixed-dim": "#8387ff",
+                    "on-tertiary-fixed": "#2a1700",
+                    "inverse-on-surface": "#4d556b",
+                    "on-secondary": "#005a3c",
+                    "on-tertiary-fixed-variant": "#563400",
+                    "on-primary-fixed-variant": "#0e009d",
+                    "surface-container-lowest": "#000000",
+                    "on-surface-variant": "#a3aac4",
+                    "tertiary-fixed": "#f8a010",
+                    "on-secondary-container": "#e1ffec",
+                    "on-secondary-fixed-variant": "#006544",
+                    "surface-bright": "#1f2b49",
+                    "secondary-container": "#006c49",
+                    "tertiary": "#ffb148",
+                    "on-tertiary-container": "#4a2c00",
+                    "tertiary-container": "#f8a010",
+                    "primary-container": "#9396ff",
+                    "primary": "#a3a6ff",
+                    "tertiary-dim": "#e79400",
+                    "outline": "#6d758c",
+                    "on-error-container": "#ffb2b9",
+                    "secondary-dim": "#58e7ab",
+                    "on-error": "#490013",
+                    "outline-variant": "#40485d",
+                    "on-primary-fixed": "#000000",
+                    "on-background": "#dee5ff",
+                    "on-secondary-fixed": "#00452d",
+                    "inverse-surface": "#faf8ff",
+                    "surface-tint": "#a3a6ff",
+                    "surface-container-low": "#091328",
+                    "inverse-primary": "#494bd7",
+                    "on-tertiary": "#573500",
+                    "primary-fixed": "#9396ff",
+                    "surface-dim": "#060e20",
+                    "surface": "#060e20",
+                    "on-primary-container": "#0a0081"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Epilogue"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #060e20;
+            color: #dee5ff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .neon-glow-primary {
+            box-shadow: 0 0 20px rgba(163, 166, 255, 0.2);
+        }
+        .glass-panel {
+            background: rgba(25, 37, 64, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .editorial-focus:focus-within {
+            border-bottom: 2px solid #a3a6ff;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen flex flex-col items-center justify-between p-6 md:p-12">
+<!-- Background Decoration -->
+<div class="fixed top-[-10%] right-[-10%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="fixed bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[100px] pointer-events-none"></div>
+<!-- Header Section -->
+<header class="w-full max-w-4xl flex flex-col items-center mt-12 mb-8">
+<div class="mb-4">
+<span class="font-headline font-black text-2xl tracking-tighter text-primary">Lagos Pulse</span>
+</div>
+<h1 class="font-headline text-4xl md:text-6xl font-extrabold text-center tracking-tight leading-tight mb-4">
+            How will you use <br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-dim">Lagos Pulse?</span>
+</h1>
+<p class="font-body text-on-surface-variant text-center max-w-md">
+            Select your journey to unlock a curated nightlife experience tailored to your rhythm.
+        </p>
+</header>
+<!-- Role Selection Grid -->
+<main class="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-12">
+<!-- Client Option -->
+<label class="group relative cursor-pointer outline-none">
+<input class="peer hidden" name="role" type="radio" value="client"/>
+<div class="h-full glass-panel rounded-3xl p-8 transition-all duration-300 border-2 border-transparent peer-checked:border-primary/50 peer-checked:bg-primary/5 group-hover:bg-surface-container-highest flex flex-col">
+<div class="relative w-full aspect-square md:aspect-video mb-6 overflow-hidden rounded-2xl bg-surface-container-low">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-80" data-alt="vibrant neon-lit upscale nightclub in Lagos with a crowded dance floor and purple lighting atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5iC-ganUXDYlFqsfe8Q2EvAP275cRrqJyOA8NvJbEr2tsnLbR2RcYU45-1dq-wyfvSzjA0BSw-G-98QmBGAyeum-L94IQQfcnRsAG_bWOrYmkyyV25s3kACxD450ZYnmRBek8o2GY0fVkskA0nOsiEMaCIGS3yLHf8a6gvFBjjwEvkvDlHuKURnMg1WBAB7LBsovTA7V-XLeZNlHXEKWh2BnyoelPP_5pHg_JmYwX6tenqrVAOlj_q9ofpwELkqu6qAOlLxAQervP"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest to-transparent"></div>
+<div class="absolute bottom-4 left-4">
+<span class="material-symbols-outlined text-primary text-4xl">explore</span>
+</div>
+</div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline text-2xl font-bold">I'm a Client</h3>
+<div class="w-6 h-6 rounded-full border-2 border-outline flex items-center justify-center peer-checked:bg-primary peer-checked:border-primary transition-colors">
+<div class="w-2 h-2 rounded-full bg-on-primary opacity-0 peer-checked:opacity-100"></div>
+</div>
+</div>
+<p class="font-body text-on-surface-variant leading-relaxed">
+                    Discover the hottest maquis, book premium tables at exclusive lounges, and track the pulse of the city's elite venues.
+                </p>
+<div class="mt-auto pt-6 flex flex-wrap gap-2">
+<span class="text-[10px] uppercase tracking-widest font-semibold px-3 py-1 bg-surface-container-highest text-primary-dim rounded-full">Bookings</span>
+<span class="text-[10px] uppercase tracking-widest font-semibold px-3 py-1 bg-surface-container-highest text-primary-dim rounded-full">VIP Access</span>
+</div>
+</div>
+</label>
+<!-- Owner Option -->
+<label class="group relative cursor-pointer outline-none">
+<input class="peer hidden" name="role" type="radio" value="owner"/>
+<div class="h-full glass-panel rounded-3xl p-8 transition-all duration-300 border-2 border-transparent peer-checked:border-secondary/50 peer-checked:bg-secondary/5 group-hover:bg-surface-container-highest flex flex-col">
+<div class="relative w-full aspect-square md:aspect-video mb-6 overflow-hidden rounded-2xl bg-surface-container-low">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-80" data-alt="sophisticated empty lounge bar with emerald green velvet seating and warm brass accents during golden hour" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqkI1ortt_8QyrJOE0CHKRh1Bk1N2X3btZgv7QCLCtN_XzjsPnJp1zrjHkyZqpDfaAVTa_zAiA9TxoTwoTBm2sM0C-Qk9CyS8ic3YaCkCH1U5JhLndmPwaoMxt6o4G5-ApQCMLCEt2YPmtg0rJ0N0fjXlU9ZrZNY9VwlcZZikXf4kjV_0RVSAZB529Uu0BijWHsvmSSdvccVJG38AZlXaGZDUfJl4SUulizPYhAVhAjH-_MrxrcZjMFEWi1DYLDu3_Yj153rCKAj93"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest to-transparent"></div>
+<div class="absolute bottom-4 left-4">
+<span class="material-symbols-outlined text-secondary text-4xl">storefront</span>
+</div>
+</div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline text-2xl font-bold">I'm a Venue Owner</h3>
+<div class="w-6 h-6 rounded-full border-2 border-outline flex items-center justify-center peer-checked:bg-secondary peer-checked:border-secondary transition-colors">
+<div class="w-2 h-2 rounded-full bg-on-secondary opacity-0 peer-checked:opacity-100"></div>
+</div>
+</div>
+<p class="font-body text-on-surface-variant leading-relaxed">
+                    Showcase your lounge or maquis, manage table reservations, promote exclusive events, and engage with your VIP patrons.
+                </p>
+<div class="mt-auto pt-6 flex flex-wrap gap-2">
+<span class="text-[10px] uppercase tracking-widest font-semibold px-3 py-1 bg-surface-container-highest text-secondary-dim rounded-full">Management</span>
+<span class="text-[10px] uppercase tracking-widest font-semibold px-3 py-1 bg-surface-container-highest text-secondary-dim rounded-full">Promotion</span>
+</div>
+</div>
+</label>
+</main>
+<!-- Footer Actions -->
+<footer class="w-full max-w-4xl flex flex-col items-center gap-6 mb-8">
+<!-- Disabled State Example (Pure CSS Logic) -->
+<button class="relative w-full md:w-auto md:min-w-[300px] px-8 py-5 rounded-2xl font-headline font-bold text-lg tracking-tight transition-all duration-300 opacity-50 cursor-not-allowed bg-surface-container-highest text-on-surface-variant /* This logic would be handled by JS normally, using generic group logic for visualization */">
+            Get Started
+        </button>
+<p class="font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant opacity-60">
+            Secure Onboarding • Step 1 of 3
+        </p>
+</footer>
+<!-- CSS Hidden Logic for Visualizing Selection -->
+<style>
+        /* Mocking the behavior requested: if any radio is checked, the button becomes active */
+        body:has(input[type="radio"]:checked) footer button {
+            opacity: 1;
+            cursor: pointer;
+            background: linear-gradient(135deg, #a3a6ff, #6063ee);
+            color: #0f00a4;
+            box-shadow: 0 8px 32px rgba(96, 99, 238, 0.3);
+        }
+        body:has(input[type="radio"]:checked) footer button:active {
+            transform: scale(0.95);
+        }
+        
+        /* Custom radio logic using :checked siblings is limited with this layout, so we use peer-checked classes in HTML where possible */
+    </style>
+</body></html>

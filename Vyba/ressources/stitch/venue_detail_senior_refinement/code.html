@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lagos Pulse - Venue Details</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#000000",
+                    "error": "#ff6e84",
+                    "secondary-fixed-dim": "#58e7ab",
+                    "outline": "#6d758c",
+                    "surface": "#040812",
+                    "secondary": "#69f6b8",
+                    "surface-container-lowest": "#000000",
+                    "on-primary-fixed-variant": "#0e009d",
+                    "surface-bright": "#1f2b49",
+                    "on-secondary-fixed-variant": "#006544",
+                    "secondary-container": "#006c49",
+                    "inverse-primary": "#494bd7",
+                    "error-container": "#a70138",
+                    "surface-tint": "#a3a6ff",
+                    "outline-variant": "#40485d",
+                    "tertiary-container": "#f8a010",
+                    "on-surface": "#dee5ff",
+                    "surface-dim": "#040812",
+                    "inverse-on-surface": "#4d556b",
+                    "surface-variant": "#192540",
+                    "tertiary-dim": "#e79400",
+                    "primary-container": "#9396ff",
+                    "on-background": "#dee5ff",
+                    "surface-container": "#0f1930",
+                    "surface-container-low": "#091328",
+                    "on-error-container": "#ffb2b9",
+                    "on-secondary": "#005a3c",
+                    "primary-fixed": "#9396ff",
+                    "error-dim": "#d73357",
+                    "on-tertiary-fixed": "#2a1700",
+                    "on-secondary-container": "#e1ffec",
+                    "tertiary": "#ffb148",
+                    "on-primary": "#0f00a4",
+                    "tertiary-fixed": "#f8a010",
+                    "on-tertiary-container": "#4a2c00",
+                    "on-error": "#490013",
+                    "on-tertiary": "#573500",
+                    "tertiary-fixed-dim": "#e79400",
+                    "secondary-dim": "#58e7ab",
+                    "on-primary-container": "#0a0081",
+                    "inverse-surface": "#faf8ff",
+                    "primary-fixed-dim": "#8387ff",
+                    "primary": "#a3a6ff",
+                    "on-tertiary-fixed-variant": "#563400",
+                    "surface-container-high": "#0e172a",
+                    "primary-dim": "#6063ee",
+                    "on-surface-variant": "#a3aac4",
+                    "secondary-fixed": "#69f6b8",
+                    "on-secondary-fixed": "#00452d",
+                    "surface-container-highest": "#1e293b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "4px",
+                    "lg": "8px",
+                    "xl": "12px",
+                    "2xl": "16px",
+                    "3xl": "24px",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Epilogue", "sans-serif"],
+                    "body": ["Inter", "sans-serif"],
+                    "label": ["Inter", "sans-serif"]
+            },
+            "spacing": {
+                '1': '4px',
+                '2': '8px',
+                '3': '12px',
+                '4': '16px',
+                '5': '20px',
+                '6': '24px',
+                '8': '32px',
+                '10': '40px',
+                '12': '48px',
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .glass-card {
+            background: rgba(15, 25, 48, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(163, 166, 255, 0.1);
+        }
+        
+        .neon-glow-primary {
+            box-shadow: 0 0 15px -3px rgba(163, 166, 255, 0.5);
+        }
+        
+        .neon-glow-secondary {
+            box-shadow: 0 0 15px -3px rgba(88, 231, 171, 0.4);
+        }
+
+        .active-tab-indicator {
+            position: relative;
+        }
+        .active-tab-indicator::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #a3a6ff;
+            border-radius: 4px 4px 0 0;
+            box-shadow: 0 -2px 10px rgba(163, 166, 255, 0.6);
+        }
+
+        body {
+            min-height: 100dvh;
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary selection:text-on-primary">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/60 backdrop-blur-xl flex justify-between items-center px-6 h-16 border-b border-outline-variant/10">
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="text-lg font-bold tracking-tight text-on-surface font-headline uppercase">Lagos Pulse</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+</button>
+</div>
+</header>
+<main class="pb-40">
+<!-- Hero Image Carousel Section -->
+<section class="relative w-full h-[50vh] overflow-hidden">
+<img alt="The Vibe Lounge" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtG_5QS9MBzzzBwT4cpL8QACqaSce9dcFQtwMYXMIVXIhJ7z2BiepLnY-LdNxVarX7bIFgLMtMVaUURznZhavElGD8YndOm1C9icuPgsNKAtw1hhbY7QbRQXiwxIKGm-b9PuWXkRastuUShUJ-PQodgVkf8UeBW8Lht2c1AX3LuR4gIYvgeBXol4r1ktkKCkmR-lhL2q0MpK4kkcSZeOGIkppD03GLWg8P_tcG1kuJ1kETZXChM7YvW8F2rwSJxQZqouuVmCnIVpdE"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/20 to-transparent"></div>
+<div class="absolute top-20 right-6 flex flex-col gap-3">
+<button class="w-11 h-11 bg-surface-container-highest/40 backdrop-blur-md rounded-full text-on-surface flex items-center justify-center border border-white/10 hover:bg-surface/60 transition-all shadow-xl">
+<span class="material-symbols-outlined text-xl">share</span>
+</button>
+<button class="w-11 h-11 bg-surface-container-highest/40 backdrop-blur-md rounded-full text-primary flex items-center justify-center border border-white/10 hover:bg-surface/60 transition-all shadow-xl">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+<!-- Carousel Indicators - Refined -->
+<div class="absolute bottom-16 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/20 backdrop-blur-sm border border-white/5">
+<span class="w-6 h-1 rounded-full bg-primary neon-glow-primary"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-white/20"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-white/20"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-white/20"></span>
+</div>
+</section>
+<!-- Info Block -->
+<section class="px-6 -mt-12 relative z-10">
+<div class="glass-card p-6 rounded-2xl shadow-2xl">
+<div class="flex justify-between items-start mb-3">
+<div class="space-y-1">
+<span class="text-[10px] uppercase tracking-[0.2em] font-black text-tertiary">Premium Nightlife</span>
+<h2 class="font-headline font-black text-3xl text-on-surface leading-none tracking-tight">The Vibe Lounge</h2>
+</div>
+<div class="flex flex-col items-end">
+<div class="flex items-center bg-surface-container-highest px-2.5 py-1 rounded-lg border border-outline-variant/20 neon-glow-secondary">
+<span class="material-symbols-outlined text-secondary text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="ml-1 font-bold text-sm text-secondary">4.9</span>
+</div>
+<span class="text-[10px] text-on-surface-variant mt-1 font-medium">1.2k Reviews</span>
+</div>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant text-sm mb-5">
+<span class="material-symbols-outlined text-primary text-lg">location_on</span>
+<span>Victoria Island, Lagos, Nigeria</span>
+<span class="text-outline-variant mx-1">•</span>
+<span class="text-primary font-semibold">1.2 km</span>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/10">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-secondary neon-glow-secondary animate-pulse"></div>
+<span class="text-sm font-semibold text-secondary uppercase tracking-wider">Open Now</span>
+<span class="text-on-surface-variant text-xs">• Closes 2:00 AM</span>
+</div>
+<span class="text-[10px] font-bold text-outline-variant uppercase tracking-widest">Highly Rated</span>
+</div>
+</div>
+</section>
+<!-- Quick Actions -->
+<section class="px-6 mt-6 flex gap-3">
+<button class="flex-1 h-14 rounded-xl bg-surface-container-high border border-outline-variant/20 text-primary font-bold flex items-center justify-center gap-2 hover:bg-surface-container-highest transition-all group">
+<span class="material-symbols-outlined text-xl group-hover:scale-110 transition-transform">call</span>
+<span class="text-sm tracking-wide">Call</span>
+</button>
+<button class="flex-1 h-14 rounded-xl bg-surface-container-high border border-outline-variant/20 text-on-surface font-bold flex items-center justify-center gap-2 hover:bg-surface-container-highest transition-all group">
+<span class="material-symbols-outlined text-xl group-hover:scale-110 transition-transform text-secondary">directions</span>
+<span class="text-sm tracking-wide">Route</span>
+</button>
+<button class="w-14 h-14 rounded-xl bg-surface-container-high border border-outline-variant/20 text-on-surface-variant flex items-center justify-center hover:bg-surface-container-highest transition-all">
+<span class="material-symbols-outlined text-xl">bookmark</span>
+</button>
+</section>
+<!-- Tabs -->
+<section class="mt-8 px-6 sticky top-16 bg-surface/80 backdrop-blur-md z-30 py-2 border-b border-outline-variant/10">
+<div class="flex gap-8 overflow-x-auto hide-scrollbar">
+<button class="pb-2 active-tab-indicator text-primary font-bold text-sm uppercase tracking-widest">About</button>
+<button class="pb-2 text-on-surface-variant font-semibold text-sm uppercase tracking-widest opacity-60 hover:opacity-100 transition-opacity">Menu</button>
+<button class="pb-2 text-on-surface-variant font-semibold text-sm uppercase tracking-widest opacity-60 hover:opacity-100 transition-opacity">Events</button>
+<button class="pb-2 text-on-surface-variant font-semibold text-sm uppercase tracking-widest opacity-60 hover:opacity-100 transition-opacity">Reviews</button>
+</div>
+</section>
+<!-- About Content Section -->
+<section class="px-6 mt-8 space-y-10">
+<div class="space-y-4">
+<h3 class="font-headline font-bold text-xl text-on-surface flex items-center gap-2">
+                The Experience
+                <span class="h-px flex-1 bg-gradient-to-r from-outline-variant/30 to-transparent"></span>
+</h3>
+<p class="text-on-surface-variant leading-relaxed text-sm font-medium opacity-90">
+                Set in the heart of Victoria Island, The Vibe Lounge offers an immersive night of luxury, curated cocktails, and West Africa's finest DJs. Experience an editorial-grade atmosphere with neon-infused aesthetics and VIP treatment that defines the Lagos night.
+            </p>
+</div>
+<div class="space-y-4">
+<h3 class="font-headline font-bold text-xs uppercase tracking-[0.2em] text-outline-variant">Amenities &amp; Features</h3>
+<div class="grid grid-cols-2 gap-3">
+<div class="flex items-center gap-3 p-3 glass-card rounded-xl">
+<div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-lg">wifi</span>
+</div>
+<span class="text-xs font-semibold">Fast WiFi</span>
+</div>
+<div class="flex items-center gap-3 p-3 glass-card rounded-xl">
+<div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-lg">local_parking</span>
+</div>
+<span class="text-xs font-semibold">Valet</span>
+</div>
+<div class="flex items-center gap-3 p-3 glass-card rounded-xl">
+<div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-lg">deck</span>
+</div>
+<span class="text-xs font-semibold">Outdoor</span>
+</div>
+<div class="flex items-center gap-3 p-3 glass-card rounded-xl">
+<div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-lg">restaurant</span>
+</div>
+<span class="text-xs font-semibold">Full Dining</span>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<h3 class="font-headline font-bold text-xl text-on-surface">Gallery</h3>
+<button class="text-xs font-bold text-primary uppercase tracking-widest">View All</button>
+</div>
+<div class="grid grid-cols-6 grid-rows-2 gap-2 h-[320px]">
+<div class="col-span-3 row-span-2 rounded-2xl overflow-hidden border border-white/5">
+<img alt="Club Detail 1" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWRqMYrVLSoxBUdLZ2RbwJp34-4Rrh_YpCFhrym8B6L084ESbXY5CyZEcmOK3Qiy_U4fD89EyJPkp6bXYtC1c9vsZ7-n7VtTV7OqJCobGu65ovJnvck4Z8w1mxscCEh-0pzGVCawZCOX4yWaAiM7JhFp2yw3gSGSLXSaDqodR4lUqhfLqMU0KuQ4hRM-aQ1MreZahqnSY48N2Gp8a9375h8hI3SUMd0Cstpx_c6yFzQ_oZkVzvta7Vw1-w6rOjbkuhkyFUiZRVCygZ"/>
+</div>
+<div class="col-span-3 row-span-1 rounded-2xl overflow-hidden border border-white/5">
+<img alt="Club Detail 2" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIoWr2iBqR-4reFKmu3ZzWw2uBcIHJfdZgMS9osTOik_G6CnBoh89S7E3XBHk03GelQk9ukTQoJNV4aiBM8vT1P1mP7e_xsv78qaugqJs-9upFzpaV0tssCF5BT_k5h9X9tG-pxhHzx6vDSUWhVmg-dwKdzBVXCSKoXxcT6QD3CVFIXQjaJnH3xjxmBTcTzg6kibhCflKvAmTeHK-7bpJai-5pbznwDyc0nrDeOnNMz7FQ0UrM2iwTUjpAeYv4TmBWq4iP5TO8-Jgi"/>
+</div>
+<div class="col-span-3 row-span-1 rounded-2xl overflow-hidden border border-white/5">
+<img alt="Club Detail 3" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD59-JN4JbemK9vQTiytAVoriOG5fVIxdKMc0SkSFy2f_wQ1UXr7hTsyGn5TSFlorsLlNHRjcPmfzc9yJMSc3VnYoutu6VaZSaAQFRbJpTuXJCBdXLfISeU-XEa8EjbgYxmGs72-lcsSRCw53mW8yMROwLGm2ro1g-GgaH6yGjMT63dRNeg6Y-evs2nKrQpHQ9qdEP8vfmKyuvhoqvozcTPd0YtkILZ-Xtc56noNUVqmxwAKeCOvO1zD0iLwEihnCwVeoz0aVtkZXFA"/>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Sticky Bottom Bar -->
+<div class="fixed bottom-0 left-0 w-full z-40">
+<div class="px-6 pb-10 pt-4 bg-gradient-to-t from-surface via-surface to-transparent">
+<button class="w-full h-16 rounded-2xl bg-primary text-on-primary-fixed font-black text-base tracking-[0.1em] uppercase shadow-[0_12px_40px_rgba(163,166,255,0.4)] neon-glow-primary flex items-center justify-center gap-3 group active:scale-[0.98] transition-transform">
+            Reserve a Table
+            <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward_ios</span>
+</button>
+</div>
+<!-- BottomNavBar -->
+<nav class="flex justify-around items-center px-4 h-20 bg-surface-container-high/80 backdrop-blur-2xl border-t border-outline-variant/10 rounded-t-3xl">
+<a class="flex flex-col items-center justify-center text-primary group" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">explore</span>
+<span class="text-[9px] uppercase tracking-widest font-black mt-1">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined">dynamic_feed</span>
+<span class="text-[9px] uppercase tracking-widest font-bold mt-1">Feed</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined">confirmation_number</span>
+<span class="text-[9px] uppercase tracking-widest font-bold mt-1">Tickets</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 hover:opacity-100 transition-all" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[9px] uppercase tracking-widest font-bold mt-1">Profile</span>
+</a>
+</nav>
+</div>
+</body></html>

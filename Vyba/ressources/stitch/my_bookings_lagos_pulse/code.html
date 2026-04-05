@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lagos Pulse | My Bookings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#006c49",
+                        "on-background": "#dee5ff",
+                        "inverse-on-surface": "#4d556b",
+                        "outline": "#6d758c",
+                        "surface-dim": "#060e20",
+                        "inverse-surface": "#faf8ff",
+                        "surface-container-lowest": "#000000",
+                        "on-primary": "#0f00a4",
+                        "on-secondary": "#005a3c",
+                        "primary-fixed": "#9396ff",
+                        "secondary-fixed": "#69f6b8",
+                        "primary-fixed-dim": "#8387ff",
+                        "inverse-primary": "#494bd7",
+                        "on-tertiary": "#573500",
+                        "primary-container": "#9396ff",
+                        "error-container": "#a70138",
+                        "on-primary-fixed": "#000000",
+                        "on-secondary-fixed": "#00452d",
+                        "surface-tint": "#a3a6ff",
+                        "on-tertiary-container": "#4a2c00",
+                        "primary": "#a3a6ff",
+                        "surface-container": "#0f1930",
+                        "on-primary-container": "#0a0081",
+                        "secondary-dim": "#58e7ab",
+                        "surface-container-high": "#141f38",
+                        "background": "#060e20",
+                        "on-tertiary-fixed-variant": "#563400",
+                        "surface-bright": "#1f2b49",
+                        "on-error": "#490013",
+                        "outline-variant": "#40485d",
+                        "tertiary-fixed": "#f8a010",
+                        "surface": "#060e20",
+                        "on-surface-variant": "#a3aac4",
+                        "surface-container-highest": "#192540",
+                        "error-dim": "#d73357",
+                        "surface-container-low": "#091328",
+                        "tertiary": "#ffb148",
+                        "tertiary-dim": "#e79400",
+                        "surface-variant": "#192540",
+                        "on-secondary-container": "#e1ffec",
+                        "error": "#ff6e84",
+                        "secondary": "#69f6b8",
+                        "on-primary-fixed-variant": "#0e009d",
+                        "tertiary-container": "#f8a010",
+                        "on-surface": "#dee5ff",
+                        "on-error-container": "#ffb2b9",
+                        "on-tertiary-fixed": "#2a1700",
+                        "primary-dim": "#6063ee",
+                        "on-secondary-fixed-variant": "#006544",
+                        "tertiary-fixed-dim": "#e79400",
+                        "secondary-fixed-dim": "#58e7ab"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Epilogue"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tonal-shift {
+            transition: background-color 0.3s ease;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-950/60 backdrop-blur-xl flex justify-between items-center px-6 h-16 w-full tonal-shift bg-slate-900/40">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-indigo-500">location_on</span>
+<h1 class="text-xl font-bold tracking-tighter text-indigo-400 font-epilogue">Lagos Pulse</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-indigo-400 hover:text-indigo-300 transition-colors cursor-pointer scale-95 active:duration-150">search</span>
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm text-indigo-400">person</span>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<main class="pt-24 px-6 max-w-2xl mx-auto">
+<!-- Editorial Header -->
+<div class="mb-8">
+<p class="text-indigo-400 font-label text-[10px] uppercase tracking-[0.2em] font-bold mb-2">Manage your night</p>
+<h2 class="font-headline text-4xl font-extrabold tracking-tight text-on-surface">Bookings</h2>
+</div>
+<!-- Filter Tabs (Asymmetric Editorial Style) -->
+<div class="flex items-end gap-6 mb-10 overflow-x-auto pb-2 scrollbar-hide">
+<div class="relative flex-shrink-0">
+<button class="font-headline text-2xl font-bold text-on-surface relative z-10">Upcoming</button>
+<div class="absolute -bottom-1 left-0 w-full h-2 bg-primary/20 rounded-full -rotate-1"></div>
+</div>
+<button class="font-headline text-lg font-medium text-on-surface-variant hover:text-primary transition-colors flex-shrink-0">Past</button>
+<button class="font-headline text-lg font-medium text-on-surface-variant hover:text-primary transition-colors flex-shrink-0">Cancelled</button>
+</div>
+<!-- Booking Cards Grid -->
+<div class="space-y-6">
+<!-- Booking Card 1: Confirmed -->
+<div class="group relative bg-surface-container-low rounded-2xl overflow-hidden tonal-shift hover:bg-surface-container-high transition-all duration-300">
+<div class="flex flex-col md:flex-row">
+<div class="relative w-full md:w-40 h-48 md:h-auto overflow-hidden">
+<img alt="Luxury lounge interior" class="w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 transition-all duration-500 scale-105 group-hover:scale-100" data-alt="Modern high-end lounge interior with neon purple accents, velvet seating, and ambient warm lighting in a sleek urban setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1EF0IakgKOmfaP6MGh-BvigaVPkbGtdTSFdGuGe0kwYY1JYAfGmYKbr-9YtsaR7yTPdSH4T__iaAQ-ilpFn1jUn3LziWYV2PqkntM4uo0xPol6cTZs6MqBdBh5rFXSkkzQ_UPxCKyUugPpcjISou5zA0GdChtGzIrLNkbcSK4VVEb-p3XkLbfEvpRIewQYpOkf8zJ4ogd-lHdo3U-IhXvcYIAMUUCwsVZ1lKbloqevtcwkEuDnsz5F-hTB8b8o1CaiEkFXzxe8Z_m"/>
+<div class="absolute top-3 left-3">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase flex items-center gap-1 backdrop-blur-md">
+<span class="w-1.5 h-1.5 bg-secondary rounded-full animate-pulse"></span>
+                                Confirmed
+                            </span>
+</div>
+</div>
+<div class="p-6 flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline text-xl font-bold text-on-surface">Zaza Lagos</h3>
+<span class="material-symbols-outlined text-primary-fixed-dim">verified</span>
+</div>
+<div class="space-y-2">
+<div class="flex items-center gap-2 text-on-surface-variant text-sm">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span>Friday, Oct 27, 2023</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant text-sm">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span>10:00 PM — 02:00 AM</span>
+</div>
+</div>
+</div>
+<div class="mt-6 flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-surface-container-low bg-slate-800 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of a young man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHQ593g04S8tsQFovgQ5_hy697lqa7jO-UHgxfk-tLFPuC5rUa0_u7SsWdxxg40_iQurFBritI40nJoElzi4OJabVM3Y_-wQqzAa3TpTniXqt7a0xjvVaXdA_6C8d_iVrm45fny-mgtHcw4YYkG_APolrJwpH6OWyThw4DU5Ka7PFyAaLijHebPfxcTxPPhEy-Hf9qi8ZkqWckLcwlvS65sDghwPK6IWGSFvjXRchec2l9e7NbamwTifOsd0N5lB789pikZu-x1JnU"/>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-surface-container-low bg-slate-800 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of a young woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCK4AX1TGDNsCoPsnXkHLW3Fl17C6lrVuT0EJ8r_ZOQlhee0g6NK_DWxRzr4Fv3fdprgP3b4CG58qdtxDGMQ60R_STyI8lfpjGjNT2UlvFwu2qcPHH_-qClU6tYlFyX6qvE7LdG0uPTtSdBS2obLVDZ1kLOa92er1JHc2ZcEtuWgXED4_PPcZ_sKL0RdbdUO-1aMOyiLHnOJ9jtU2f4duszlhR4P44fs3qjhZywv4tvNwcy3BxJQsg-agQsBLCKI45PPlWUXuUrrKnH"/>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-surface-container-low bg-surface-container-highest flex items-center justify-center text-[10px] font-bold text-indigo-300">
+                                    +4
+                                </div>
+</div>
+<button class="bg-primary/10 text-primary px-4 py-2 rounded-xl text-xs font-bold hover:bg-primary hover:text-on-primary transition-all active:scale-95">
+                                View Ticket
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Booking Card 2: Pending -->
+<div class="group relative bg-surface-container-low rounded-2xl overflow-hidden tonal-shift hover:bg-surface-container-high transition-all duration-300">
+<div class="flex flex-col md:flex-row">
+<div class="relative w-full md:w-40 h-48 md:h-auto overflow-hidden">
+<img alt="Crowded club dancefloor" class="w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 transition-all duration-500 scale-105 group-hover:scale-100" data-alt="Vibrant nightclub dancefloor with laser lights, silhouettes of people dancing, and a hazy atmospheric mood in shades of blue and magenta" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBp-WsQl17a6DefCR4VzQXc_A8Em74P--5_bTdGd_6OfHD_a1LffearlfMlBL4kUhY1Smfq0J7mMH-rZcS78kYMSr5DN2ejiiLcRWTevm9mGEVwRp_zZDRGWeyqfCV-9Ds5rbaHrvbF_wEN8AaC9N25HnR62tCHujUiAXmzbXhwwHNQI_grtBG_45uHD_GH3TbEyMTp0ECBrdUnukCr12qzH5nfuxVPXmI_AeMGdbyqS0S83ZD4R73LBQRbpwF-FFbtdBx88urUCpRm"/>
+<div class="absolute top-3 left-3">
+<span class="bg-tertiary/20 text-tertiary px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase flex items-center gap-1 backdrop-blur-md">
+<span class="w-1.5 h-1.5 bg-tertiary rounded-full"></span>
+                                Pending
+                            </span>
+</div>
+</div>
+<div class="p-6 flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline text-xl font-bold text-on-surface">Club Quilox</h3>
+<span class="material-symbols-outlined text-on-surface-variant">more_horiz</span>
+</div>
+<div class="space-y-2">
+<div class="flex items-center gap-2 text-on-surface-variant text-sm">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span>Saturday, Oct 28, 2023</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant text-sm">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span>11:30 PM — 04:00 AM</span>
+</div>
+</div>
+</div>
+<div class="mt-6 flex items-center justify-between">
+<span class="text-[10px] text-on-surface-variant italic">Waiting for host approval...</span>
+<div class="flex gap-2">
+<button class="text-on-surface-variant p-2 rounded-xl border border-outline-variant/30 hover:bg-error/10 hover:text-error hover:border-error/20 transition-all">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+<button class="bg-surface-container-highest text-on-surface px-4 py-2 rounded-xl text-xs font-bold hover:bg-indigo-500/20 transition-all">
+                                    Details
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Booking Card 3: VIP Promotion Style -->
+<div class="p-[1px] rounded-2xl bg-gradient-to-br from-tertiary/40 via-transparent to-primary/40">
+<div class="group relative bg-surface-container-low rounded-[15px] overflow-hidden tonal-shift hover:bg-surface-container-high transition-all duration-300">
+<div class="flex flex-col md:flex-row">
+<div class="relative w-full md:w-40 h-48 md:h-auto overflow-hidden">
+<img alt="Rooftop party" class="w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 transition-all duration-500 scale-105 group-hover:scale-100" data-alt="Luxury rooftop pool party at dusk with city skyline in background, cocktail tables, and warm string lights reflecting in water" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCK0AVId2NTQf18cxTMPMlJiVqyBVUrMOfsJeRhZ2J5kWc6OJyCSwYdPnmt4iiP7lQt5ZIefWXxwARKuZYnFA_pZ1JRhOPLSNp3cmA3l2TnSCiq4G9QpGzVK2LHbmU1brXF7tq7_gEOjavnH1ZmilnH3B2fJiSS3atKfkMv7m6uPhBCyGfQ1xmTivKZKCgmT4dRTCkmk0BVuv9FtEzKBBVmcfQ7AZhg7_1jzJi1MZDWEZAYYpygc2xEDOpNvNnV5sV-2kuBrXNDbByF"/>
+<div class="absolute top-3 left-3">
+<span class="bg-tertiary text-on-tertiary-fixed px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase flex items-center gap-1">
+                                    VIP TABLE
+                                </span>
+</div>
+</div>
+<div class="p-6 flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline text-xl font-bold text-on-surface">Atmosphere Rooftop</h3>
+<div class="flex items-center gap-1 px-2 py-0.5 bg-tertiary/10 rounded-md">
+<span class="material-symbols-outlined text-[14px] text-tertiary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-[10px] font-bold text-tertiary uppercase">Featured</span>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex items-center gap-2 text-on-surface-variant text-sm">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span>Friday, Nov 3, 2023</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant text-sm">
+<span class="material-symbols-outlined text-sm">group</span>
+<span>Table for 8 People</span>
+</div>
+</div>
+</div>
+<div class="mt-6 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Total Price</span>
+<span class="text-lg font-headline font-bold text-on-surface">₦450,000</span>
+</div>
+<button class="bg-gradient-to-r from-primary to-primary-dim text-on-primary-fixed px-6 py-2.5 rounded-xl text-xs font-bold shadow-[0_8px_20px_-4px_rgba(163,166,255,0.4)] active:scale-95 transition-all">
+                                    Complete Payment
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination / Load More -->
+<div class="mt-12 flex justify-center">
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-indigo-400 font-label text-xs font-bold uppercase tracking-widest transition-colors">
+<span>View Older Activity</span>
+<span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-slate-950/60 backdrop-blur-xl rounded-t-3xl tonal-shift bg-slate-900/80 shadow-[0_-4px_24px_-4px_rgba(0,0,0,0.5)]">
+<div class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pt-3 pb-6">
+<a class="flex flex-col items-center justify-center text-slate-500 hover:bg-slate-800/50 transition-all p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-bold mt-1">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:bg-slate-800/50 transition-all p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined">dynamic_feed</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-bold mt-1">Feed</span>
+</a>
+<!-- Active Tab: Bookings -->
+<a class="flex flex-col items-center justify-center text-indigo-400 bg-indigo-500/10 rounded-xl px-4 py-1 transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-bold mt-1">Bookings</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:bg-slate-800/50 transition-all p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-bold mt-1">Studio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:bg-slate-800/50 transition-all p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-bold mt-1">Profile</span>
+</a>
+</div>
+</nav>
+</body></html>

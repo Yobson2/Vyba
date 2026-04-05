@@ -1,0 +1,197 @@
+<html class="dark"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-lowest": "#000000",
+                    "on-primary": "#0f00a4",
+                    "primary": "#a3a6ff",
+                    "surface-container": "#0f1930",
+                    "inverse-surface": "#faf8ff",
+                    "on-tertiary-fixed": "#2a1700",
+                    "tertiary-fixed": "#f8a010",
+                    "secondary-dim": "#58e7ab",
+                    "on-surface-variant": "#a3aac4",
+                    "on-error-container": "#ffb2b9",
+                    "tertiary-fixed-dim": "#e79400",
+                    "secondary-fixed-dim": "#58e7ab",
+                    "outline": "#6d758c",
+                    "secondary-container": "#006c49",
+                    "error": "#ff6e84",
+                    "on-secondary-fixed-variant": "#006544",
+                    "on-primary-fixed": "#000000",
+                    "on-tertiary-container": "#4a2c00",
+                    "primary-fixed": "#9396ff",
+                    "surface-tint": "#a3a6ff",
+                    "surface-variant": "#192540",
+                    "tertiary-dim": "#e79400",
+                    "secondary-fixed": "#69f6b8",
+                    "error-dim": "#d73357",
+                    "on-surface": "#dee5ff",
+                    "surface-dim": "#060e20",
+                    "secondary": "#69f6b8",
+                    "background": "#060e20",
+                    "on-tertiary-fixed-variant": "#563400",
+                    "on-secondary-fixed": "#00452d",
+                    "on-error": "#490013",
+                    "inverse-on-surface": "#4d556b",
+                    "primary-dim": "#6063ee",
+                    "on-secondary": "#005a3c",
+                    "inverse-primary": "#494bd7",
+                    "on-secondary-container": "#e1ffec",
+                    "tertiary-container": "#f8a010",
+                    "tertiary": "#ffb148",
+                    "on-primary-container": "#0a0081",
+                    "surface": "#060e20",
+                    "primary-container": "#9396ff",
+                    "surface-container-highest": "#192540",
+                    "surface-bright": "#1f2b49",
+                    "on-primary-fixed-variant": "#0e009d",
+                    "outline-variant": "#40485d",
+                    "primary-fixed-dim": "#8387ff",
+                    "surface-container-low": "#091328",
+                    "surface-container-high": "#141f38",
+                    "error-container": "#a70138",
+                    "on-tertiary": "#573500",
+                    "on-background": "#dee5ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Epilogue"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+        }
+        .neon-glow {
+            text-shadow: 0 0 10px rgba(163, 166, 255, 0.8), 0 0 20px rgba(163, 166, 255, 0.4);
+        }
+        .glass-panel {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body min-h-screen flex flex-col">
+<!-- Top Navigation Anchor (Manual suppression of global TopAppBar for focused task) -->
+<header class="fixed top-0 w-full z-50 bg-slate-950/60 backdrop-blur-xl flex justify-between items-center px-6 py-4">
+<button class="text-slate-400 hover:text-indigo-400 transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+<div class="flex flex-col items-center">
+<span class="text-[10px] uppercase tracking-[0.2em] font-semibold text-indigo-400/70">Reviewing</span>
+<h1 class="font-headline font-bold text-lg tracking-tight text-on-surface">The Monarch Lagos</h1>
+</div>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="luxury circular brand logo with gold crest and deep navy background for a premium lounge" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIW623R00W3saHqMuMRfTa56lA1OxgfB0jQkxlKViOQQURFbOqpm3ls6ia3tv3chygNfDH6iio6xn2B-1D7rzPoniFjWZuqt2aHBjyPW3MNvQ3yKxM9Cpmfgj5hfxXcSc7XZ0ZqRyUNszV13m2HIAyfmR3C5e0gdyrONysyIOZ7h76I_sB0xQqRUnzOlIjIPFeyQFaUDh3EPqKYv9luvNlM9Gw50LSDVOhni49Gpn9TNr5p2Z5CfiM35yQmzt3Qb9Put5aBrFuivXx"/>
+</div>
+</header>
+<main class="flex-grow pt-24 pb-32 px-6 max-w-2xl mx-auto w-full">
+<!-- Venue Context Section -->
+<section class="mb-10 text-center">
+<div class="inline-block px-4 py-1.5 rounded-full bg-surface-container-high border border-outline-variant/20 mb-4">
+<span class="text-secondary text-[11px] font-bold tracking-widest uppercase">Visit Confirmed</span>
+</div>
+<h2 class="font-headline text-3xl font-extrabold tracking-tighter mb-2 text-on-surface">How was the vibe?</h2>
+<p class="text-on-surface-variant text-sm">Your feedback helps the community find the best spots in Lagos.</p>
+</section>
+<!-- Star Selector Section -->
+<section class="mb-10 flex flex-col items-center">
+<div class="flex gap-3 mb-4">
+<button class="group">
+<span class="material-symbols-outlined text-4xl text-primary neon-glow" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+<button class="group">
+<span class="material-symbols-outlined text-4xl text-primary neon-glow" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+<button class="group">
+<span class="material-symbols-outlined text-4xl text-primary neon-glow" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+<button class="group">
+<span class="material-symbols-outlined text-4xl text-primary neon-glow" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+<button class="group">
+<span class="material-symbols-outlined text-4xl text-slate-700 hover:text-primary/50 transition-colors">star</span>
+</button>
+</div>
+<span class="font-headline text-indigo-300 font-semibold tracking-wide">AMAZING</span>
+</section>
+<!-- Review Text Area -->
+<section class="mb-8">
+<div class="relative">
+<label class="absolute -top-2.5 left-4 px-2 bg-background text-[10px] font-bold tracking-widest text-indigo-400 uppercase">Your Experience</label>
+<textarea class="w-full h-40 bg-surface-container-low rounded-xl p-6 text-on-surface border-none focus:ring-0 focus:border-b-2 focus:border-primary transition-all placeholder:text-slate-600 resize-none" placeholder="Tell us about the music, the drinks, and the crowd..."></textarea>
+</div>
+</section>
+<!-- Photo Grid Section -->
+<section class="mb-12">
+<div class="flex justify-between items-end mb-4">
+<h3 class="font-headline text-sm font-bold tracking-tight text-on-surface">Add Photos</h3>
+<span class="text-[10px] font-medium text-slate-500 uppercase tracking-widest">Optional (Max 3)</span>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<!-- Uploaded Photo 1 -->
+<div class="relative aspect-square rounded-xl overflow-hidden group">
+<img class="w-full h-full object-cover" data-alt="dramatic close-up of a cocktail being poured with neon purple lighting and ice splashes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCInWzW5CqFRoI721S6V3yG9xHRLw5ralGiN0ygcDXrmFaHUaR2UAXo4aWRr2Og1-yLK8-VfrTOQyT6D5UB6GYfYH_gwt2aLy63NCoIQpglJglJjSHOZW9MiA1OaY4scrXmRYqRodx7oMP9UFOmEjZceLblFgebEr_nrMHXVARI3jIA3hlEkYQsHS8Swqt4rxbwtAnWyckFhX_JUdMzwfIvtXTEmum_YifNyMPTwsy0VoAJgxNmdzMSQ1DKCrkedHd_NYwCRXYLGWnM"/>
+<button class="absolute top-2 right-2 w-6 h-6 rounded-full bg-black/60 flex items-center justify-center backdrop-blur-md">
+<span class="material-symbols-outlined text-xs text-white">close</span>
+</button>
+</div>
+<!-- Placeholder / Upload Slot -->
+<div class="relative aspect-square rounded-xl border-2 border-dashed border-outline-variant/30 flex flex-col items-center justify-center bg-surface-container-low hover:bg-surface-container-high transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform mb-2">add_a_photo</span>
+<span class="text-[9px] font-bold uppercase tracking-tighter text-slate-500">Add Photo</span>
+</div>
+<!-- Empty Slot -->
+<div class="relative aspect-square rounded-xl border-2 border-dashed border-outline-variant/30 flex flex-col items-center justify-center bg-surface-container-low/30">
+</div>
+</div>
+</section>
+<!-- Privacy Toggle (Bento style sub-component) -->
+<section class="mb-12 bg-surface-container-low rounded-2xl p-5 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">visibility</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-on-surface">Post Anonymously</h4>
+<p class="text-[11px] text-on-surface-variant">Hide your name and profile photo</p>
+</div>
+</div>
+<div class="w-12 h-6 bg-slate-800 rounded-full relative p-1 cursor-pointer">
+<div class="w-4 h-4 bg-slate-500 rounded-full"></div>
+</div>
+</section>
+</main>
+<!-- Bottom Action Bar -->
+<div class="fixed bottom-0 left-0 w-full p-6 glass-panel bg-slate-950/80">
+<button class="w-full py-4 rounded-xl bg-gradient-to-br from-primary to-primary-dim text-on-primary-fixed font-headline font-extrabold tracking-tight text-base shadow-[0_8px_30px_rgba(163,166,255,0.2)] active:scale-[0.98] transition-transform">
+            Submit Review
+        </button>
+</div>
+</body></html>

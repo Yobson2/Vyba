@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lagos Pulse - Explore</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-primary-fixed": "#000000",
+                "error": "#ff6e84",
+                "secondary-fixed-dim": "#58e7ab",
+                "outline": "#6d758c",
+                "surface": "#060e20",
+                "secondary": "#69f6b8",
+                "surface-container-lowest": "#000000",
+                "on-primary-fixed-variant": "#0e009d",
+                "secondary-container": "#006c49",
+                "inverse-primary": "#494bd7",
+                "error-container": "#a70138",
+                "surface-tint": "#a3a6ff",
+                "outline-variant": "#40485d",
+                "tertiary-container": "#f8a010",
+                "on-surface": "#dee5ff",
+                "surface-dim": "#060e20",
+                "inverse-on-surface": "#4d556b",
+                "surface-variant": "#192540",
+                "tertiary-dim": "#e79400",
+                "primary-container": "#9396ff",
+                "on-background": "#dee5ff",
+                "surface-container": "#0f1930",
+                "surface-container-low": "#091328",
+                "on-error-container": "#ffb2b9",
+                "on-secondary": "#005a3c",
+                "primary-fixed": "#9396ff",
+                "error-dim": "#d73357",
+                "on-tertiary-fixed": "#2a1700",
+                "on-secondary-container": "#e1ffec",
+                "tertiary": "#ffb148",
+                "on-primary": "#0f00a4",
+                "tertiary-fixed": "#f8a010",
+                "on-tertiary-container": "#4a2c00",
+                "on-error": "#490013",
+                "on-tertiary": "#573500",
+                "tertiary-fixed-dim": "#e79400",
+                "secondary-dim": "#58e7ab",
+                "on-primary-container": "#0a0081",
+                "inverse-surface": "#faf8ff",
+                "primary-fixed-dim": "#8387ff",
+                "primary": "#a3a6ff",
+                "on-tertiary-fixed-variant": "#563400",
+                "surface-container-high": "#141f38",
+                "primary-dim": "#6063ee",
+                "on-surface-variant": "#a3aac4",
+                "secondary-fixed": "#69f6b8",
+                "on-secondary-fixed": "#00452d",
+                "surface-container-highest": "#192540"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "fontFamily": {
+                "headline": ["Epilogue"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .glass-header { backdrop-filter: blur(20px); }
+        .scrim-bottom { background: linear-gradient(to top, rgba(6, 14, 32, 0.9) 0%, rgba(6, 14, 32, 0) 100%); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-950/60 backdrop-blur-xl flex justify-between items-center px-6 h-16 w-full tonal-shift bg-slate-900/40 shadow-none">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-indigo-500" data-icon="location_on">location_on</span>
+<span class="text-xl font-bold tracking-tighter text-indigo-400 font-epilogue">Lagos Pulse</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-400 hover:text-indigo-300 transition-colors scale-95 active:duration-150">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="text-slate-400 hover:text-indigo-300 transition-colors scale-95 active:duration-150">
+<span class="material-symbols-outlined" data-icon="tune">tune</span>
+</button>
+</div>
+</header>
+<main class="pt-20 pb-28 px-4 max-w-2xl mx-auto">
+<!-- Location Context -->
+<div class="mb-6 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<p class="text-xs font-bold uppercase tracking-widest text-on-surface-variant font-label">Current Location</p>
+<p class="text-sm font-semibold text-primary font-body">Abidjan, Cocody</p>
+</div>
+<!-- View Toggle -->
+<div class="bg-surface-container-highest p-1 rounded-xl flex items-center shadow-inner">
+<button class="px-4 py-1.5 rounded-lg text-xs font-bold bg-primary text-on-primary-fixed shadow-lg">List</button>
+<button class="px-4 py-1.5 rounded-lg text-xs font-bold text-on-surface-variant hover:text-on-surface">Map</button>
+</div>
+</div>
+<!-- Filter Chips -->
+<div class="flex gap-3 overflow-x-auto hide-scrollbar mb-8 pb-2">
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-primary-container text-on-primary-container text-xs font-bold font-label transition-all active:scale-95">Open Now</button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-surface-container-high border border-outline-variant/15 text-on-surface-variant text-xs font-bold font-label hover:bg-surface-container-highest">Top Rated</button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-surface-container-high border border-outline-variant/15 text-on-surface-variant text-xs font-bold font-label hover:bg-surface-container-highest">Live Music</button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-surface-container-high border border-outline-variant/15 text-on-surface-variant text-xs font-bold font-label hover:bg-surface-container-highest">VIP</button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-surface-container-high border border-outline-variant/15 text-on-surface-variant text-xs font-bold font-label hover:bg-surface-container-highest">Nearby</button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-surface-container-high border border-outline-variant/15 text-tertiary font-bold text-xs font-label hover:bg-surface-container-highest">Promo Active</button>
+</div>
+<!-- Venue List -->
+<div class="space-y-10">
+<!-- Venue Card 1 -->
+<div class="group relative flex flex-col gap-4">
+<div class="relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-surface-container-low shadow-2xl transition-transform active:scale-[0.98]">
+<img alt="Luxury nightclub interior" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="dramatic interior of a luxury nightclub in Lagos with neon blue and purple lighting, sleek furniture, and hazy atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1unKjg5mRzP7X7Y37n66P5ap4LHvxeG4BWbwGfyjilRWg2QxAcccALjFb_E9Qxi-oPJVaFMGPpwpIh4rebtE2KFaA_Txqh2xPHufawJbHQXUcmYPp1xNRMmrECe-dJdJhiXFoBMRGW3qnkk8gVeUNOzyAatOtQm39XQ97OmYjlcr5j20gDmFeBOTdZ8BJGbTr3nLSe86MhCGtAb6HY7m5D6n88bMkygmKa6943Z21WSTZs_vTtGzQUa0Qn-qAGy1DwJakvC6gDXjJ"/>
+<div class="absolute inset-0 scrim-bottom"></div>
+<button class="absolute top-4 right-4 h-10 w-10 flex items-center justify-center rounded-full bg-surface/40 backdrop-blur-md text-on-surface hover:text-error transition-colors">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</button>
+<div class="absolute top-4 left-4 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider backdrop-blur-sm">
+                        Open Now
+                    </div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary mb-1 block">Nightclub • Victoria Island</span>
+<h3 class="text-2xl font-bold font-headline tracking-tight text-on-surface">The Vibe Lounge</h3>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-high px-2 py-1 rounded-lg">
+<span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold text-on-surface">4.6</span>
+<span class="text-[10px] text-on-surface-variant font-medium">(128)</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="near_me">near_me</span>
+<span class="text-sm text-on-surface-variant font-medium">1.2 km away</span>
+</div>
+<div class="text-tertiary-fixed font-bold text-sm bg-tertiary/10 px-3 py-1 rounded-lg">
+                            🔥 Happy Hour until 10 PM
+                        </div>
+</div>
+</div>
+</div>
+<!-- Venue Card 2 -->
+<div class="group relative flex flex-col gap-4 opacity-90 hover:opacity-100 transition-opacity">
+<div class="relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-surface-container-low shadow-2xl transition-transform active:scale-[0.98]">
+<img alt="Acoustic live music set" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="close up of a musician playing a saxophone in a dimly lit jazz bar with warm golden spotlights and mahogany wood accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFLmYJBouIFcoLin20YMC9y9ERGU2vdJMxPOJ3ezaOhX9Id3u9eTIZ4FI4Mh-66vMzA0QOYZ7MvoFBSkhWaWJjLTinTfZJh_3LiP4Qy5Ttlh5aDJQpLJh684zPfrnt1wimQ16xX5_KPi469Mc5NaKy5dR46KDadcP5RLNpQw7g6FRWsmtpGU3RbUX68aENXgOJ3glXyxx1ChZHCTur926-V5VV_3isKmhFT6CojdZRjOpULUGGPlkoB-U-Q7ctpL6KudSZCJS77tc-"/>
+<div class="absolute inset-0 scrim-bottom"></div>
+<button class="absolute top-4 right-4 h-10 w-10 flex items-center justify-center rounded-full bg-surface/40 backdrop-blur-md text-on-surface">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</button>
+<div class="absolute top-4 left-4 bg-outline-variant/60 text-on-surface px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider backdrop-blur-sm">
+                        Closed
+                    </div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary mb-1 block">Live Bar • Lekki Phase 1</span>
+<h3 class="text-2xl font-bold font-headline tracking-tight text-on-surface">Jazzhole Cocody</h3>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-high px-2 py-1 rounded-lg">
+<span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold text-on-surface">4.9</span>
+<span class="text-[10px] text-on-surface-variant font-medium">(2.4k)</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="near_me">near_me</span>
+<span class="text-sm text-on-surface-variant font-medium">3.8 km away</span>
+</div>
+<div class="text-secondary-fixed-dim font-bold text-sm">
+                            Starts at 9 PM
+                        </div>
+</div>
+</div>
+</div>
+<!-- Venue Card 3 (Bento-style focus) -->
+<div class="grid grid-cols-2 gap-4">
+<div class="col-span-2 bg-gradient-to-br from-primary-dim to-surface-container-high p-6 rounded-2xl flex flex-col justify-between h-48 relative overflow-hidden">
+<div class="z-10">
+<h4 class="text-3xl font-black font-headline tracking-tighter leading-none mb-2">VIP PASS<br/>EXCLUSIVE</h4>
+<p class="text-on-surface-variant text-xs font-bold max-w-[150px]">Skip the line at Skybox Lounge tonight.</p>
+</div>
+<button class="z-10 w-fit px-6 py-2 bg-on-primary-fixed text-primary rounded-xl font-black text-sm uppercase tracking-tighter">Claim Now</button>
+<span class="material-symbols-outlined absolute -bottom-8 -right-8 text-[180px] text-primary/10 rotate-12" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pt-3 pb-6 bg-slate-950/60 backdrop-blur-xl z-50 rounded-t-3xl tonal-shift bg-slate-900/80 shadow-[0_-4px_24px_-4px_rgba(0,0,0,0.5)]">
+<button class="flex flex-col items-center justify-center text-indigo-400 bg-indigo-500/10 rounded-xl px-4 py-1 scale-90 active:duration-200">
+<span class="material-symbols-outlined" data-icon="explore" style="font-variation-settings: 'FILL' 1;">explore</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-bold">Explore</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-500 hover:bg-slate-800/50 transition-all scale-90 active:duration-200">
+<span class="material-symbols-outlined" data-icon="dynamic_feed">dynamic_feed</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-bold">Feed</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-500 hover:bg-slate-800/50 transition-all scale-90 active:duration-200">
+<span class="material-symbols-outlined" data-icon="confirmation_number">confirmation_number</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-bold">Bookings</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-500 hover:bg-slate-800/50 transition-all scale-90 active:duration-200">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-inter text-[10px] uppercase tracking-widest font-bold">Profile</span>
+</button>
+</nav>
+<!-- Contextual FAB (Search/Action) - Only on home/explore -->
+<button class="fixed bottom-28 right-6 h-14 w-14 rounded-2xl bg-gradient-to-br from-primary to-primary-dim text-on-primary-fixed shadow-[0_8px_32px_-8px_rgba(99,102,241,0.6)] flex items-center justify-center z-40 active:scale-90 transition-transform">
+<span class="material-symbols-outlined font-bold" data-icon="map">map</span>
+</button>
+</body></html>
