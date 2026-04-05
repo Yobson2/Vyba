@@ -1,4 +1,4 @@
-/// Blur, icon sizing, and touch target tokens for the Lagos Pulse design system.
+/// Blur, icon sizing, and touch target tokens for the Vyba design system.
 ///
 /// Centralizes values that were previously scattered as magic numbers
 /// across widgets.

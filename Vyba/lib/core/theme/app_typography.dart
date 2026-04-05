@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templates/core/theme/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// Lagos Pulse typography tokens using a dual-font strategy.
+/// Vyba typography tokens using a dual-font strategy.
 ///
 /// - **Epilogue**: Headlines & display — geometric weight with editorial personality.
 /// - **Inter**: Body & labels — clean modern clarity for dense information.

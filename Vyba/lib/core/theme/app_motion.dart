@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-/// Animation and motion tokens for the Lagos Pulse design system.
+/// Animation and motion tokens for the Vyba design system.
 ///
 /// Standardizes durations and curves across all widgets.
 /// Respects reduced-motion accessibility preferences via [resolve].

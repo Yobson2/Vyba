@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 160" width="520" height="160">
+  <!-- Monochrome Dark: all #060E20 on transparent — for light backgrounds & print -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@700&amp;display=swap');
+    .wordmark {
+      font-family: 'Epilogue', sans-serif;
+      font-weight: 700;
+      font-size: 72px;
+      letter-spacing: -1.5px;
+    }
+    .tagline {
+      font-family: 'Inter', 'Helvetica Neue', sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      letter-spacing: 4px;
+    }
+  </style>
+
+  <!-- Pulse Mark -->
+  <g transform="translate(0, 10)">
+    <path d="
+      M 8 78
+      L 38 78
+      L 64 26
+      L 72 26
+      L 98 78
+      L 128 78
+      L 128 88
+      L 94 88
+      L 69 42
+      L 44 88
+      L 8 88
+      Z
+    " fill="#060E20"/>
+    <circle cx="116" cy="56" r="8" fill="#060E20"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="152" y="105" class="wordmark" fill="#060E20">Vyba</text>
+  <text x="156" y="132" class="tagline" fill="#060E20" opacity="0.5">LAGOS PULSE</text>
+</svg>

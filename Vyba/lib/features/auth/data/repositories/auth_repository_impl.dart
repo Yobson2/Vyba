@@ -46,6 +46,29 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<Either<Failure, User>> loginWithPhone({
+    required String phoneNumber,
+    required String code,
+  }) async {
+    if (!await _networkInfo.isConnected) {
+      return const Left(NetworkFailure());
+    }
+    try {
+      final result =
+          await _remote.loginWithPhone(phoneNumber: phoneNumber, code: code);
+      await _local.cacheTokens(result.tokens);
+      await _local.cacheUser(result.user);
+      return Right(result.user.toEntity());
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.message, statusCode: e.statusCode));
+    } on UnauthorizedException catch (e) {
+      return Left(UnauthorizedFailure(message: e.message));
+    } on NetworkException {
+      return const Left(NetworkFailure());
+    }
+  }
+
+  @override
   Future<Either<Failure, User>> register({
     required String name,
     required String email,

@@ -57,12 +57,10 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
   Future<void> _onVerify() async {
     if (_otpCode.length < 6) return;
     context.unfocus();
-    final success = await ref
-        .read(authNotifierProvider.notifier)
-        .verifyOtp(email: widget.email, code: _otpCode);
-    if (success && mounted) {
-      context.go('/login');
-    }
+    await ref.read(authNotifierProvider.notifier).loginWithPhone(
+          phoneNumber: widget.email,
+          code: _otpCode,
+        );
   }
 
   void _onResend() {
@@ -87,6 +85,10 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
       if (state is AuthError) {
         context.showSnackBar(state.message, isError: true);
       }
+      if (state is AuthAuthenticated) {
+        // Router redirect handles role-based navigation automatically.
+        context.go('/');
+      }
     });
 
     return Scaffold(
@@ -98,7 +100,7 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
           onPressed: () => context.pop(),
         ),
         title: Text(
-          'Lagos Pulse',
+          'Vyba',
           style: GoogleFonts.epilogue(
             fontSize: 18,
             fontWeight: FontWeight.w700,
@@ -230,7 +232,7 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            'Your verification is processed through a secure high-end channel for Lagos Pulse VIP members.',
+                            'Your verification is processed through a secure high-end channel for Vyba VIP members.',
                             style: Theme.of(context)
                                 .textTheme
                                 .bodySmall
@@ -248,7 +250,7 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
               // Footer
               Center(
                 child: Text(
-                  'THE NEON CURATOR © 2024 WEST AFRICA\nNIGHTLIFE',
+                  'VYBA © 2024',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
                         color:

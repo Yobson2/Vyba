@@ -11,6 +11,7 @@ import 'package:flutter_templates/features/auth/domain/repositories/auth_reposit
 import 'package:flutter_templates/features/auth/domain/usecases/forgot_password_usecase.dart';
 import 'package:flutter_templates/features/auth/domain/usecases/get_cached_user_usecase.dart';
 import 'package:flutter_templates/features/auth/domain/usecases/login_usecase.dart';
+import 'package:flutter_templates/features/auth/domain/usecases/login_with_phone_usecase.dart';
 import 'package:flutter_templates/features/auth/domain/usecases/logout_usecase.dart';
 import 'package:flutter_templates/features/auth/domain/usecases/register_usecase.dart';
 import 'package:flutter_templates/features/auth/domain/usecases/verify_otp_usecase.dart';
@@ -25,7 +26,11 @@ part 'auth_providers.g.dart';
 @riverpod
 AuthRemoteDataSource authRemoteDataSource(Ref ref) {
   final useMock = dotenv.get('USE_MOCK_AUTH', fallback: 'false') == 'true';
-  if (useMock) return MockAuthRemoteDataSource();
+  if (useMock) {
+    return MockAuthRemoteDataSource(
+      localStorage: ref.watch(localStorageProvider),
+    );
+  }
   return AuthRemoteDataSourceImpl(ref.watch(dioProvider));
 }
 
@@ -52,6 +57,12 @@ AuthRepository authRepository(Ref ref) {
 @riverpod
 LoginUseCase loginUseCase(Ref ref) {
   return LoginUseCase(ref.watch(authRepositoryProvider));
+}
+
+/// Provides the [LoginWithPhoneUseCase].
+@riverpod
+LoginWithPhoneUseCase loginWithPhoneUseCase(Ref ref) {
+  return LoginWithPhoneUseCase(ref.watch(authRepositoryProvider));
 }
 
 /// Provides the [RegisterUseCase].

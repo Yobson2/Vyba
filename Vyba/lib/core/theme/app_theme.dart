@@ -4,7 +4,7 @@ import 'package:flutter_templates/core/theme/app_effects.dart';
 import 'package:flutter_templates/core/theme/app_radius.dart';
 import 'package:flutter_templates/core/theme/app_typography.dart';
 
-/// Composes [ThemeData] from Lagos Pulse design tokens.
+/// Composes [ThemeData] from Vyba design tokens.
 ///
 /// Dark-first nightlife app — the dark theme is the primary experience.
 /// No-line rule: boundaries via tonal shifts, not borders.

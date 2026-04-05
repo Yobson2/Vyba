@@ -7,7 +7,7 @@ import 'package:flutter_templates/core/theme/theme_provider.dart';
 import 'package:flutter_templates/core/widgets/data_display/app_glass_card.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// Lagos Pulse settings page with glass cards and theme/language selectors.
+/// Vyba settings page with glass cards and theme/language selectors.
 class SettingsPage extends ConsumerWidget {
   const SettingsPage({super.key});
 

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 160" width="520" height="160">
+  <defs>
+    <linearGradient id="vipGoldGradient" x1="0" y1="0" x2="140" y2="140" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FF8C00"/>
+    </linearGradient>
+  </defs>
+
+  <!-- VIP Gold variant: gold mark, light wordmark — for exclusive event branding on dark -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@700&amp;display=swap');
+    .wordmark {
+      font-family: 'Epilogue', sans-serif;
+      font-weight: 700;
+      font-size: 72px;
+      letter-spacing: -1.5px;
+    }
+    .tagline {
+      font-family: 'Inter', 'Helvetica Neue', sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      letter-spacing: 4px;
+    }
+  </style>
+
+  <!-- Pulse Mark in VIP Gold -->
+  <g transform="translate(0, 10)">
+    <path d="
+      M 8 78
+      L 38 78
+      L 64 26
+      L 72 26
+      L 98 78
+      L 128 78
+      L 128 88
+      L 94 88
+      L 69 42
+      L 44 88
+      L 8 88
+      Z
+    " fill="url(#vipGoldGradient)"/>
+    <circle cx="116" cy="56" r="8" fill="#FF2D78"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="152" y="105" class="wordmark" fill="#DEE5FF">Vyba</text>
+  <text x="156" y="132" class="tagline" fill="#B0B7D0">LAGOS PULSE</text>
+</svg>

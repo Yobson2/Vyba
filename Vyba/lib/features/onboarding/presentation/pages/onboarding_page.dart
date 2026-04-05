@@ -8,7 +8,7 @@ import 'package:flutter_templates/features/onboarding/presentation/providers/onb
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// Lagos Pulse onboarding with step indicator bars and nightlife imagery.
+/// Vyba onboarding with step indicator bars and nightlife imagery.
 class OnboardingPage extends ConsumerStatefulWidget {
   const OnboardingPage({super.key});
 
@@ -51,7 +51,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
 
   Future<void> _onComplete() async {
     await ref.read(onboardingNotifierProvider.notifier).complete();
-    if (mounted) context.go('/login');
+    if (mounted) context.go('/role-selection');
   }
 
   @override
@@ -87,7 +87,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        'Lagos Pulse',
+                        'Vyba',
                         style: GoogleFonts.epilogue(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,

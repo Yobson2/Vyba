@@ -8,7 +8,7 @@ import 'package:flutter_templates/features/auth/presentation/providers/auth_stat
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// Lagos Pulse profile page with hero section and bento grid layout.
+/// Vyba profile page with hero section and bento grid layout.
 class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
 

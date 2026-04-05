@@ -1,6 +1,7 @@
 import 'package:flutter_templates/core/usecase/usecase.dart';
 import 'package:flutter_templates/features/auth/domain/usecases/forgot_password_usecase.dart';
 import 'package:flutter_templates/features/auth/domain/usecases/login_usecase.dart';
+import 'package:flutter_templates/features/auth/domain/usecases/login_with_phone_usecase.dart';
 import 'package:flutter_templates/features/auth/domain/usecases/register_usecase.dart';
 import 'package:flutter_templates/features/auth/domain/usecases/verify_otp_usecase.dart';
 import 'package:flutter_templates/features/auth/presentation/providers/auth_providers.dart';
@@ -29,6 +30,25 @@ class AuthNotifier extends _$AuthNotifier {
     try {
       final result = await ref.read(loginUseCaseProvider).call(
             LoginParams(email: email, password: password),
+          );
+      state = result.fold(
+        (failure) => AuthState.error(failure.message),
+        AuthState.authenticated,
+      );
+    } catch (e) {
+      state = AuthState.error(e.toString());
+    }
+  }
+
+  /// Attempts to log in with phone number and OTP code.
+  Future<void> loginWithPhone({
+    required String phoneNumber,
+    required String code,
+  }) async {
+    state = const AuthState.loading();
+    try {
+      final result = await ref.read(loginWithPhoneUseCaseProvider).call(
+            LoginWithPhoneParams(phoneNumber: phoneNumber, code: code),
           );
       state = result.fold(
         (failure) => AuthState.error(failure.message),

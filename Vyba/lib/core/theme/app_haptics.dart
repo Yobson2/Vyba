@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 /// Semantic haptic feedback for premium interactions.
 ///
 /// Wraps [HapticFeedback] with named methods that map to
-/// Lagos Pulse interaction patterns.
+/// Vyba interaction patterns.
 class AppHaptics {
   const AppHaptics._();
 

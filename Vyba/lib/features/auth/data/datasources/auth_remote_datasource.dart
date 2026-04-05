@@ -25,6 +25,12 @@ abstract class AuthRemoteDataSource {
   /// POST verify OTP.
   Future<void> verifyOtp({required String email, required String code});
 
+  /// POST login with phone number + OTP code.
+  Future<({UserModel user, TokensModel tokens})> loginWithPhone({
+    required String phoneNumber,
+    required String code,
+  });
+
   /// POST logout.
   Future<void> logout();
 }
@@ -105,6 +111,28 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         ApiEndpoints.verifyOtp,
         data: {'email': email, 'code': code},
       );
+    } on DioException {
+      rethrow;
+    } catch (e) {
+      throw ServerException(message: e.toString());
+    }
+  }
+
+  @override
+  Future<({UserModel user, TokensModel tokens})> loginWithPhone({
+    required String phoneNumber,
+    required String code,
+  }) async {
+    try {
+      final response = await _dio.post<Map<String, dynamic>>(
+        ApiEndpoints.loginWithPhone,
+        data: {'phone_number': phoneNumber, 'code': code},
+      );
+      final data = response.data;
+      if (data == null) {
+        throw const ServerException(message: 'Empty response from server');
+      }
+      return _parseAuthResponse(data);
     } on DioException {
       rethrow;
     } catch (e) {

@@ -1,6 +1,6 @@
-# Flutter Clean Architecture Template
+# Vyba
 
-Production-ready Flutter template with Clean Architecture, Riverpod, GoRouter, Dio, and Freezed. Ready for both small and large projects.
+Lagos Pulse nightlife platform — discover venues, book tables, leave reviews, and manage promotions. Built with Flutter using Clean Architecture, Riverpod, GoRouter, Dio, and Freezed.
 
 ## Features
 
@@ -10,25 +10,27 @@ Production-ready Flutter template with Clean Architecture, Riverpod, GoRouter, D
 - **Dio** — HTTP client with auth interceptor (token refresh), error interceptor, and logging
 - **Freezed** — Immutable models, sealed state unions, JSON serialization
 - **Functional error handling** — `Either<Failure, T>` via dartz
-- **Theme system** — Light/dark mode with Material 3 design tokens
-- **50+ reusable widgets** — Buttons, inputs, feedback, loading, states, layout
-- **Localization** — ARB-based i18n (English + French)
-- **Offline-first sync** — Drift (SQLite) with sync queue engine, write-local-first, background push ([docs](docs/offline_sync.md))
-- **Offline support** — Connectivity monitoring with automatic offline banner
+- **Theme system** — Dark-first design with custom Vyba design tokens
+- **Phone + OTP auth** — Login with phone number and OTP verification
+- **Role selection** — Client and venue owner roles with role-specific flows
+- **Venue discovery** — Search, browse, and explore nightlife venues
+- **Bookings** — Table reservations for clients and booking management for owners
+- **Reviews & ratings** — User reviews for venues
+- **Promotions** — Venue promotions and deals
+- **Owner dashboard** — Analytics and venue management for owners
+- **Favorites** — Save and manage favorite venues
+- **Notifications** — In-app notification feed
+- **Offline-first sync** — Drift (SQLite) with sync queue engine
 - **Secure storage** — Encrypted token storage via FlutterSecureStorage
-- **Auth flow** — Login, register, forgot password, OTP verification, token refresh
 - **Onboarding** — First-launch onboarding with completion tracking
-- **Pagination** — Scroll-based pagination utility
-- **Form validation** — Composable validators
 - **Responsive design** — ScreenUtil + responsive breakpoints
 - **Analytics & crash reporting** — Abstract interfaces, plug in any provider
-- **CI/CD** — GitHub Actions workflow + Makefile
 
 ## Getting Started
 
 ```bash
 # 1. Clone and enter the project
-cd flutter_templates
+cd Vyba
 
 # 2. Copy environment file
 cp .env.example .env
@@ -52,6 +54,7 @@ lib/
 ├── bootstrap.dart               # Initialization (env, storage, crash reporting)
 ├── core/
 │   ├── config/                  # Environment configuration (Env, AppConfig)
+│   ├── enums/                   # Shared enums (UserRole, etc.)
 │   ├── error/                   # Exceptions (data) & Failures (domain)
 │   ├── extensions/              # String, Context, DateTime, Num, Widget
 │   ├── network/                 # Dio client, interceptors, API endpoints
@@ -73,47 +76,24 @@ lib/
 │       ├── loading/             # Shimmer, ShimmerList
 │       └── states/              # Empty, Error, Offline banner
 └── features/
-    ├── auth/                    # Authentication (full Clean Architecture)
-    │   ├── data/                # DataSources, Models, Repository impl
-    │   ├── domain/              # Entities, Repository interface, UseCases
-    │   └── presentation/        # Pages, Providers, Widgets
+    ├── auth/                    # Authentication (phone + OTP, email, register)
+    ├── bookings/                # Table reservations
+    ├── favorites/               # Saved venues
+    ├── feed/                    # Activity feed
     ├── home/                    # Home shell with bottom navigation
-    ├── notes/                   # Notes feature (offline-first reference implementation)
+    ├── notes/                   # Notes (offline-first reference)
+    ├── notifications/           # Notification feed
     ├── onboarding/              # First-launch onboarding flow
-    └── splash/                  # Splash screen with init checks
+    ├── owner_analytics/         # Venue owner analytics
+    ├── owner_bookings/          # Venue owner booking management
+    ├── owner_dashboard/         # Venue owner dashboard
+    ├── promotions/              # Venue promotions and deals
+    ├── reviews/                 # Venue reviews and ratings
+    ├── role_selection/          # Client / Owner role selection
+    ├── search/                  # Venue search and discovery
+    ├── splash/                  # Splash screen with init checks
+    └── venue_management/        # Venue CRUD for owners
 ```
-
-## Adding a New Feature
-
-1. Create the feature directory under `lib/features/your_feature/`
-
-2. **Domain layer** — Define entities, repository interface, and use cases:
-   ```
-   domain/
-   ├── entities/your_entity.dart
-   ├── repositories/your_repository.dart
-   └── usecases/your_usecase.dart
-   ```
-
-3. **Data layer** — Implement models, datasources, and repository:
-   ```
-   data/
-   ├── models/your_model.dart          # @freezed with toEntity()
-   ├── datasources/your_datasource.dart
-   └── repositories/your_repository_impl.dart
-   ```
-
-4. **Presentation layer** — Create pages, state, and providers:
-   ```
-   presentation/
-   ├── pages/your_page.dart
-   ├── providers/your_provider.dart    # @riverpod
-   └── widgets/your_widget.dart
-   ```
-
-5. Run code generation: `make gen`
-
-6. Add routes in `core/router/app_router.dart` and route names in `route_names.dart`
 
 ## Available Commands
 
@@ -147,23 +127,6 @@ make integration
 ```
 
 Tests use `mocktail` for mocking. Test helpers and mock providers are in `test/helpers/`.
-
-**Test structure mirrors the source:**
-```
-test/
-├── helpers/
-│   ├── mock_providers.dart    # Shared mocks
-│   └── test_helpers.dart      # Test utilities (createTestApp, etc.)
-├── core/
-│   └── usecase/               # Base UseCase tests
-└── features/
-    └── auth/
-        ├── data/repositories/  # Repository tests
-        ├── domain/usecases/    # UseCase tests
-        └── presentation/
-            ├── pages/          # Widget tests
-            └── providers/      # Notifier tests
-```
 
 ## Environment Configuration
 

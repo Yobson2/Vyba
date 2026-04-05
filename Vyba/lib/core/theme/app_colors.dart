@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-/// Lagos Pulse design system color tokens.
+/// Vyba design system color tokens.
 ///
-/// Dark-first nightlife app palette based on "The Neon Curator" design system.
+/// Dark-first nightlife app palette.
 /// Boundaries are defined through tonal shifts, not borders (no-line rule).
 class AppColors {
   const AppColors._();
@@ -203,7 +203,7 @@ class AppColors {
       const Color(0xFFFFFFFF).withValues(alpha: AppOpacity.glass);
 }
 
-/// Standardized opacity values for the Lagos Pulse design system.
+/// Standardized opacity values for the Vyba design system.
 ///
 /// Replaces scattered magic numbers across widgets.
 class AppOpacity {

@@ -20,6 +20,12 @@ abstract class AuthRepository {
     required String password,
   });
 
+  /// Logs in with [phoneNumber] and OTP [code].
+  Future<Either<Failure, User>> loginWithPhone({
+    required String phoneNumber,
+    required String code,
+  });
+
   /// Sends a password reset code to [email].
   Future<Either<Failure, void>> forgotPassword({required String email});
 

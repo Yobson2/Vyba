@@ -19,18 +19,21 @@ class SplashPage extends ConsumerWidget {
       if (!context.mounted) return;
       switch (next) {
         case AsyncData(:final value):
-          // Hydrate auth state for router guards (safe here — widget layer,
-          // not inside a provider build). Fire-and-forget is fine because
-          // the router redirect already allows AuthInitial/AuthLoading.
-          if (value != SplashResult.onboarding) {
-            ref.read(authNotifierProvider.notifier).checkAuthStatus();
-          }
           switch (value) {
             case SplashResult.onboarding:
               context.go('/onboarding');
             case SplashResult.authenticated:
-              context.go('/home');
+              // Hydrate auth state first so the router redirect knows the
+              // user's role, then navigate to a public route — the redirect
+              // will send them to /explore or /owner/dashboard.
+              ref
+                  .read(authNotifierProvider.notifier)
+                  .checkAuthStatus()
+                  .then((_) {
+                if (context.mounted) context.go('/login');
+              });
             case SplashResult.unauthenticated:
+              ref.read(authNotifierProvider.notifier).checkAuthStatus();
               context.go('/login');
           }
         case AsyncError():

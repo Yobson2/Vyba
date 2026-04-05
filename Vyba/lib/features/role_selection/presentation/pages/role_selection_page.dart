@@ -29,7 +29,7 @@ class RoleSelectionPage extends ConsumerWidget {
               // Header
               Center(
                 child: Text(
-                  'Lagos Pulse',
+                  'Vyba',
                   style: GoogleFonts.epilogue(
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
@@ -39,7 +39,7 @@ class RoleSelectionPage extends ConsumerWidget {
               ),
               const SizedBox(height: 32),
               Text(
-                'How will you use\nLagos Pulse?',
+                'How will you use\nVyba?',
                 style: GoogleFonts.epilogue(
                   fontSize: 32,
                   fontWeight: FontWeight.w800,

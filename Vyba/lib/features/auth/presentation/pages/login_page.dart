@@ -13,7 +13,7 @@ import 'package:flutter_templates/features/auth/presentation/providers/auth_stat
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// Phone-based login page with Lagos Pulse branding.
+/// Phone-based login page with Vyba branding.
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
 
@@ -41,15 +41,15 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   void _onGoogleLogin() {
     ref.read(authNotifierProvider.notifier).login(
-          email: 'google@oauth.com',
-          password: 'google_oauth',
+          email: 'test@gmail.com',
+          password: 'passworD@123',
         );
   }
 
   void _onAppleLogin() {
     ref.read(authNotifierProvider.notifier).login(
-          email: 'apple@oauth.com',
-          password: 'apple_oauth',
+          email: 'test@gmail.com',
+          password: 'passworD@123',
         );
   }
 
@@ -63,7 +63,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         context.showSnackBar(state.message, isError: true);
       }
       if (state is AuthAuthenticated) {
-        context.go('/home');
+        // Router redirect handles role-based navigation automatically.
+        context.go('/');
       }
     });
 
@@ -103,9 +104,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 48),
-                  // NP. Logo
+                  // Vyba Logo
                   Text(
-                    'NP.',
+                    'Vyba',
                     style: GoogleFonts.epilogue(
                       fontSize: 20,
                       fontWeight: FontWeight.w800,
@@ -118,7 +119,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     TextSpan(
                       children: [
                         TextSpan(
-                          text: 'Join the ',
+                          text: 'Welcome to ',
                           style: GoogleFonts.epilogue(
                             fontSize: 40,
                             fontWeight: FontWeight.w800,
@@ -127,7 +128,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           ),
                         ),
                         TextSpan(
-                          text: 'Pulse',
+                          text: 'Vyba',
                           style: GoogleFonts.epilogue(
                             fontSize: 40,
                             fontWeight: FontWeight.w800,

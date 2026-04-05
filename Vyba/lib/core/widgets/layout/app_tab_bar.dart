@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templates/core/theme/app_colors.dart';
 import 'package:flutter_templates/core/theme/app_radius.dart';
 
-/// Custom pill-indicator tab bar matching Lagos Pulse design.
+/// Custom pill-indicator tab bar matching Vyba design.
 class AppTabBar extends StatelessWidget {
   const AppTabBar({
     super.key,

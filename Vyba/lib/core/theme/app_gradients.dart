@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templates/core/theme/app_colors.dart';
 
-/// Gradient tokens for the Lagos Pulse design system.
+/// Gradient tokens for the Vyba design system.
 ///
 /// All primary CTAs use gradient fills. Image cards use scrim overlays.
 /// Floating headers use glassmorphic gradients.

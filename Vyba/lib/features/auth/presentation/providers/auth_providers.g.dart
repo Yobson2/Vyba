@@ -7,7 +7,7 @@ part of 'auth_providers.dart';
 // **************************************************************************
 
 String _$authRemoteDataSourceHash() =>
-    r'8d1700ef3c133ff115d593c3a75331cc14959f56';
+    r'df9698b6aefb315582872c8ab354d3cd1fdd60b9';
 
 /// Provides the [AuthRemoteDataSource].
 ///
@@ -88,6 +88,28 @@ final loginUseCaseProvider = AutoDisposeProvider<LoginUseCase>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef LoginUseCaseRef = AutoDisposeProviderRef<LoginUseCase>;
+String _$loginWithPhoneUseCaseHash() =>
+    r'5811ecc6288d3e98a0c8e15d50d79e209fb6aff4';
+
+/// Provides the [LoginWithPhoneUseCase].
+///
+/// Copied from [loginWithPhoneUseCase].
+@ProviderFor(loginWithPhoneUseCase)
+final loginWithPhoneUseCaseProvider =
+    AutoDisposeProvider<LoginWithPhoneUseCase>.internal(
+  loginWithPhoneUseCase,
+  name: r'loginWithPhoneUseCaseProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$loginWithPhoneUseCaseHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef LoginWithPhoneUseCaseRef
+    = AutoDisposeProviderRef<LoginWithPhoneUseCase>;
 String _$registerUseCaseHash() => r'0f1f842bd5399c007cd5e8089bff9c56ec0c7618';
 
 /// Provides the [RegisterUseCase].
