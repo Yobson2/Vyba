@@ -1,90 +1,116 @@
 import {
-  IconBrowserCheck,
-  IconChecklist,
+  IconBell,
+  IconBuilding,
+  IconCalendarEvent,
+  IconChartBar,
+  IconClipboardCheck,
+  IconHistory,
   IconLayoutDashboard,
-  IconNotification,
-  IconPackages,
-  IconPalette,
+  IconMessageCircle,
   IconSettings,
-  IconTool,
-  IconUserCog,
+  IconSpeakerphone,
   IconUsers,
 } from '@tabler/icons-react'
 import { Logo } from '@/components/logo'
 import { type SidebarData } from '../types'
+import { SETTINGS_NAV_ITEMS } from '@/features/settings/data/nav-items'
 
 export const sidebarData: SidebarData = {
   user: {
     name: 'Admin',
-    email: 'admin@example.com',
-    avatar: '/avatars/shadcn.jpg',
+    email: 'admin@vyba.app',
+    avatar: '/avatars/01.png',
   },
   teams: [
     {
-      name: 'React Admin',
+      name: 'Vyba Admin',
       logo: Logo,
-      plan: 'Admin Template',
+      plan: 'Lagos Pulse',
     },
   ],
   navGroups: [
     {
-      title: 'General',
+      title: 'Overview',
       items: [
         {
           title: 'Dashboard',
           url: '/dashboard',
           icon: IconLayoutDashboard,
         },
+      ],
+    },
+    {
+      title: 'Management',
+      items: [
         {
           title: 'Users',
           url: '/users',
           icon: IconUsers,
         },
         {
-          title: 'Tasks',
-          url: '/tasks',
-          icon: IconChecklist,
+          title: 'Venues',
+          icon: IconBuilding,
+          items: [
+            {
+              title: 'All Venues',
+              url: '/venues',
+              icon: IconBuilding,
+            },
+            {
+              title: 'Applications',
+              url: '/venues/applications',
+              icon: IconClipboardCheck,
+            },
+          ],
         },
         {
-          title: 'Apps',
-          url: '/apps',
-          icon: IconPackages,
+          title: 'Bookings',
+          url: '/bookings',
+          icon: IconCalendarEvent,
+        },
+        {
+          title: 'Reviews',
+          url: '/reviews',
+          icon: IconMessageCircle,
+        },
+        {
+          title: 'Promotions',
+          url: '/promotions',
+          icon: IconSpeakerphone,
+        },
+        {
+          title: 'Notifications',
+          url: '/notifications',
+          icon: IconBell,
         },
       ],
     },
     {
-      title: 'Other',
+      title: 'Insights',
+      items: [
+        {
+          title: 'Analytics',
+          url: '/analytics',
+          icon: IconChartBar,
+        },
+        {
+          title: 'Audit Log',
+          url: '/audit-log',
+          icon: IconHistory,
+        },
+      ],
+    },
+    {
+      title: 'Configuration',
       items: [
         {
           title: 'Settings',
           icon: IconSettings,
-          items: [
-            {
-              title: 'Profile',
-              url: '/settings',
-              icon: IconUserCog,
-            },
-            {
-              title: 'Account',
-              url: '/settings/account',
-              icon: IconTool,
-            },
-            {
-              title: 'Appearance',
-              url: '/settings/appearance',
-              icon: IconPalette,
-            },
-            {
-              title: 'Notifications',
-              url: '/settings/notifications',
-              icon: IconNotification,
-            },
-            {
-              title: 'Display',
-              url: '/settings/display',
-              icon: IconBrowserCheck,
-            },
-          ],
+          items: SETTINGS_NAV_ITEMS.map((item) => ({
+            title: item.title,
+            url: item.href as '/',
+            icon: item.icon,
+          })),
         },
       ],
     },

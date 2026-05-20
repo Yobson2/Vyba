@@ -39,7 +39,7 @@ export function ProfileDropdown() {
               {auth.user?.email ?? 'Admin'}
             </p>
             <p className='text-muted-foreground text-xs leading-none'>
-              admin@example.com
+              {auth.user?.email ?? 'admin@vyba.app'}
             </p>
           </div>
         </DropdownMenuLabel>
@@ -52,7 +52,7 @@ export function ProfileDropdown() {
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link to='/settings/account'>
+            <Link to='/settings/appearance'>
               Settings
               <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
             </Link>
