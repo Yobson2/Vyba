@@ -10,12 +10,12 @@ export default function ForgotPassword2() {
         <div className='absolute inset-0 bg-foreground' />
         <Link to='/' className='relative z-20 flex items-center text-lg font-medium'>
           <Logo className='mr-2 h-6 w-6' />
-          React Admin
+          Vyba Admin
         </Link>
 
         <div className='relative z-20 m-auto flex flex-col items-center gap-4'>
           <Logo className='h-16 w-16' />
-          <span className='text-3xl font-bold tracking-tight'>React Admin</span>
+          <span className='text-3xl font-bold tracking-tight'>Vyba Admin</span>
         </div>
 
         <div className='relative z-20 mt-auto'>
@@ -32,7 +32,7 @@ export default function ForgotPassword2() {
         <div className='mx-auto flex w-full flex-col justify-center space-y-2 sm:w-[350px]'>
           <Link to='/' className='mb-4 flex items-center gap-2 lg:hidden'>
             <Logo className='h-6 w-6' />
-            <span className='text-lg font-semibold'>React Admin</span>
+            <span className='text-lg font-semibold'>Vyba Admin</span>
           </Link>
           <div className='flex flex-col space-y-2 text-left'>
             <h1 className='text-2xl font-semibold tracking-tight'>

@@ -12,14 +12,14 @@ export default function AuthLayout({ children }: Props) {
             viewBox='0 0 24 24'
             fill='none'
             stroke='currentColor'
-            strokeWidth='2'
+            strokeWidth='2.5'
             strokeLinecap='round'
             strokeLinejoin='round'
             className='mr-2 h-6 w-6'
           >
-            <path d='M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3' />
+            <path d='M4 4 L12 20 L20 4' />
           </svg>
-          <h1 className='text-xl font-medium'>Shadcn Admin</h1>
+          <h1 className='text-xl font-medium'>Vyba Admin</h1>
         </div>
         {children}
       </div>

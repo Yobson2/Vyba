@@ -1,6 +1,6 @@
 {
-  "name": "react-admin-template",
-  "private": false,
+  "name": "vyba-dashboard-admin",
+  "private": true,
   "version": "1.0.0",
   "type": "module",
   "scripts": {

@@ -33,7 +33,11 @@ export const useAuthStore = create<AuthState>()((set) => {
       accessToken: initToken,
       setAccessToken: (accessToken) =>
         set((state) => {
-          Cookies.set(ACCESS_TOKEN, JSON.stringify(accessToken))
+          Cookies.set(ACCESS_TOKEN, JSON.stringify(accessToken), {
+            secure: true,
+            sameSite: 'strict',
+            expires: 7,
+          })
           return { ...state, auth: { ...state.auth, accessToken } }
         }),
       resetAccessToken: () =>

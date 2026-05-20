@@ -29,8 +29,20 @@ const formSchema = z
       .min(1, {
         message: 'Please enter your password',
       })
-      .min(7, {
-        message: 'Password must be at least 7 characters long',
+      .min(8, {
+        message: 'Password must be at least 8 characters long',
+      })
+      .regex(/[A-Z]/, {
+        message: 'Must contain at least one uppercase letter',
+      })
+      .regex(/[a-z]/, {
+        message: 'Must contain at least one lowercase letter',
+      })
+      .regex(/[0-9]/, {
+        message: 'Must contain at least one digit',
+      })
+      .regex(/[^A-Za-z0-9]/, {
+        message: 'Must contain at least one special character',
       }),
     confirmPassword: z.string(),
   })
@@ -51,11 +63,10 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
     },
   })
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
+  function onSubmit(_data: z.infer<typeof formSchema>) {
     setIsLoading(true)
-    // eslint-disable-next-line no-console
-    console.log(data)
 
+    // TODO: Replace with actual API call
     setTimeout(() => {
       setIsLoading(false)
     }, 3000)

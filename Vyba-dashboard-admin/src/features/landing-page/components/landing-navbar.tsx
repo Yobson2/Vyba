@@ -14,9 +14,6 @@ import {
 
 const navLinks = [
   { label: 'Features', href: '#features' },
-  { label: 'Testimonials', href: '#testimonials' },
-  { label: 'Pricing', href: '#pricing' },
-  { label: 'FAQ', href: '#faq' },
 ]
 
 export function LandingNavbar() {
@@ -58,7 +55,7 @@ export function LandingNavbar() {
             <Link to='/sign-in'>Sign In</Link>
           </Button>
           <Button size='sm' asChild className='hidden md:inline-flex'>
-            <Link to='/sign-up'>Get Started</Link>
+            <Link to='/sign-in'>Get Started</Link>
           </Button>
 
           {/* Mobile menu */}
@@ -93,7 +90,7 @@ export function LandingNavbar() {
                     <Link to='/sign-in' onClick={() => setOpen(false)}>Sign In</Link>
                   </Button>
                   <Button size='lg' className='w-full' asChild>
-                    <Link to='/sign-up' onClick={() => setOpen(false)}>Get Started</Link>
+                    <Link to='/sign-in' onClick={() => setOpen(false)}>Get Started</Link>
                   </Button>
                 </div>
               </nav>

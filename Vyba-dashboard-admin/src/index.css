@@ -4,136 +4,90 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ========================================
-   LIGHT MODE COLORS (Default Theme)
+   VYBA LAGOS PULSE — LIGHT MODE (Secondary)
+   Adapted from mobile: inverseSurface / light scaffold
    ======================================== */
 :root {
-  /* ========================================
-     BORDER RADIUS SYSTEM
-     Use: rounded-sm, rounded-md, rounded-lg, rounded-xl, rounded-2xl
-     ======================================== */
-  --radius: 0.625rem;                /* Base radius (10px) */
+  /* Border Radius — 12px base (mobile AppRadius.md) */
+  --radius: 0.75rem;
 
-  /* ========================================
-     BASE COLORS
-     Use: bg-background, text-foreground
-     ======================================== */
-  --background: oklch(1 0 0);        /* Main page background (white) */
-  --foreground: oklch(0.145 0 0);    /* Main text color (black) */
+  /* Base */
+  --background: #F8FAFC;
+  --foreground: #1D2F4C;
 
-  /* ========================================
-     CARD COLORS
-     Use: bg-card, text-card-foreground
-     ======================================== */
-  --card: oklch(1 0 0);              /* Card backgrounds */
-  --card-foreground: oklch(0.145 0 0); /* Text on cards */
+  /* Card */
+  --card: #FFFFFF;
+  --card-foreground: #1D2F4C;
 
-  /* ========================================
-     POPOVER COLORS
-     Use: bg-popover, text-popover-foreground
-     ======================================== */
-  --popover: oklch(1 0 0);           /* Dropdown/popup backgrounds */
-  --popover-foreground: oklch(0.145 0 0); /* Text in dropdowns */
+  /* Popover */
+  --popover: #FFFFFF;
+  --popover-foreground: #1D2F4C;
 
-  /* ========================================
-     PRIMARY COLORS
-     Use: bg-primary, text-primary-foreground, hover:bg-primary/90
-     ======================================== */
-  --primary: oklch(0.205 0 0);       /* Main action buttons (dark) */
-  --primary-foreground: oklch(0.985 0 0); /* Text on primary buttons (white) */
+  /* Primary — Electric Indigo (dimmed for light mode) */
+  --primary: #6C5CE7;
+  --primary-foreground: #FFFFFF;
 
-  /* ========================================
-     SECONDARY COLORS
-     Use: bg-secondary, text-secondary-foreground
-     ======================================== */
-  --secondary: oklch(0.97 0 0);      /* Secondary buttons (light gray) */
-  --secondary-foreground: oklch(0.205 0 0); /* Text on secondary buttons */
+  /* Secondary — Lagos Emerald container */
+  --secondary: #E1FFEC;
+  --secondary-foreground: #005A3C;
 
-  /* ========================================
-     MUTED COLORS
-     Use: bg-muted, text-muted-foreground
-     ======================================== */
-  --muted: oklch(0.97 0 0);          /* Subtle backgrounds (light gray) */
-  --muted-foreground: oklch(0.556 0 0); /* Disabled/less important text */
+  /* Tertiary — Golden Hour */
+  --tertiary: #E79400;
+  --tertiary-foreground: #FFFFFF;
 
-  /* ========================================
-     ACCENT COLORS
-     Use: bg-accent, text-accent-foreground, hover:bg-accent
-     ======================================== */
-  --accent: oklch(0.97 0 0);         /* Hover states for items */
-  --accent-foreground: oklch(0.205 0 0); /* Text on accent backgrounds */
+  /* Muted */
+  --muted: #F1F5F9;
+  --muted-foreground: #6B7280;
 
-  /* ========================================
-     STATUS COLORS
-     Use: bg-destructive, bg-success, bg-warning, bg-info
-     ======================================== */
-  --destructive: oklch(0.577 0.245 27.325); /* Error/delete actions (red) */
-  --destructive-foreground: oklch(0.985 0 0); /* Text on destructive */
+  /* Accent */
+  --accent: #F1F5F9;
+  --accent-foreground: #1D2F4C;
 
-  --success: oklch(0.65 0.19 150);   /* Success states (green) */
-  --success-foreground: oklch(0.985 0 0); /* Text on success */
+  /* Status */
+  --destructive: #DC2626;
+  --destructive-foreground: #FFFFFF;
 
-  --warning: oklch(0.75 0.15 85);    /* Warning states (yellow/amber) */
-  --warning-foreground: oklch(0.145 0 0); /* Text on warning */
+  --success: #16A34A;
+  --success-foreground: #FFFFFF;
 
-  --info: oklch(0.6 0.15 250);       /* Info states (blue) */
-  --info-foreground: oklch(0.985 0 0); /* Text on info */
+  --warning: #D97706;
+  --warning-foreground: #FFFFFF;
 
-  /* ========================================
-     BORDER & INPUT COLORS
-     Use: border-border, bg-input, ring-ring
-     ======================================== */
-  --border: oklch(0.922 0 0);        /* All borders (light gray) */
-  --input: oklch(0.922 0 0);         /* Input field borders */
-  --ring: oklch(0.708 0 0);          /* Focus ring color */
+  --info: #2563EB;
+  --info-foreground: #FFFFFF;
 
-  /* ========================================
-     CHART COLORS
-     Use in Recharts: fill="hsl(var(--chart-1))"
-     ======================================== */
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
+  /* Border & Input */
+  --border: #E2E8F0;
+  --input: #E2E8F0;
+  --ring: #6C5CE7;
 
-  /* ========================================
-     SIDEBAR COLORS
-     Use: bg-sidebar, text-sidebar-foreground
-     ======================================== */
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  /* Chart — brand palette (light mode variants) */
+  --chart-1: #6C5CE7;
+  --chart-2: #16A34A;
+  --chart-3: #D97706;
+  --chart-4: #2563EB;
+  --chart-5: #DC2626;
 
-  /* ========================================
-     BRAND COLORS - Customize These!
-     Use: bg-brand, text-brand-foreground, bg-brand-secondary
-     ======================================== */
-  --brand: oklch(0.65 0.19 30);      /* Orange accent */
-  --brand-foreground: oklch(0.985 0 0); /* White text */
-  --brand-secondary: oklch(0.55 0.20 353); /* Red accent */
-  --brand-secondary-foreground: oklch(0.985 0 0);
-  --brand-dark: oklch(0.35 0.10 212); /* Deep blue */
-  --brand-dark-foreground: oklch(0.985 0 0);
+  /* Sidebar */
+  --sidebar: #FAF8FF;
+  --sidebar-foreground: #1D2F4C;
+  --sidebar-primary: #6C5CE7;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #F1F5F9;
+  --sidebar-accent-foreground: #1D2F4C;
+  --sidebar-border: #E2E8F0;
+  --sidebar-ring: #6C5CE7;
 
-  /* ========================================
-     TYPOGRAPHY SYSTEM
-     Use: text-xs, text-sm, text-base, text-lg, etc.
-     Already handled by Tailwind, documented here for reference
-     ======================================== */
-  --font-size-xs: 0.75rem;           /* 12px */
-  --font-size-sm: 0.875rem;          /* 14px */
-  --font-size-base: 1rem;            /* 16px */
-  --font-size-lg: 1.125rem;          /* 18px */
-  --font-size-xl: 1.25rem;           /* 20px */
-  --font-size-2xl: 1.5rem;           /* 24px */
-  --font-size-3xl: 1.875rem;         /* 30px */
-  --font-size-4xl: 2.25rem;          /* 36px */
-  --font-size-5xl: 3rem;             /* 48px */
+  /* Typography (reference — Tailwind handles sizing) */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: 3rem;
 
   --line-height-tight: 1.25;
   --line-height-normal: 1.5;
@@ -144,52 +98,39 @@
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
-  /* ========================================
-     SPACING SYSTEM (8px base grid)
-     Use: p-1, m-2, gap-4, etc. (handled by Tailwind)
-     Documented for reference
-     ======================================== */
-  --spacing-0: 0;                    /* 0px */
-  --spacing-1: 0.25rem;              /* 4px */
-  --spacing-2: 0.5rem;               /* 8px */
-  --spacing-3: 0.75rem;              /* 12px */
-  --spacing-4: 1rem;                 /* 16px */
-  --spacing-5: 1.25rem;              /* 20px */
-  --spacing-6: 1.5rem;               /* 24px */
-  --spacing-8: 2rem;                 /* 32px */
-  --spacing-10: 2.5rem;              /* 40px */
-  --spacing-12: 3rem;                /* 48px */
-  --spacing-16: 4rem;                /* 64px */
+  /* Spacing (4px grid, reference) */
+  --spacing-0: 0;
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-10: 2.5rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
 
-  /* ========================================
-     SHADOW/ELEVATION SYSTEM
-     Use: shadow-sm, shadow-md, shadow-lg, etc.
-     ======================================== */
-  --shadow-sm: 0 1px 2px 0 oklch(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px oklch(0 0 0 / 0.1), 0 2px 4px -2px oklch(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px oklch(0 0 0 / 0.1), 0 4px 6px -4px oklch(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px oklch(0 0 0 / 0.1), 0 8px 10px -6px oklch(0 0 0 / 0.1);
-  --shadow-2xl: 0 25px 50px -12px oklch(0 0 0 / 0.25);
-  --shadow-inner: inset 0 2px 4px 0 oklch(0 0 0 / 0.05);
+  /* Shadows — tinted with foreground instead of pure black */
+  --shadow-sm: 0 1px 2px 0 rgb(29 47 76 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(29 47 76 / 0.08), 0 2px 4px -2px rgb(29 47 76 / 0.06);
+  --shadow-lg: 0 10px 15px -3px rgb(29 47 76 / 0.08), 0 4px 6px -4px rgb(29 47 76 / 0.06);
+  --shadow-xl: 0 20px 25px -5px rgb(29 47 76 / 0.1), 0 8px 10px -6px rgb(29 47 76 / 0.08);
+  --shadow-2xl: 0 25px 50px -12px rgb(29 47 76 / 0.2);
+  --shadow-inner: inset 0 2px 4px 0 rgb(29 47 76 / 0.05);
 
-  /* ========================================
-     ANIMATION SYSTEM
-     Use with Tailwind: transition, duration-normal, ease-out
-     ======================================== */
-  --duration-fast: 150ms;            /* Quick interactions */
-  --duration-normal: 300ms;          /* Standard transitions */
-  --duration-slow: 500ms;            /* Smooth animations */
-  --duration-slower: 700ms;          /* Page transitions */
+  /* Animation */
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --duration-slower: 700ms;
 
   --ease-in: cubic-bezier(0.4, 0, 1, 1);
   --ease-out: cubic-bezier(0, 0, 0.2, 1);
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
-  /* ========================================
-     OPACITY SCALE
-     Use: bg-black/10, text-white/50, etc.
-     ======================================== */
+  /* Opacity */
   --opacity-0: 0;
   --opacity-5: 0.05;
   --opacity-10: 0.1;
@@ -203,10 +144,7 @@
   --opacity-90: 0.9;
   --opacity-100: 1;
 
-  /* ========================================
-     Z-INDEX SCALE
-     Use for layering components consistently
-     ======================================== */
+  /* Z-Index */
   --z-dropdown: 1000;
   --z-sticky: 1020;
   --z-fixed: 1030;
@@ -214,133 +152,106 @@
   --z-modal: 1050;
   --z-popover: 1060;
   --z-tooltip: 1070;
-
 }
 
 /* ========================================
-   DARK MODE COLORS
-   Automatically applied when <html class="dark">
+   VYBA LAGOS PULSE — DARK MODE (Primary)
+   Exact tokens from mobile AppColors
    ======================================== */
 .dark {
-  /* ========================================
-     BASE COLORS
-     ======================================== */
-  --background: oklch(0.145 0 0);    /* Dark background */
-  --foreground: oklch(0.985 0 0);    /* Light text */
+  /* Base — deep navy from mobile surface */
+  --background: #060E20;
+  --foreground: #DEE5FF;
 
-  /* ========================================
-     CARD COLORS
-     ======================================== */
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
+  /* Card — surfaceContainerHigh */
+  --card: #172742;
+  --card-foreground: #DEE5FF;
 
-  /* ========================================
-     POPOVER COLORS
-     ======================================== */
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
+  /* Popover — surfaceContainerHighest */
+  --popover: #1D2F4C;
+  --popover-foreground: #DEE5FF;
 
-  /* ========================================
-     PRIMARY COLORS
-     ======================================== */
-  --primary: oklch(0.922 0 0);       /* Light primary in dark mode */
-  --primary-foreground: oklch(0.205 0 0); /* Dark text on light button */
+  /* Primary — Electric Indigo (full brightness in dark) */
+  --primary: #B0A3FF;
+  --primary-foreground: #000000;
 
-  /* ========================================
-     SECONDARY & MUTED COLORS
-     ======================================== */
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
+  /* Secondary — Lagos Emerald */
+  --secondary: #69F6B8;
+  --secondary-foreground: #005A3C;
 
-  /* ========================================
-     ACCENT COLORS
-     ======================================== */
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  /* Tertiary — Golden Hour */
+  --tertiary: #FFB148;
+  --tertiary-foreground: #573500;
 
-  /* ========================================
-     STATUS COLORS
-     ======================================== */
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.985 0 0);
+  /* Muted — surfaceContainer */
+  --muted: #111F3A;
+  --muted-foreground: #B0B7D0;
 
-  --success: oklch(0.70 0.20 150);   /* Brighter green for dark mode */
-  --success-foreground: oklch(0.145 0 0);
+  /* Accent — surfaceContainerHigh */
+  --accent: #172742;
+  --accent-foreground: #DEE5FF;
 
-  --warning: oklch(0.80 0.16 85);    /* Brighter yellow for dark mode */
-  --warning-foreground: oklch(0.145 0 0);
+  /* Status */
+  --destructive: #FF6E84;
+  --destructive-foreground: #FFFFFF;
 
-  --info: oklch(0.65 0.16 250);      /* Brighter blue for dark mode */
-  --info-foreground: oklch(0.985 0 0);
+  --success: #69F6B8;
+  --success-foreground: #005A3C;
 
-  /* ========================================
-     BORDERS & INPUTS
-     ======================================== */
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  --warning: #FFB148;
+  --warning-foreground: #573500;
 
-  /* ========================================
-     CHART COLORS FOR DARK MODE
-     ======================================== */
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
+  --info: #38BDF8;
+  --info-foreground: #FFFFFF;
 
-  /* ========================================
-     SIDEBAR IN DARK MODE
-     ======================================== */
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  /* Border — outlineVariant */
+  --border: #40485D;
+  --input: #1D2F4C;
+  --ring: #B0A3FF;
 
-  /* ========================================
-     BRAND COLORS ADJUSTED FOR DARK MODE
-     ======================================== */
-  --brand: oklch(0.70 0.20 30);      /* Brighter orange */
-  --brand-foreground: oklch(0.145 0 0);
-  --brand-secondary: oklch(0.60 0.22 353); /* Brighter red */
-  --brand-secondary-foreground: oklch(0.985 0 0);
-  --brand-dark: oklch(0.60 0.12 212); /* Lighter blue (naming paradox) */
-  --brand-dark-foreground: oklch(0.145 0 0);
+  /* Chart — brand palette (full brightness) */
+  --chart-1: #B0A3FF;
+  --chart-2: #69F6B8;
+  --chart-3: #FFB148;
+  --chart-4: #38BDF8;
+  --chart-5: #FF2D78;
 
-  /* ========================================
-     SHADOWS ADJUSTED FOR DARK MODE
-     ======================================== */
-  --shadow-sm: 0 1px 2px 0 oklch(0 0 0 / 0.3);
-  --shadow-md: 0 4px 6px -1px oklch(0 0 0 / 0.4), 0 2px 4px -2px oklch(0 0 0 / 0.3);
-  --shadow-lg: 0 10px 15px -3px oklch(0 0 0 / 0.5), 0 4px 6px -4px oklch(0 0 0 / 0.4);
-  --shadow-xl: 0 20px 25px -5px oklch(0 0 0 / 0.6), 0 8px 10px -6px oklch(0 0 0 / 0.5);
-  --shadow-2xl: 0 25px 50px -12px oklch(0 0 0 / 0.7);
-  --shadow-inner: inset 0 2px 4px 0 oklch(0 0 0 / 0.3);
+  /* Sidebar — surfaceContainer */
+  --sidebar: #111F3A;
+  --sidebar-foreground: #DEE5FF;
+  --sidebar-primary: #B0A3FF;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: #172742;
+  --sidebar-accent-foreground: #DEE5FF;
+  --sidebar-border: #40485D;
+  --sidebar-ring: #B0A3FF;
 
+  /* Shadows — tinted with onSurface (#DEE5FF) for brand feel */
+  --shadow-sm: 0 1px 2px 0 rgb(222 229 255 / 0.04), 0 2px 8px 0 rgb(222 229 255 / 0.06);
+  --shadow-md: 0 4px 8px -1px rgb(222 229 255 / 0.06), 0 8px 16px -2px rgb(222 229 255 / 0.08);
+  --shadow-lg: 0 8px 16px -3px rgb(222 229 255 / 0.08), 0 16px 32px -4px rgb(222 229 255 / 0.12);
+  --shadow-xl: 0 20px 25px -5px rgb(222 229 255 / 0.1), 0 8px 10px -6px rgb(222 229 255 / 0.08);
+  --shadow-2xl: 0 25px 50px -12px rgb(222 229 255 / 0.2);
+  --shadow-inner: inset 0 2px 4px 0 rgb(222 229 255 / 0.06);
 }
 
 /* ========================================
    TAILWIND V4 THEME CONFIGURATION
-   Do not modify - used internally by Tailwind
    ======================================== */
 @theme inline {
-  /* Font families - Use: font-inter, font-manrope */
-  --font-inter: 'Inter', 'sans-serif';
-  --font-manrope: 'Manrope', 'sans-serif';
+  /* Font families — matching mobile: Epilogue (headings), Inter (body), Space Mono (accents) */
+  --font-heading: 'Epilogue', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'Space Mono', monospace;
 
-  /* Dynamic radius values */
+  /* Dynamic radius — 12px base (mobile AppRadius.md) */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 12px);
 
-  /* Color mappings for Tailwind */
+  /* Color mappings for Tailwind utilities */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -363,6 +274,8 @@
   --color-warning-foreground: var(--warning-foreground);
   --color-info: var(--info);
   --color-info-foreground: var(--info-foreground);
+  --color-tertiary: var(--tertiary);
+  --color-tertiary-foreground: var(--tertiary-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -379,55 +292,47 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --color-brand: var(--brand);
-  --color-brand-foreground: var(--brand-foreground);
-  --color-brand-secondary: var(--brand-secondary);
-  --color-brand-secondary-foreground: var(--brand-secondary-foreground);
-  --color-brand-dark: var(--brand-dark);
-  --color-brand-dark-foreground: var(--brand-dark-foreground);
 }
 
 /* ========================================
    GLOBAL BASE STYLES
    ======================================== */
 @layer base {
-  /* Universal styles - borders, focus rings, scrollbars */
   * {
     @apply border-border outline-ring/50;
     scrollbar-width: thin;
     scrollbar-color: var(--border) transparent;
   }
 
-  /* Prevent horizontal scroll */
   html {
     @apply overflow-x-hidden;
   }
 
-  /* Main body setup - uses bg-background and text-foreground */
   body {
-    @apply bg-background text-foreground min-h-svh w-full;
+    @apply bg-background text-foreground min-h-svh w-full font-body;
   }
 
-  /* All buttons get pointer cursor when enabled */
+  /* Epilogue for all headings */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+
   button:not(:disabled),
   [role='button']:not(:disabled) {
     cursor: pointer;
   }
 
-  /* Disabled state styling for better UX */
   button:disabled,
   [role='button']:disabled {
     opacity: var(--opacity-50);
     cursor: not-allowed;
   }
 
-  /* Focus visible styles for keyboard navigation accessibility */
   *:focus-visible {
     outline: 2px solid var(--ring);
     outline-offset: 2px;
   }
 
-  /* Mobile fix: prevent zoom on input focus (iOS Safari) */
   @media screen and (max-width: 767px) {
     input,
     select,
@@ -439,33 +344,37 @@
 
 /* ========================================
    CUSTOM UTILITIES
-   Use these in your JSX with className="..."
    ======================================== */
 
-/* Container utility - Use: className="container" */
 @utility container {
   margin-inline: auto;
   padding-inline: 2rem;
 }
 
-/* Hide scrollbars - Use: className="no-scrollbar" */
 @utility no-scrollbar {
   &::-webkit-scrollbar {
-    display: none;  /* Chrome, Safari, Opera */
+    display: none;
   }
-  -ms-overflow-style: none;   /* IE, Edge */
-  scrollbar-width: none;       /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-/* Faded bottom effect - Use: className="faded-bottom" */
-/* Creates white/black gradient fade at bottom of container */
 @utility faded-bottom {
-  @apply after:pointer-events-none after:absolute after:bottom-0 after:left-0 after:hidden after:h-32 after:w-full after:bg-[linear-gradient(180deg,_transparent_10%,_white_70%)] md:after:block dark:after:bg-[linear-gradient(180deg,_transparent_10%,_black_70%)];
+  @apply after:pointer-events-none after:absolute after:bottom-0 after:left-0 after:hidden after:h-32 after:w-full md:after:block;
+  &::after {
+    background: linear-gradient(180deg, transparent 10%, var(--background) 70%);
+  }
+}
+
+/* Utility for Space Mono KPI numbers */
+@utility font-kpi {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 /* ========================================
    RADIX UI ANIMATIONS
-   For Collapsible components - applied automatically
    ======================================== */
 .CollapsibleContent {
   overflow: hidden;
@@ -486,5 +395,3 @@
   from { height: var(--radix-collapsible-content-height); }
   to { height: 0; }
 }
-
-

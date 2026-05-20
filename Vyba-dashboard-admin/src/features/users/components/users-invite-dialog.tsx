@@ -2,7 +2,7 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { IconMailPlus, IconSend } from '@tabler/icons-react'
-import { showSubmittedData } from '@/utils/show-submitted-data'
+import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -24,7 +24,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { SelectDropdown } from '@/components/select-dropdown'
-import { userTypes } from '../data/data'
+import { roleTypes } from '../data/data'
 
 const formSchema = z.object({
   email: z
@@ -49,7 +49,7 @@ export function UsersInviteDialog({ open, onOpenChange }: Props) {
 
   const onSubmit = (values: UserInviteForm) => {
     form.reset()
-    showSubmittedData(values)
+    toast.success('Invitation sent', { description: values.email })
     onOpenChange(false)
   }
 
@@ -104,7 +104,7 @@ export function UsersInviteDialog({ open, onOpenChange }: Props) {
                     defaultValue={field.value}
                     onValueChange={field.onChange}
                     placeholder='Select a role'
-                    items={userTypes.map(({ label, value }) => ({
+                    items={roleTypes.map(({ label, value }) => ({
                       label,
                       value,
                     }))}

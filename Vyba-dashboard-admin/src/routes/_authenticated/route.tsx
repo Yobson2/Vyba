@@ -1,6 +1,8 @@
 import Cookies from 'js-cookie'
-import { createFileRoute, Outlet } from '@tanstack/react-router'
+import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
 import { cn } from '@/lib/utils'
+import { isTokenExpired } from '@/lib/jwt-utils'
+import { useAuthStore } from '@/stores/authStore'
 import { SearchProvider } from '@/context/search-context'
 import { SidebarProvider } from '@/components/ui/sidebar'
 import { AppSidebar } from '@/components/layout/app-sidebar'
@@ -8,6 +10,16 @@ import { PageTransition } from '@/components/motion/page-transition'
 import SkipToMain from '@/components/skip-to-main'
 
 export const Route = createFileRoute('/_authenticated')({
+  beforeLoad: ({ location }) => {
+    const { accessToken } = useAuthStore.getState().auth
+    if (!accessToken || isTokenExpired(accessToken)) {
+      useAuthStore.getState().auth.reset()
+      throw redirect({
+        to: '/sign-in',
+        search: { redirect: location.href },
+      })
+    }
+  },
   component: RouteComponent,
 })
 
