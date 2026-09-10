@@ -49,10 +49,7 @@ export const buildDbConfig = (config: ConfigService): TypeOrmModuleOptions => {
     extra: {
       max: config.get<number>('DB_POOL_SIZE', useManagedDB ? 5 : 10),
       idleTimeoutMillis: 30000,
-      connectionTimeoutMillis: config.get<number>(
-        'DB_CONNECT_TIMEOUT',
-        10000,
-      ),
+      connectionTimeoutMillis: config.get<number>('DB_CONNECT_TIMEOUT', 10000),
       keepAlive: true,
       keepAliveInitialDelayMillis: 10000,
       ...(useManagedDB && sslOptions ? { ssl: sslOptions } : {}),

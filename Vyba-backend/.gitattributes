@@ -1,0 +1,9 @@
+# The backend sources are stored and linted with LF endings. Pin that so a
+# contributor with core.autocrlf=true does not see the whole tree as modified
+# after running `yarn lint` / prettier.
+* text=auto eol=lf
+*.png binary
+*.ico binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
