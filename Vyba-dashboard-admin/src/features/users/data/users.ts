@@ -37,7 +37,7 @@ export const users = Array.from({ length: 20 }, (_, i) => ({
   avatarUrl: faker.helpers.maybe(() => faker.image.avatar(), {
     probability: 0.6,
   }) ?? null,
-  role: faker.helpers.arrayElement(['client', 'venue_owner'] as const),
+  role: faker.helpers.arrayElement(['CLIENT', 'VENUE_OWNER'] as const),
   status: faker.helpers.arrayElement([
     'active',
     'active',
@@ -47,7 +47,14 @@ export const users = Array.from({ length: 20 }, (_, i) => ({
     'banned',
   ] as const),
   city: faker.helpers.arrayElement(nigerianCities),
-  bookingCount: faker.number.int({ min: 0, max: 48 }),
+  acquisitionSource: faker.helpers.arrayElement([
+    'qr',
+    'qr',
+    'web',
+    'referral',
+    'organic',
+    'campaign',
+  ] as const),
   createdAt: faker.date.past({ years: 1 }),
   updatedAt: faker.date.recent({ days: 30 }),
 }))

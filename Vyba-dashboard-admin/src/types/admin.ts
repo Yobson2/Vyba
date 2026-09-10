@@ -1,22 +1,7 @@
-export type AdminRole =
-  | 'super_admin'
-  | 'admin'
-  | 'manager'
-  | 'support'
-  | 'viewer'
-
-export const ADMIN_ROLES: readonly AdminRole[] = [
-  'super_admin',
-  'admin',
-  'manager',
-  'support',
-  'viewer',
-] as const
-
-export const ROLE_LABELS: Record<AdminRole, string> = {
-  super_admin: 'Super Admin',
-  admin: 'Admin',
-  manager: 'Manager',
-  support: 'Support',
-  viewer: 'Viewer',
-}
+/**
+ * Dashboard-access accounts are Vyba team members. During the validation phase
+ * the only role the dashboard issues is `ADMIN`; the shared role vocabulary lives
+ * in `./roles` and is mirrored from the backend.
+ */
+export type { UserRole as AdminRole } from './roles'
+export { USER_ROLES as ADMIN_ROLES, ROLE_LABELS } from './roles'

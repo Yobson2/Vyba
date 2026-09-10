@@ -1,20 +1,23 @@
 import {
-  IconBell,
   IconBuilding,
-  IconCalendarEvent,
+  IconCameraCheck,
   IconChartBar,
-  IconClipboardCheck,
-  IconHistory,
   IconLayoutDashboard,
-  IconMessageCircle,
+  IconPencil,
   IconSettings,
   IconSpeakerphone,
   IconUsers,
 } from '@tabler/icons-react'
 import { Logo } from '@/components/logo'
-import { type SidebarData } from '../types'
 import { SETTINGS_NAV_ITEMS } from '@/features/settings/data/nav-items'
+import { type SidebarData } from '../types'
 
+/**
+ * The dashboard is the Vyba team's operational cockpit for the validation phase.
+ * Navigation is organised around the operational surfaces (see
+ * `Vyba-dashboard-admin/CONTEXT.md`). Surfaces that aren't built yet point at a
+ * "coming soon" placeholder page.
+ */
 export const sidebarData: SidebarData = {
   user: {
     name: 'Admin',
@@ -30,78 +33,57 @@ export const sidebarData: SidebarData = {
   ],
   navGroups: [
     {
-      title: 'Overview',
+      title: 'Provisioning',
       items: [
         {
-          title: 'Dashboard',
-          url: '/dashboard',
-          icon: IconLayoutDashboard,
+          title: 'Venues & owners',
+          url: '/venues',
+          icon: IconBuilding,
         },
-      ],
-    },
-    {
-      title: 'Management',
-      items: [
         {
           title: 'Users',
           url: '/users',
           icon: IconUsers,
         },
+      ],
+    },
+    {
+      title: 'Content & curation',
+      items: [
         {
-          title: 'Venues',
-          icon: IconBuilding,
-          items: [
-            {
-              title: 'All Venues',
-              url: '/venues',
-              icon: IconBuilding,
-            },
-            {
-              title: 'Applications',
-              url: '/venues/applications',
-              icon: IconClipboardCheck,
-            },
-          ],
+          title: 'Editorial composer',
+          url: '/editorial',
+          icon: IconPencil,
         },
         {
-          title: 'Bookings',
-          url: '/bookings',
-          icon: IconCalendarEvent,
-        },
-        {
-          title: 'Reviews',
-          url: '/reviews',
-          icon: IconMessageCircle,
-        },
-        {
-          title: 'Promotions',
+          title: 'Assist mode',
           url: '/promotions',
           icon: IconSpeakerphone,
         },
         {
-          title: 'Notifications',
-          url: '/notifications',
-          icon: IconBell,
+          title: 'Photo curation',
+          url: '/curation',
+          icon: IconCameraCheck,
         },
       ],
     },
     {
-      title: 'Insights',
+      title: 'Monitoring & metrics',
       items: [
         {
-          title: 'Analytics',
+          title: 'VenueNight monitor',
+          url: '/dashboard',
+          icon: IconLayoutDashboard,
+        },
+        {
+          title: 'Validation metrics',
           url: '/analytics',
           icon: IconChartBar,
         },
-        {
-          title: 'Audit Log',
-          url: '/audit-log',
-          icon: IconHistory,
-        },
       ],
     },
     {
-      title: 'Configuration',
+      title: 'Settings',
       items: [
         {
           title: 'Settings',

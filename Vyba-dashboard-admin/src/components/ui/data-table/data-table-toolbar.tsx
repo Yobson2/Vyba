@@ -1,0 +1,52 @@
+import { type ReactNode } from 'react'
+import { Cross2Icon } from '@radix-ui/react-icons'
+import { type Table } from '@tanstack/react-table'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { DataTableViewOptions } from './data-table-view-options'
+
+interface DataTableToolbarProps<TData> {
+  table: Table<TData>
+  /** Column id the search box filters on. Omit to hide the search box. */
+  searchColumn?: string
+  searchPlaceholder?: string
+  /** Faceted filters and other controls rendered next to the search box. */
+  children?: ReactNode
+}
+
+export function DataTableToolbar<TData>({
+  table,
+  searchColumn,
+  searchPlaceholder = 'Search...',
+  children,
+}: DataTableToolbarProps<TData>) {
+  const isFiltered = table.getState().columnFilters.length > 0
+  const column = searchColumn ? table.getColumn(searchColumn) : undefined
+
+  return (
+    <div className='flex items-center justify-between'>
+      <div className='flex flex-1 flex-col-reverse items-start gap-y-2 sm:flex-row sm:items-center sm:space-x-2'>
+        {column && (
+          <Input
+            placeholder={searchPlaceholder}
+            value={(column.getFilterValue() as string) ?? ''}
+            onChange={(event) => column.setFilterValue(event.target.value)}
+            className='h-8 w-[150px] lg:w-[250px]'
+          />
+        )}
+        <div className='flex gap-x-2'>{children}</div>
+        {isFiltered && (
+          <Button
+            variant='ghost'
+            onClick={() => table.resetColumnFilters()}
+            className='h-8 px-2 lg:px-3'
+          >
+            Reset
+            <Cross2Icon className='ml-2 h-4 w-4' />
+          </Button>
+        )}
+      </div>
+      <DataTableViewOptions table={table} />
+    </div>
+  )
+}

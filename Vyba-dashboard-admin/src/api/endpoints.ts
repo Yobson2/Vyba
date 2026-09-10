@@ -9,8 +9,4 @@ export const ENDPOINTS = {
     LIST: '/users',
     DETAIL: (id: string) => `/users/${id}`,
   },
-  TASKS: {
-    LIST: '/tasks',
-    DETAIL: (id: string) => `/tasks/${id}`,
-  },
 } as const

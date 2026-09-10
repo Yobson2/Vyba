@@ -45,14 +45,6 @@ export default function ForgotPassword2() {
           </div>
           <ForgotPasswordForm />
           <p className='text-muted-foreground px-8 text-center text-sm'>
-            Don&apos;t have an account?{' '}
-            <Link
-              to='/sign-up'
-              className='hover:text-primary underline underline-offset-4'
-            >
-              Sign up
-            </Link>
-            .{' '}
             <Link
               to='/sign-in'
               className='hover:text-primary underline underline-offset-4'

@@ -9,11 +9,9 @@ const adminStatusSchema = z.union([
 export type AdminStatus = z.infer<typeof adminStatusSchema>
 
 const adminRoleSchema: z.ZodType<AdminRole> = z.union([
-  z.literal('super_admin'),
-  z.literal('admin'),
-  z.literal('manager'),
-  z.literal('support'),
-  z.literal('viewer'),
+  z.literal('ADMIN'),
+  z.literal('VENUE_OWNER'),
+  z.literal('CLIENT'),
 ])
 
 const adminSchema = z.object({

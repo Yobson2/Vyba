@@ -11,54 +11,39 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as PublicRouteImport } from './routes/_public/route'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated/route'
-import { Route as PublicIndexImport } from './routes/_public/index'
+import { Route as IndexImport } from './routes/index'
 import { Route as errors503Import } from './routes/(errors)/503'
 import { Route as errors500Import } from './routes/(errors)/500'
 import { Route as errors404Import } from './routes/(errors)/404'
 import { Route as errors403Import } from './routes/(errors)/403'
 import { Route as errors401Import } from './routes/(errors)/401'
-import { Route as authSignUpImport } from './routes/(auth)/sign-up'
 import { Route as authSignInImport } from './routes/(auth)/sign-in'
 import { Route as authOtpImport } from './routes/(auth)/otp'
 import { Route as authForgotPasswordImport } from './routes/(auth)/forgot-password'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings/route'
 import { Route as AuthenticatedVenuesIndexImport } from './routes/_authenticated/venues/index'
 import { Route as AuthenticatedUsersIndexImport } from './routes/_authenticated/users/index'
-import { Route as AuthenticatedTasksIndexImport } from './routes/_authenticated/tasks/index'
 import { Route as AuthenticatedSettingsIndexImport } from './routes/_authenticated/settings/index'
-import { Route as AuthenticatedReviewsIndexImport } from './routes/_authenticated/reviews/index'
 import { Route as AuthenticatedPromotionsIndexImport } from './routes/_authenticated/promotions/index'
-import { Route as AuthenticatedNotificationsIndexImport } from './routes/_authenticated/notifications/index'
+import { Route as AuthenticatedEditorialIndexImport } from './routes/_authenticated/editorial/index'
 import { Route as AuthenticatedDashboardIndexImport } from './routes/_authenticated/dashboard/index'
-import { Route as AuthenticatedBookingsIndexImport } from './routes/_authenticated/bookings/index'
-import { Route as AuthenticatedAuditLogIndexImport } from './routes/_authenticated/audit-log/index'
-import { Route as AuthenticatedAppsIndexImport } from './routes/_authenticated/apps/index'
+import { Route as AuthenticatedCurationIndexImport } from './routes/_authenticated/curation/index'
 import { Route as AuthenticatedAnalyticsIndexImport } from './routes/_authenticated/analytics/index'
-import { Route as AuthenticatedVenuesApplicationsImport } from './routes/_authenticated/venues/applications'
-import { Route as AuthenticatedSettingsSecurityImport } from './routes/_authenticated/settings/security'
-import { Route as AuthenticatedSettingsPlatformImport } from './routes/_authenticated/settings/platform'
-import { Route as AuthenticatedSettingsNotificationsImport } from './routes/_authenticated/settings/notifications'
 import { Route as AuthenticatedSettingsAppearanceImport } from './routes/_authenticated/settings/appearance'
 import { Route as AuthenticatedSettingsAdminsImport } from './routes/_authenticated/settings/admins'
 
 // Create/Update Routes
-
-const PublicRouteRoute = PublicRouteImport.update({
-  id: '/_public',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const AuthenticatedRouteRoute = AuthenticatedRouteImport.update({
   id: '/_authenticated',
   getParentRoute: () => rootRoute,
 } as any)
 
-const PublicIndexRoute = PublicIndexImport.update({
+const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => PublicRouteRoute,
+  getParentRoute: () => rootRoute,
 } as any)
 
 const errors503Route = errors503Import.update({
@@ -88,12 +73,6 @@ const errors403Route = errors403Import.update({
 const errors401Route = errors401Import.update({
   id: '/(errors)/401',
   path: '/401',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const authSignUpRoute = authSignUpImport.update({
-  id: '/(auth)/sign-up',
-  path: '/sign-up',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -135,12 +114,6 @@ const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexImport.update({
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
-const AuthenticatedTasksIndexRoute = AuthenticatedTasksIndexImport.update({
-  id: '/tasks/',
-  path: '/tasks/',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-
 const AuthenticatedSettingsIndexRoute = AuthenticatedSettingsIndexImport.update(
   {
     id: '/',
@@ -149,12 +122,6 @@ const AuthenticatedSettingsIndexRoute = AuthenticatedSettingsIndexImport.update(
   } as any,
 )
 
-const AuthenticatedReviewsIndexRoute = AuthenticatedReviewsIndexImport.update({
-  id: '/reviews/',
-  path: '/reviews/',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-
 const AuthenticatedPromotionsIndexRoute =
   AuthenticatedPromotionsIndexImport.update({
     id: '/promotions/',
@@ -162,10 +129,10 @@ const AuthenticatedPromotionsIndexRoute =
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
-const AuthenticatedNotificationsIndexRoute =
-  AuthenticatedNotificationsIndexImport.update({
-    id: '/notifications/',
-    path: '/notifications/',
+const AuthenticatedEditorialIndexRoute =
+  AuthenticatedEditorialIndexImport.update({
+    id: '/editorial/',
+    path: '/editorial/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
@@ -176,61 +143,19 @@ const AuthenticatedDashboardIndexRoute =
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
-const AuthenticatedBookingsIndexRoute = AuthenticatedBookingsIndexImport.update(
+const AuthenticatedCurationIndexRoute = AuthenticatedCurationIndexImport.update(
   {
-    id: '/bookings/',
-    path: '/bookings/',
+    id: '/curation/',
+    path: '/curation/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any,
 )
-
-const AuthenticatedAuditLogIndexRoute = AuthenticatedAuditLogIndexImport.update(
-  {
-    id: '/audit-log/',
-    path: '/audit-log/',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any,
-)
-
-const AuthenticatedAppsIndexRoute = AuthenticatedAppsIndexImport.update({
-  id: '/apps/',
-  path: '/apps/',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
 
 const AuthenticatedAnalyticsIndexRoute =
   AuthenticatedAnalyticsIndexImport.update({
     id: '/analytics/',
     path: '/analytics/',
     getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-
-const AuthenticatedVenuesApplicationsRoute =
-  AuthenticatedVenuesApplicationsImport.update({
-    id: '/venues/applications',
-    path: '/venues/applications',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-
-const AuthenticatedSettingsSecurityRoute =
-  AuthenticatedSettingsSecurityImport.update({
-    id: '/security',
-    path: '/security',
-    getParentRoute: () => AuthenticatedSettingsRouteRoute,
-  } as any)
-
-const AuthenticatedSettingsPlatformRoute =
-  AuthenticatedSettingsPlatformImport.update({
-    id: '/platform',
-    path: '/platform',
-    getParentRoute: () => AuthenticatedSettingsRouteRoute,
-  } as any)
-
-const AuthenticatedSettingsNotificationsRoute =
-  AuthenticatedSettingsNotificationsImport.update({
-    id: '/notifications',
-    path: '/notifications',
-    getParentRoute: () => AuthenticatedSettingsRouteRoute,
   } as any)
 
 const AuthenticatedSettingsAppearanceRoute =
@@ -251,18 +176,18 @@ const AuthenticatedSettingsAdminsRoute =
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
     '/_authenticated': {
       id: '/_authenticated'
       path: ''
       fullPath: ''
       preLoaderRoute: typeof AuthenticatedRouteImport
-      parentRoute: typeof rootRoute
-    }
-    '/_public': {
-      id: '/_public'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof PublicRouteImport
       parentRoute: typeof rootRoute
     }
     '/_authenticated/settings': {
@@ -291,13 +216,6 @@ declare module '@tanstack/react-router' {
       path: '/sign-in'
       fullPath: '/sign-in'
       preLoaderRoute: typeof authSignInImport
-      parentRoute: typeof rootRoute
-    }
-    '/(auth)/sign-up': {
-      id: '/(auth)/sign-up'
-      path: '/sign-up'
-      fullPath: '/sign-up'
-      preLoaderRoute: typeof authSignUpImport
       parentRoute: typeof rootRoute
     }
     '/(errors)/401': {
@@ -335,13 +253,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof errors503Import
       parentRoute: typeof rootRoute
     }
-    '/_public/': {
-      id: '/_public/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof PublicIndexImport
-      parentRoute: typeof PublicRouteImport
-    }
     '/_authenticated/settings/admins': {
       id: '/_authenticated/settings/admins'
       path: '/admins'
@@ -356,34 +267,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsAppearanceImport
       parentRoute: typeof AuthenticatedSettingsRouteImport
     }
-    '/_authenticated/settings/notifications': {
-      id: '/_authenticated/settings/notifications'
-      path: '/notifications'
-      fullPath: '/settings/notifications'
-      preLoaderRoute: typeof AuthenticatedSettingsNotificationsImport
-      parentRoute: typeof AuthenticatedSettingsRouteImport
-    }
-    '/_authenticated/settings/platform': {
-      id: '/_authenticated/settings/platform'
-      path: '/platform'
-      fullPath: '/settings/platform'
-      preLoaderRoute: typeof AuthenticatedSettingsPlatformImport
-      parentRoute: typeof AuthenticatedSettingsRouteImport
-    }
-    '/_authenticated/settings/security': {
-      id: '/_authenticated/settings/security'
-      path: '/security'
-      fullPath: '/settings/security'
-      preLoaderRoute: typeof AuthenticatedSettingsSecurityImport
-      parentRoute: typeof AuthenticatedSettingsRouteImport
-    }
-    '/_authenticated/venues/applications': {
-      id: '/_authenticated/venues/applications'
-      path: '/venues/applications'
-      fullPath: '/venues/applications'
-      preLoaderRoute: typeof AuthenticatedVenuesApplicationsImport
-      parentRoute: typeof AuthenticatedRouteImport
-    }
     '/_authenticated/analytics/': {
       id: '/_authenticated/analytics/'
       path: '/analytics'
@@ -391,25 +274,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAnalyticsIndexImport
       parentRoute: typeof AuthenticatedRouteImport
     }
-    '/_authenticated/apps/': {
-      id: '/_authenticated/apps/'
-      path: '/apps'
-      fullPath: '/apps'
-      preLoaderRoute: typeof AuthenticatedAppsIndexImport
-      parentRoute: typeof AuthenticatedRouteImport
-    }
-    '/_authenticated/audit-log/': {
-      id: '/_authenticated/audit-log/'
-      path: '/audit-log'
-      fullPath: '/audit-log'
-      preLoaderRoute: typeof AuthenticatedAuditLogIndexImport
-      parentRoute: typeof AuthenticatedRouteImport
-    }
-    '/_authenticated/bookings/': {
-      id: '/_authenticated/bookings/'
-      path: '/bookings'
-      fullPath: '/bookings'
-      preLoaderRoute: typeof AuthenticatedBookingsIndexImport
+    '/_authenticated/curation/': {
+      id: '/_authenticated/curation/'
+      path: '/curation'
+      fullPath: '/curation'
+      preLoaderRoute: typeof AuthenticatedCurationIndexImport
       parentRoute: typeof AuthenticatedRouteImport
     }
     '/_authenticated/dashboard/': {
@@ -419,11 +288,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardIndexImport
       parentRoute: typeof AuthenticatedRouteImport
     }
-    '/_authenticated/notifications/': {
-      id: '/_authenticated/notifications/'
-      path: '/notifications'
-      fullPath: '/notifications'
-      preLoaderRoute: typeof AuthenticatedNotificationsIndexImport
+    '/_authenticated/editorial/': {
+      id: '/_authenticated/editorial/'
+      path: '/editorial'
+      fullPath: '/editorial'
+      preLoaderRoute: typeof AuthenticatedEditorialIndexImport
       parentRoute: typeof AuthenticatedRouteImport
     }
     '/_authenticated/promotions/': {
@@ -433,26 +302,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPromotionsIndexImport
       parentRoute: typeof AuthenticatedRouteImport
     }
-    '/_authenticated/reviews/': {
-      id: '/_authenticated/reviews/'
-      path: '/reviews'
-      fullPath: '/reviews'
-      preLoaderRoute: typeof AuthenticatedReviewsIndexImport
-      parentRoute: typeof AuthenticatedRouteImport
-    }
     '/_authenticated/settings/': {
       id: '/_authenticated/settings/'
       path: '/'
       fullPath: '/settings/'
       preLoaderRoute: typeof AuthenticatedSettingsIndexImport
       parentRoute: typeof AuthenticatedSettingsRouteImport
-    }
-    '/_authenticated/tasks/': {
-      id: '/_authenticated/tasks/'
-      path: '/tasks'
-      fullPath: '/tasks'
-      preLoaderRoute: typeof AuthenticatedTasksIndexImport
-      parentRoute: typeof AuthenticatedRouteImport
     }
     '/_authenticated/users/': {
       id: '/_authenticated/users/'
@@ -476,9 +331,6 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedSettingsRouteRouteChildren {
   AuthenticatedSettingsAdminsRoute: typeof AuthenticatedSettingsAdminsRoute
   AuthenticatedSettingsAppearanceRoute: typeof AuthenticatedSettingsAppearanceRoute
-  AuthenticatedSettingsNotificationsRoute: typeof AuthenticatedSettingsNotificationsRoute
-  AuthenticatedSettingsPlatformRoute: typeof AuthenticatedSettingsPlatformRoute
-  AuthenticatedSettingsSecurityRoute: typeof AuthenticatedSettingsSecurityRoute
   AuthenticatedSettingsIndexRoute: typeof AuthenticatedSettingsIndexRoute
 }
 
@@ -486,10 +338,6 @@ const AuthenticatedSettingsRouteRouteChildren: AuthenticatedSettingsRouteRouteCh
   {
     AuthenticatedSettingsAdminsRoute: AuthenticatedSettingsAdminsRoute,
     AuthenticatedSettingsAppearanceRoute: AuthenticatedSettingsAppearanceRoute,
-    AuthenticatedSettingsNotificationsRoute:
-      AuthenticatedSettingsNotificationsRoute,
-    AuthenticatedSettingsPlatformRoute: AuthenticatedSettingsPlatformRoute,
-    AuthenticatedSettingsSecurityRoute: AuthenticatedSettingsSecurityRoute,
     AuthenticatedSettingsIndexRoute: AuthenticatedSettingsIndexRoute,
   }
 
@@ -500,32 +348,22 @@ const AuthenticatedSettingsRouteRouteWithChildren =
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedSettingsRouteRoute: typeof AuthenticatedSettingsRouteRouteWithChildren
-  AuthenticatedVenuesApplicationsRoute: typeof AuthenticatedVenuesApplicationsRoute
   AuthenticatedAnalyticsIndexRoute: typeof AuthenticatedAnalyticsIndexRoute
-  AuthenticatedAppsIndexRoute: typeof AuthenticatedAppsIndexRoute
-  AuthenticatedAuditLogIndexRoute: typeof AuthenticatedAuditLogIndexRoute
-  AuthenticatedBookingsIndexRoute: typeof AuthenticatedBookingsIndexRoute
+  AuthenticatedCurationIndexRoute: typeof AuthenticatedCurationIndexRoute
   AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
-  AuthenticatedNotificationsIndexRoute: typeof AuthenticatedNotificationsIndexRoute
+  AuthenticatedEditorialIndexRoute: typeof AuthenticatedEditorialIndexRoute
   AuthenticatedPromotionsIndexRoute: typeof AuthenticatedPromotionsIndexRoute
-  AuthenticatedReviewsIndexRoute: typeof AuthenticatedReviewsIndexRoute
-  AuthenticatedTasksIndexRoute: typeof AuthenticatedTasksIndexRoute
   AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
   AuthenticatedVenuesIndexRoute: typeof AuthenticatedVenuesIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedSettingsRouteRoute: AuthenticatedSettingsRouteRouteWithChildren,
-  AuthenticatedVenuesApplicationsRoute: AuthenticatedVenuesApplicationsRoute,
   AuthenticatedAnalyticsIndexRoute: AuthenticatedAnalyticsIndexRoute,
-  AuthenticatedAppsIndexRoute: AuthenticatedAppsIndexRoute,
-  AuthenticatedAuditLogIndexRoute: AuthenticatedAuditLogIndexRoute,
-  AuthenticatedBookingsIndexRoute: AuthenticatedBookingsIndexRoute,
+  AuthenticatedCurationIndexRoute: AuthenticatedCurationIndexRoute,
   AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
-  AuthenticatedNotificationsIndexRoute: AuthenticatedNotificationsIndexRoute,
+  AuthenticatedEditorialIndexRoute: AuthenticatedEditorialIndexRoute,
   AuthenticatedPromotionsIndexRoute: AuthenticatedPromotionsIndexRoute,
-  AuthenticatedReviewsIndexRoute: AuthenticatedReviewsIndexRoute,
-  AuthenticatedTasksIndexRoute: AuthenticatedTasksIndexRoute,
   AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
   AuthenticatedVenuesIndexRoute: AuthenticatedVenuesIndexRoute,
 }
@@ -533,114 +371,74 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
-interface PublicRouteRouteChildren {
-  PublicIndexRoute: typeof PublicIndexRoute
-}
-
-const PublicRouteRouteChildren: PublicRouteRouteChildren = {
-  PublicIndexRoute: PublicIndexRoute,
-}
-
-const PublicRouteRouteWithChildren = PublicRouteRoute._addFileChildren(
-  PublicRouteRouteChildren,
-)
-
 export interface FileRoutesByFullPath {
-  '': typeof PublicRouteRouteWithChildren
+  '/': typeof IndexRoute
+  '': typeof AuthenticatedRouteRouteWithChildren
   '/settings': typeof AuthenticatedSettingsRouteRouteWithChildren
   '/forgot-password': typeof authForgotPasswordRoute
   '/otp': typeof authOtpRoute
   '/sign-in': typeof authSignInRoute
-  '/sign-up': typeof authSignUpRoute
   '/401': typeof errors401Route
   '/403': typeof errors403Route
   '/404': typeof errors404Route
   '/500': typeof errors500Route
   '/503': typeof errors503Route
-  '/': typeof PublicIndexRoute
   '/settings/admins': typeof AuthenticatedSettingsAdminsRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
-  '/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
-  '/settings/platform': typeof AuthenticatedSettingsPlatformRoute
-  '/settings/security': typeof AuthenticatedSettingsSecurityRoute
-  '/venues/applications': typeof AuthenticatedVenuesApplicationsRoute
   '/analytics': typeof AuthenticatedAnalyticsIndexRoute
-  '/apps': typeof AuthenticatedAppsIndexRoute
-  '/audit-log': typeof AuthenticatedAuditLogIndexRoute
-  '/bookings': typeof AuthenticatedBookingsIndexRoute
+  '/curation': typeof AuthenticatedCurationIndexRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
-  '/notifications': typeof AuthenticatedNotificationsIndexRoute
+  '/editorial': typeof AuthenticatedEditorialIndexRoute
   '/promotions': typeof AuthenticatedPromotionsIndexRoute
-  '/reviews': typeof AuthenticatedReviewsIndexRoute
   '/settings/': typeof AuthenticatedSettingsIndexRoute
-  '/tasks': typeof AuthenticatedTasksIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
   '/venues': typeof AuthenticatedVenuesIndexRoute
 }
 
 export interface FileRoutesByTo {
+  '/': typeof IndexRoute
   '': typeof AuthenticatedRouteRouteWithChildren
   '/forgot-password': typeof authForgotPasswordRoute
   '/otp': typeof authOtpRoute
   '/sign-in': typeof authSignInRoute
-  '/sign-up': typeof authSignUpRoute
   '/401': typeof errors401Route
   '/403': typeof errors403Route
   '/404': typeof errors404Route
   '/500': typeof errors500Route
   '/503': typeof errors503Route
-  '/': typeof PublicIndexRoute
   '/settings/admins': typeof AuthenticatedSettingsAdminsRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
-  '/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
-  '/settings/platform': typeof AuthenticatedSettingsPlatformRoute
-  '/settings/security': typeof AuthenticatedSettingsSecurityRoute
-  '/venues/applications': typeof AuthenticatedVenuesApplicationsRoute
   '/analytics': typeof AuthenticatedAnalyticsIndexRoute
-  '/apps': typeof AuthenticatedAppsIndexRoute
-  '/audit-log': typeof AuthenticatedAuditLogIndexRoute
-  '/bookings': typeof AuthenticatedBookingsIndexRoute
+  '/curation': typeof AuthenticatedCurationIndexRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
-  '/notifications': typeof AuthenticatedNotificationsIndexRoute
+  '/editorial': typeof AuthenticatedEditorialIndexRoute
   '/promotions': typeof AuthenticatedPromotionsIndexRoute
-  '/reviews': typeof AuthenticatedReviewsIndexRoute
   '/settings': typeof AuthenticatedSettingsIndexRoute
-  '/tasks': typeof AuthenticatedTasksIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
   '/venues': typeof AuthenticatedVenuesIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
+  '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
-  '/_public': typeof PublicRouteRouteWithChildren
   '/_authenticated/settings': typeof AuthenticatedSettingsRouteRouteWithChildren
   '/(auth)/forgot-password': typeof authForgotPasswordRoute
   '/(auth)/otp': typeof authOtpRoute
   '/(auth)/sign-in': typeof authSignInRoute
-  '/(auth)/sign-up': typeof authSignUpRoute
   '/(errors)/401': typeof errors401Route
   '/(errors)/403': typeof errors403Route
   '/(errors)/404': typeof errors404Route
   '/(errors)/500': typeof errors500Route
   '/(errors)/503': typeof errors503Route
-  '/_public/': typeof PublicIndexRoute
   '/_authenticated/settings/admins': typeof AuthenticatedSettingsAdminsRoute
   '/_authenticated/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
-  '/_authenticated/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
-  '/_authenticated/settings/platform': typeof AuthenticatedSettingsPlatformRoute
-  '/_authenticated/settings/security': typeof AuthenticatedSettingsSecurityRoute
-  '/_authenticated/venues/applications': typeof AuthenticatedVenuesApplicationsRoute
   '/_authenticated/analytics/': typeof AuthenticatedAnalyticsIndexRoute
-  '/_authenticated/apps/': typeof AuthenticatedAppsIndexRoute
-  '/_authenticated/audit-log/': typeof AuthenticatedAuditLogIndexRoute
-  '/_authenticated/bookings/': typeof AuthenticatedBookingsIndexRoute
+  '/_authenticated/curation/': typeof AuthenticatedCurationIndexRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
-  '/_authenticated/notifications/': typeof AuthenticatedNotificationsIndexRoute
+  '/_authenticated/editorial/': typeof AuthenticatedEditorialIndexRoute
   '/_authenticated/promotions/': typeof AuthenticatedPromotionsIndexRoute
-  '/_authenticated/reviews/': typeof AuthenticatedReviewsIndexRoute
   '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute
-  '/_authenticated/tasks/': typeof AuthenticatedTasksIndexRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
   '/_authenticated/venues/': typeof AuthenticatedVenuesIndexRoute
 }
@@ -648,110 +446,81 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/'
     | ''
     | '/settings'
     | '/forgot-password'
     | '/otp'
     | '/sign-in'
-    | '/sign-up'
     | '/401'
     | '/403'
     | '/404'
     | '/500'
     | '/503'
-    | '/'
     | '/settings/admins'
     | '/settings/appearance'
-    | '/settings/notifications'
-    | '/settings/platform'
-    | '/settings/security'
-    | '/venues/applications'
     | '/analytics'
-    | '/apps'
-    | '/audit-log'
-    | '/bookings'
+    | '/curation'
     | '/dashboard'
-    | '/notifications'
+    | '/editorial'
     | '/promotions'
-    | '/reviews'
     | '/settings/'
-    | '/tasks'
     | '/users'
     | '/venues'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/'
     | ''
     | '/forgot-password'
     | '/otp'
     | '/sign-in'
-    | '/sign-up'
     | '/401'
     | '/403'
     | '/404'
     | '/500'
     | '/503'
-    | '/'
     | '/settings/admins'
     | '/settings/appearance'
-    | '/settings/notifications'
-    | '/settings/platform'
-    | '/settings/security'
-    | '/venues/applications'
     | '/analytics'
-    | '/apps'
-    | '/audit-log'
-    | '/bookings'
+    | '/curation'
     | '/dashboard'
-    | '/notifications'
+    | '/editorial'
     | '/promotions'
-    | '/reviews'
     | '/settings'
-    | '/tasks'
     | '/users'
     | '/venues'
   id:
     | '__root__'
+    | '/'
     | '/_authenticated'
-    | '/_public'
     | '/_authenticated/settings'
     | '/(auth)/forgot-password'
     | '/(auth)/otp'
     | '/(auth)/sign-in'
-    | '/(auth)/sign-up'
     | '/(errors)/401'
     | '/(errors)/403'
     | '/(errors)/404'
     | '/(errors)/500'
     | '/(errors)/503'
-    | '/_public/'
     | '/_authenticated/settings/admins'
     | '/_authenticated/settings/appearance'
-    | '/_authenticated/settings/notifications'
-    | '/_authenticated/settings/platform'
-    | '/_authenticated/settings/security'
-    | '/_authenticated/venues/applications'
     | '/_authenticated/analytics/'
-    | '/_authenticated/apps/'
-    | '/_authenticated/audit-log/'
-    | '/_authenticated/bookings/'
+    | '/_authenticated/curation/'
     | '/_authenticated/dashboard/'
-    | '/_authenticated/notifications/'
+    | '/_authenticated/editorial/'
     | '/_authenticated/promotions/'
-    | '/_authenticated/reviews/'
     | '/_authenticated/settings/'
-    | '/_authenticated/tasks/'
     | '/_authenticated/users/'
     | '/_authenticated/venues/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
-  PublicRouteRoute: typeof PublicRouteRouteWithChildren
   authForgotPasswordRoute: typeof authForgotPasswordRoute
   authOtpRoute: typeof authOtpRoute
   authSignInRoute: typeof authSignInRoute
-  authSignUpRoute: typeof authSignUpRoute
   errors401Route: typeof errors401Route
   errors403Route: typeof errors403Route
   errors404Route: typeof errors404Route
@@ -760,12 +529,11 @@ export interface RootRouteChildren {
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
-  PublicRouteRoute: PublicRouteRouteWithChildren,
   authForgotPasswordRoute: authForgotPasswordRoute,
   authOtpRoute: authOtpRoute,
   authSignInRoute: authSignInRoute,
-  authSignUpRoute: authSignUpRoute,
   errors401Route: errors401Route,
   errors403Route: errors403Route,
   errors404Route: errors404Route,
@@ -783,12 +551,11 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
+        "/",
         "/_authenticated",
-        "/_public",
         "/(auth)/forgot-password",
         "/(auth)/otp",
         "/(auth)/sign-in",
-        "/(auth)/sign-up",
         "/(errors)/401",
         "/(errors)/403",
         "/(errors)/404",
@@ -796,28 +563,20 @@ export const routeTree = rootRoute
         "/(errors)/503"
       ]
     },
+    "/": {
+      "filePath": "index.tsx"
+    },
     "/_authenticated": {
       "filePath": "_authenticated/route.tsx",
       "children": [
         "/_authenticated/settings",
-        "/_authenticated/venues/applications",
         "/_authenticated/analytics/",
-        "/_authenticated/apps/",
-        "/_authenticated/audit-log/",
-        "/_authenticated/bookings/",
+        "/_authenticated/curation/",
         "/_authenticated/dashboard/",
-        "/_authenticated/notifications/",
+        "/_authenticated/editorial/",
         "/_authenticated/promotions/",
-        "/_authenticated/reviews/",
-        "/_authenticated/tasks/",
         "/_authenticated/users/",
         "/_authenticated/venues/"
-      ]
-    },
-    "/_public": {
-      "filePath": "_public/route.tsx",
-      "children": [
-        "/_public/"
       ]
     },
     "/_authenticated/settings": {
@@ -826,9 +585,6 @@ export const routeTree = rootRoute
       "children": [
         "/_authenticated/settings/admins",
         "/_authenticated/settings/appearance",
-        "/_authenticated/settings/notifications",
-        "/_authenticated/settings/platform",
-        "/_authenticated/settings/security",
         "/_authenticated/settings/"
       ]
     },
@@ -840,9 +596,6 @@ export const routeTree = rootRoute
     },
     "/(auth)/sign-in": {
       "filePath": "(auth)/sign-in.tsx"
-    },
-    "/(auth)/sign-up": {
-      "filePath": "(auth)/sign-up.tsx"
     },
     "/(errors)/401": {
       "filePath": "(errors)/401.tsx"
@@ -859,10 +612,6 @@ export const routeTree = rootRoute
     "/(errors)/503": {
       "filePath": "(errors)/503.tsx"
     },
-    "/_public/": {
-      "filePath": "_public/index.tsx",
-      "parent": "/_public"
-    },
     "/_authenticated/settings/admins": {
       "filePath": "_authenticated/settings/admins.tsx",
       "parent": "/_authenticated/settings"
@@ -871,61 +620,29 @@ export const routeTree = rootRoute
       "filePath": "_authenticated/settings/appearance.tsx",
       "parent": "/_authenticated/settings"
     },
-    "/_authenticated/settings/notifications": {
-      "filePath": "_authenticated/settings/notifications.tsx",
-      "parent": "/_authenticated/settings"
-    },
-    "/_authenticated/settings/platform": {
-      "filePath": "_authenticated/settings/platform.tsx",
-      "parent": "/_authenticated/settings"
-    },
-    "/_authenticated/settings/security": {
-      "filePath": "_authenticated/settings/security.tsx",
-      "parent": "/_authenticated/settings"
-    },
-    "/_authenticated/venues/applications": {
-      "filePath": "_authenticated/venues/applications.tsx",
-      "parent": "/_authenticated"
-    },
     "/_authenticated/analytics/": {
       "filePath": "_authenticated/analytics/index.tsx",
       "parent": "/_authenticated"
     },
-    "/_authenticated/apps/": {
-      "filePath": "_authenticated/apps/index.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/audit-log/": {
-      "filePath": "_authenticated/audit-log/index.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/bookings/": {
-      "filePath": "_authenticated/bookings/index.tsx",
+    "/_authenticated/curation/": {
+      "filePath": "_authenticated/curation/index.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/dashboard/": {
       "filePath": "_authenticated/dashboard/index.tsx",
       "parent": "/_authenticated"
     },
-    "/_authenticated/notifications/": {
-      "filePath": "_authenticated/notifications/index.tsx",
+    "/_authenticated/editorial/": {
+      "filePath": "_authenticated/editorial/index.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/promotions/": {
       "filePath": "_authenticated/promotions/index.tsx",
       "parent": "/_authenticated"
     },
-    "/_authenticated/reviews/": {
-      "filePath": "_authenticated/reviews/index.tsx",
-      "parent": "/_authenticated"
-    },
     "/_authenticated/settings/": {
       "filePath": "_authenticated/settings/index.tsx",
       "parent": "/_authenticated/settings"
-    },
-    "/_authenticated/tasks/": {
-      "filePath": "_authenticated/tasks/index.tsx",
-      "parent": "/_authenticated"
     },
     "/_authenticated/users/": {
       "filePath": "_authenticated/users/index.tsx",

@@ -77,7 +77,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             JSON.stringify({
               sub: '1',
               email: data.email,
-              role: ['admin'],
+              role: ['ADMIN'],
               exp: Math.floor(Date.now() / 1000) + 900,
             })
           ) +
@@ -87,7 +87,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         setUser({
           accountNo: '1',
           email: data.email,
-          role: ['admin'],
+          role: ['ADMIN'],
           exp: Math.floor(Date.now() / 1000) + 900,
         })
       } else {

@@ -66,13 +66,13 @@ function InviteDialog({
   onOpenChange: (open: boolean) => void
 }) {
   const [email, setEmail] = useState('')
-  const [role, setRole] = useState<AdminRole>('viewer')
+  const [role, setRole] = useState<AdminRole>('ADMIN')
 
   const handleInvite = () => {
     if (!email.trim()) return
     toast.success(`Invitation sent to ${email}`)
     setEmail('')
-    setRole('viewer')
+    setRole('ADMIN')
     onOpenChange(false)
   }
 

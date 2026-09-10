@@ -1,5 +1,5 @@
-import { IconUser, IconBuilding } from '@tabler/icons-react'
-import { UserStatus } from './schema'
+import { IconBuilding, IconUser } from '@tabler/icons-react'
+import { AcquisitionSource, UserStatus } from './schema'
 
 export const statusTypes = new Map<UserStatus, string>([
   [
@@ -20,12 +20,23 @@ export const statusTypes = new Map<UserStatus, string>([
 export const roleTypes = [
   {
     label: 'Client',
-    value: 'client',
+    value: 'CLIENT',
     icon: IconUser,
   },
   {
     label: 'Venue Owner',
-    value: 'venue_owner',
+    value: 'VENUE_OWNER',
     icon: IconBuilding,
   },
 ] as const
+
+export const acquisitionSourceTypes: {
+  label: string
+  value: AcquisitionSource
+}[] = [
+  { label: 'Venue QR', value: 'qr' },
+  { label: 'Web', value: 'web' },
+  { label: 'Referral', value: 'referral' },
+  { label: 'Organic', value: 'organic' },
+  { label: 'Campaign', value: 'campaign' },
+]

@@ -1,57 +1,14 @@
 import { ColumnDef } from '@tanstack/react-table'
-import { IconDotsVertical } from '@tabler/icons-react'
 import { cn } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
 import { ROLE_LABELS } from '@/types/admin'
 import type { Admin } from '../data/schema'
-import { useAdmins } from '../context/admins-context'
+import { AdminRowActions } from './admin-row-actions'
 
 const statusColors: Record<string, string> = {
   active: 'bg-secondary/20 text-secondary-foreground',
   invited: 'bg-tertiary/20 text-tertiary',
   deactivated: 'bg-destructive/20 text-destructive',
-}
-
-function AdminActions({ admin }: { admin: Admin }) {
-  const { setOpen, setCurrentRow } = useAdmins()
-
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant='ghost' size='icon' className='h-8 w-8'>
-          <IconDotsVertical size={16} />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align='end'>
-        <DropdownMenuItem
-          onClick={() => {
-            setCurrentRow(admin)
-            setOpen('edit')
-          }}
-        >
-          Edit role
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem
-          className='text-destructive'
-          onClick={() => {
-            setCurrentRow(admin)
-            setOpen('delete')
-          }}
-        >
-          {admin.status === 'active' ? 'Deactivate' : 'Remove'}
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  )
 }
 
 export const adminsColumns: ColumnDef<Admin>[] = [
@@ -110,6 +67,6 @@ export const adminsColumns: ColumnDef<Admin>[] = [
   },
   {
     id: 'actions',
-    cell: ({ row }) => <AdminActions admin={row.original} />,
+    cell: ({ row }) => <AdminRowActions admin={row.original} />,
   },
 ]
