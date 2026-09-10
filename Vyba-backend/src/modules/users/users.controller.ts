@@ -20,7 +20,6 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PaginationQueryDto } from '@common/dto/pagination.dto';
 import { Roles } from '@common/decorators/roles.decorator';
-import { Public } from '@common/decorators/public.decorator';
 import { RolesGuard } from '@common/guards/roles.guard';
 import { UserRole } from '@common/constants/roles.constant';
 
@@ -31,8 +30,11 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  @Public()
-  @ApiOperation({ summary: 'Create a new user' })
+  @UseGuards(RolesGuard)
+  @Roles(UserRole.ADMIN)
+  @ApiOperation({
+    summary: 'Provision a user by phone (admin only, e.g. a venue owner)',
+  })
   @ApiResponse({ status: 201, description: 'User created successfully' })
   @ApiResponse({ status: 409, description: 'User already exists' })
   create(@Body() dto: CreateUserDto) {

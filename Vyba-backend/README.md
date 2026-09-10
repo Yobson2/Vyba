@@ -59,8 +59,8 @@ src/
 │   ├── middleware/                # JWT authentication
 │   └── utils/                     # Error context utility
 ├── modules/
-│   ├── auth/                      # JWT auth (register, login, refresh)
-│   ├── users/                     # Sample CRUD module
+│   ├── auth/                      # JWT session issuance + refresh (phone-OTP flow: ticket 04)
+│   ├── users/                     # Phone-first user records
 │   └── health/                    # Health check endpoint
 templates/                         # Handlebars email templates
 ```
@@ -99,14 +99,14 @@ docker compose logs -f     # View logs
 | Method | Path | Auth | Description |
 |--------|------|------|-------------|
 | `GET` | `/health` | No | Health check |
-| `POST` | `/api/auth/register` | No | Register user |
-| `POST` | `/api/auth/login` | No | Login |
-| `POST` | `/api/auth/refresh` | No | Refresh tokens |
+| `POST` | `/api/auth/refresh` | No | Rotate access token from a refresh token |
 | `GET` | `/api/users` | Yes | List users (paginated) |
 | `GET` | `/api/users/:id` | Yes | Get user by ID |
-| `POST` | `/api/users` | No | Create user |
+| `POST` | `/api/users` | Admin | Provision a user by phone (e.g. a venue owner) |
 | `PATCH` | `/api/users/:id` | Yes | Update user |
 | `DELETE` | `/api/users/:id` | Admin | Delete user (soft) |
+
+> Phone-OTP request/verify endpoints land in ticket 04.
 
 ## Adding a New Module
 

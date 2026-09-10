@@ -3,6 +3,10 @@ import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
 
+/**
+ * Minimal boot + auth-guard smoke test. The full phone-OTP auth e2e harness
+ * (FakeSmsProvider, request/verify flow, throwaway Postgres) is ticket 04.
+ */
 describe('Application (e2e)', () => {
   let app: INestApplication;
 
@@ -40,72 +44,9 @@ describe('Application (e2e)', () => {
     });
   });
 
-  describe('Auth', () => {
-    const testUser = {
-      email: `test-${Date.now()}@example.com`,
-      password: 'TestPassword123!',
-      firstName: 'Test',
-      lastName: 'User',
-    };
-    let accessToken: string;
-
-    it('POST /api/auth/register - should register a new user', () => {
-      return request(app.getHttpServer())
-        .post('/api/auth/register')
-        .send(testUser)
-        .expect(201)
-        .expect((res) => {
-          expect(res.body).toHaveProperty('user');
-          expect(res.body).toHaveProperty('accessToken');
-          expect(res.body).toHaveProperty('refreshToken');
-          expect(res.body.user).toHaveProperty('email', testUser.email);
-          expect(res.body.user).not.toHaveProperty('password');
-        });
-    });
-
-    it('POST /api/auth/login - should login with credentials', () => {
-      return request(app.getHttpServer())
-        .post('/api/auth/login')
-        .send({ email: testUser.email, password: testUser.password })
-        .expect(201)
-        .expect((res) => {
-          expect(res.body).toHaveProperty('accessToken');
-          expect(res.body).toHaveProperty('refreshToken');
-          accessToken = res.body.accessToken;
-        });
-    });
-
-    it('GET /api/users - should return users with auth token', () => {
-      return request(app.getHttpServer())
-        .get('/api/users')
-        .set('Authorization', `Bearer ${accessToken}`)
-        .expect(200)
-        .expect((res) => {
-          expect(res.body).toHaveProperty('data');
-          expect(res.body).toHaveProperty('meta');
-          expect(Array.isArray(res.body.data)).toBe(true);
-        });
-    });
-
-    it('GET /api/users - should reject without auth token', () => {
+  describe('Auth guard', () => {
+    it('GET /api/users - should reject without an auth token', () => {
       return request(app.getHttpServer()).get('/api/users').expect(401);
-    });
-
-    it('POST /api/auth/refresh - should refresh tokens', () => {
-      return request(app.getHttpServer())
-        .post('/api/auth/login')
-        .send({ email: testUser.email, password: testUser.password })
-        .expect(201)
-        .then((loginRes) => {
-          return request(app.getHttpServer())
-            .post('/api/auth/refresh')
-            .send({ refreshToken: loginRes.body.refreshToken })
-            .expect(201)
-            .expect((res) => {
-              expect(res.body).toHaveProperty('accessToken');
-              expect(res.body).toHaveProperty('refreshToken');
-            });
-        });
     });
   });
 });

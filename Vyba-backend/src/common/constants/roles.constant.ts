@@ -2,34 +2,38 @@
  * Role Constants - Single Source of Truth for User Roles
  *
  * All role-related code MUST use these constants instead of hardcoded strings.
+ * Vyba actors: platform staff (ADMIN), venue owners (VENUE_OWNER), end users (CLIENT).
  */
 
 export enum UserRole {
   ADMIN = 'ADMIN',
-  CHEF_ZONE = 'CHEF_ZONE',
-  MEMBRE = 'MEMBRE',
+  VENUE_OWNER = 'VENUE_OWNER',
+  CLIENT = 'CLIENT',
 }
 
-export const DEFAULT_ROLE = UserRole.MEMBRE;
+/** Role assigned to a self-registered user (phone-OTP verified). */
+export const DEFAULT_ROLE = UserRole.CLIENT;
 
 export const VALID_USER_ROLES: readonly UserRole[] = [
   UserRole.ADMIN,
-  UserRole.CHEF_ZONE,
-  UserRole.MEMBRE,
+  UserRole.VENUE_OWNER,
+  UserRole.CLIENT,
 ] as const;
 
 export const ROLE_METADATA = {
   [UserRole.ADMIN]: {
-    displayName: 'Administrateur',
-    description: 'Full access to all features and data',
+    displayName: 'Admin',
+    description: 'Vyba platform staff. Full access to all features and data.',
   },
-  [UserRole.CHEF_ZONE]: {
-    displayName: 'Chef de Zone',
-    description: 'Manages families and members within their assigned zone',
+  [UserRole.VENUE_OWNER]: {
+    displayName: 'Venue Owner',
+    description:
+      'Manages their own venue: nights, promotions and venue content.',
   },
-  [UserRole.MEMBRE]: {
-    displayName: 'Membre',
-    description: 'Read-only access to own family data',
+  [UserRole.CLIENT]: {
+    displayName: 'Client',
+    description:
+      'End user: discovers venues, follows them and marks "J\'y vais".',
   },
 } as const;
 

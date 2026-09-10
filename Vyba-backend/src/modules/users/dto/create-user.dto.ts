@@ -1,23 +1,34 @@
-import { IsEmail, IsString, MinLength, IsOptional } from 'class-validator';
+import { IsString, IsOptional, IsEnum, Matches } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { UserRole } from '@common/constants/roles.constant';
+
+/** E.164: a leading '+', a non-zero first digit, then 6–14 more digits. */
+export const E164_REGEX = /^\+[1-9]\d{6,14}$/;
 
 export class CreateUserDto {
-  @ApiProperty({ example: 'user@example.com' })
-  @IsEmail()
-  email: string;
-
-  @ApiProperty({ example: 'StrongP@ss1', minLength: 8 })
+  @ApiProperty({
+    example: '+2250700000000',
+    description: 'Phone number in E.164 format',
+  })
   @IsString()
-  @MinLength(8)
-  password: string;
+  @Matches(E164_REGEX, { message: 'phone must be a valid E.164 number' })
+  phone: string;
 
-  @ApiPropertyOptional({ example: 'John' })
+  @ApiPropertyOptional({ example: 'Awa' })
   @IsOptional()
   @IsString()
   firstName?: string;
 
-  @ApiPropertyOptional({ example: 'Doe' })
+  @ApiPropertyOptional({ example: 'Traoré' })
   @IsOptional()
   @IsString()
   lastName?: string;
+
+  @ApiPropertyOptional({
+    enum: UserRole,
+    description: 'Defaults to CLIENT when omitted',
+  })
+  @IsOptional()
+  @IsEnum(UserRole)
+  role?: UserRole;
 }

@@ -14,12 +14,12 @@ export class UserNotFoundError extends BaseAppException {
 }
 
 export class UserAlreadyExistsError extends BaseAppException {
-  constructor(email: string) {
+  constructor(identifier: string, identifierType: string = 'phone') {
     super(
-      `User with email ${email} already exists`,
+      `User with ${identifierType} ${identifier} already exists`,
       HttpStatus.CONFLICT,
       UserErrorCode.USER_ALREADY_EXISTS,
-      { email },
+      { identifier, identifierType },
     );
   }
 }

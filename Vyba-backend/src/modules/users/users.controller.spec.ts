@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
+import { UserRole } from '@common/constants/roles.constant';
 
 describe('UsersController', () => {
   let controller: UsersController;
@@ -24,14 +25,20 @@ describe('UsersController', () => {
     service = module.get<UsersService>(UsersService);
   });
 
+  afterEach(() => jest.clearAllMocks());
+
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
 
   describe('create', () => {
-    it('should create a user', async () => {
-      const dto = { email: 'test@example.com', password: 'Password123' };
-      const result = { id: '1', ...dto, role: 'MEMBRE', isActive: true };
+    it('should provision a user from a phone number', async () => {
+      const dto = { phone: '+2250700000000', role: UserRole.VENUE_OWNER };
+      const result = {
+        id: '1',
+        ...dto,
+        isActive: true,
+      };
       mockUsersService.create.mockResolvedValue(result);
 
       expect(await controller.create(dto)).toEqual(result);
@@ -53,7 +60,7 @@ describe('UsersController', () => {
 
   describe('findOne', () => {
     it('should return a user by ID', async () => {
-      const result = { id: '1', email: 'test@example.com' };
+      const result = { id: '1', phone: '+2250700000000' };
       mockUsersService.findOne.mockResolvedValue(result);
 
       expect(await controller.findOne('1')).toEqual(result);

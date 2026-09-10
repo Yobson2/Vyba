@@ -1,7 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import * as bcrypt from 'bcrypt';
 import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -13,6 +12,7 @@ import {
   UserNotFoundError,
   UserAlreadyExistsError,
 } from '@common/exceptions/user.exceptions';
+import { DEFAULT_ROLE } from '@common/constants/roles.constant';
 
 @Injectable()
 export class UsersService {
@@ -23,25 +23,52 @@ export class UsersService {
     private readonly userRepository: Repository<User>,
   ) {}
 
+  /**
+   * Explicit creation path (e.g. Vyba team provisioning a venue-owner account
+   * by phone number + role). Self-serve users come in via `findOrCreateByPhone`.
+   */
   async create(dto: CreateUserDto): Promise<User> {
     const existing = await this.userRepository.findOne({
-      where: { email: dto.email },
+      where: { phone: dto.phone },
     });
 
     if (existing) {
-      throw new UserAlreadyExistsError(dto.email);
+      throw new UserAlreadyExistsError(dto.phone, 'phone');
     }
 
-    const hashedPassword = await bcrypt.hash(dto.password, 10);
-
     const user = this.userRepository.create({
-      ...dto,
-      password: hashedPassword,
+      phone: dto.phone,
+      firstName: dto.firstName ?? null,
+      lastName: dto.lastName ?? null,
+      role: dto.role ?? DEFAULT_ROLE,
     });
 
     const saved = await this.userRepository.save(user);
     this.logger.log(`User created: ${saved.id}`);
     return saved;
+  }
+
+  /**
+   * Identity resolution for the phone-OTP flow: the same E.164 number always
+   * resolves to the same account (ADR-0003). Get-or-create, no linking logic.
+   */
+  async findOrCreateByPhone(phone: string): Promise<User> {
+    const existing = await this.findByPhone(phone);
+    if (existing) {
+      return existing;
+    }
+
+    const user = this.userRepository.create({
+      phone,
+      role: DEFAULT_ROLE,
+    });
+    const saved = await this.userRepository.save(user);
+    this.logger.log(`User created: ${saved.id}`);
+    return saved;
+  }
+
+  async findByPhone(phone: string): Promise<User | null> {
+    return this.userRepository.findOne({ where: { phone } });
   }
 
   async findAll(
@@ -65,10 +92,6 @@ export class UsersService {
       throw new UserNotFoundError(id);
     }
     return user;
-  }
-
-  async findByEmail(email: string): Promise<User | null> {
-    return this.userRepository.findOne({ where: { email } });
   }
 
   async update(id: string, dto: UpdateUserDto): Promise<User> {
