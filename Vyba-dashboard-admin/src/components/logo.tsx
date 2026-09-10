@@ -93,7 +93,7 @@ export function LogoFull({ ...props }: SVGProps<SVGSVGElement>) {
         fontSize='16'
         letterSpacing='4px'
       >
-        LAGOS PULSE
+        Abidjan PULSE
       </text>
     </svg>
   )

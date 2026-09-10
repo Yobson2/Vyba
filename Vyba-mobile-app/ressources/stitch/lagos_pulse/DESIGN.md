@@ -12,7 +12,7 @@ The aesthetic identity is defined by **Intentional Asymmetry** and **Tonal Depth
 ### The Palette
 We utilize a sophisticated Material-inspired palette where the core colors are elevated through tonal variants.
 - **Primary (`#a3a6ff` / `#6366F1`):** Our signature electric indigo. Use `primary_dim` for a moody, late-night feel and `primary_fixed` for high-impact CTAs.
-- **Secondary (`#69f6b8` / `#10B981`):** "Lagos Emerald." Reserved strictly for availability and positive status.
+- **Secondary (`#69f6b8` / `#10B981`):** "Abidjan Emerald." Reserved strictly for availability and positive status.
 - **Tertiary (`#ffb148` / `#F59E0B`):** "Golden Hour." Used exclusively for promotions, VIP tiers, and high-value highlights.
 
 ### The "No-Line" Rule

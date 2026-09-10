@@ -67,7 +67,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
           phone: '',
           role: '',
           status: 'active',
-          city: 'Lagos',
+          city: 'Abidjan',
           reason: '',
         },
   })
@@ -223,7 +223,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
                       placeholder='Select city'
                       className='col-span-4'
                       items={[
-                        { label: 'Lagos', value: 'Lagos' },
+                        { label: 'Abidjan', value: 'Abidjan' },
                         { label: 'Abuja', value: 'Abuja' },
                         { label: 'Port Harcourt', value: 'Port Harcourt' },
                         { label: 'Ibadan', value: 'Ibadan' },

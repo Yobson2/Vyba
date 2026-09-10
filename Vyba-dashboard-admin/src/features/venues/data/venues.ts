@@ -1,15 +1,15 @@
 import { faker } from '@faker-js/faker'
 
-const nigerianCities = ['Lagos', 'Abuja', 'Port Harcourt', 'Ibadan', 'Kano']
+const nigerianCities = ['Abidjan', 'Abuja', 'Port Harcourt', 'Ibadan', 'Kano']
 
 const venueNames = [
   'Club Quilox',
   'Atmosphere Rooftop',
-  'Hard Rock Lagos',
+  'Hard Rock Abidjan',
   'Sky Lounge',
   'Maquis du Lekki',
   'Buzz Bar Victoria Island',
-  'Shiro Lagos',
+  'Shiro Abidjan',
   'The Place Lekki',
   'Sailors Lounge',
   'Lagoon Restaurant',

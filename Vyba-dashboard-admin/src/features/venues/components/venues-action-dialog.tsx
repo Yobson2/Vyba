@@ -69,7 +69,7 @@ export function VenuesActionDialog({ currentRow, open, onOpenChange }: Props) {
           address: '',
           venueType: '',
           priceLevel: '',
-          city: 'Lagos',
+          city: 'Abidjan',
           isPremium: false,
           status: 'active',
           ownerName: '',
@@ -225,7 +225,7 @@ export function VenuesActionDialog({ currentRow, open, onOpenChange }: Props) {
                       placeholder='Select city'
                       className='col-span-4'
                       items={[
-                        { label: 'Lagos', value: 'Lagos' },
+                        { label: 'Abidjan', value: 'Abidjan' },
                         { label: 'Abuja', value: 'Abuja' },
                         { label: 'Port Harcourt', value: 'Port Harcourt' },
                         { label: 'Ibadan', value: 'Ibadan' },

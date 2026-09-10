@@ -24,7 +24,7 @@ interface City {
 }
 
 const initialCities: City[] = [
-  { id: '1', name: 'Lagos', country: 'Nigeria', active: true },
+  { id: '1', name: 'Abidjan', country: 'Nigeria', active: true },
 ]
 
 export function CitiesForm() {

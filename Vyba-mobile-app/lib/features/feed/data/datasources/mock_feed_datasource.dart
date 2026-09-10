@@ -6,7 +6,7 @@ abstract class FeedDataSource {
   Future<void> markInterested(String eventId);
 }
 
-/// Mock implementation with sample Lagos feed items.
+/// Mock implementation with sample Abidjan feed items.
 class MockFeedDataSource implements FeedDataSource {
   final Set<String> _interestedEventIds = {};
 
@@ -20,7 +20,7 @@ class MockFeedDataSource implements FeedDataSource {
         title: 'Happy Hour — 50% Off Cocktails',
         description:
             'Enjoy half-price cocktails every Friday from 6 PM to 9 PM. '
-            'Lagos Sunset, Neon Negroni, and more.',
+            'Abidjan Sunset, Neon Negroni, and more.',
         imageUrl:
             'https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=800',
         venueName: 'The Vibe Lounge',
@@ -33,7 +33,7 @@ class MockFeedDataSource implements FeedDataSource {
         title: 'Afrobeats Takeover Night',
         imageUrl:
             'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800',
-        venueName: 'Zaza Lagos',
+        venueName: 'Zaza Abidjan',
         date: DateTime.now().add(const Duration(days: 7)),
         attendeeCount: 234,
         attendeeAvatars: [

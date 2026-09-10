@@ -1,4 +1,4 @@
-# Design System — Vyba Lagos Pulse
+# Design System — Vyba Abidjan Pulse
 
 These rules are **hard constraints** for all UI work across both frontends. A
 violation is treated the same as a security-framework violation — fix before
@@ -10,7 +10,7 @@ Tokens: `Vyba-mobile-app/lib/core/theme/*` (Flutter) and
 ## Color Palette
 
 - **Primary**: Electric Indigo `#B0A3FF` — main interactive elements, CTAs
-- **Secondary**: Lagos Emerald `#69F6B8` — availability and success states only
+- **Secondary**: Abidjan Emerald `#69F6B8` — availability and success states only
 - **Tertiary**: Golden Hour `#FFB148` — promotions and VIP only
 - **Error**: `#FF6E84`
 - **Never use** pure black `#000000` — use tonal dark surfaces from `AppColors`

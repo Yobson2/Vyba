@@ -53,7 +53,7 @@ export function DataTableToolbar<TData>({
               column={table.getColumn('city')}
               title='City'
               options={[
-                { label: 'Lagos', value: 'Lagos' },
+                { label: 'Abidjan', value: 'Abidjan' },
                 { label: 'Abuja', value: 'Abuja' },
                 { label: 'Port Harcourt', value: 'Port Harcourt' },
                 { label: 'Ibadan', value: 'Ibadan' },

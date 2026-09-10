@@ -30,7 +30,7 @@ const regionalFormSchema = z.object({
 type RegionalFormValues = z.infer<typeof regionalFormSchema>
 
 const defaultValues: RegionalFormValues = {
-  timezone: 'Africa/Lagos',
+  timezone: 'Africa/Abidjan',
   dateFormat: 'DD/MM/YYYY',
   currency: 'NGN',
 }
@@ -68,8 +68,8 @@ export function RegionalForm() {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value='Africa/Lagos'>
-                      Africa/Lagos (WAT, UTC+1)
+                    <SelectItem value='Africa/Abidjan'>
+                      Africa/Abidjan (WAT, UTC+1)
                     </SelectItem>
                     <SelectItem value='Europe/London'>
                       Europe/London (GMT, UTC+0)

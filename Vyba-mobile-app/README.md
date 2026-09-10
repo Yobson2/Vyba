@@ -1,6 +1,6 @@
 # Vyba
 
-Lagos Pulse nightlife platform — discover venues, book tables, leave reviews, and manage promotions. Built with Flutter using Clean Architecture, Riverpod, GoRouter, Dio, and Freezed.
+Abidjan Pulse nightlife platform — discover venues, book tables, leave reviews, and manage promotions. Built with Flutter using Clean Architecture, Riverpod, GoRouter, Dio, and Freezed.
 
 ## Features
 

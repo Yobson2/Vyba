@@ -1,39 +1,42 @@
 # CLAUDE.md
 
-Guidance for Claude Code when working in this repository. Keep this file short —
-it loads on every task. Details live in `docs/` and are read on demand.
+Entry point for Claude Code — global instructions and navigation only. Concepts
+live in `CONTEXT.md`, mechanics in `docs/`, read on demand.
 
 ## What this is
 
-**Vyba** — a Lagos nightlife platform: discover venues, book tables, leave
-reviews, run venue promotions. Monorepo with three deployables, each bootstrapped
-from a reusable starter template and adapted for Vyba:
+**Vyba** — a nightlife discovery and coordination platform for Abidjan, Côte
+d'Ivoire: discover venues, see what's happening tonight, signal intent to go out
+("J'y vais"), leave reviews, run venue promotions. In a **validation phase** scoped
+to one commune (Zone 4 / Marcory).
+
+Monorepo, three deployables, each adapted from a starter template. Each has its own
+toolchain, README and conventions — work within the one you're editing, don't
+cross-wire them.
 
 | Path | Role | Stack |
 |------|------|-------|
 | `Vyba-mobile-app/` | Client + venue-owner mobile app | Flutter, Riverpod, GoRouter, Dio, Freezed |
-| `Vyba-dashboard-admin/` | Platform operator dashboard | React 19, TanStack Router/Query/Table, Zustand, shadcn/ui |
+| `Vyba-dashboard-admin/` | Vyba team operations dashboard | React 19, TanStack Router/Query/Table, Zustand, shadcn/ui |
 | `Vyba-backend/` | REST API | NestJS 11, TypeORM + PostgreSQL, Redis, S3, Socket.IO, JWT |
 
-Each sub-project has its own toolchain, README, and conventions. Work within the
-one you're editing; don't cross-wire them.
+## Start here
+
+- **Product & domain vocabulary** — `CONTEXT.md`, then the relevant sub-project `CONTEXT.md`.
+- **Decisions & rationale** — `docs/adr/`.
+- **Current build target** — `docs/validation-mvp/`.
 
 ## Architecture (high level)
 
-- **Mobile** — Clean Architecture per feature under `lib/features/<name>/`:
-  `domain` (entities, repo interfaces, use cases returning `Either<Failure, T>`),
-  `data` (repo impls, datasources, Freezed models), `presentation` (pages,
-  Riverpod notifiers, Freezed sealed-union states). Two role shells: **client**
-  (Explore / Feed / Bookings / Profile) and **owner** (Dashboard / Bookings /
-  Promos / Profile).
-- **Dashboard** — feature-based under `src/features/<name>/`. Most features are a
-  CRUD resource rendered as a TanStack Table with dialog-driven create/edit/delete.
-  File-based routing; auth state in Zustand; server state in TanStack Query.
-- **Backend** — modular NestJS under `src/modules/<name>/` on top of shared
-  infrastructure in `src/common/`. JWT access + refresh tokens, role guards,
-  Swagger at `/api/docs`.
-- **Authorization** — the client-side `UserRole` is a UX hint only. The backend
-  re-validates permissions on every request and is the source of truth.
+- **Mobile** — Clean Architecture per feature (`domain` / `data` / `presentation`);
+  use cases return `Either<Failure, T>`; state is a Freezed sealed union. Client
+  and owner role shells.
+- **Dashboard** — feature-based; most features are a CRUD resource as a TanStack
+  Table with dialog-driven create/edit/delete.
+- **Backend** — modular NestJS (`src/modules/<name>/`) on shared `src/common/`
+  infrastructure. JWT access + refresh, role guards, Swagger at `/api/docs`.
+- **Authorization** — the client-side `UserRole` is a UX hint only; the backend
+  re-validates on every request and is the source of truth.
 
 ## Non-negotiable rules
 
@@ -46,7 +49,7 @@ one you're editing; don't cross-wire them.
   custom shadow tokens — never default Material `elevation` or Tailwind `shadow`.
 - 4px spacing grid. Use the token systems: `lib/core/theme/*` (mobile),
   `src/index.css` (dashboard).
-- Brand colors are semantic: Electric Indigo `#B0A3FF` = primary/CTA · Lagos
+- Brand colors are semantic: Electric Indigo `#B0A3FF` = primary/CTA · Abidjan
   Emerald `#69F6B8` = success/availability only · Golden Hour `#FFB148` = promos/VIP
   only · Error `#FF6E84`.
 
@@ -62,23 +65,37 @@ one you're editing; don't cross-wire them.
 
 ## Working in this repo
 
-- Match the existing patterns in the sub-project before introducing new ones.
-- **Mobile**: after editing any `@freezed`, `@riverpod`/`@Riverpod`, or
-  `@JsonSerializable` class, run `make gen`.
-- **UI work**: plan with the `ui-ux-pro-max` skill, build with `frontend-design`,
-  then review with `ui-ux-pro-max`. Skip all three for trivial edits — copy,
-  padding, translations, import order, non-visual bug fixes.
-- **Scaffolding a feature**: use the project skills `flutter-feature-scaffold`
-  (mobile) or `dashboard-crud-feature` (dashboard).
+- Match existing patterns in the sub-project before introducing new ones.
+- **Mobile**: run `make gen` after editing any `@freezed`, `@riverpod`/`@Riverpod`
+  or `@JsonSerializable` class.
+- **UI work**: plan with `ui-ux-pro-max`, build with `frontend-design`, review with
+  `ui-ux-pro-max`. Skip for trivial edits (copy, padding, translations, import
+  order, non-visual fixes).
+- **Scaffolding a feature**: use `flutter-feature-scaffold` (mobile) or
+  `dashboard-crud-feature` (dashboard).
 
 ## Where the details live
 
-| You're working on… | Read |
-|--------------------|------|
-| The Flutter app — commands, layer contracts, Riverpod DI graph, routing, networking, error mapping, lint | `docs/mobile.md` |
-| The admin dashboard — commands, routing, state, API layer, table/dialog patterns, lint | `docs/dashboard.md` |
-| The backend API — commands, module & infrastructure layout, migrations, conventions | `docs/backend.md` |
-| Any UI — the full design system with rationale and edge cases | `docs/design-system.md` |
+| Topic | Read |
+|---|---|
+| Product concepts, glossary, actors, invariants | `CONTEXT.md` + sub-project `CONTEXT.md` |
+| The validation MVP — spec, scope, codebase audit | `docs/validation-mvp/` |
+| Flutter app — commands, layer contracts, DI graph, routing, networking, lint | `docs/mobile.md` |
+| Admin dashboard — commands, routing, state, API layer, table/dialog patterns | `docs/dashboard.md` |
+| Backend API — commands, module & infrastructure layout, migrations, conventions | `docs/backend.md` |
+| Full design system — rationale and edge cases | `docs/design-system.md` |
 | Auth, tokens, headers, deployment hardening, CI security | `docs/security.md` |
 | Mobile offline sync & conflict resolution | `Vyba-mobile-app/docs/offline_sync.md` |
 | A sub-project's template origin / deep stack reference | that sub-project's `README.md` |
+
+## Agent skills
+
+### Issue tracker
+
+GitHub Issues on `Yobson2/Vyba` via the `gh` CLI (pending `gh auth login`). See
+`docs/agents/issue-tracker.md`.
+
+### Domain docs
+
+Multi-context: root `CONTEXT.md` + one `CONTEXT.md` per sub-project + `docs/adr/`.
+See `docs/agents/domain.md`.

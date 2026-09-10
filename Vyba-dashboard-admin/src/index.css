@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ========================================
-   VYBA LAGOS PULSE — LIGHT MODE (Secondary)
+   VYBA Abidjan PULSE — LIGHT MODE (Secondary)
    Adapted from mobile: inverseSurface / light scaffold
    ======================================== */
 :root {
@@ -27,7 +27,7 @@
   --primary: #6C5CE7;
   --primary-foreground: #FFFFFF;
 
-  /* Secondary — Lagos Emerald container */
+  /* Secondary — Abidjan Emerald container */
   --secondary: #E1FFEC;
   --secondary-foreground: #005A3C;
 
@@ -155,7 +155,7 @@
 }
 
 /* ========================================
-   VYBA LAGOS PULSE — DARK MODE (Primary)
+   VYBA Abidjan PULSE — DARK MODE (Primary)
    Exact tokens from mobile AppColors
    ======================================== */
 .dark {
@@ -175,7 +175,7 @@
   --primary: #B0A3FF;
   --primary-foreground: #000000;
 
-  /* Secondary — Lagos Emerald */
+  /* Secondary — Abidjan Emerald */
   --secondary: #69F6B8;
   --secondary-foreground: #005A3C;
 

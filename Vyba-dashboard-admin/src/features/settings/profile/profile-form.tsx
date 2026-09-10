@@ -43,7 +43,7 @@ const languages = [
 ] as const
 
 const timezones = [
-  { label: 'Africa/Lagos (WAT)', value: 'Africa/Lagos' },
+  { label: 'Africa/Abidjan (WAT)', value: 'Africa/Abidjan' },
   { label: 'Europe/London (GMT)', value: 'Europe/London' },
   { label: 'America/New_York (EST)', value: 'America/New_York' },
   { label: 'Europe/Paris (CET)', value: 'Europe/Paris' },
@@ -83,7 +83,7 @@ const defaultValues: Partial<ProfileFormValues> = {
   email: 'admin@vyba.app',
   bio: 'Vyba platform administrator.',
   language: 'en',
-  timezone: 'Africa/Lagos',
+  timezone: 'Africa/Abidjan',
   urls: [{ value: 'https://vyba.app' }],
 }
 

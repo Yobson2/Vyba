@@ -280,7 +280,7 @@ class _BookTablePageState extends ConsumerState<BookTablePage> {
           _buildZoneCard(
             BookingZone.outdoorTerrace,
             'Outdoor Terrace',
-            'Open-air vibes under the Lagos sky',
+            'Open-air vibes under the Abidjan sky',
             Icons.deck_outlined,
           ),
           AppSpacing.verticalMd,

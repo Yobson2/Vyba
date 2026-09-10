@@ -33,17 +33,17 @@ const nigerianNames = [
   'Zainab Aliyu',
 ]
 
-const lagosVenues = [
+const AbidjanVenues = [
   'Club Quilox',
   'The Place',
-  'Hard Rock Cafe Lagos',
-  'Shiro Lagos',
+  'Hard Rock Cafe Abidjan',
+  'Shiro Abidjan',
   'Escape Nightclub',
   'Sky Lounge VI',
   'Ember Creek',
   'NOK by Alara',
   'Craft Gourmet',
-  'RSVP Lagos',
+  'RSVP Abidjan',
   'The Vault Lounge',
   'Mood Bar & Grill',
   'Afropolitan Vibes',
@@ -66,7 +66,7 @@ export const bookings = Array.from({ length: 30 }, (_, i) => {
         lastName: name.split(' ')[1],
       })
       .toLowerCase(),
-    venueName: faker.helpers.arrayElement(lagosVenues),
+    venueName: faker.helpers.arrayElement(AbidjanVenues),
     date: faker.date.soon({ days: 30 }),
     timeSlot: faker.helpers.arrayElement(timeSlots),
     guestCount: faker.number.int({ min: 1, max: 12 }),

@@ -24,7 +24,7 @@ class MockReviewDatasource {
             venueId: 'v1',
             rating: 5,
             text:
-                'Best lounge in Lagos hands down. The VIP section is worth '
+                'Best lounge in Abidjan hands down. The VIP section is worth '
                 'every naira. Staff were super attentive.',
             createdAt: DateTime.now().subtract(const Duration(days: 3)),
           ),

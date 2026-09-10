@@ -39,7 +39,7 @@ class AppColors {
   /// Inverse primary.
   static const Color inversePrimary = Color(0xFF494BD7);
 
-  // ── Secondary (Lagos Emerald — availability/success ONLY) ──────
+  // ── Secondary (Abidjan Emerald — availability/success ONLY) ──────
 
   /// Secondary — availability, positive status signals.
   static const Color secondary = Color(0xFF69F6B8);

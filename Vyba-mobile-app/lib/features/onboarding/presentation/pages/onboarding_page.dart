@@ -301,7 +301,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
             ),
             // Footer
             Text(
-              'POWERED BY LAGOS PULSE VIP NETWORK',
+              'POWERED BY Abidjan PULSE VIP NETWORK',
               style: Theme.of(context).textTheme.labelSmall?.copyWith(
                     color:
                         AppColors.onSurfaceVariant.withValues(alpha: 0.4),

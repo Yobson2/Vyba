@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker'
 
-const nigerianCities = ['Lagos', 'Abuja', 'Port Harcourt', 'Ibadan', 'Kano']
+const nigerianCities = ['Abidjan', 'Abuja', 'Port Harcourt', 'Ibadan', 'Kano']
 const nigerianNames = [
   'Adeola Johnson',
   'Tunde Bakare',

@@ -311,7 +311,7 @@ class _HighlightedBody extends StatelessWidget {
 
   /// Known venue names to highlight.
   static const _venueNames = [
-    'Sky Lounge Lagos',
+    'Sky Lounge Abidjan',
     'Lagoon Restaurant',
     'Quilox Nightclub',
   ];

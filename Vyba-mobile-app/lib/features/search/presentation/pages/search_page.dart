@@ -20,7 +20,7 @@ class _SearchPageState extends ConsumerState<SearchPage> {
   int _budgetLevel = 2;
   double _minRating = 3.0;
 
-  static const _recentSearches = ['Zaza Lagos', 'Rooftop bars', 'VIP'];
+  static const _recentSearches = ['Zaza Abidjan', 'Rooftop bars', 'VIP'];
   static const _trendingSearches = [
     'Beach clubs',
     'Live music tonight',

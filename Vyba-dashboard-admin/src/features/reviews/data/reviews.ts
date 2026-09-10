@@ -28,17 +28,17 @@ const nigerianNames = [
   'Olumide Ogunleye',
 ]
 
-const lagosVenues = [
+const AbidjanVenues = [
   'Club Quilox',
   'The Place',
-  'Hard Rock Cafe Lagos',
-  'Shiro Lagos',
+  'Hard Rock Cafe Abidjan',
+  'Shiro Abidjan',
   'Escape Nightclub',
   'Sky Lounge VI',
   'Ember Creek',
   'NOK by Alara',
   'Craft Gourmet',
-  'RSVP Lagos',
+  'RSVP Abidjan',
   'The Vault Lounge',
   'Mood Bar & Grill',
   'Afropolitan Vibes',
@@ -47,12 +47,12 @@ const lagosVenues = [
 ]
 
 const reviewTexts = [
-  'Amazing vibe and great music selection. The DJ really knows how to keep the energy going all night long in Lagos.',
+  'Amazing vibe and great music selection. The DJ really knows how to keep the energy going all night long in Abidjan.',
   'Overpriced drinks and the service was incredibly slow. Waited 40 minutes for a simple cocktail. Not coming back.',
-  'Best nightlife spot on the island! The outdoor terrace has a stunning view of the Lagos lagoon. Highly recommend.',
+  'Best nightlife spot on the island! The outdoor terrace has a stunning view of the Abidjan lagoon. Highly recommend.',
   'The VIP section is worth every naira. Premium service, dedicated waitstaff, and top-shelf bottles.',
   'Average experience. Music was too loud to have a conversation, but the atmosphere was decent for a Saturday night.',
-  'Absolutely loved the live band performance. Afrobeats and highlife classics — pure Lagos energy.',
+  'Absolutely loved the live band performance. Afrobeats and highlife classics — pure Abidjan energy.',
   'Security was rude and the bouncers were very aggressive at the door. Killed the entire mood before we even got in.',
   'Perfect for date night. Intimate setting, great cocktails, and the dim lighting creates a wonderful ambiance.',
   'This place has gone downhill. Used to be the best in Lekki but now it feels neglected. Dirty restrooms.',
@@ -64,13 +64,13 @@ const reviewTexts = [
   'Love the new renovation. The indoor lounge area feels much more spacious and the decor is very modern.',
   'Drinks are reasonably priced compared to other spots on Victoria Island. The cocktail menu is creative.',
   'Terrible sound system. The bass was distorted and you could barely hear the vocals. Very disappointing.',
-  'Great place to unwind after a long week. The rooftop bar has the best sunset views in Lagos.',
+  'Great place to unwind after a long week. The rooftop bar has the best sunset views in Abidjan.',
   'Staff was incredibly friendly and attentive. They remembered our names by the second visit.',
   'Not worth the hype. Went on a Friday and it was half empty. The online buzz does not match reality.',
   'The themed nights are brilliant. Throwback Thursday with 90s music is my absolute favorite.',
   'Cocktails are creative but the portions are small for the price. Style over substance unfortunately.',
-  'One of the few places in Lagos where you feel genuinely safe. Well-managed security and CCTV everywhere.',
-  'The AC was broken during our visit. In Lagos heat that is unforgivable. Fix your infrastructure.',
+  'One of the few places in Abidjan where you feel genuinely safe. Well-managed security and CCTV everywhere.',
+  'The AC was broken during our visit. In Abidjan heat that is unforgivable. Fix your infrastructure.',
   'Hands down the best karaoke night in town. Great song selection and the crowd is always supportive.',
 ]
 
@@ -89,7 +89,7 @@ export const reviews = Array.from({ length: 25 }, (_, i) => {
         lastName: name.split(' ')[1],
       })
       .toLowerCase(),
-    venueName: faker.helpers.arrayElement(lagosVenues),
+    venueName: faker.helpers.arrayElement(AbidjanVenues),
     rating: faker.helpers.arrayElement([
       1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.0, 4.5, 4.5, 5.0, 5.0,
     ]),

@@ -104,7 +104,7 @@ const recentActivity = [
   {
     id: 3,
     actor: 'Chioma Nwankwo',
-    action: 'Left a 5-star review for Hard Rock Lagos',
+    action: 'Left a 5-star review for Hard Rock Abidjan',
     time: '15 min ago',
   },
   {

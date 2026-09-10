@@ -7,10 +7,10 @@ class MockFavoriteDatasource {
           'v1': Favorite(
             id: 'fav_1',
             venueId: 'v1',
-            name: 'Sky Lounge Lagos',
+            name: 'Sky Lounge Abidjan',
             image: 'https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?w=800',
             rating: 4.8,
-            address: 'Victoria Island, Lagos',
+            address: 'Victoria Island, Abidjan',
             favoritedAt: DateTime.now().subtract(const Duration(days: 2)),
           ),
           'v2': Favorite(
@@ -58,7 +58,7 @@ class MockFavoriteDatasource {
       name: 'Venue $venueId',
       image: 'https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?w=800',
       rating: 4,
-      address: 'Lagos, Nigeria',
+      address: 'Abidjan, Nigeria',
       favoritedAt: DateTime.now(),
     );
     return true;

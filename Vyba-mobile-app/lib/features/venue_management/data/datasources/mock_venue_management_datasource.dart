@@ -12,9 +12,9 @@ class MockVenueManagementDataSource implements VenueManagementDataSource {
       id: 'v-001',
       name: 'The Vibe Lounge',
       description:
-          'Lagos premier nightlife destination with world-class DJs, '
+          'Abidjan premier nightlife destination with world-class DJs, '
           'craft cocktails, and an electric atmosphere.',
-      address: '23 Admiralty Way, Lekki Phase 1, Lagos',
+      address: '23 Admiralty Way, Lekki Phase 1, Abidjan',
       phone: '+234 801 234 5678',
       openingHours: {
         'Mon-Thu': '5:00 PM - 2:00 AM',
@@ -42,9 +42,9 @@ class MockVenueManagementDataSource implements VenueManagementDataSource {
       id: 'v-002',
       name: 'Velvet Rooftop',
       description:
-          'An elegant rooftop bar offering panoramic views of the Lagos '
+          'An elegant rooftop bar offering panoramic views of the Abidjan '
           'skyline, signature cocktails, and live acoustic performances.',
-      address: '15 Victoria Island Road, Victoria Island, Lagos',
+      address: '15 Victoria Island Road, Victoria Island, Abidjan',
       phone: '+234 802 345 6789',
       openingHours: {
         'Mon-Thu': '6:00 PM - 1:00 AM',

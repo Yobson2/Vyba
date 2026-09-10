@@ -128,8 +128,8 @@ const venueTypeDistribution = [
 const topVenues = [
   { name: 'Club Quilox', bookings: 342, revenue: 4200000 },
   { name: 'Atmosphere Rooftop', bookings: 289, revenue: 3100000 },
-  { name: 'Shiro Lagos', bookings: 256, revenue: 2800000 },
-  { name: 'Hard Rock Lagos', bookings: 234, revenue: 2500000 },
+  { name: 'Shiro Abidjan', bookings: 256, revenue: 2800000 },
+  { name: 'Hard Rock Abidjan', bookings: 234, revenue: 2500000 },
   { name: 'Sky Lounge', bookings: 198, revenue: 1900000 },
 ]
 

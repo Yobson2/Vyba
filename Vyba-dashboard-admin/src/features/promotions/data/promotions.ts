@@ -1,16 +1,16 @@
 import { faker } from '@faker-js/faker'
 
-const lagosVenues = [
+const AbidjanVenues = [
   'Club Quilox',
   'The Place',
-  'Hard Rock Cafe Lagos',
-  'Shiro Lagos',
+  'Hard Rock Cafe Abidjan',
+  'Shiro Abidjan',
   'Escape Nightclub',
   'Sky Lounge VI',
   'Ember Creek',
   'NOK by Alara',
   'Craft Gourmet',
-  'RSVP Lagos',
+  'RSVP Abidjan',
   'The Vault Lounge',
   'Mood Bar & Grill',
   'Afropolitan Vibes',
@@ -43,12 +43,12 @@ const promoTitles = [
 
 const promoDescriptions = [
   'Enjoy half-price cocktails and appetizers every Friday from 5pm to 8pm. Perfect way to start the weekend.',
-  'Free entry for ladies before 11pm with complimentary welcome drink. Music by top Lagos DJs.',
+  'Free entry for ladies before 11pm with complimentary welcome drink. Music by top Abidjan DJs.',
   'Get 20% off all food and drinks this weekend. No minimum spend required.',
   'Experience the best of Afrobeats and Amapiano with resident DJ Spinall. Doors open at 9pm.',
   'Buy one get one free on all cocktails every Monday. The perfect cure for Monday blues.',
   'Exclusive VIP table package includes a bottle of premium spirit, mixers, and dedicated service.',
-  'Watch the sunset over the Lagos lagoon with acoustic performances and craft cocktails.',
+  'Watch the sunset over the Abidjan lagoon with acoustic performances and craft cocktails.',
   'Throwback Afrobeats classics every Thursday night. Free entry before 10pm.',
   'Show your student ID for 30% off entry and 15% off drinks. Valid any weeknight.',
   'Ring in the new year with live performances, premium open bar, and fireworks display.',
@@ -60,7 +60,7 @@ const promoDescriptions = [
   'Sunday pool party with BBQ, cocktails, and music. Family-friendly until 6pm.',
   'Celebrate your birthday month with a free cake and 25% off your total bill.',
   'Professional networking event with complimentary canapes and business card exchange.',
-  'Two-day music festival featuring the hottest acts in Lagos. Early bird tickets available.',
+  'Two-day music festival featuring the hottest acts in Abidjan. Early bird tickets available.',
   'Midweek special: 40% off all main courses Tuesday through Thursday.',
 ]
 
@@ -68,7 +68,7 @@ export const promotions = Array.from({ length: 20 }, (_, i) => ({
   id: faker.string.uuid(),
   title: promoTitles[i] ?? faker.commerce.productName(),
   description: promoDescriptions[i] ?? faker.lorem.sentences(2),
-  venueName: faker.helpers.arrayElement(lagosVenues),
+  venueName: faker.helpers.arrayElement(AbidjanVenues),
   promoType: faker.helpers.arrayElement([
     'happy_hour',
     'event',

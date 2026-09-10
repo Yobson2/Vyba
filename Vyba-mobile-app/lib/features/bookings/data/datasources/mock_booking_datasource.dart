@@ -15,7 +15,7 @@ abstract class BookingDataSource {
   Future<void> cancelBooking(String bookingId);
 }
 
-/// Mock implementation with sample Lagos venue bookings.
+/// Mock implementation with sample Abidjan venue bookings.
 class MockBookingDataSource implements BookingDataSource {
   final List<Booking> _bookings = [
     Booking(
@@ -36,7 +36,7 @@ class MockBookingDataSource implements BookingDataSource {
     Booking(
       id: 'bk-002',
       venueId: '3',
-      venueName: 'Zaza Lagos',
+      venueName: 'Zaza Abidjan',
       venueImage:
           'https://images.unsplash.com/photo-1571204829887-3b8d69e4094d?w=800',
       date: DateTime.now().add(const Duration(days: 5)),
@@ -99,7 +99,7 @@ class MockBookingDataSource implements BookingDataSource {
     final venueNames = {
       '1': 'The Vibe Lounge',
       '2': 'Jazzhole Cocody',
-      '3': 'Zaza Lagos',
+      '3': 'Zaza Abidjan',
       '4': 'Moist Beach Club',
       '5': 'Velvet Rooftop',
       '6': 'Shiro Restaurant',

@@ -25,7 +25,7 @@ export const sidebarData: SidebarData = {
     {
       name: 'Vyba Admin',
       logo: Logo,
-      plan: 'Lagos Pulse',
+      plan: 'Abidjan Pulse',
     },
   ],
   navGroups: [

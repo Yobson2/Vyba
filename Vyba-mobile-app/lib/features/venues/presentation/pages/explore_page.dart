@@ -49,7 +49,7 @@ class ExplorePage extends ConsumerWidget {
                     color: AppColors.primary, size: 20),
                 const SizedBox(width: 6),
                 Text(
-                  'LAGOS',
+                  'Abidjan',
                   style: GoogleFonts.epilogue(
                     fontSize: 14,
                     fontWeight: FontWeight.w700,

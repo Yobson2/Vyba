@@ -26,7 +26,7 @@ const features = [
     icon: IconBuilding,
     title: 'Venue Management',
     description:
-      'Manage venues, approve applications, and monitor listings across Lagos and beyond.',
+      'Manage venues, approve applications, and monitor listings across Abidjan and beyond.',
   },
   {
     icon: IconCalendarEvent,
@@ -67,13 +67,13 @@ export default function LandingPage() {
       <section className='container mx-auto px-4 py-20 text-center sm:px-6 sm:py-32 lg:px-8'>
         <AnimatedContainer variant='fadeSlideUp'>
           <h1 className='text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl'>
-            Lagos Nightlife,
+            Abidjan Nightlife,
             <br />
             <span className='text-primary'>Under Control</span>
           </h1>
           <p className='text-muted-foreground mx-auto mt-6 max-w-2xl text-lg'>
             The Vyba Admin Dashboard — manage venues, bookings, reviews, and
-            promotions for Lagos&apos;s premier nightlife discovery platform.
+            promotions for Abidjan&apos;s premier nightlife discovery platform.
           </p>
           <div className='mt-10 flex items-center justify-center gap-4'>
             <Button size='lg' asChild>

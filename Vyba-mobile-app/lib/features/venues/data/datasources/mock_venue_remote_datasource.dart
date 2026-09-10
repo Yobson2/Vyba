@@ -2,7 +2,7 @@ import 'package:flutter_templates/features/venues/data/datasources/venue_remote_
 import 'package:flutter_templates/features/venues/data/models/venue_menu_model.dart';
 import 'package:flutter_templates/features/venues/data/models/venue_model.dart';
 
-/// Mock implementation with sample Lagos venues.
+/// Mock implementation with sample Abidjan venues.
 class MockVenueRemoteDataSource implements VenueRemoteDataSource {
   static const _mockVenues = [
     VenueModel(
@@ -10,7 +10,7 @@ class MockVenueRemoteDataSource implements VenueRemoteDataSource {
       name: 'The Vibe Lounge',
       description:
           'Set in the heart of Victoria Island, The Vibe Lounge offers an unmatched nightlife experience with world-class DJs, an exquisite cocktail menu, and an exclusive atmosphere with indoor-outdoor seating.',
-      address: 'Victoria Island, Lagos',
+      address: 'Victoria Island, Abidjan',
       latitude: 6.4281,
       longitude: 3.4219,
       heroImages: [
@@ -34,7 +34,7 @@ class MockVenueRemoteDataSource implements VenueRemoteDataSource {
       id: '2',
       name: 'Jazzhole Cocody',
       description:
-          'A sophisticated jazz bar with live performances every weekend. Enjoy premium cocktails in an intimate setting with the best acoustic experience in Lagos.',
+          'A sophisticated jazz bar with live performances every weekend. Enjoy premium cocktails in an intimate setting with the best acoustic experience in Abidjan.',
       address: 'Cocody, Abidjan',
       latitude: 6.4541,
       longitude: 3.3947,
@@ -52,10 +52,10 @@ class MockVenueRemoteDataSource implements VenueRemoteDataSource {
     ),
     VenueModel(
       id: '3',
-      name: 'Zaza Lagos',
+      name: 'Zaza Abidjan',
       description:
-          'The premier VIP nightclub in Lagos with state-of-the-art sound systems, exclusive bottle service, and the hottest DJs in West Africa.',
-      address: 'Lekki Phase 1, Lagos',
+          'The premier VIP nightclub in Abidjan with state-of-the-art sound systems, exclusive bottle service, and the hottest DJs in West Africa.',
+      address: 'Lekki Phase 1, Abidjan',
       latitude: 6.4350,
       longitude: 3.4700,
       heroImages: [
@@ -80,7 +80,7 @@ class MockVenueRemoteDataSource implements VenueRemoteDataSource {
       name: 'Moist Beach Club',
       description:
           'Beachfront dining and entertainment with ocean views. Perfect for sunset cocktails and late-night dancing under the stars.',
-      address: 'Oniru Beach, Lagos',
+      address: 'Oniru Beach, Abidjan',
       latitude: 6.4200,
       longitude: 3.4400,
       heroImages: [
@@ -100,7 +100,7 @@ class MockVenueRemoteDataSource implements VenueRemoteDataSource {
       name: 'Velvet Rooftop',
       description:
           'Elevated dining and lounge experience with panoramic city views. The rooftop features a curated cocktail menu and weekend DJ sets.',
-      address: 'Ikoyi, Lagos',
+      address: 'Ikoyi, Abidjan',
       latitude: 6.4500,
       longitude: 3.4300,
       heroImages: [
@@ -121,7 +121,7 @@ class MockVenueRemoteDataSource implements VenueRemoteDataSource {
       name: 'Shiro Restaurant',
       description:
           'Award-winning Pan-Asian restaurant with a vibrant bar scene. Known for exquisite sushi and premium sake selection.',
-      address: 'Victoria Island, Lagos',
+      address: 'Victoria Island, Abidjan',
       latitude: 6.4310,
       longitude: 3.4250,
       heroImages: [
@@ -161,7 +161,7 @@ class MockVenueRemoteDataSource implements VenueRemoteDataSource {
     return const VenueMenuModel(
       categories: [
         MenuCategoryModel(name: 'Cocktails', items: [
-          MenuItemModel(id: 'm1', name: 'Lagos Sunset', price: 5500, description: 'Rum, mango, passion fruit, lime'),
+          MenuItemModel(id: 'm1', name: 'Abidjan Sunset', price: 5500, description: 'Rum, mango, passion fruit, lime'),
           MenuItemModel(id: 'm2', name: 'Neon Negroni', price: 6000, description: 'Gin, Campari, sweet vermouth'),
           MenuItemModel(id: 'm3', name: 'Palm Wine Spritz', price: 4500, description: 'Palm wine, prosecco, elderflower'),
         ]),
