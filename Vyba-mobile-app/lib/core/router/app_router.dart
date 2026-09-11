@@ -1,41 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_templates/core/enums/user_role.dart';
-import 'package:flutter_templates/core/theme/app_colors.dart';
 import 'package:flutter_templates/core/providers/analytics_provider.dart';
 import 'package:flutter_templates/core/providers/storage_providers.dart';
 import 'package:flutter_templates/core/router/analytics_observer.dart';
 import 'package:flutter_templates/core/router/page_transitions.dart';
 import 'package:flutter_templates/core/router/route_names.dart';
-import 'package:flutter_templates/features/auth/presentation/pages/forgot_password_page.dart';
+import 'package:flutter_templates/core/theme/app_colors.dart';
 import 'package:flutter_templates/features/auth/presentation/pages/login_page.dart';
 import 'package:flutter_templates/features/auth/presentation/pages/otp_verification_page.dart';
-import 'package:flutter_templates/features/auth/presentation/pages/register_page.dart';
 import 'package:flutter_templates/features/auth/presentation/providers/auth_notifier.dart';
 import 'package:flutter_templates/features/auth/presentation/providers/auth_state.dart';
+import 'package:flutter_templates/features/favorites/presentation/pages/favorites_page.dart';
+import 'package:flutter_templates/features/feed/presentation/pages/feed_page.dart';
 import 'package:flutter_templates/features/home/presentation/pages/client_shell.dart';
 import 'package:flutter_templates/features/home/presentation/pages/owner_shell.dart';
 import 'package:flutter_templates/features/home/presentation/pages/profile_page.dart';
 import 'package:flutter_templates/features/home/presentation/pages/settings_page.dart';
+import 'package:flutter_templates/features/notifications/presentation/pages/notifications_page.dart';
 import 'package:flutter_templates/features/onboarding/presentation/pages/onboarding_page.dart';
+import 'package:flutter_templates/features/owner_dashboard/presentation/pages/owner_dashboard_page.dart';
+import 'package:flutter_templates/features/promotions/presentation/pages/create_promotion_page.dart';
 import 'package:flutter_templates/features/role_selection/presentation/pages/role_selection_page.dart';
 import 'package:flutter_templates/features/splash/presentation/pages/splash_page.dart';
 import 'package:flutter_templates/features/venues/presentation/pages/explore_page.dart';
 import 'package:flutter_templates/features/venues/presentation/pages/venue_detail_page.dart';
-import 'package:flutter_templates/features/venues/presentation/pages/venue_menu_page.dart';
-import 'package:flutter_templates/features/bookings/presentation/pages/book_table_page.dart';
-import 'package:flutter_templates/features/bookings/presentation/pages/booking_confirmation_page.dart';
-import 'package:flutter_templates/features/bookings/presentation/pages/my_bookings_page.dart';
-import 'package:flutter_templates/features/favorites/presentation/pages/favorites_page.dart';
-import 'package:flutter_templates/features/feed/presentation/pages/feed_page.dart';
-import 'package:flutter_templates/features/notifications/presentation/pages/notifications_page.dart';
-import 'package:flutter_templates/features/owner_analytics/presentation/pages/owner_analytics_page.dart';
-import 'package:flutter_templates/features/owner_bookings/presentation/pages/manage_bookings_page.dart';
-import 'package:flutter_templates/features/owner_dashboard/presentation/pages/owner_dashboard_page.dart';
-import 'package:flutter_templates/features/promotions/presentation/pages/create_promotion_page.dart';
-import 'package:flutter_templates/features/reviews/presentation/pages/write_review_page.dart';
-import 'package:flutter_templates/features/search/presentation/pages/search_page.dart';
-import 'package:flutter_templates/features/venue_management/presentation/pages/my_venues_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -44,10 +33,8 @@ part 'app_router.g.dart';
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _clientExploreKey = GlobalKey<NavigatorState>();
 final _clientFeedKey = GlobalKey<NavigatorState>();
-final _clientBookingsKey = GlobalKey<NavigatorState>();
 final _clientProfileKey = GlobalKey<NavigatorState>();
 final _ownerDashboardKey = GlobalKey<NavigatorState>();
-final _ownerBookingsKey = GlobalKey<NavigatorState>();
 final _ownerPromosKey = GlobalKey<NavigatorState>();
 final _ownerProfileKey = GlobalKey<NavigatorState>();
 
@@ -57,8 +44,6 @@ const _publicPaths = [
   RouteNames.onboarding,
   RouteNames.roleSelection,
   RouteNames.login,
-  RouteNames.register,
-  RouteNames.forgotPassword,
   RouteNames.otpVerification,
 ];
 
@@ -144,7 +129,7 @@ GoRouter appRouter(Ref ref) {
         builder: (context, state) => const RoleSelectionPage(),
       ),
 
-      // Auth routes
+      // Auth routes (phone-OTP only)
       GoRoute(
         path: RouteNames.login,
         name: RouteNames.loginName,
@@ -152,16 +137,6 @@ GoRouter appRouter(Ref ref) {
           key: state.pageKey,
           child: const LoginPage(),
         ),
-      ),
-      GoRoute(
-        path: RouteNames.register,
-        name: RouteNames.registerName,
-        builder: (context, state) => const RegisterPage(),
-      ),
-      GoRoute(
-        path: RouteNames.forgotPassword,
-        name: RouteNames.forgotPasswordName,
-        builder: (context, state) => const ForgotPasswordPage(),
       ),
       GoRoute(
         path: RouteNames.otpVerification,
@@ -173,7 +148,7 @@ GoRouter appRouter(Ref ref) {
       ),
 
       // ════════════════════════════════════════════════════════════
-      // CLIENT SHELL (4 tabs: Explore, Feed, Bookings, Profile)
+      // CLIENT SHELL (3 tabs: Explore, Feed, Profile)
       // ════════════════════════════════════════════════════════════
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) =>
@@ -196,44 +171,6 @@ GoRouter appRouter(Ref ref) {
                       final venueId = state.pathParameters['venueId']!;
                       return VenueDetailPage(venueId: venueId);
                     },
-                    routes: [
-                      // Book Table
-                      GoRoute(
-                        path: RouteNames.bookTable,
-                        name: RouteNames.bookTableName,
-                        builder: (context, state) {
-                          final venueId = state.pathParameters['venueId']!;
-                          return BookTablePage(
-                            venueId: venueId,
-                            venueName: 'Venue',
-                          );
-                        },
-                      ),
-                      // Venue Menu
-                      GoRoute(
-                        path: RouteNames.venueMenu,
-                        name: RouteNames.venueMenuName,
-                        builder: (context, state) {
-                          final venueId = state.pathParameters['venueId']!;
-                          return VenueMenuPage(venueId: venueId);
-                        },
-                      ),
-                      // Write Review
-                      GoRoute(
-                        path: RouteNames.writeReview,
-                        name: RouteNames.writeReviewName,
-                        builder: (context, state) {
-                          final venueId = state.pathParameters['venueId']!;
-                          return WriteReviewPage(venueId: venueId);
-                        },
-                      ),
-                    ],
-                  ),
-                  // Search
-                  GoRoute(
-                    path: RouteNames.search,
-                    name: RouteNames.searchName,
-                    builder: (context, state) => const SearchPage(),
                   ),
                   // Favorites
                   GoRoute(
@@ -256,18 +193,7 @@ GoRouter appRouter(Ref ref) {
               ),
             ],
           ),
-          // Branch 2: Bookings
-          StatefulShellBranch(
-            navigatorKey: _clientBookingsKey,
-            routes: [
-              GoRoute(
-                path: RouteNames.clientBookings,
-                name: RouteNames.clientBookingsName,
-                builder: (context, state) => const MyBookingsPage(),
-              ),
-            ],
-          ),
-          // Branch 3: Profile
+          // Branch 2: Profile
           StatefulShellBranch(
             navigatorKey: _clientProfileKey,
             routes: [
@@ -284,8 +210,7 @@ GoRouter appRouter(Ref ref) {
                   GoRoute(
                     path: RouteNames.notifications,
                     name: RouteNames.notificationsName,
-                    builder: (context, state) =>
-                        const NotificationsPage(),
+                    builder: (context, state) => const NotificationsPage(),
                   ),
                 ],
               ),
@@ -295,7 +220,7 @@ GoRouter appRouter(Ref ref) {
       ),
 
       // ════════════════════════════════════════════════════════════
-      // OWNER SHELL (4 tabs: Dashboard, Bookings, Promos, Profile)
+      // OWNER SHELL (3 tabs: Dashboard, Promos, Profile)
       // ════════════════════════════════════════════════════════════
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) =>
@@ -308,38 +233,11 @@ GoRouter appRouter(Ref ref) {
               GoRoute(
                 path: RouteNames.ownerDashboard,
                 name: RouteNames.ownerDashboardName,
-                builder: (context, state) =>
-                    const OwnerDashboardPage(),
-                routes: [
-                  GoRoute(
-                    path: RouteNames.ownerAnalytics,
-                    name: RouteNames.ownerAnalyticsName,
-                    builder: (context, state) =>
-                        const OwnerAnalyticsPage(),
-                  ),
-                  GoRoute(
-                    path: RouteNames.myVenues,
-                    name: RouteNames.myVenuesName,
-                    builder: (context, state) =>
-                        const MyVenuesPage(),
-                  ),
-                ],
+                builder: (context, state) => const OwnerDashboardPage(),
               ),
             ],
           ),
-          // Branch 1: Owner Bookings
-          StatefulShellBranch(
-            navigatorKey: _ownerBookingsKey,
-            routes: [
-              GoRoute(
-                path: RouteNames.ownerBookings,
-                name: RouteNames.ownerBookingsName,
-                builder: (context, state) =>
-                    const ManageBookingsPage(),
-              ),
-            ],
-          ),
-          // Branch 2: Promos
+          // Branch 1: Promos
           StatefulShellBranch(
             navigatorKey: _ownerPromosKey,
             routes: [
@@ -347,23 +245,22 @@ GoRouter appRouter(Ref ref) {
                 path: RouteNames.ownerPromos,
                 name: RouteNames.ownerPromosName,
                 builder: (context, state) {
-                  return Scaffold(
+                  return const Scaffold(
                     backgroundColor: AppColors.background,
-                    body: const Center(child: Text('My Promotions')),
+                    body: Center(child: Text('My Promotions')),
                   );
                 },
                 routes: [
                   GoRoute(
                     path: RouteNames.createPromotion,
                     name: RouteNames.createPromotionName,
-                    builder: (context, state) =>
-                        const CreatePromotionPage(),
+                    builder: (context, state) => const CreatePromotionPage(),
                   ),
                 ],
               ),
             ],
           ),
-          // Branch 3: Owner Profile
+          // Branch 2: Owner Profile
           StatefulShellBranch(
             navigatorKey: _ownerProfileKey,
             routes: [

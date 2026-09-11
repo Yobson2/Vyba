@@ -118,7 +118,7 @@ class ProfilePage extends ConsumerWidget {
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Row(
                 children: [
-                  _StatCard(value: '12', label: 'Bookings'),
+                  _StatCard(value: '12', label: 'Sorties'),
                   const SizedBox(width: 8),
                   _StatCard(value: '8', label: 'Favorites'),
                   const SizedBox(width: 8),
@@ -178,8 +178,8 @@ class ProfilePage extends ConsumerWidget {
                       onPressed: () {
                         ref.read(authNotifierProvider.notifier).logout();
                       },
-                      icon: const Icon(
-                          Icons.logout, color: AppColors.error, size: 18),
+                      icon: const Icon(Icons.logout,
+                          color: AppColors.error, size: 18),
                       label: Text(
                         'Logout',
                         style: Theme.of(context).textTheme.labelLarge?.copyWith(

@@ -5,18 +5,24 @@ import 'package:flutter_templates/core/theme/app_colors.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// Owner bottom navigation shell with 4 tabs:
-/// Dashboard, Bookings, Promos, Profile.
+/// Owner bottom navigation shell with 3 tabs:
+/// Dashboard, Promos, Profile.
 class OwnerShell extends StatelessWidget {
   const OwnerShell({required this.navigationShell, super.key});
 
   final StatefulNavigationShell navigationShell;
 
   static const _tabs = [
-    _TabItem(icon: Icons.dashboard_outlined, activeIcon: Icons.dashboard, label: 'Dashboard'),
-    _TabItem(icon: Icons.book_online_outlined, activeIcon: Icons.book_online, label: 'Bookings'),
-    _TabItem(icon: Icons.campaign_outlined, activeIcon: Icons.campaign, label: 'Promos'),
-    _TabItem(icon: Icons.person_outline, activeIcon: Icons.person, label: 'Profile'),
+    _TabItem(
+        icon: Icons.dashboard_outlined,
+        activeIcon: Icons.dashboard,
+        label: 'Dashboard'),
+    _TabItem(
+        icon: Icons.campaign_outlined,
+        activeIcon: Icons.campaign,
+        label: 'Promos'),
+    _TabItem(
+        icon: Icons.person_outline, activeIcon: Icons.person, label: 'Profile'),
   ];
 
   @override
@@ -39,7 +45,8 @@ class OwnerShell extends StatelessWidget {
             ),
             child: SafeArea(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: List.generate(_tabs.length, (index) {
@@ -48,8 +55,7 @@ class OwnerShell extends StatelessWidget {
                     return GestureDetector(
                       onTap: () => navigationShell.goBranch(
                         index,
-                        initialLocation:
-                            index == navigationShell.currentIndex,
+                        initialLocation: index == navigationShell.currentIndex,
                       ),
                       behavior: HitTestBehavior.opaque,
                       child: AnimatedContainer(

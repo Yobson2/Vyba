@@ -4,7 +4,6 @@ import 'package:flutter_templates/core/enums/user_role.dart';
 import 'package:flutter_templates/core/theme/app_colors.dart';
 import 'package:flutter_templates/core/theme/app_spacing.dart';
 import 'package:flutter_templates/core/widgets/buttons/app_gradient_button.dart';
-import 'package:flutter_templates/core/widgets/data_display/app_glass_card.dart';
 import 'package:flutter_templates/features/role_selection/presentation/providers/role_selection_providers.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -171,9 +170,8 @@ class _RoleCard extends StatelessWidget {
                               : AppColors.outlineVariant,
                           width: 2,
                         ),
-                        color: isSelected
-                            ? AppColors.primary
-                            : Colors.transparent,
+                        color:
+                            isSelected ? AppColors.primary : Colors.transparent,
                       ),
                       child: isSelected
                           ? const Icon(Icons.check,

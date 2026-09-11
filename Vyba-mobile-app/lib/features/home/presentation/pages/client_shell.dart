@@ -5,18 +5,24 @@ import 'package:flutter_templates/core/theme/app_colors.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// Client bottom navigation shell with 4 tabs:
-/// Explore, Feed, Bookings, Profile.
+/// Client bottom navigation shell with 3 tabs:
+/// Explore, Feed, Profile.
 class ClientShell extends StatelessWidget {
   const ClientShell({required this.navigationShell, super.key});
 
   final StatefulNavigationShell navigationShell;
 
   static const _tabs = [
-    _TabItem(icon: Icons.explore_outlined, activeIcon: Icons.explore, label: 'Explore'),
-    _TabItem(icon: Icons.dynamic_feed_outlined, activeIcon: Icons.dynamic_feed, label: 'Feed'),
-    _TabItem(icon: Icons.confirmation_number_outlined, activeIcon: Icons.confirmation_number, label: 'Bookings'),
-    _TabItem(icon: Icons.person_outline, activeIcon: Icons.person, label: 'Profile'),
+    _TabItem(
+        icon: Icons.explore_outlined,
+        activeIcon: Icons.explore,
+        label: 'Explore'),
+    _TabItem(
+        icon: Icons.dynamic_feed_outlined,
+        activeIcon: Icons.dynamic_feed,
+        label: 'Feed'),
+    _TabItem(
+        icon: Icons.person_outline, activeIcon: Icons.person, label: 'Profile'),
   ];
 
   @override
@@ -39,7 +45,8 @@ class ClientShell extends StatelessWidget {
             ),
             child: SafeArea(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: List.generate(_tabs.length, (index) {

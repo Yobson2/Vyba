@@ -16,12 +16,6 @@ abstract final class RouteNames {
   static const String login = '/login';
   static const String loginName = 'login';
 
-  static const String register = '/register';
-  static const String registerName = 'register';
-
-  static const String forgotPassword = '/forgot-password';
-  static const String forgotPasswordName = 'forgotPassword';
-
   static const String otpVerification = '/otp-verification';
   static const String otpVerificationName = 'otpVerification';
 
@@ -32,32 +26,12 @@ abstract final class RouteNames {
   static const String feed = '/feed';
   static const String feedName = 'feed';
 
-  static const String clientBookings = '/bookings';
-  static const String clientBookingsName = 'clientBookings';
-
   static const String clientProfile = '/client-profile';
   static const String clientProfileName = 'clientProfile';
 
   // -- Venue routes (nested under explore) --
   static const String venueDetail = 'venue/:venueId';
   static const String venueDetailName = 'venueDetail';
-
-  static const String venueMenu = 'menu';
-  static const String venueMenuName = 'venueMenu';
-
-  static const String bookTable = 'book';
-  static const String bookTableName = 'bookTable';
-
-  static const String writeReview = 'review';
-  static const String writeReviewName = 'writeReview';
-
-  // -- Booking confirmation --
-  static const String bookingConfirmation = ':bookingId/confirmation';
-  static const String bookingConfirmationName = 'bookingConfirmation';
-
-  // -- Search & Filter --
-  static const String search = 'search';
-  static const String searchName = 'search';
 
   // -- Favorites --
   static const String favorites = 'favorites';
@@ -75,9 +49,6 @@ abstract final class RouteNames {
   static const String ownerDashboard = '/owner/dashboard';
   static const String ownerDashboardName = 'ownerDashboard';
 
-  static const String ownerBookings = '/owner/bookings';
-  static const String ownerBookingsName = 'ownerBookings';
-
   static const String ownerPromos = '/owner/promos';
   static const String ownerPromosName = 'ownerPromos';
 
@@ -85,15 +56,6 @@ abstract final class RouteNames {
   static const String ownerProfileName = 'ownerProfile';
 
   // -- Owner sub-routes --
-  static const String ownerAnalytics = 'analytics';
-  static const String ownerAnalyticsName = 'ownerAnalytics';
-
-  static const String myVenues = 'venues';
-  static const String myVenuesName = 'myVenues';
-
-  static const String editVenue = 'edit/:venueId';
-  static const String editVenueName = 'editVenue';
-
   static const String createPromotion = 'create';
   static const String createPromotionName = 'createPromotion';
 
@@ -103,10 +65,4 @@ abstract final class RouteNames {
 
   static const String profile = '/profile';
   static const String profileName = 'profile';
-
-  static const String notes = '/home/notes';
-  static const String notesName = 'notes';
-
-  static const String noteDetail = '/home/notes/detail';
-  static const String noteDetailName = 'noteDetail';
 }

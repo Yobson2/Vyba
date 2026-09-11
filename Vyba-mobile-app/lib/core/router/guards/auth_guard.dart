@@ -18,8 +18,6 @@ String? authGuard(Ref ref, String currentPath) {
     RouteNames.splash,
     RouteNames.onboarding,
     RouteNames.login,
-    RouteNames.register,
-    RouteNames.forgotPassword,
     RouteNames.otpVerification,
   ];
 
