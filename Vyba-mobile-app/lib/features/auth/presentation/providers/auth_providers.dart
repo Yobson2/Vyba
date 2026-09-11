@@ -8,12 +8,9 @@ import 'package:flutter_templates/features/auth/data/datasources/auth_remote_dat
 import 'package:flutter_templates/features/auth/data/datasources/mock_auth_remote_datasource.dart';
 import 'package:flutter_templates/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:flutter_templates/features/auth/domain/repositories/auth_repository.dart';
-import 'package:flutter_templates/features/auth/domain/usecases/forgot_password_usecase.dart';
 import 'package:flutter_templates/features/auth/domain/usecases/get_cached_user_usecase.dart';
-import 'package:flutter_templates/features/auth/domain/usecases/login_usecase.dart';
 import 'package:flutter_templates/features/auth/domain/usecases/login_with_phone_usecase.dart';
 import 'package:flutter_templates/features/auth/domain/usecases/logout_usecase.dart';
-import 'package:flutter_templates/features/auth/domain/usecases/register_usecase.dart';
 import 'package:flutter_templates/features/auth/domain/usecases/verify_otp_usecase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -53,28 +50,10 @@ AuthRepository authRepository(Ref ref) {
   );
 }
 
-/// Provides the [LoginUseCase].
-@riverpod
-LoginUseCase loginUseCase(Ref ref) {
-  return LoginUseCase(ref.watch(authRepositoryProvider));
-}
-
 /// Provides the [LoginWithPhoneUseCase].
 @riverpod
 LoginWithPhoneUseCase loginWithPhoneUseCase(Ref ref) {
   return LoginWithPhoneUseCase(ref.watch(authRepositoryProvider));
-}
-
-/// Provides the [RegisterUseCase].
-@riverpod
-RegisterUseCase registerUseCase(Ref ref) {
-  return RegisterUseCase(ref.watch(authRepositoryProvider));
-}
-
-/// Provides the [ForgotPasswordUseCase].
-@riverpod
-ForgotPasswordUseCase forgotPasswordUseCase(Ref ref) {
-  return ForgotPasswordUseCase(ref.watch(authRepositoryProvider));
 }
 
 /// Provides the [VerifyOtpUseCase].

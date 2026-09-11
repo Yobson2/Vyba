@@ -1,8 +1,5 @@
 import 'package:flutter_templates/core/usecase/usecase.dart';
-import 'package:flutter_templates/features/auth/domain/usecases/forgot_password_usecase.dart';
-import 'package:flutter_templates/features/auth/domain/usecases/login_usecase.dart';
 import 'package:flutter_templates/features/auth/domain/usecases/login_with_phone_usecase.dart';
-import 'package:flutter_templates/features/auth/domain/usecases/register_usecase.dart';
 import 'package:flutter_templates/features/auth/domain/usecases/verify_otp_usecase.dart';
 import 'package:flutter_templates/features/auth/presentation/providers/auth_providers.dart';
 import 'package:flutter_templates/features/auth/presentation/providers/auth_state.dart';
@@ -19,25 +16,6 @@ class AuthNotifier extends _$AuthNotifier {
   @override
   AuthState build() {
     return const AuthState.initial();
-  }
-
-  /// Attempts to log in with [email] and [password].
-  Future<void> login({
-    required String email,
-    required String password,
-  }) async {
-    state = const AuthState.loading();
-    try {
-      final result = await ref.read(loginUseCaseProvider).call(
-            LoginParams(email: email, password: password),
-          );
-      state = result.fold(
-        (failure) => AuthState.error(failure.message),
-        AuthState.authenticated,
-      );
-    } catch (e) {
-      state = AuthState.error(e.toString());
-    }
   }
 
   /// Attempts to log in with phone number and OTP code.
@@ -57,44 +35,6 @@ class AuthNotifier extends _$AuthNotifier {
     } catch (e) {
       state = AuthState.error(e.toString());
     }
-  }
-
-  /// Attempts to register a new account.
-  Future<void> register({
-    required String name,
-    required String email,
-    required String password,
-  }) async {
-    state = const AuthState.loading();
-    try {
-      final result = await ref.read(registerUseCaseProvider).call(
-            RegisterParams(name: name, email: email, password: password),
-          );
-      state = result.fold(
-        (failure) => AuthState.error(failure.message),
-        AuthState.authenticated,
-      );
-    } catch (e) {
-      state = AuthState.error(e.toString());
-    }
-  }
-
-  /// Sends a password reset email.
-  Future<bool> forgotPassword({required String email}) async {
-    state = const AuthState.loading();
-    final result = await ref.read(forgotPasswordUseCaseProvider).call(
-          ForgotPasswordParams(email: email),
-        );
-    return result.fold(
-      (failure) {
-        state = AuthState.error(failure.message);
-        return false;
-      },
-      (_) {
-        state = const AuthState.unauthenticated();
-        return true;
-      },
-    );
   }
 
   /// Verifies the OTP code.

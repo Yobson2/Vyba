@@ -24,9 +24,7 @@ class AuthInterceptor extends QueuedInterceptor {
   /// Paths that do not require authentication.
   /// Matched via exact equality (not contains) to prevent bypasses.
   static const _publicPaths = [
-    ApiEndpoints.login,
-    ApiEndpoints.register,
-    ApiEndpoints.forgotPassword,
+    ApiEndpoints.loginWithPhone,
     ApiEndpoints.verifyOtp,
     ApiEndpoints.refreshToken,
   ];

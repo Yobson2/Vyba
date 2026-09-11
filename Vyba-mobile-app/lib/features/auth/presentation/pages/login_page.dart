@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_templates/core/extensions/context_extensions.dart';
@@ -37,20 +35,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     context.unfocus();
     // Navigate to OTP verification with phone number
     context.push('/otp-verification', extra: '$_countryCode $phone');
-  }
-
-  void _onGoogleLogin() {
-    ref.read(authNotifierProvider.notifier).login(
-          email: 'test@gmail.com',
-          password: 'passworD@123',
-        );
-  }
-
-  void _onAppleLogin() {
-    ref.read(authNotifierProvider.notifier).login(
-          email: 'test@gmail.com',
-          password: 'passworD@123',
-        );
   }
 
   @override
@@ -170,56 +154,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     label: 'Continue',
                     isLoading: isLoading,
                   ),
-                  const SizedBox(height: 32),
-                  // Divider
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          height: 1,
-                          color: AppColors.outlineVariant.withValues(alpha: 0.2),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Text(
-                          'OR CURATED ENTRY VIA',
-                          style:
-                              Theme.of(context).textTheme.labelSmall?.copyWith(
-                                    color: AppColors.onSurfaceVariant,
-                                    letterSpacing: 1.5,
-                                  ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          height: 1,
-                          color: AppColors.outlineVariant.withValues(alpha: 0.2),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 24),
-                  // Social login buttons
-                  Row(
-                    children: [
-                      Expanded(
-                        child: _SocialButton(
-                          icon: Icons.g_mobiledata_rounded,
-                          label: 'Google',
-                          onPressed: _onGoogleLogin,
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: _SocialButton(
-                          icon: Icons.apple,
-                          label: 'Apple',
-                          onPressed: _onAppleLogin,
-                        ),
-                      ),
-                    ],
-                  ),
                   const SizedBox(height: 48),
                   // Disclaimer
                   Center(
@@ -227,8 +161,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       'BY CONTINUING, YOU AGREE TO OUR\nPRIVACY RITUALS & TERMS OF ACCESS',
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                            color:
-                                AppColors.onSurfaceVariant.withValues(alpha: 0.5),
+                            color: AppColors.onSurfaceVariant
+                                .withValues(alpha: 0.5),
                             letterSpacing: 1,
                           ),
                     ),
@@ -239,51 +173,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _SocialButton extends StatelessWidget {
-  const _SocialButton({
-    required this.icon,
-    required this.label,
-    required this.onPressed,
-  });
-
-  final IconData icon;
-  final String label;
-  final VoidCallback onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: const BorderRadius.all(Radius.circular(12)),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-        child: Material(
-          color: AppColors.glassBg,
-          child: InkWell(
-            onTap: onPressed,
-            borderRadius: const BorderRadius.all(Radius.circular(12)),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 14),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(icon, color: AppColors.onSurface, size: 20),
-                  const SizedBox(width: 8),
-                  Text(
-                    label,
-                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          color: AppColors.onSurface,
-                        ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
       ),
     );
   }

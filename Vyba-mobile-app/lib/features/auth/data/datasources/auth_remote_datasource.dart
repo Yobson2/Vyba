@@ -6,22 +6,6 @@ import 'package:flutter_templates/features/auth/data/models/user_model.dart';
 
 /// Remote data source for authentication API calls.
 abstract class AuthRemoteDataSource {
-  /// POST login.
-  Future<({UserModel user, TokensModel tokens})> login({
-    required String email,
-    required String password,
-  });
-
-  /// POST register.
-  Future<({UserModel user, TokensModel tokens})> register({
-    required String name,
-    required String email,
-    required String password,
-  });
-
-  /// POST forgot password.
-  Future<void> forgotPassword({required String email});
-
   /// POST verify OTP.
   Future<void> verifyOtp({required String email, required String code});
 
@@ -41,65 +25,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   const AuthRemoteDataSourceImpl(this._dio);
 
   final Dio _dio;
-
-  @override
-  Future<({UserModel user, TokensModel tokens})> login({
-    required String email,
-    required String password,
-  }) async {
-    try {
-      final response = await _dio.post<Map<String, dynamic>>(
-        ApiEndpoints.login,
-        data: {'email': email, 'password': password},
-      );
-      final data = response.data;
-      if (data == null) {
-        throw const ServerException(message: 'Empty response from server');
-      }
-      return _parseAuthResponse(data);
-    } on DioException {
-      rethrow;
-    } catch (e) {
-      throw ServerException(message: e.toString());
-    }
-  }
-
-  @override
-  Future<({UserModel user, TokensModel tokens})> register({
-    required String name,
-    required String email,
-    required String password,
-  }) async {
-    try {
-      final response = await _dio.post<Map<String, dynamic>>(
-        ApiEndpoints.register,
-        data: {'name': name, 'email': email, 'password': password},
-      );
-      final data = response.data;
-      if (data == null) {
-        throw const ServerException(message: 'Empty response from server');
-      }
-      return _parseAuthResponse(data);
-    } on DioException {
-      rethrow;
-    } catch (e) {
-      throw ServerException(message: e.toString());
-    }
-  }
-
-  @override
-  Future<void> forgotPassword({required String email}) async {
-    try {
-      await _dio.post<void>(
-        ApiEndpoints.forgotPassword,
-        data: {'email': email},
-      );
-    } on DioException {
-      rethrow;
-    } catch (e) {
-      throw ServerException(message: e.toString());
-    }
-  }
 
   @override
   Future<void> verifyOtp({

@@ -9,7 +9,7 @@ import 'package:flutter_templates/features/auth/data/models/user_model.dart';
 
 /// Mock implementation of [AuthRemoteDataSource] for local testing.
 ///
-/// Credentials: `test@test.com` / `password`
+/// Any phone number + OTP code `123456` succeeds.
 ///
 /// Remove this file and set `USE_MOCK_AUTH=false` in `.env` to switch
 /// to the real API.
@@ -20,9 +20,6 @@ class MockAuthRemoteDataSource implements AuthRemoteDataSource {
   final LocalStorage _localStorage;
 
   static const _delay = Duration(milliseconds: 800);
-
-  static const _email = 'test@gmail.com';
-  static const _password = 'passworD@123';
 
   /// Reads the role the user selected on the role-selection page.
   UserRole _savedRole() {
@@ -38,54 +35,6 @@ class MockAuthRemoteDataSource implements AuthRemoteDataSource {
     accessToken: 'mock-access-token',
     refreshToken: 'mock-refresh-token',
   );
-
-  @override
-  Future<({UserModel user, TokensModel tokens})> login({
-    required String email,
-    required String password,
-  }) async {
-    await Future<void>.delayed(_delay);
-
-    if (email != _email || password != _password) {
-      throw const UnauthorizedException(
-        message: 'Invalid credentials. Use test@gmail.com / passworD@123',
-      );
-    }
-
-    return (
-      user: UserModel(
-        id: 'mock-user-001',
-        email: _email,
-        name: 'Test User',
-        role: _savedRole(),
-      ),
-      tokens: _mockTokens,
-    );
-  }
-
-  @override
-  Future<({UserModel user, TokensModel tokens})> register({
-    required String name,
-    required String email,
-    required String password,
-  }) async {
-    await Future<void>.delayed(_delay);
-
-    return (
-      user: UserModel(
-        id: 'mock-user-002',
-        email: email,
-        name: name,
-        role: _savedRole(),
-      ),
-      tokens: _mockTokens,
-    );
-  }
-
-  @override
-  Future<void> forgotPassword({required String email}) async {
-    await Future<void>.delayed(_delay);
-  }
 
   @override
   Future<void> verifyOtp({required String email, required String code}) async {

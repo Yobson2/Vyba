@@ -3,9 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_templates/core/error/failures.dart';
 import 'package:flutter_templates/core/usecase/usecase.dart';
 import 'package:flutter_templates/features/auth/domain/entities/user.dart';
-import 'package:flutter_templates/features/auth/domain/usecases/forgot_password_usecase.dart';
-import 'package:flutter_templates/features/auth/domain/usecases/login_usecase.dart';
-import 'package:flutter_templates/features/auth/domain/usecases/register_usecase.dart';
+import 'package:flutter_templates/features/auth/domain/usecases/login_with_phone_usecase.dart';
 import 'package:flutter_templates/features/auth/domain/usecases/verify_otp_usecase.dart';
 import 'package:flutter_templates/features/auth/presentation/providers/auth_notifier.dart';
 import 'package:flutter_templates/features/auth/presentation/providers/auth_providers.dart';
@@ -15,18 +13,16 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../../helpers/mock_providers.dart';
 
+class MockLoginWithPhoneUseCase extends Mock implements LoginWithPhoneUseCase {}
+
 void main() {
-  late MockLoginUseCase mockLoginUseCase;
-  late MockRegisterUseCase mockRegisterUseCase;
-  late MockForgotPasswordUseCase mockForgotPasswordUseCase;
+  late MockLoginWithPhoneUseCase mockLoginWithPhoneUseCase;
   late MockVerifyOtpUseCase mockVerifyOtpUseCase;
   late MockLogoutUseCase mockLogoutUseCase;
   late MockGetCachedUserUseCase mockGetCachedUserUseCase;
 
   setUp(() {
-    mockLoginUseCase = MockLoginUseCase();
-    mockRegisterUseCase = MockRegisterUseCase();
-    mockForgotPasswordUseCase = MockForgotPasswordUseCase();
+    mockLoginWithPhoneUseCase = MockLoginWithPhoneUseCase();
     mockVerifyOtpUseCase = MockVerifyOtpUseCase();
     mockLogoutUseCase = MockLogoutUseCase();
     mockGetCachedUserUseCase = MockGetCachedUserUseCase();
@@ -34,13 +30,7 @@ void main() {
 
   setUpAll(() {
     registerFallbackValue(
-      const LoginParams(email: '', password: ''),
-    );
-    registerFallbackValue(
-      const RegisterParams(name: '', email: '', password: ''),
-    );
-    registerFallbackValue(
-      const ForgotPasswordParams(email: ''),
+      const LoginWithPhoneParams(phoneNumber: '', code: ''),
     );
     registerFallbackValue(
       const VerifyOtpParams(email: '', code: ''),
@@ -57,10 +47,9 @@ void main() {
   ProviderContainer createContainer() {
     return ProviderContainer(
       overrides: [
-        loginUseCaseProvider.overrideWithValue(mockLoginUseCase),
-        registerUseCaseProvider.overrideWithValue(mockRegisterUseCase),
-        forgotPasswordUseCaseProvider
-            .overrideWithValue(mockForgotPasswordUseCase),
+        loginWithPhoneUseCaseProvider.overrideWithValue(
+          mockLoginWithPhoneUseCase,
+        ),
         verifyOtpUseCaseProvider.overrideWithValue(mockVerifyOtpUseCase),
         logoutUseCaseProvider.overrideWithValue(mockLogoutUseCase),
         getCachedUserUseCaseProvider
@@ -78,18 +67,19 @@ void main() {
       expect(state, isA<AuthInitial>());
     });
 
-    test('login should update state to AuthAuthenticated on success', () async {
+    test('loginWithPhone should update state to AuthAuthenticated on success',
+        () async {
       // Arrange
-      when(() => mockLoginUseCase(any()))
+      when(() => mockLoginWithPhoneUseCase(any()))
           .thenAnswer((_) async => const Right(tUser));
 
       final container = createContainer();
       final notifier = container.read(authNotifierProvider.notifier);
 
       // Act
-      await notifier.login(
-        email: 'test@example.com',
-        password: 'password123',
+      await notifier.loginWithPhone(
+        phoneNumber: '+2250102030405',
+        code: '123456',
       );
 
       // Assert
@@ -98,18 +88,19 @@ void main() {
       expect((state as AuthAuthenticated).user, tUser);
     });
 
-    test('login should update state to AuthError on failure', () async {
+    test('loginWithPhone should update state to AuthError on failure',
+        () async {
       // Arrange
-      when(() => mockLoginUseCase(any()))
+      when(() => mockLoginWithPhoneUseCase(any()))
           .thenAnswer((_) async => const Left(ServerFailure(message: 'Error')));
 
       final container = createContainer();
       final notifier = container.read(authNotifierProvider.notifier);
 
       // Act
-      await notifier.login(
-        email: 'test@example.com',
-        password: 'wrong',
+      await notifier.loginWithPhone(
+        phoneNumber: '+2250102030405',
+        code: 'wrong',
       );
 
       // Assert

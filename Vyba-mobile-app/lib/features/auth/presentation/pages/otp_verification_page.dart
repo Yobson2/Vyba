@@ -65,7 +65,6 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
 
   void _onResend() {
     if (_resendCountdown > 0) return;
-    ref.read(authNotifierProvider.notifier).forgotPassword(email: widget.email);
     _startCountdown();
     context.showSnackBar('Code resent to ${widget.email}');
   }
@@ -164,14 +163,13 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
                       onTap: _resendCountdown == 0 ? _onResend : null,
                       child: Text(
                         'RESEND CODE',
-                        style:
-                            Theme.of(context).textTheme.labelSmall?.copyWith(
-                                  color: _resendCountdown == 0
-                                      ? AppColors.primary
-                                      : AppColors.onSurfaceVariant,
-                                  letterSpacing: 2,
-                                  fontWeight: FontWeight.w700,
-                                ),
+                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                              color: _resendCountdown == 0
+                                  ? AppColors.primary
+                                  : AppColors.onSurfaceVariant,
+                              letterSpacing: 2,
+                              fontWeight: FontWeight.w700,
+                            ),
                       ),
                     ),
                     if (_resendCountdown > 0) ...[
@@ -190,11 +188,10 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
                       const SizedBox(width: 4),
                       Text(
                         _formattedCountdown,
-                        style:
-                            Theme.of(context).textTheme.labelSmall?.copyWith(
-                                  color: AppColors.tertiaryFixed,
-                                  fontWeight: FontWeight.w700,
-                                ),
+                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                              color: AppColors.tertiaryFixed,
+                              fontWeight: FontWeight.w700,
+                            ),
                       ),
                     ],
                   ],
@@ -233,12 +230,10 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
                           const SizedBox(height: 2),
                           Text(
                             'Your verification is processed through a secure high-end channel for Vyba VIP members.',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall
-                                ?.copyWith(
-                                  color: AppColors.onSurfaceVariant,
-                                ),
+                            style:
+                                Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      color: AppColors.onSurfaceVariant,
+                                    ),
                           ),
                         ],
                       ),

@@ -27,6 +27,15 @@ void main() {
     );
   });
 
+  setUpAll(() {
+    registerFallbackValue(
+      const UserModel(id: '', email: '', name: ''),
+    );
+    registerFallbackValue(
+      const TokensModel(accessToken: '', refreshToken: ''),
+    );
+  });
+
   const tUserModel = UserModel(
     id: '1',
     email: 'test@example.com',
@@ -44,21 +53,23 @@ void main() {
     name: 'Test User',
   );
 
-  group('login', () {
+  group('loginWithPhone', () {
     test('should check if device is online', () async {
       // Arrange
       when(() => mockNetworkInfo.isConnected).thenAnswer((_) async => true);
-      when(() => mockRemote.login(
-            email: any(named: 'email'),
-            password: any(named: 'password'),
-          )).thenAnswer((_) async => (user: tUserModel, tokens: tTokensModel));
+      when(
+        () => mockRemote.loginWithPhone(
+          phoneNumber: any(named: 'phoneNumber'),
+          code: any(named: 'code'),
+        ),
+      ).thenAnswer((_) async => (user: tUserModel, tokens: tTokensModel));
       when(() => mockLocal.cacheUser(any())).thenAnswer((_) async {});
       when(() => mockLocal.cacheTokens(any())).thenAnswer((_) async {});
 
       // Act
-      await repository.login(
-        email: 'test@example.com',
-        password: 'password123',
+      await repository.loginWithPhone(
+        phoneNumber: '+2250102030405',
+        code: '123456',
       );
 
       // Assert
@@ -72,19 +83,21 @@ void main() {
 
       test('should return User when remote call succeeds', () async {
         // Arrange
-        when(() => mockRemote.login(
-              email: any(named: 'email'),
-              password: any(named: 'password'),
-            )).thenAnswer(
+        when(
+          () => mockRemote.loginWithPhone(
+            phoneNumber: any(named: 'phoneNumber'),
+            code: any(named: 'code'),
+          ),
+        ).thenAnswer(
           (_) async => (user: tUserModel, tokens: tTokensModel),
         );
         when(() => mockLocal.cacheUser(any())).thenAnswer((_) async {});
         when(() => mockLocal.cacheTokens(any())).thenAnswer((_) async {});
 
         // Act
-        final result = await repository.login(
-          email: 'test@example.com',
-          password: 'password123',
+        final result = await repository.loginWithPhone(
+          phoneNumber: '+2250102030405',
+          code: '123456',
         );
 
         // Assert
@@ -93,15 +106,17 @@ void main() {
 
       test('should return ServerFailure when remote call fails', () async {
         // Arrange
-        when(() => mockRemote.login(
-              email: any(named: 'email'),
-              password: any(named: 'password'),
-            )).thenThrow(const ServerException(message: 'Invalid credentials'));
+        when(
+          () => mockRemote.loginWithPhone(
+            phoneNumber: any(named: 'phoneNumber'),
+            code: any(named: 'code'),
+          ),
+        ).thenThrow(const ServerException(message: 'Invalid OTP'));
 
         // Act
-        final result = await repository.login(
-          email: 'test@example.com',
-          password: 'password123',
+        final result = await repository.loginWithPhone(
+          phoneNumber: '+2250102030405',
+          code: '123456',
         );
 
         // Assert
@@ -116,9 +131,9 @@ void main() {
 
       test('should return NetworkFailure', () async {
         // Act
-        final result = await repository.login(
-          email: 'test@example.com',
-          password: 'password123',
+        final result = await repository.loginWithPhone(
+          phoneNumber: '+2250102030405',
+          code: '123456',
         );
 
         // Assert

@@ -24,28 +24,6 @@ class AuthRepositoryImpl implements AuthRepository {
   final NetworkInfo _networkInfo;
 
   @override
-  Future<Either<Failure, User>> login({
-    required String email,
-    required String password,
-  }) async {
-    if (!await _networkInfo.isConnected) {
-      return const Left(NetworkFailure());
-    }
-    try {
-      final result = await _remote.login(email: email, password: password);
-      await _local.cacheTokens(result.tokens);
-      await _local.cacheUser(result.user);
-      return Right(result.user.toEntity());
-    } on ServerException catch (e) {
-      return Left(ServerFailure(message: e.message, statusCode: e.statusCode));
-    } on UnauthorizedException catch (e) {
-      return Left(UnauthorizedFailure(message: e.message));
-    } on NetworkException {
-      return const Left(NetworkFailure());
-    }
-  }
-
-  @override
   Future<Either<Failure, User>> loginWithPhone({
     required String phoneNumber,
     required String code,
@@ -63,48 +41,6 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(ServerFailure(message: e.message, statusCode: e.statusCode));
     } on UnauthorizedException catch (e) {
       return Left(UnauthorizedFailure(message: e.message));
-    } on NetworkException {
-      return const Left(NetworkFailure());
-    }
-  }
-
-  @override
-  Future<Either<Failure, User>> register({
-    required String name,
-    required String email,
-    required String password,
-  }) async {
-    if (!await _networkInfo.isConnected) {
-      return const Left(NetworkFailure());
-    }
-    try {
-      final result = await _remote.register(
-        name: name,
-        email: email,
-        password: password,
-      );
-      await _local.cacheTokens(result.tokens);
-      await _local.cacheUser(result.user);
-      return Right(result.user.toEntity());
-    } on ServerException catch (e) {
-      return Left(ServerFailure(message: e.message, statusCode: e.statusCode));
-    } on NetworkException {
-      return const Left(NetworkFailure());
-    }
-  }
-
-  @override
-  Future<Either<Failure, void>> forgotPassword({
-    required String email,
-  }) async {
-    if (!await _networkInfo.isConnected) {
-      return const Left(NetworkFailure());
-    }
-    try {
-      await _remote.forgotPassword(email: email);
-      return const Right(null);
-    } on ServerException catch (e) {
-      return Left(ServerFailure(message: e.message));
     } on NetworkException {
       return const Left(NetworkFailure());
     }

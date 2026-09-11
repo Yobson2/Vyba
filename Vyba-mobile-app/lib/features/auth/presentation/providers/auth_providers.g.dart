@@ -70,24 +70,6 @@ final authRepositoryProvider = AutoDisposeProvider<AuthRepository>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef AuthRepositoryRef = AutoDisposeProviderRef<AuthRepository>;
-String _$loginUseCaseHash() => r'e082833fd1fc26be8c5fac08d612713cb2c18a17';
-
-/// Provides the [LoginUseCase].
-///
-/// Copied from [loginUseCase].
-@ProviderFor(loginUseCase)
-final loginUseCaseProvider = AutoDisposeProvider<LoginUseCase>.internal(
-  loginUseCase,
-  name: r'loginUseCaseProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$loginUseCaseHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef LoginUseCaseRef = AutoDisposeProviderRef<LoginUseCase>;
 String _$loginWithPhoneUseCaseHash() =>
     r'5811ecc6288d3e98a0c8e15d50d79e209fb6aff4';
 
@@ -110,47 +92,6 @@ final loginWithPhoneUseCaseProvider =
 // ignore: unused_element
 typedef LoginWithPhoneUseCaseRef
     = AutoDisposeProviderRef<LoginWithPhoneUseCase>;
-String _$registerUseCaseHash() => r'0f1f842bd5399c007cd5e8089bff9c56ec0c7618';
-
-/// Provides the [RegisterUseCase].
-///
-/// Copied from [registerUseCase].
-@ProviderFor(registerUseCase)
-final registerUseCaseProvider = AutoDisposeProvider<RegisterUseCase>.internal(
-  registerUseCase,
-  name: r'registerUseCaseProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$registerUseCaseHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef RegisterUseCaseRef = AutoDisposeProviderRef<RegisterUseCase>;
-String _$forgotPasswordUseCaseHash() =>
-    r'308418b3aa16b40eecd5c120bcfc7bdd01f86b1d';
-
-/// Provides the [ForgotPasswordUseCase].
-///
-/// Copied from [forgotPasswordUseCase].
-@ProviderFor(forgotPasswordUseCase)
-final forgotPasswordUseCaseProvider =
-    AutoDisposeProvider<ForgotPasswordUseCase>.internal(
-  forgotPasswordUseCase,
-  name: r'forgotPasswordUseCaseProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$forgotPasswordUseCaseHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef ForgotPasswordUseCaseRef
-    = AutoDisposeProviderRef<ForgotPasswordUseCase>;
 String _$verifyOtpUseCaseHash() => r'031122716f3e2b5d80082d3460d7dab6ab4998f1';
 
 /// Provides the [VerifyOtpUseCase].

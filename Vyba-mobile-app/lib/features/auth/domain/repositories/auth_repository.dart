@@ -7,27 +7,11 @@ import 'package:flutter_templates/features/auth/domain/entities/user.dart';
 /// Implemented by [AuthRepositoryImpl] in the data layer.
 
 abstract class AuthRepository {
-  /// Logs in with [email] and [password].
-  Future<Either<Failure, User>> login({
-    required String email,
-    required String password,
-  });
-
-  /// Registers a new user.
-  Future<Either<Failure, User>> register({
-    required String name,
-    required String email,
-    required String password,
-  });
-
   /// Logs in with [phoneNumber] and OTP [code].
   Future<Either<Failure, User>> loginWithPhone({
     required String phoneNumber,
     required String code,
   });
-
-  /// Sends a password reset code to [email].
-  Future<Either<Failure, void>> forgotPassword({required String email});
 
   /// Verifies the OTP [code] sent to [email].
   Future<Either<Failure, void>> verifyOtp({

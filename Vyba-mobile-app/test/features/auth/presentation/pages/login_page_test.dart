@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_templates/core/widgets/buttons/app_gradient_button.dart';
+import 'package:flutter_templates/core/widgets/inputs/app_phone_field.dart';
 import 'package:flutter_templates/features/auth/presentation/pages/login_page.dart';
 import 'package:flutter_templates/features/auth/presentation/providers/auth_notifier.dart';
 import 'package:flutter_templates/features/auth/presentation/providers/auth_state.dart';
+import 'package:flutter_templates/l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 
 void main() {
   Widget createTestWidget({AuthState? initialState}) {
@@ -15,40 +18,39 @@ void main() {
             () => _FakeAuthNotifier(initialState),
           ),
       ],
-      child: const MaterialApp(
+      child: MaterialApp.router(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        home: LoginPage(),
+        routerConfig: GoRouter(
+          initialLocation: '/',
+          routes: [
+            GoRoute(path: '/', builder: (_, __) => const LoginPage()),
+            GoRoute(
+              path: '/otp-verification',
+              builder: (_, __) => const SizedBox.shrink(),
+            ),
+          ],
+        ),
       ),
     );
   }
 
   group('LoginPage', () {
-    testWidgets('should render email and password fields', (tester) async {
+    testWidgets('should render the phone field', (tester) async {
       await tester.pumpWidget(createTestWidget());
       await tester.pumpAndSettle();
 
-      expect(find.byType(TextFormField), findsNWidgets(2));
+      expect(find.byType(AppPhoneField), findsOneWidget);
     });
 
-    testWidgets('should render login button', (tester) async {
-      await tester.pumpWidget(createTestWidget());
-      await tester.pumpAndSettle();
-
-      expect(find.byType(ElevatedButton), findsOneWidget);
-    });
-
-    testWidgets('should show validation errors for empty fields',
+    testWidgets('should render a single continue button, no social buttons',
         (tester) async {
       await tester.pumpWidget(createTestWidget());
       await tester.pumpAndSettle();
 
-      // Tap login without entering anything
-      await tester.tap(find.byType(ElevatedButton).first);
-      await tester.pumpAndSettle();
-
-      // Should show validation errors
-      expect(find.byType(TextFormField), findsNWidgets(2));
+      expect(find.byType(AppGradientButton), findsOneWidget);
+      expect(find.textContaining('Google'), findsNothing);
+      expect(find.textContaining('Apple'), findsNothing);
     });
 
     testWidgets('should show loading state', (tester) async {
@@ -58,18 +60,6 @@ void main() {
       await tester.pump();
 
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
-    });
-
-    testWidgets('should navigate to register page on tap', (tester) async {
-      await tester.pumpWidget(createTestWidget());
-      await tester.pumpAndSettle();
-
-      // Find and tap the register link
-      final registerFinder = find.byType(TextButton);
-      if (registerFinder.evaluate().isNotEmpty) {
-        await tester.tap(registerFinder.last);
-        await tester.pumpAndSettle();
-      }
     });
   });
 }
