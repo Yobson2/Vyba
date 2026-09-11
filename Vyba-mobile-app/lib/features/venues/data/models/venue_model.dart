@@ -21,11 +21,9 @@ abstract class VenueModel with _$VenueModel {
     @JsonKey(name: 'is_open') required bool isOpen,
     @JsonKey(name: 'venue_type') required String venueType,
     String? phone,
-    @JsonKey(name: 'opening_hours') String? openingHours,
     @JsonKey(name: 'price_level') @Default(2) int priceLevel,
     @Default([]) List<String> amenities,
     @JsonKey(name: 'is_premium') @Default(false) bool isPremium,
-    @JsonKey(name: 'has_vip_pass') @Default(false) bool hasVipPass,
     double? distance,
     @JsonKey(name: 'active_promo_label') String? activePromoLabel,
   }) = _VenueModel;
@@ -49,11 +47,9 @@ abstract class VenueModel with _$VenueModel {
           orElse: () => VenueType.bar,
         ),
         phone: phone,
-        openingHours: openingHours,
         priceLevel: priceLevel,
         amenities: amenities,
         isPremium: isPremium,
-        hasVipPass: hasVipPass,
         distance: distance,
         activePromoLabel: activePromoLabel,
       );

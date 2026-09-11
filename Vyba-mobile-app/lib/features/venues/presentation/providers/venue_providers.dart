@@ -3,7 +3,6 @@ import 'package:flutter_templates/features/venues/data/datasources/venue_remote_
 import 'package:flutter_templates/features/venues/data/repositories/venue_repository_impl.dart';
 import 'package:flutter_templates/features/venues/domain/repositories/venue_repository.dart';
 import 'package:flutter_templates/features/venues/domain/usecases/get_venue_detail_usecase.dart';
-import 'package:flutter_templates/features/venues/domain/usecases/get_venue_menu_usecase.dart';
 import 'package:flutter_templates/features/venues/domain/usecases/get_venues_usecase.dart';
 import 'package:flutter_templates/features/venues/domain/usecases/search_venues_usecase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -28,11 +27,6 @@ GetVenuesUseCase getVenuesUseCase(GetVenuesUseCaseRef ref) {
 @riverpod
 GetVenueDetailUseCase getVenueDetailUseCase(GetVenueDetailUseCaseRef ref) {
   return GetVenueDetailUseCase(ref.read(venueRepositoryProvider));
-}
-
-@riverpod
-GetVenueMenuUseCase getVenueMenuUseCase(GetVenueMenuUseCaseRef ref) {
-  return GetVenueMenuUseCase(ref.read(venueRepositoryProvider));
 }
 
 @riverpod

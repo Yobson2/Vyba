@@ -21,14 +21,12 @@ _VenueModel _$VenueModelFromJson(Map<String, dynamic> json) => _VenueModel(
       isOpen: json['is_open'] as bool,
       venueType: json['venue_type'] as String,
       phone: json['phone'] as String?,
-      openingHours: json['opening_hours'] as String?,
       priceLevel: (json['price_level'] as num?)?.toInt() ?? 2,
       amenities: (json['amenities'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           const [],
       isPremium: json['is_premium'] as bool? ?? false,
-      hasVipPass: json['has_vip_pass'] as bool? ?? false,
       distance: (json['distance'] as num?)?.toDouble(),
       activePromoLabel: json['active_promo_label'] as String?,
     );
@@ -47,11 +45,9 @@ Map<String, dynamic> _$VenueModelToJson(_VenueModel instance) =>
       'is_open': instance.isOpen,
       'venue_type': instance.venueType,
       'phone': instance.phone,
-      'opening_hours': instance.openingHours,
       'price_level': instance.priceLevel,
       'amenities': instance.amenities,
       'is_premium': instance.isPremium,
-      'has_vip_pass': instance.hasVipPass,
       'distance': instance.distance,
       'active_promo_label': instance.activePromoLabel,
     };

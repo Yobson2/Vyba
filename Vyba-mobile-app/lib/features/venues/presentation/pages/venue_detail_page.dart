@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_templates/core/theme/app_colors.dart';
-import 'package:flutter_templates/core/theme/app_gradients.dart';
 import 'package:flutter_templates/core/theme/app_radius.dart';
 import 'package:flutter_templates/core/theme/app_spacing.dart';
 import 'package:flutter_templates/core/widgets/buttons/app_gradient_button.dart';
@@ -29,8 +28,7 @@ class VenueDetailPage extends ConsumerWidget {
       body: switch (state) {
         VenueDetailLoading() => const Center(
             child: CircularProgressIndicator(color: AppColors.primary)),
-        VenueDetailError(:final message) => Center(
-            child: Text(message)),
+        VenueDetailError(:final message) => Center(child: Text(message)),
         VenueDetailLoaded(:final venue) => Stack(
             children: [
               CustomScrollView(
@@ -107,8 +105,7 @@ class VenueDetailPage extends ConsumerWidget {
                                 children: [
                                   if (venue.isPremium)
                                     Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 6),
+                                      padding: const EdgeInsets.only(bottom: 6),
                                       child: Text(
                                         'PREMIUM VENUE',
                                         style: Theme.of(context)
@@ -151,8 +148,7 @@ class VenueDetailPage extends ConsumerWidget {
                                             .textTheme
                                             .bodySmall
                                             ?.copyWith(
-                                              color:
-                                                  AppColors.onSurfaceVariant,
+                                              color: AppColors.onSurfaceVariant,
                                             ),
                                       ),
                                       const Spacer(),
@@ -173,8 +169,7 @@ class VenueDetailPage extends ConsumerWidget {
                                       _QuickAction(
                                         icon: Icons.calendar_today,
                                         label: 'Reserve',
-                                        onTap: () => context.push(
-                                            '/explore/venue/$venueId/book'),
+                                        onTap: () {},
                                       ),
                                       const SizedBox(width: 12),
                                       _QuickAction(
@@ -222,8 +217,7 @@ class VenueDetailPage extends ConsumerWidget {
                           // Amenities
                           if (venue.amenities.isNotEmpty) ...[
                             Text('Amenities',
-                                style:
-                                    Theme.of(context).textTheme.titleMedium),
+                                style: Theme.of(context).textTheme.titleMedium),
                             AppSpacing.verticalMd,
                             Wrap(
                               spacing: 8,
@@ -277,8 +271,7 @@ class VenueDetailPage extends ConsumerWidget {
                 right: 24,
                 bottom: MediaQuery.of(context).padding.bottom + 16,
                 child: AppGradientButton(
-                  onPressed: () =>
-                      context.push('/explore/venue/$venueId/book'),
+                  onPressed: () {},
                   label: 'RESERVE A TABLE',
                   icon: Icons.arrow_forward,
                 ),
@@ -298,7 +291,6 @@ class VenueDetailPage extends ConsumerWidget {
       'vip booths' => Icons.star,
       'live music' => Icons.music_note,
       'beach access' => Icons.beach_access,
-      'rooftop views' => Icons.visibility,
       'full bar' => Icons.local_bar,
       'lounge seating' => Icons.weekend,
       'dance floor' => Icons.nightlife,

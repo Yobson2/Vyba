@@ -236,7 +236,7 @@ class AppTypography {
 
   // ── Accent Text Styles ─────────────────────────────────────────
 
-  /// Monospace accent for prices (e.g. ₦12,500).
+  /// Monospace accent for prices (e.g. 12 500 FCFA).
   static TextStyle get priceDisplay => TextStyle(
         fontFamily: _accentFont,
         fontSize: 28,

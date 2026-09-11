@@ -31,15 +31,11 @@ mixin _$VenueModel {
   @JsonKey(name: 'venue_type')
   String get venueType;
   String? get phone;
-  @JsonKey(name: 'opening_hours')
-  String? get openingHours;
   @JsonKey(name: 'price_level')
   int get priceLevel;
   List<String> get amenities;
   @JsonKey(name: 'is_premium')
   bool get isPremium;
-  @JsonKey(name: 'has_vip_pass')
-  bool get hasVipPass;
   double? get distance;
   @JsonKey(name: 'active_promo_label')
   String? get activePromoLabel;
@@ -77,15 +73,11 @@ mixin _$VenueModel {
             (identical(other.venueType, venueType) ||
                 other.venueType == venueType) &&
             (identical(other.phone, phone) || other.phone == phone) &&
-            (identical(other.openingHours, openingHours) ||
-                other.openingHours == openingHours) &&
             (identical(other.priceLevel, priceLevel) ||
                 other.priceLevel == priceLevel) &&
             const DeepCollectionEquality().equals(other.amenities, amenities) &&
             (identical(other.isPremium, isPremium) ||
                 other.isPremium == isPremium) &&
-            (identical(other.hasVipPass, hasVipPass) ||
-                other.hasVipPass == hasVipPass) &&
             (identical(other.distance, distance) ||
                 other.distance == distance) &&
             (identical(other.activePromoLabel, activePromoLabel) ||
@@ -94,32 +86,29 @@ mixin _$VenueModel {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hashAll([
-        runtimeType,
-        id,
-        name,
-        description,
-        address,
-        latitude,
-        longitude,
-        const DeepCollectionEquality().hash(heroImages),
-        rating,
-        reviewCount,
-        isOpen,
-        venueType,
-        phone,
-        openingHours,
-        priceLevel,
-        const DeepCollectionEquality().hash(amenities),
-        isPremium,
-        hasVipPass,
-        distance,
-        activePromoLabel
-      ]);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      description,
+      address,
+      latitude,
+      longitude,
+      const DeepCollectionEquality().hash(heroImages),
+      rating,
+      reviewCount,
+      isOpen,
+      venueType,
+      phone,
+      priceLevel,
+      const DeepCollectionEquality().hash(amenities),
+      isPremium,
+      distance,
+      activePromoLabel);
 
   @override
   String toString() {
-    return 'VenueModel(id: $id, name: $name, description: $description, address: $address, latitude: $latitude, longitude: $longitude, heroImages: $heroImages, rating: $rating, reviewCount: $reviewCount, isOpen: $isOpen, venueType: $venueType, phone: $phone, openingHours: $openingHours, priceLevel: $priceLevel, amenities: $amenities, isPremium: $isPremium, hasVipPass: $hasVipPass, distance: $distance, activePromoLabel: $activePromoLabel)';
+    return 'VenueModel(id: $id, name: $name, description: $description, address: $address, latitude: $latitude, longitude: $longitude, heroImages: $heroImages, rating: $rating, reviewCount: $reviewCount, isOpen: $isOpen, venueType: $venueType, phone: $phone, priceLevel: $priceLevel, amenities: $amenities, isPremium: $isPremium, distance: $distance, activePromoLabel: $activePromoLabel)';
   }
 }
 
@@ -142,11 +131,9 @@ abstract mixin class $VenueModelCopyWith<$Res> {
       @JsonKey(name: 'is_open') bool isOpen,
       @JsonKey(name: 'venue_type') String venueType,
       String? phone,
-      @JsonKey(name: 'opening_hours') String? openingHours,
       @JsonKey(name: 'price_level') int priceLevel,
       List<String> amenities,
       @JsonKey(name: 'is_premium') bool isPremium,
-      @JsonKey(name: 'has_vip_pass') bool hasVipPass,
       double? distance,
       @JsonKey(name: 'active_promo_label') String? activePromoLabel});
 }
@@ -175,11 +162,9 @@ class _$VenueModelCopyWithImpl<$Res> implements $VenueModelCopyWith<$Res> {
     Object? isOpen = null,
     Object? venueType = null,
     Object? phone = freezed,
-    Object? openingHours = freezed,
     Object? priceLevel = null,
     Object? amenities = null,
     Object? isPremium = null,
-    Object? hasVipPass = null,
     Object? distance = freezed,
     Object? activePromoLabel = freezed,
   }) {
@@ -232,10 +217,6 @@ class _$VenueModelCopyWithImpl<$Res> implements $VenueModelCopyWith<$Res> {
           ? _self.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String?,
-      openingHours: freezed == openingHours
-          ? _self.openingHours
-          : openingHours // ignore: cast_nullable_to_non_nullable
-              as String?,
       priceLevel: null == priceLevel
           ? _self.priceLevel
           : priceLevel // ignore: cast_nullable_to_non_nullable
@@ -247,10 +228,6 @@ class _$VenueModelCopyWithImpl<$Res> implements $VenueModelCopyWith<$Res> {
       isPremium: null == isPremium
           ? _self.isPremium
           : isPremium // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hasVipPass: null == hasVipPass
-          ? _self.hasVipPass
-          : hasVipPass // ignore: cast_nullable_to_non_nullable
               as bool,
       distance: freezed == distance
           ? _self.distance
@@ -280,11 +257,9 @@ class _VenueModel extends VenueModel {
       @JsonKey(name: 'is_open') required this.isOpen,
       @JsonKey(name: 'venue_type') required this.venueType,
       this.phone,
-      @JsonKey(name: 'opening_hours') this.openingHours,
       @JsonKey(name: 'price_level') this.priceLevel = 2,
       final List<String> amenities = const [],
       @JsonKey(name: 'is_premium') this.isPremium = false,
-      @JsonKey(name: 'has_vip_pass') this.hasVipPass = false,
       this.distance,
       @JsonKey(name: 'active_promo_label') this.activePromoLabel})
       : _heroImages = heroImages,
@@ -328,9 +303,6 @@ class _VenueModel extends VenueModel {
   @override
   final String? phone;
   @override
-  @JsonKey(name: 'opening_hours')
-  final String? openingHours;
-  @override
   @JsonKey(name: 'price_level')
   final int priceLevel;
   final List<String> _amenities;
@@ -345,9 +317,6 @@ class _VenueModel extends VenueModel {
   @override
   @JsonKey(name: 'is_premium')
   final bool isPremium;
-  @override
-  @JsonKey(name: 'has_vip_pass')
-  final bool hasVipPass;
   @override
   final double? distance;
   @override
@@ -392,16 +361,12 @@ class _VenueModel extends VenueModel {
             (identical(other.venueType, venueType) ||
                 other.venueType == venueType) &&
             (identical(other.phone, phone) || other.phone == phone) &&
-            (identical(other.openingHours, openingHours) ||
-                other.openingHours == openingHours) &&
             (identical(other.priceLevel, priceLevel) ||
                 other.priceLevel == priceLevel) &&
             const DeepCollectionEquality()
                 .equals(other._amenities, _amenities) &&
             (identical(other.isPremium, isPremium) ||
                 other.isPremium == isPremium) &&
-            (identical(other.hasVipPass, hasVipPass) ||
-                other.hasVipPass == hasVipPass) &&
             (identical(other.distance, distance) ||
                 other.distance == distance) &&
             (identical(other.activePromoLabel, activePromoLabel) ||
@@ -410,32 +375,29 @@ class _VenueModel extends VenueModel {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hashAll([
-        runtimeType,
-        id,
-        name,
-        description,
-        address,
-        latitude,
-        longitude,
-        const DeepCollectionEquality().hash(_heroImages),
-        rating,
-        reviewCount,
-        isOpen,
-        venueType,
-        phone,
-        openingHours,
-        priceLevel,
-        const DeepCollectionEquality().hash(_amenities),
-        isPremium,
-        hasVipPass,
-        distance,
-        activePromoLabel
-      ]);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      description,
+      address,
+      latitude,
+      longitude,
+      const DeepCollectionEquality().hash(_heroImages),
+      rating,
+      reviewCount,
+      isOpen,
+      venueType,
+      phone,
+      priceLevel,
+      const DeepCollectionEquality().hash(_amenities),
+      isPremium,
+      distance,
+      activePromoLabel);
 
   @override
   String toString() {
-    return 'VenueModel(id: $id, name: $name, description: $description, address: $address, latitude: $latitude, longitude: $longitude, heroImages: $heroImages, rating: $rating, reviewCount: $reviewCount, isOpen: $isOpen, venueType: $venueType, phone: $phone, openingHours: $openingHours, priceLevel: $priceLevel, amenities: $amenities, isPremium: $isPremium, hasVipPass: $hasVipPass, distance: $distance, activePromoLabel: $activePromoLabel)';
+    return 'VenueModel(id: $id, name: $name, description: $description, address: $address, latitude: $latitude, longitude: $longitude, heroImages: $heroImages, rating: $rating, reviewCount: $reviewCount, isOpen: $isOpen, venueType: $venueType, phone: $phone, priceLevel: $priceLevel, amenities: $amenities, isPremium: $isPremium, distance: $distance, activePromoLabel: $activePromoLabel)';
   }
 }
 
@@ -460,11 +422,9 @@ abstract mixin class _$VenueModelCopyWith<$Res>
       @JsonKey(name: 'is_open') bool isOpen,
       @JsonKey(name: 'venue_type') String venueType,
       String? phone,
-      @JsonKey(name: 'opening_hours') String? openingHours,
       @JsonKey(name: 'price_level') int priceLevel,
       List<String> amenities,
       @JsonKey(name: 'is_premium') bool isPremium,
-      @JsonKey(name: 'has_vip_pass') bool hasVipPass,
       double? distance,
       @JsonKey(name: 'active_promo_label') String? activePromoLabel});
 }
@@ -493,11 +453,9 @@ class __$VenueModelCopyWithImpl<$Res> implements _$VenueModelCopyWith<$Res> {
     Object? isOpen = null,
     Object? venueType = null,
     Object? phone = freezed,
-    Object? openingHours = freezed,
     Object? priceLevel = null,
     Object? amenities = null,
     Object? isPremium = null,
-    Object? hasVipPass = null,
     Object? distance = freezed,
     Object? activePromoLabel = freezed,
   }) {
@@ -550,10 +508,6 @@ class __$VenueModelCopyWithImpl<$Res> implements _$VenueModelCopyWith<$Res> {
           ? _self.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String?,
-      openingHours: freezed == openingHours
-          ? _self.openingHours
-          : openingHours // ignore: cast_nullable_to_non_nullable
-              as String?,
       priceLevel: null == priceLevel
           ? _self.priceLevel
           : priceLevel // ignore: cast_nullable_to_non_nullable
@@ -565,10 +519,6 @@ class __$VenueModelCopyWithImpl<$Res> implements _$VenueModelCopyWith<$Res> {
       isPremium: null == isPremium
           ? _self.isPremium
           : isPremium // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hasVipPass: null == hasVipPass
-          ? _self.hasVipPass
-          : hasVipPass // ignore: cast_nullable_to_non_nullable
               as bool,
       distance: freezed == distance
           ? _self.distance

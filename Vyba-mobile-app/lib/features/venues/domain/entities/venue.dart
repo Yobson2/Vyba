@@ -16,11 +16,9 @@ class Venue {
     required this.isOpen,
     required this.venueType,
     this.phone,
-    this.openingHours,
     this.priceLevel = 2,
     this.amenities = const [],
     this.isPremium = false,
-    this.hasVipPass = false,
     this.distance,
     this.activePromoLabel,
   });
@@ -37,16 +35,13 @@ class Venue {
   final bool isOpen;
   final VenueType venueType;
   final String? phone;
-  final String? openingHours;
   final int priceLevel;
   final List<String> amenities;
   final bool isPremium;
-  final bool hasVipPass;
   final double? distance;
   final String? activePromoLabel;
 
-  String get firstImage =>
-      heroImages.isNotEmpty ? heroImages.first : '';
+  String get firstImage => heroImages.isNotEmpty ? heroImages.first : '';
 
   String get formattedDistance {
     if (distance == null) return '';
@@ -54,15 +49,14 @@ class Venue {
     return '${distance!.toStringAsFixed(1)} km away';
   }
 
-  String get priceLevelLabel => List.filled(priceLevel, '₦').join();
+  /// Price level shown as repeated FCFA markers (e.g. "FCFA FCFA").
+  String get priceLevelLabel => List.filled(priceLevel, 'FCFA').join(' ');
 }
 
+/// Venue categories in the validation launch market (Zone 4 / Marcory).
 enum VenueType {
   club,
   bar,
   lounge,
-  restaurant,
-  rooftop,
-  beachClub,
   maquis,
 }

@@ -78,25 +78,6 @@ final getVenueDetailUseCaseProvider =
 // ignore: unused_element
 typedef GetVenueDetailUseCaseRef
     = AutoDisposeProviderRef<GetVenueDetailUseCase>;
-String _$getVenueMenuUseCaseHash() =>
-    r'1654249daa118b118265ea123ba075bc21edb341';
-
-/// See also [getVenueMenuUseCase].
-@ProviderFor(getVenueMenuUseCase)
-final getVenueMenuUseCaseProvider =
-    AutoDisposeProvider<GetVenueMenuUseCase>.internal(
-  getVenueMenuUseCase,
-  name: r'getVenueMenuUseCaseProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$getVenueMenuUseCaseHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef GetVenueMenuUseCaseRef = AutoDisposeProviderRef<GetVenueMenuUseCase>;
 String _$searchVenuesUseCaseHash() =>
     r'53b841c5b9de31ad742a3fbec739d3425079ad42';
 

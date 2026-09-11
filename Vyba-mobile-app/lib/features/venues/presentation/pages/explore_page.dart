@@ -4,7 +4,6 @@ import 'package:flutter_templates/core/theme/app_colors.dart';
 import 'package:flutter_templates/core/theme/app_gradients.dart';
 import 'package:flutter_templates/core/theme/app_radius.dart';
 import 'package:flutter_templates/core/theme/app_spacing.dart';
-import 'package:flutter_templates/core/widgets/data_display/app_glass_card.dart';
 import 'package:flutter_templates/core/widgets/loading/app_shimmer.dart';
 import 'package:flutter_templates/features/venues/presentation/providers/venue_list_notifier.dart';
 import 'package:flutter_templates/features/venues/presentation/providers/venue_list_state.dart';
@@ -63,8 +62,7 @@ class ExplorePage extends ConsumerWidget {
               // View toggle
               Container(
                 margin: const EdgeInsets.only(right: 4),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
                   color: AppColors.surfaceContainerHighest,
                   borderRadius: AppRadius.borderRadiusFull,
@@ -127,8 +125,7 @@ class ExplorePage extends ConsumerWidget {
                                   : AppColors.onSurfaceVariant,
                             ),
                     showCheckmark: false,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 4),
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
                   );
                 },
               ),
@@ -175,8 +172,7 @@ class ExplorePage extends ConsumerWidget {
                     final venue = venues[venueIndex];
                     return VenueCard(
                       venue: venue,
-                      onTap: () => context.push(
-                          '/explore/venue/${venue.id}'),
+                      onTap: () => context.push('/explore/venue/${venue.id}'),
                     );
                   },
                 ),
@@ -190,16 +186,17 @@ class ExplorePage extends ConsumerWidget {
                           style: Theme.of(context).textTheme.bodyMedium),
                       const SizedBox(height: 16),
                       TextButton(
-                        onPressed: () =>
-                            ref.read(venueListNotifierProvider.notifier).refresh(),
+                        onPressed: () => ref
+                            .read(venueListNotifierProvider.notifier)
+                            .refresh(),
                         child: const Text('Retry'),
                       ),
                     ],
                   ),
                 ),
               ),
-            VenueListInitial() => const SliverToBoxAdapter(
-                child: SizedBox.shrink()),
+            VenueListInitial() =>
+              const SliverToBoxAdapter(child: SizedBox.shrink()),
           },
           // Bottom padding
           const SliverToBoxAdapter(child: SizedBox(height: 100)),
@@ -238,7 +235,9 @@ class _ToggleButton extends StatelessWidget {
         ),
         child: Icon(icon,
             size: 16,
-            color: isActive ? AppColors.onPrimaryFixed : AppColors.onSurfaceVariant),
+            color: isActive
+                ? AppColors.onPrimaryFixed
+                : AppColors.onSurfaceVariant),
       ),
     );
   }
