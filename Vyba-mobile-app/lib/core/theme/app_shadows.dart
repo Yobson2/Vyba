@@ -95,7 +95,7 @@ class AppShadows {
 
   // ── Neon Glow Effects (hero moments) ───────────────────────────
 
-  /// Intensified primary neon glow for featured venues, booking confirmation.
+  /// Intensified primary neon glow for featured venues, "J'y vais" confirmation.
   static List<BoxShadow> get neonPrimaryGlow => [
         BoxShadow(
           color: AppColors.primary.withValues(alpha: AppOpacity.semi),

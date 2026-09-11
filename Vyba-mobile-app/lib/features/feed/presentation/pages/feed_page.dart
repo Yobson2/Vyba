@@ -245,9 +245,9 @@ class _PromoCard extends StatelessWidget {
                     height: 36,
                     child: AppGradientButton(
                       onPressed: () {
-                        // Navigate to booking
+                        // Navigate to promo details
                       },
-                      label: 'Book Now',
+                      label: 'View Promo',
                       height: 36,
                       width: 120,
                       borderRadius: AppRadius.borderRadiusFull,

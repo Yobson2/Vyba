@@ -10,10 +10,10 @@ class AppHaptics {
   /// Light tap — tab selection, chip toggle, filter change.
   static Future<void> light() => HapticFeedback.lightImpact();
 
-  /// Medium tap — booking step complete, carousel snap, toggle.
+  /// Medium tap — "J'y vais" step complete, carousel snap, toggle.
   static Future<void> medium() => HapticFeedback.mediumImpact();
 
-  /// Heavy tap — booking confirmed, QR generated.
+  /// Heavy tap — "J'y vais" confirmed, QR generated.
   static Future<void> heavy() => HapticFeedback.heavyImpact();
 
   /// Selection tick — picker scroll, stepper increment.

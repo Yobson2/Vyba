@@ -2,11 +2,11 @@ import 'package:flutter/foundation.dart';
 
 /// Types of in-app notifications.
 enum NotificationType {
-  bookingConfirmed,
+  goingReminder,
   promoNew,
   reviewReply,
   badgeEarned,
-  bookingCompleted,
+  visitFollowUp,
 }
 
 /// Domain entity representing an in-app notification.

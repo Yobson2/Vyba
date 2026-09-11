@@ -14,9 +14,9 @@ class MockNotificationDatasource {
     return [
       AppNotification(
         id: 'notif_1',
-        type: NotificationType.bookingConfirmed,
-        title: 'Booking Confirmed',
-        body: 'Your reservation at Sky Lounge Abidjan is confirmed for Friday, 8 PM.',
+        type: NotificationType.goingReminder,
+        title: 'Tonight at Sky Lounge Abidjan',
+        body: 'You said "J\'y vais" — doors open at 8 PM.',
         isRead: false,
         createdAt: today.add(const Duration(hours: 10, minutes: 45)),
       ),
@@ -38,9 +38,9 @@ class MockNotificationDatasource {
       ),
       AppNotification(
         id: 'notif_4',
-        type: NotificationType.bookingCompleted,
-        title: 'Booking Completed',
-        body: 'How was your visit to Sky Lounge Abidjan? Leave a review and earn points.',
+        type: NotificationType.visitFollowUp,
+        title: 'How was Sky Lounge Abidjan?',
+        body: 'You went last night — leave a review and earn points.',
         isRead: true,
         createdAt: yesterday.add(const Duration(hours: 11, minutes: 30)),
       ),

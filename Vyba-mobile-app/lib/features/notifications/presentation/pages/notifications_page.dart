@@ -283,11 +283,11 @@ class _TypeIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final (IconData icon, Color color) = switch (type) {
-      NotificationType.bookingConfirmed => (
+      NotificationType.goingReminder => (
           Icons.check_circle,
           AppColors.secondary
         ),
-      NotificationType.bookingCompleted => (
+      NotificationType.visitFollowUp => (
           Icons.check_circle,
           AppColors.secondary
         ),
