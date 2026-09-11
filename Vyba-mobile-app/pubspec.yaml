@@ -12,7 +12,6 @@ dependencies:
   cupertino_icons: ^1.0.8
   dartz: ^0.10.1
   dio: ^5.7.0
-  drift: ^2.22.0
   flutter:
     sdk: flutter
   flutter_dotenv: ^6.0.0
@@ -28,18 +27,14 @@ dependencies:
   intl: any
   json_annotation: ^4.9.0
   lottie: ^3.3.1
-  path: ^1.9.0
-  path_provider: ^2.1.5
   riverpod_annotation: ^2.6.1
   shared_preferences: ^2.3.5
   shimmer: ^3.0.0
-  sqlite3_flutter_libs: ^0.5.28
-  uuid: ^4.5.1
+  url_launcher: ^6.3.1
 
 dev_dependencies:
   build_runner: ^2.4.14
   custom_lint: ^0.7.5
-  drift_dev: ^2.22.0
   flutter_launcher_icons: ^0.14.3
   flutter_native_splash: ^2.4.4
   flutter_test:
@@ -60,6 +55,4 @@ flutter:
   assets:
     - .env
     - assets/icon/
-    - assets/images/
-    - assets/icons/
-    - assets/lottie/
+    - assets/logo/

@@ -17,4 +17,8 @@ abstract class Env {
 
   /// Whether to enable the debug overlay banner.
   bool get showDebugBanner;
+
+  /// WhatsApp number (international format, digits only) for the
+  /// "Un problème ?" support entry in Settings.
+  String get supportWhatsappNumber;
 }

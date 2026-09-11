@@ -20,4 +20,8 @@ class AppConfig extends Env {
   @override
   bool get showDebugBanner =>
       dotenv.get('SHOW_DEBUG_BANNER', fallback: 'true') == 'true';
+
+  @override
+  String get supportWhatsappNumber =>
+      dotenv.get('SUPPORT_WHATSAPP_NUMBER', fallback: '2250000000000');
 }
