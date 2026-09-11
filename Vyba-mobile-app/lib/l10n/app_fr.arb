@@ -43,6 +43,13 @@
   "authHaveAccount": "Vous avez déjà un compte ? ",
   "authOtpTitle": "Vérifiez votre e-mail",
   "authOtpSubtitle": "Entrez le code à 6 chiffres envoyé à {email}",
+  "@authOtpSubtitle": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
   "authOtpResend": "Vous n'avez pas reçu le code ? Renvoyer",
   "authLoginWithGoogle": "Continuer avec Google",
   "authLoginWithApple": "Continuer avec Apple",
@@ -63,6 +70,13 @@
 
   "homeTitle": "Accueil",
   "homeGreeting": "Bonjour, {name} !",
+  "@homeGreeting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
 
   "profileTitle": "Profil",
   "profileEditProfile": "Modifier le profil",
@@ -80,6 +94,13 @@
   "settingsLanguageFr": "Français",
   "settingsAbout": "À propos",
   "settingsVersion": "Version {version}",
+  "@settingsVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
   "settingsTerms": "Conditions d'utilisation",
   "settingsPrivacy": "Politique de confidentialité",
 

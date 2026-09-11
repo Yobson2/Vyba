@@ -42,7 +42,7 @@ class MockPromotionDataSource implements PromotionDataSource {
     ),
     Promotion(
       id: 'promo-003',
-      title: '20% Off Group Bookings',
+      title: '20% Off for Groups',
       description: 'Book for 6+ guests and save 20% on your total bill.',
       imageUrl:
           'https://images.unsplash.com/photo-1566737236500-c8ac43014a67?w=800',

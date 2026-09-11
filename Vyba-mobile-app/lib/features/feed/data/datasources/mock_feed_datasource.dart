@@ -52,7 +52,7 @@ class MockFeedDataSource implements FeedDataSource {
             'of Moet. Limited availability.',
         imageUrl:
             'https://images.unsplash.com/photo-1571204829887-3b8d69e4094d?w=800',
-        venueName: 'Velvet Rooftop',
+        venueName: 'Velvet Lounge',
         validUntil: DateTime.now().add(const Duration(days: 2)),
         promoType: 'vip',
       ),
@@ -74,10 +74,10 @@ class MockFeedDataSource implements FeedDataSource {
       EventFeedItem(
         id: 'event-003',
         createdAt: DateTime.now().subtract(const Duration(days: 1)),
-        title: 'Rooftop Silent Disco',
+        title: 'Silent Disco Night',
         imageUrl:
             'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=800',
-        venueName: 'Velvet Rooftop',
+        venueName: 'Velvet Lounge',
         date: DateTime.now().add(const Duration(days: 10)),
         attendeeCount: 156,
         attendeeAvatars: [

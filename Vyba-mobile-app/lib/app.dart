@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templates/core/config/env_provider.dart';
 import 'package:flutter_templates/core/router/app_router.dart';
 import 'package:flutter_templates/core/theme/app_theme.dart';
 import 'package:flutter_templates/core/theme/theme_provider.dart';
+import 'package:flutter_templates/l10n/app_localizations.dart';
 
 /// Root application widget.
 ///
