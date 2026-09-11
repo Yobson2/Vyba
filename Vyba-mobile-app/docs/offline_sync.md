@@ -1,5 +1,12 @@
 # Offline-First Data Synchronization with Drift
 
+> **Superseded.** The validation build removed the Drift offline-sync queue and
+> the `notes` demo feature it was built around (ticket 02, `docs/validation-mvp/`).
+> The app now keeps only a plain read cache for the feed and venue list — there is
+> no write-queue, sync engine, or conflict resolution in the shipped code. This
+> document is kept for historical reference only; do not use it as a guide to the
+> current architecture.
+
 This document explains the complete offline-first sync architecture, how data flows through each layer, and how to add sync support to your own features.
 
 ---

@@ -43,22 +43,6 @@ class NetworkException implements Exception {
   String toString() => 'NetworkException(message: $message)';
 }
 
-/// Exception thrown when a sync operation fails.
-class SyncException implements Exception {
-  /// Creates a [SyncException].
-  const SyncException({this.message = 'Sync error', this.isConflict = false});
-
-  /// Error message.
-  final String message;
-
-  /// Whether this is a conflict (409) that requires resolution.
-  final bool isConflict;
-
-  @override
-  String toString() =>
-      'SyncException(message: $message, isConflict: $isConflict)';
-}
-
 /// Exception thrown for unauthorized access (401/403).
 class UnauthorizedException implements Exception {
   /// Creates an [UnauthorizedException].

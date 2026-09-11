@@ -58,19 +58,6 @@ class UnauthorizedFailure extends Failure {
   });
 }
 
-/// Failure due to a sync operation error.
-class SyncFailure extends Failure {
-  /// Creates a [SyncFailure].
-  const SyncFailure({
-    super.message = 'Sync operation failed',
-    this.isPending = false,
-  });
-
-  /// Whether the operation was saved locally and is pending sync.
-  /// When true, the UI should show "saved offline" instead of an error.
-  final bool isPending;
-}
-
 /// Failure due to input validation errors.
 class ValidationFailure extends Failure {
   /// Creates a [ValidationFailure] with field-level [errors].
