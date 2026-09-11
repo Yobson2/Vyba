@@ -16,12 +16,10 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UserModel {
   String get id;
-  String get email;
-  String get name;
-  @JsonKey(name: 'avatar_url')
-  String? get avatarUrl;
-  @JsonKey(name: 'phone_number')
-  String? get phoneNumber;
+  String get phone;
+  String? get firstName;
+  String? get lastName;
+  @_UserRoleConverter()
   UserRole get role;
 
   /// Create a copy of UserModel
@@ -40,23 +38,22 @@ mixin _$UserModel {
         (other.runtimeType == runtimeType &&
             other is UserModel &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.email, email) || other.email == email) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.avatarUrl, avatarUrl) ||
-                other.avatarUrl == avatarUrl) &&
-            (identical(other.phoneNumber, phoneNumber) ||
-                other.phoneNumber == phoneNumber) &&
+            (identical(other.phone, phone) || other.phone == phone) &&
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
             (identical(other.role, role) || other.role == role));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, email, name, avatarUrl, phoneNumber, role);
+      Object.hash(runtimeType, id, phone, firstName, lastName, role);
 
   @override
   String toString() {
-    return 'UserModel(id: $id, email: $email, name: $name, avatarUrl: $avatarUrl, phoneNumber: $phoneNumber, role: $role)';
+    return 'UserModel(id: $id, phone: $phone, firstName: $firstName, lastName: $lastName, role: $role)';
   }
 }
 
@@ -67,11 +64,10 @@ abstract mixin class $UserModelCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String email,
-      String name,
-      @JsonKey(name: 'avatar_url') String? avatarUrl,
-      @JsonKey(name: 'phone_number') String? phoneNumber,
-      UserRole role});
+      String phone,
+      String? firstName,
+      String? lastName,
+      @_UserRoleConverter() UserRole role});
 }
 
 /// @nodoc
@@ -87,10 +83,9 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
   @override
   $Res call({
     Object? id = null,
-    Object? email = null,
-    Object? name = null,
-    Object? avatarUrl = freezed,
-    Object? phoneNumber = freezed,
+    Object? phone = null,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
     Object? role = null,
   }) {
     return _then(_self.copyWith(
@@ -98,21 +93,17 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
-          ? _self.email
-          : email // ignore: cast_nullable_to_non_nullable
+      phone: null == phone
+          ? _self.phone
+          : phone // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      avatarUrl: freezed == avatarUrl
-          ? _self.avatarUrl
-          : avatarUrl // ignore: cast_nullable_to_non_nullable
+      firstName: freezed == firstName
+          ? _self.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
               as String?,
-      phoneNumber: freezed == phoneNumber
-          ? _self.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
+      lastName: freezed == lastName
+          ? _self.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
       role: null == role
           ? _self.role
@@ -127,11 +118,10 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
 class _UserModel extends UserModel {
   const _UserModel(
       {required this.id,
-      required this.email,
-      required this.name,
-      @JsonKey(name: 'avatar_url') this.avatarUrl,
-      @JsonKey(name: 'phone_number') this.phoneNumber,
-      this.role = UserRole.client})
+      required this.phone,
+      this.firstName,
+      this.lastName,
+      @_UserRoleConverter() this.role = UserRole.client})
       : super._();
   factory _UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
@@ -139,17 +129,14 @@ class _UserModel extends UserModel {
   @override
   final String id;
   @override
-  final String email;
+  final String phone;
   @override
-  final String name;
+  final String? firstName;
   @override
-  @JsonKey(name: 'avatar_url')
-  final String? avatarUrl;
-  @override
-  @JsonKey(name: 'phone_number')
-  final String? phoneNumber;
+  final String? lastName;
   @override
   @JsonKey()
+  @_UserRoleConverter()
   final UserRole role;
 
   /// Create a copy of UserModel
@@ -173,23 +160,22 @@ class _UserModel extends UserModel {
         (other.runtimeType == runtimeType &&
             other is _UserModel &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.email, email) || other.email == email) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.avatarUrl, avatarUrl) ||
-                other.avatarUrl == avatarUrl) &&
-            (identical(other.phoneNumber, phoneNumber) ||
-                other.phoneNumber == phoneNumber) &&
+            (identical(other.phone, phone) || other.phone == phone) &&
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
             (identical(other.role, role) || other.role == role));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, email, name, avatarUrl, phoneNumber, role);
+      Object.hash(runtimeType, id, phone, firstName, lastName, role);
 
   @override
   String toString() {
-    return 'UserModel(id: $id, email: $email, name: $name, avatarUrl: $avatarUrl, phoneNumber: $phoneNumber, role: $role)';
+    return 'UserModel(id: $id, phone: $phone, firstName: $firstName, lastName: $lastName, role: $role)';
   }
 }
 
@@ -203,11 +189,10 @@ abstract mixin class _$UserModelCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      String email,
-      String name,
-      @JsonKey(name: 'avatar_url') String? avatarUrl,
-      @JsonKey(name: 'phone_number') String? phoneNumber,
-      UserRole role});
+      String phone,
+      String? firstName,
+      String? lastName,
+      @_UserRoleConverter() UserRole role});
 }
 
 /// @nodoc
@@ -223,10 +208,9 @@ class __$UserModelCopyWithImpl<$Res> implements _$UserModelCopyWith<$Res> {
   @pragma('vm:prefer-inline')
   $Res call({
     Object? id = null,
-    Object? email = null,
-    Object? name = null,
-    Object? avatarUrl = freezed,
-    Object? phoneNumber = freezed,
+    Object? phone = null,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
     Object? role = null,
   }) {
     return _then(_UserModel(
@@ -234,21 +218,17 @@ class __$UserModelCopyWithImpl<$Res> implements _$UserModelCopyWith<$Res> {
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
-          ? _self.email
-          : email // ignore: cast_nullable_to_non_nullable
+      phone: null == phone
+          ? _self.phone
+          : phone // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      avatarUrl: freezed == avatarUrl
-          ? _self.avatarUrl
-          : avatarUrl // ignore: cast_nullable_to_non_nullable
+      firstName: freezed == firstName
+          ? _self.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
               as String?,
-      phoneNumber: freezed == phoneNumber
-          ? _self.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
+      lastName: freezed == lastName
+          ? _self.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
       role: null == role
           ? _self.role

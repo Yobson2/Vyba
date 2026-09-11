@@ -9,7 +9,10 @@ part of 'venue_providers.dart';
 String _$venueRemoteDataSourceHash() =>
     r'1ff7a1c84a4568682c363da993c8bb45d720f870';
 
-/// See also [venueRemoteDataSource].
+/// Backs the Explore listing. Still mock — the backend has no public venue
+/// *list* endpoint yet (a later ticket).
+///
+/// Copied from [venueRemoteDataSource].
 @ProviderFor(venueRemoteDataSource)
 final venueRemoteDataSourceProvider = Provider<VenueRemoteDataSource>.internal(
   venueRemoteDataSource,
@@ -58,26 +61,6 @@ final getVenuesUseCaseProvider = AutoDisposeProvider<GetVenuesUseCase>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef GetVenuesUseCaseRef = AutoDisposeProviderRef<GetVenuesUseCase>;
-String _$getVenueDetailUseCaseHash() =>
-    r'134a092272462ce4860ce687b2e2b645e1527766';
-
-/// See also [getVenueDetailUseCase].
-@ProviderFor(getVenueDetailUseCase)
-final getVenueDetailUseCaseProvider =
-    AutoDisposeProvider<GetVenueDetailUseCase>.internal(
-  getVenueDetailUseCase,
-  name: r'getVenueDetailUseCaseProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$getVenueDetailUseCaseHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef GetVenueDetailUseCaseRef
-    = AutoDisposeProviderRef<GetVenueDetailUseCase>;
 String _$searchVenuesUseCaseHash() =>
     r'53b841c5b9de31ad742a3fbec739d3425079ad42';
 
@@ -97,5 +80,65 @@ final searchVenuesUseCaseProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef SearchVenuesUseCaseRef = AutoDisposeProviderRef<SearchVenuesUseCase>;
+String _$venueDetailRemoteDataSourceHash() =>
+    r'1bebd9e763133d6108a92913f80e3c80bd7387e1';
+
+/// Backs venue *detail* (ticket 06) — real backend, distinct from the
+/// mock-backed listing provider above.
+///
+/// Copied from [venueDetailRemoteDataSource].
+@ProviderFor(venueDetailRemoteDataSource)
+final venueDetailRemoteDataSourceProvider =
+    Provider<VenueRemoteDataSource>.internal(
+  venueDetailRemoteDataSource,
+  name: r'venueDetailRemoteDataSourceProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$venueDetailRemoteDataSourceHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef VenueDetailRemoteDataSourceRef = ProviderRef<VenueRemoteDataSource>;
+String _$venueDetailRepositoryHash() =>
+    r'db7ada39793585cc191c25874c70bae8ba409218';
+
+/// See also [venueDetailRepository].
+@ProviderFor(venueDetailRepository)
+final venueDetailRepositoryProvider = Provider<VenueRepository>.internal(
+  venueDetailRepository,
+  name: r'venueDetailRepositoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$venueDetailRepositoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef VenueDetailRepositoryRef = ProviderRef<VenueRepository>;
+String _$getVenueDetailUseCaseHash() =>
+    r'2b564a1393c331e243dc245ce2ab64caec4dc46c';
+
+/// See also [getVenueDetailUseCase].
+@ProviderFor(getVenueDetailUseCase)
+final getVenueDetailUseCaseProvider =
+    AutoDisposeProvider<GetVenueDetailUseCase>.internal(
+  getVenueDetailUseCase,
+  name: r'getVenueDetailUseCaseProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$getVenueDetailUseCaseHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef GetVenueDetailUseCaseRef
+    = AutoDisposeProviderRef<GetVenueDetailUseCase>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

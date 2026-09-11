@@ -45,7 +45,8 @@ class VenueCard extends StatelessWidget {
                 ),
                 // Scrim overlay
                 const DecoratedBox(
-                  decoration: BoxDecoration(gradient: AppGradients.scrimOverlay),
+                  decoration:
+                      BoxDecoration(gradient: AppGradients.scrimOverlay),
                 ),
                 // Status chip (top-left)
                 Positioned(
@@ -66,7 +67,8 @@ class VenueCard extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
-                        color: AppColors.tertiaryContainer.withValues(alpha: 0.9),
+                        color:
+                            AppColors.tertiaryContainer.withValues(alpha: 0.9),
                         borderRadius: AppRadius.borderRadiusFull,
                       ),
                       child: Text(
@@ -105,19 +107,17 @@ class VenueCard extends StatelessWidget {
                     children: [
                       Text(
                         venue.name,
-                        style:
-                            Theme.of(context).textTheme.titleLarge?.copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w700,
-                                ),
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                            ),
                       ),
                       const SizedBox(height: 4),
                       Row(
                         children: [
                           Icon(Icons.location_on_outlined,
                               size: 14,
-                              color:
-                                  Colors.white.withValues(alpha: 0.7)),
+                              color: Colors.white.withValues(alpha: 0.7)),
                           const SizedBox(width: 4),
                           Expanded(
                             child: Text(
@@ -126,8 +126,7 @@ class VenueCard extends StatelessWidget {
                                   .textTheme
                                   .bodySmall
                                   ?.copyWith(
-                                    color:
-                                        Colors.white.withValues(alpha: 0.7),
+                                    color: Colors.white.withValues(alpha: 0.7),
                                   ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,

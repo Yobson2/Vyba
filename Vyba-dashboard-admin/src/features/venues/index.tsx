@@ -3,17 +3,15 @@ import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
+import { useVenuesQuery } from './api/venues-api'
 import { columns } from './components/venues-columns'
 import { VenuesDialogs } from './components/venues-dialogs'
 import { VenuesPrimaryButtons } from './components/venues-primary-buttons'
 import { VenuesTable } from './components/venues-table'
 import VenuesProvider from './context/venues-context'
-import { venueListSchema } from './data/schema'
-import { venues } from './data/venues'
 
 export default function Venues() {
-  // Parse venue list
-  const venueList = venueListSchema.parse(venues)
+  const { data: venueList, isLoading, isError, error } = useVenuesQuery()
 
   return (
     <VenuesProvider>
@@ -28,15 +26,29 @@ export default function Venues() {
       <Main>
         <div className='mb-2 flex flex-wrap items-center justify-between space-y-2'>
           <div>
-            <h2 className='text-2xl font-bold tracking-tight'>Venues</h2>
+            <h2 className='text-2xl font-bold tracking-tight'>
+              Venues &amp; owners
+            </h2>
             <p className='text-muted-foreground'>
-              Manage venues, approvals, and listings.
+              Create venues, provision owner accounts, and manage validation
+              status for the Zone 4 launch.
             </p>
           </div>
           <VenuesPrimaryButtons />
         </div>
         <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-y-0 lg:space-x-12'>
-          <VenuesTable data={venueList} columns={columns} />
+          {isError ? (
+            <p className='text-destructive py-8 text-center'>
+              Failed to load venues
+              {error instanceof Error ? `: ${error.message}` : '.'}
+            </p>
+          ) : isLoading ? (
+            <p className='text-muted-foreground py-8 text-center'>
+              Loading venues...
+            </p>
+          ) : (
+            <VenuesTable data={venueList ?? []} columns={columns} />
+          )}
         </div>
       </Main>
 

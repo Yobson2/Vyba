@@ -12,6 +12,13 @@ sealed class AuthState with _$AuthState {
   /// Loading state during auth operations.
   const factory AuthState.loading() = AuthLoading;
 
+  /// A code was requested for [phoneNumber]; awaiting verification.
+  /// [isFirstSignIn] tells the OTP screen whether to show the 18+ checkbox.
+  const factory AuthState.codeRequested({
+    required String phoneNumber,
+    required bool isFirstSignIn,
+  }) = AuthCodeRequested;
+
   /// User is authenticated.
   const factory AuthState.authenticated(User user) = AuthAuthenticated;
 
@@ -19,5 +26,5 @@ sealed class AuthState with _$AuthState {
   const factory AuthState.unauthenticated() = AuthUnauthenticated;
 
   /// An error occurred during an auth operation.
-  const factory AuthState.error(String message) = AuthError;
+  const factory AuthState.error(String message, {String? code}) = AuthError;
 }

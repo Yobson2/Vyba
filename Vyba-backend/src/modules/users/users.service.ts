@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -12,7 +12,7 @@ import {
   UserNotFoundError,
   UserAlreadyExistsError,
 } from '@common/exceptions/user.exceptions';
-import { DEFAULT_ROLE } from '@common/constants/roles.constant';
+import { DEFAULT_ROLE, UserRole } from '@common/constants/roles.constant';
 
 @Injectable()
 export class UsersService {
@@ -69,6 +69,51 @@ export class UsersService {
 
   async findByPhone(phone: string): Promise<User | null> {
     return this.userRepository.findOne({ where: { phone } });
+  }
+
+  /** Batch lookup — used by `venues` to enrich a list with bound-owner summaries in one query. */
+  async findByIds(ids: string[]): Promise<User[]> {
+    if (ids.length === 0) return [];
+    return this.userRepository.find({ where: { id: In(ids) } });
+  }
+
+  /**
+   * Admin provisioning for a venue owner (ticket 05): get-or-create by
+   * phone, upgrading an existing user to `VENUE_OWNER`. Supports re-binding
+   * the same phone to a different venue without a duplicate-user error.
+   */
+  async provisionOwner(
+    phone: string,
+    firstName?: string,
+    lastName?: string,
+  ): Promise<User> {
+    const existing = await this.findByPhone(phone);
+    if (existing) {
+      existing.role = UserRole.VENUE_OWNER;
+      if (firstName !== undefined) existing.firstName = firstName;
+      if (lastName !== undefined) existing.lastName = lastName;
+      return this.userRepository.save(existing);
+    }
+
+    const user = this.userRepository.create({
+      phone,
+      firstName: firstName ?? null,
+      lastName: lastName ?? null,
+      role: UserRole.VENUE_OWNER,
+    });
+    const saved = await this.userRepository.save(user);
+    this.logger.log(`User created: ${saved.id}`);
+    return saved;
+  }
+
+  /** Records the 18+ confirmation on first verify (ADR-0003 / ticket 04). No-op once already set. */
+  async confirmAge(id: string): Promise<User> {
+    const user = await this.findOne(id);
+    if (!user.ageConfirmedAt) {
+      user.ageConfirmedAt = new Date();
+      await this.userRepository.save(user);
+    }
+    return user;
   }
 
   async findAll(

@@ -24,7 +24,7 @@ class AuthInterceptor extends QueuedInterceptor {
   /// Paths that do not require authentication.
   /// Matched via exact equality (not contains) to prevent bypasses.
   static const _publicPaths = [
-    ApiEndpoints.loginWithPhone,
+    ApiEndpoints.requestOtp,
     ApiEndpoints.verifyOtp,
     ApiEndpoints.refreshToken,
   ];
@@ -72,12 +72,12 @@ class AuthInterceptor extends QueuedInterceptor {
     try {
       final response = await _dio.post<Map<String, dynamic>>(
         ApiEndpoints.refreshToken,
-        data: {'refresh_token': refreshToken},
+        data: {'refreshToken': refreshToken},
       );
       final data = response.data;
       if (data != null) {
-        final newAccess = data['access_token'] as String?;
-        final newRefresh = data['refresh_token'] as String?;
+        final newAccess = data['accessToken'] as String?;
+        final newRefresh = data['refreshToken'] as String?;
         if (newAccess != null) {
           await _secureStorage.setAccessToken(newAccess);
         }

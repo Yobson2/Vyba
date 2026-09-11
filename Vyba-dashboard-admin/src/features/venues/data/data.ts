@@ -1,71 +1,35 @@
-import {
-  IconGlass,
-  IconBeer,
-  IconSofa,
-  IconToolsKitchen2,
-  IconBuilding,
-  IconBeach,
-  IconCoffee,
-} from '@tabler/icons-react'
-import { VenueStatus } from './schema'
+import { IconGlass, IconBeer, IconSofa, IconCoffee } from '@tabler/icons-react'
+import { ValidationStatus, VenueType } from './schema'
 
-export const statusTypes = new Map<VenueStatus, string>([
+export const statusTypes = new Map<ValidationStatus, string>([
   [
-    'active',
-    'bg-teal-100/30 text-teal-900 dark:text-teal-200 border-teal-200',
-  ],
-  [
-    'pending',
+    'ONBOARDING',
     'bg-amber-100/30 text-amber-900 dark:text-amber-200 border-amber-200',
   ],
-  ['suspended', 'bg-neutral-300/40 border-neutral-300'],
-  [
-    'rejected',
-    'bg-destructive/10 dark:bg-destructive/50 text-destructive dark:text-primary border-destructive/10',
-  ],
+  ['ACTIVE', 'bg-teal-100/30 text-teal-900 dark:text-teal-200 border-teal-200'],
+  ['PAUSED', 'bg-neutral-300/40 border-neutral-300'],
 ])
 
-export const venueTypes = [
-  {
-    label: 'Club',
-    value: 'club',
-    icon: IconGlass,
-  },
-  {
-    label: 'Bar',
-    value: 'bar',
-    icon: IconBeer,
-  },
-  {
-    label: 'Lounge',
-    value: 'lounge',
-    icon: IconSofa,
-  },
-  {
-    label: 'Restaurant',
-    value: 'restaurant',
-    icon: IconToolsKitchen2,
-  },
-  {
-    label: 'Rooftop',
-    value: 'rooftop',
-    icon: IconBuilding,
-  },
-  {
-    label: 'Beach Club',
-    value: 'beach_club',
-    icon: IconBeach,
-  },
-  {
-    label: 'Maquis',
-    value: 'maquis',
-    icon: IconCoffee,
-  },
-] as const
+export const statusOptions: { label: string; value: ValidationStatus }[] = [
+  { label: 'Onboarding', value: 'ONBOARDING' },
+  { label: 'Active', value: 'ACTIVE' },
+  { label: 'Paused', value: 'PAUSED' },
+]
+
+export const venueTypes: {
+  label: string
+  value: VenueType
+  icon: typeof IconGlass
+}[] = [
+  { label: 'Club', value: 'CLUB', icon: IconGlass },
+  { label: 'Bar', value: 'BAR', icon: IconBeer },
+  { label: 'Lounge', value: 'LOUNGE', icon: IconSofa },
+  { label: 'Maquis', value: 'MAQUIS', icon: IconCoffee },
+]
 
 export const priceLevels = [
-  { label: '\u20A6', value: '1' },
-  { label: '\u20A6\u20A6', value: '2' },
-  { label: '\u20A6\u20A6\u20A6', value: '3' },
-  { label: '\u20A6\u20A6\u20A6\u20A6', value: '4' },
+  { label: 'F', value: '1' },
+  { label: 'FF', value: '2' },
+  { label: 'FFF', value: '3' },
+  { label: 'FFFF', value: '4' },
 ] as const

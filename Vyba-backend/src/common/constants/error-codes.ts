@@ -19,6 +19,7 @@ export enum AuthErrorCode {
   EMAIL_NOT_VERIFIED = 'AUTH_ACCOUNT_004',
 
   TOO_MANY_LOGIN_ATTEMPTS = 'AUTH_RATE_001',
+  OTP_RATE_LIMITED = 'AUTH_RATE_002',
   TOO_MANY_PASSWORD_RESETS = 'AUTH_RATE_003',
 
   USER_ALREADY_EXISTS = 'AUTH_REGISTER_001',
@@ -33,6 +34,7 @@ export enum AuthErrorCode {
 
   INVALID_VERIFICATION_CODE = 'AUTH_VERIFY_001',
   VERIFICATION_CODE_EXPIRED = 'AUTH_VERIFY_002',
+  AGE_CONFIRMATION_REQUIRED = 'AUTH_VERIFY_003',
 }
 
 export enum UserErrorCode {
@@ -43,6 +45,23 @@ export enum UserErrorCode {
 
   USER_SERVICE_ERROR = 'USER_SERVICE_001',
   USER_DATABASE_ERROR = 'USER_SERVICE_002',
+}
+
+export enum VenueErrorCode {
+  VENUE_NOT_FOUND = 'VENUE_PROFILE_001',
+  VENUE_NOT_OWNED = 'VENUE_PROFILE_002',
+  VENUE_NIGHT_NOT_FOUND = 'VENUE_PROFILE_003',
+}
+
+export enum FeedErrorCode {
+  FEED_ITEM_NOT_FOUND = 'FEED_ITEM_001',
+}
+
+export enum GoingErrorCode {
+  GOING_NOT_FOUND = 'GOING_001',
+  GOING_SELF_MARK = 'GOING_002',
+  GOING_RATE_LIMITED = 'GOING_003',
+  GOING_LOCKED = 'GOING_004',
 }
 
 export enum SystemErrorCode {
@@ -68,7 +87,13 @@ export enum SystemErrorCode {
   OPERATION_FAILED = 'SYSTEM_INTERNAL_002',
 }
 
-export type ErrorCode = AuthErrorCode | UserErrorCode | SystemErrorCode;
+export type ErrorCode =
+  | AuthErrorCode
+  | UserErrorCode
+  | VenueErrorCode
+  | FeedErrorCode
+  | GoingErrorCode
+  | SystemErrorCode;
 
 export interface ErrorCodeMetadata {
   code: ErrorCode;

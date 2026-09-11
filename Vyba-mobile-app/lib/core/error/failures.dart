@@ -6,14 +6,18 @@ import 'package:flutter/foundation.dart';
 /// domain-level errors without throwing exceptions.
 @immutable
 sealed class Failure {
-  /// Creates a [Failure] with an optional [message] and [statusCode].
-  const Failure({this.message = '', this.statusCode});
+  /// Creates a [Failure] with an optional [message], [statusCode] and [code].
+  const Failure({this.message = '', this.statusCode, this.code});
 
   /// Human-readable error message.
   final String message;
 
   /// Optional HTTP status code associated with the failure.
   final int? statusCode;
+
+  /// Backend typed error code (e.g. `AUTH_VERIFY_002`), when present. Lets
+  /// callers map to precise copy instead of matching on [message].
+  final String? code;
 
   @override
   String toString() => '$runtimeType(message: $message)';
@@ -24,17 +28,18 @@ sealed class Failure {
       other is Failure &&
           runtimeType == other.runtimeType &&
           message == other.message &&
-          statusCode == other.statusCode;
+          statusCode == other.statusCode &&
+          code == other.code;
 
   @override
-  int get hashCode => Object.hash(runtimeType, message, statusCode);
+  int get hashCode => Object.hash(runtimeType, message, statusCode, code);
 }
 
 /// Failure originating from a remote server error (5xx, unexpected response).
 class ServerFailure extends Failure {
   /// Creates a [ServerFailure].
   const ServerFailure(
-      {super.message = 'Server error occurred', super.statusCode});
+      {super.message = 'Server error occurred', super.statusCode, super.code});
 }
 
 /// Failure originating from local cache operations.
@@ -55,6 +60,7 @@ class UnauthorizedFailure extends Failure {
   const UnauthorizedFailure({
     super.message = 'Unauthorized access',
     super.statusCode = 401,
+    super.code,
   });
 }
 

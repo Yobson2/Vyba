@@ -142,8 +142,15 @@ GoRouter appRouter(Ref ref) {
         path: RouteNames.otpVerification,
         name: RouteNames.otpVerificationName,
         builder: (context, state) {
-          final email = state.extra as String? ?? '';
-          return OtpVerificationPage(email: email);
+          final extra = state.extra;
+          final (phoneNumber, isFirstSignIn) =
+              extra is ({String phoneNumber, bool isFirstSignIn})
+                  ? (extra.phoneNumber, extra.isFirstSignIn)
+                  : ('', false);
+          return OtpVerificationPage(
+            phoneNumber: phoneNumber,
+            isFirstSignIn: isFirstSignIn,
+          );
         },
       ),
 

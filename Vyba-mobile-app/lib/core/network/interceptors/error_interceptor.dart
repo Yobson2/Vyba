@@ -55,13 +55,14 @@ class ErrorInterceptor extends Interceptor {
     final message = data is Map<String, dynamic>
         ? (data['message'] as String?) ?? 'Server error'
         : 'Server error';
+    final code = data is Map<String, dynamic> ? data['code'] as String? : null;
 
     if (statusCode == null) {
       handler.reject(
         DioException(
           requestOptions: err.requestOptions,
           response: err.response,
-          error: ServerException(message: message),
+          error: ServerException(message: message, code: code),
           type: err.type,
         ),
       );
@@ -69,15 +70,26 @@ class ErrorInterceptor extends Interceptor {
     }
 
     final Exception exception = switch (statusCode) {
-      401 => UnauthorizedException(message: message),
-      403 => UnauthorizedException(message: 'Access forbidden: $message'),
-      404 => ServerException(message: 'Not found: $message', statusCode: 404),
+      401 => UnauthorizedException(message: message, code: code),
+      403 => UnauthorizedException(message: message, code: code),
+      404 => ServerException(
+          message: 'Not found: $message',
+          statusCode: 404,
+          code: code,
+        ),
       422 => ServerException(
           message: 'Validation error: $message',
           statusCode: 422,
+          code: code,
         ),
-      >= 500 => ServerException(message: message, statusCode: statusCode),
-      _ => ServerException(message: message, statusCode: statusCode),
+      429 => ServerException(message: message, statusCode: 429, code: code),
+      >= 500 => ServerException(
+          message: message,
+          statusCode: statusCode,
+          code: code,
+        ),
+      _ =>
+        ServerException(message: message, statusCode: statusCode, code: code),
     };
 
     handler.reject(

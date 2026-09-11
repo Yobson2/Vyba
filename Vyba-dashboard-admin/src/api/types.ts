@@ -4,11 +4,15 @@ export interface ApiResponse<T> {
   success: boolean
 }
 
+/** Matches the backend's `PaginatedResponseDto` shape exactly (see Vyba-backend `common/dto/pagination.dto.ts`). */
 export interface PaginatedResponse<T> {
   data: T[]
-  total: number
-  page: number
-  pageSize: number
+  meta: {
+    page: number
+    limit: number
+    total: number
+    totalPages: number
+  }
 }
 
 export interface ApiError {

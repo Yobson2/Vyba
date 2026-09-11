@@ -21,7 +21,7 @@ mixin _$VenueModel {
   String get address;
   double get latitude;
   double get longitude;
-  @JsonKey(name: 'hero_images')
+  @JsonKey(name: 'photos')
   List<String> get heroImages;
   double get rating;
   @JsonKey(name: 'review_count')
@@ -39,6 +39,9 @@ mixin _$VenueModel {
   double? get distance;
   @JsonKey(name: 'active_promo_label')
   String? get activePromoLabel;
+  bool get inLaunchArea;
+  VenueTonightModel? get tonight;
+  List<VenuePromoModel> get promos;
 
   /// Create a copy of VenueModel
   /// with the given fields replaced by the non-null parameter values.
@@ -81,34 +84,42 @@ mixin _$VenueModel {
             (identical(other.distance, distance) ||
                 other.distance == distance) &&
             (identical(other.activePromoLabel, activePromoLabel) ||
-                other.activePromoLabel == activePromoLabel));
+                other.activePromoLabel == activePromoLabel) &&
+            (identical(other.inLaunchArea, inLaunchArea) ||
+                other.inLaunchArea == inLaunchArea) &&
+            (identical(other.tonight, tonight) || other.tonight == tonight) &&
+            const DeepCollectionEquality().equals(other.promos, promos));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      name,
-      description,
-      address,
-      latitude,
-      longitude,
-      const DeepCollectionEquality().hash(heroImages),
-      rating,
-      reviewCount,
-      isOpen,
-      venueType,
-      phone,
-      priceLevel,
-      const DeepCollectionEquality().hash(amenities),
-      isPremium,
-      distance,
-      activePromoLabel);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        name,
+        description,
+        address,
+        latitude,
+        longitude,
+        const DeepCollectionEquality().hash(heroImages),
+        rating,
+        reviewCount,
+        isOpen,
+        venueType,
+        phone,
+        priceLevel,
+        const DeepCollectionEquality().hash(amenities),
+        isPremium,
+        distance,
+        activePromoLabel,
+        inLaunchArea,
+        tonight,
+        const DeepCollectionEquality().hash(promos)
+      ]);
 
   @override
   String toString() {
-    return 'VenueModel(id: $id, name: $name, description: $description, address: $address, latitude: $latitude, longitude: $longitude, heroImages: $heroImages, rating: $rating, reviewCount: $reviewCount, isOpen: $isOpen, venueType: $venueType, phone: $phone, priceLevel: $priceLevel, amenities: $amenities, isPremium: $isPremium, distance: $distance, activePromoLabel: $activePromoLabel)';
+    return 'VenueModel(id: $id, name: $name, description: $description, address: $address, latitude: $latitude, longitude: $longitude, heroImages: $heroImages, rating: $rating, reviewCount: $reviewCount, isOpen: $isOpen, venueType: $venueType, phone: $phone, priceLevel: $priceLevel, amenities: $amenities, isPremium: $isPremium, distance: $distance, activePromoLabel: $activePromoLabel, inLaunchArea: $inLaunchArea, tonight: $tonight, promos: $promos)';
   }
 }
 
@@ -125,7 +136,7 @@ abstract mixin class $VenueModelCopyWith<$Res> {
       String address,
       double latitude,
       double longitude,
-      @JsonKey(name: 'hero_images') List<String> heroImages,
+      @JsonKey(name: 'photos') List<String> heroImages,
       double rating,
       @JsonKey(name: 'review_count') int reviewCount,
       @JsonKey(name: 'is_open') bool isOpen,
@@ -135,7 +146,12 @@ abstract mixin class $VenueModelCopyWith<$Res> {
       List<String> amenities,
       @JsonKey(name: 'is_premium') bool isPremium,
       double? distance,
-      @JsonKey(name: 'active_promo_label') String? activePromoLabel});
+      @JsonKey(name: 'active_promo_label') String? activePromoLabel,
+      bool inLaunchArea,
+      VenueTonightModel? tonight,
+      List<VenuePromoModel> promos});
+
+  $VenueTonightModelCopyWith<$Res>? get tonight;
 }
 
 /// @nodoc
@@ -167,6 +183,9 @@ class _$VenueModelCopyWithImpl<$Res> implements $VenueModelCopyWith<$Res> {
     Object? isPremium = null,
     Object? distance = freezed,
     Object? activePromoLabel = freezed,
+    Object? inLaunchArea = null,
+    Object? tonight = freezed,
+    Object? promos = null,
   }) {
     return _then(_self.copyWith(
       id: null == id
@@ -237,7 +256,33 @@ class _$VenueModelCopyWithImpl<$Res> implements $VenueModelCopyWith<$Res> {
           ? _self.activePromoLabel
           : activePromoLabel // ignore: cast_nullable_to_non_nullable
               as String?,
+      inLaunchArea: null == inLaunchArea
+          ? _self.inLaunchArea
+          : inLaunchArea // ignore: cast_nullable_to_non_nullable
+              as bool,
+      tonight: freezed == tonight
+          ? _self.tonight
+          : tonight // ignore: cast_nullable_to_non_nullable
+              as VenueTonightModel?,
+      promos: null == promos
+          ? _self.promos
+          : promos // ignore: cast_nullable_to_non_nullable
+              as List<VenuePromoModel>,
     ));
+  }
+
+  /// Create a copy of VenueModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $VenueTonightModelCopyWith<$Res>? get tonight {
+    if (_self.tonight == null) {
+      return null;
+    }
+
+    return $VenueTonightModelCopyWith<$Res>(_self.tonight!, (value) {
+      return _then(_self.copyWith(tonight: value));
+    });
   }
 }
 
@@ -251,19 +296,23 @@ class _VenueModel extends VenueModel {
       required this.address,
       required this.latitude,
       required this.longitude,
-      @JsonKey(name: 'hero_images') required final List<String> heroImages,
-      required this.rating,
-      @JsonKey(name: 'review_count') required this.reviewCount,
-      @JsonKey(name: 'is_open') required this.isOpen,
+      @JsonKey(name: 'photos') required final List<String> heroImages,
+      this.rating = 0,
+      @JsonKey(name: 'review_count') this.reviewCount = 0,
+      @JsonKey(name: 'is_open') this.isOpen = false,
       @JsonKey(name: 'venue_type') required this.venueType,
       this.phone,
       @JsonKey(name: 'price_level') this.priceLevel = 2,
       final List<String> amenities = const [],
       @JsonKey(name: 'is_premium') this.isPremium = false,
       this.distance,
-      @JsonKey(name: 'active_promo_label') this.activePromoLabel})
+      @JsonKey(name: 'active_promo_label') this.activePromoLabel,
+      this.inLaunchArea = true,
+      this.tonight,
+      final List<VenuePromoModel> promos = const []})
       : _heroImages = heroImages,
         _amenities = amenities,
+        _promos = promos,
         super._();
   factory _VenueModel.fromJson(Map<String, dynamic> json) =>
       _$VenueModelFromJson(json);
@@ -282,7 +331,7 @@ class _VenueModel extends VenueModel {
   final double longitude;
   final List<String> _heroImages;
   @override
-  @JsonKey(name: 'hero_images')
+  @JsonKey(name: 'photos')
   List<String> get heroImages {
     if (_heroImages is EqualUnmodifiableListView) return _heroImages;
     // ignore: implicit_dynamic_type
@@ -290,6 +339,7 @@ class _VenueModel extends VenueModel {
   }
 
   @override
+  @JsonKey()
   final double rating;
   @override
   @JsonKey(name: 'review_count')
@@ -322,6 +372,19 @@ class _VenueModel extends VenueModel {
   @override
   @JsonKey(name: 'active_promo_label')
   final String? activePromoLabel;
+  @override
+  @JsonKey()
+  final bool inLaunchArea;
+  @override
+  final VenueTonightModel? tonight;
+  final List<VenuePromoModel> _promos;
+  @override
+  @JsonKey()
+  List<VenuePromoModel> get promos {
+    if (_promos is EqualUnmodifiableListView) return _promos;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_promos);
+  }
 
   /// Create a copy of VenueModel
   /// with the given fields replaced by the non-null parameter values.
@@ -370,34 +433,42 @@ class _VenueModel extends VenueModel {
             (identical(other.distance, distance) ||
                 other.distance == distance) &&
             (identical(other.activePromoLabel, activePromoLabel) ||
-                other.activePromoLabel == activePromoLabel));
+                other.activePromoLabel == activePromoLabel) &&
+            (identical(other.inLaunchArea, inLaunchArea) ||
+                other.inLaunchArea == inLaunchArea) &&
+            (identical(other.tonight, tonight) || other.tonight == tonight) &&
+            const DeepCollectionEquality().equals(other._promos, _promos));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      name,
-      description,
-      address,
-      latitude,
-      longitude,
-      const DeepCollectionEquality().hash(_heroImages),
-      rating,
-      reviewCount,
-      isOpen,
-      venueType,
-      phone,
-      priceLevel,
-      const DeepCollectionEquality().hash(_amenities),
-      isPremium,
-      distance,
-      activePromoLabel);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        name,
+        description,
+        address,
+        latitude,
+        longitude,
+        const DeepCollectionEquality().hash(_heroImages),
+        rating,
+        reviewCount,
+        isOpen,
+        venueType,
+        phone,
+        priceLevel,
+        const DeepCollectionEquality().hash(_amenities),
+        isPremium,
+        distance,
+        activePromoLabel,
+        inLaunchArea,
+        tonight,
+        const DeepCollectionEquality().hash(_promos)
+      ]);
 
   @override
   String toString() {
-    return 'VenueModel(id: $id, name: $name, description: $description, address: $address, latitude: $latitude, longitude: $longitude, heroImages: $heroImages, rating: $rating, reviewCount: $reviewCount, isOpen: $isOpen, venueType: $venueType, phone: $phone, priceLevel: $priceLevel, amenities: $amenities, isPremium: $isPremium, distance: $distance, activePromoLabel: $activePromoLabel)';
+    return 'VenueModel(id: $id, name: $name, description: $description, address: $address, latitude: $latitude, longitude: $longitude, heroImages: $heroImages, rating: $rating, reviewCount: $reviewCount, isOpen: $isOpen, venueType: $venueType, phone: $phone, priceLevel: $priceLevel, amenities: $amenities, isPremium: $isPremium, distance: $distance, activePromoLabel: $activePromoLabel, inLaunchArea: $inLaunchArea, tonight: $tonight, promos: $promos)';
   }
 }
 
@@ -416,7 +487,7 @@ abstract mixin class _$VenueModelCopyWith<$Res>
       String address,
       double latitude,
       double longitude,
-      @JsonKey(name: 'hero_images') List<String> heroImages,
+      @JsonKey(name: 'photos') List<String> heroImages,
       double rating,
       @JsonKey(name: 'review_count') int reviewCount,
       @JsonKey(name: 'is_open') bool isOpen,
@@ -426,7 +497,13 @@ abstract mixin class _$VenueModelCopyWith<$Res>
       List<String> amenities,
       @JsonKey(name: 'is_premium') bool isPremium,
       double? distance,
-      @JsonKey(name: 'active_promo_label') String? activePromoLabel});
+      @JsonKey(name: 'active_promo_label') String? activePromoLabel,
+      bool inLaunchArea,
+      VenueTonightModel? tonight,
+      List<VenuePromoModel> promos});
+
+  @override
+  $VenueTonightModelCopyWith<$Res>? get tonight;
 }
 
 /// @nodoc
@@ -458,6 +535,9 @@ class __$VenueModelCopyWithImpl<$Res> implements _$VenueModelCopyWith<$Res> {
     Object? isPremium = null,
     Object? distance = freezed,
     Object? activePromoLabel = freezed,
+    Object? inLaunchArea = null,
+    Object? tonight = freezed,
+    Object? promos = null,
   }) {
     return _then(_VenueModel(
       id: null == id
@@ -528,7 +608,33 @@ class __$VenueModelCopyWithImpl<$Res> implements _$VenueModelCopyWith<$Res> {
           ? _self.activePromoLabel
           : activePromoLabel // ignore: cast_nullable_to_non_nullable
               as String?,
+      inLaunchArea: null == inLaunchArea
+          ? _self.inLaunchArea
+          : inLaunchArea // ignore: cast_nullable_to_non_nullable
+              as bool,
+      tonight: freezed == tonight
+          ? _self.tonight
+          : tonight // ignore: cast_nullable_to_non_nullable
+              as VenueTonightModel?,
+      promos: null == promos
+          ? _self._promos
+          : promos // ignore: cast_nullable_to_non_nullable
+              as List<VenuePromoModel>,
     ));
+  }
+
+  /// Create a copy of VenueModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $VenueTonightModelCopyWith<$Res>? get tonight {
+    if (_self.tonight == null) {
+      return null;
+    }
+
+    return $VenueTonightModelCopyWith<$Res>(_self.tonight!, (value) {
+      return _then(_self.copyWith(tonight: value));
+    });
   }
 }
 

@@ -11,8 +11,7 @@ import 'package:flutter_templates/features/auth/data/models/user_model.dart';
 ///
 /// Any phone number + OTP code `123456` succeeds.
 ///
-/// Remove this file and set `USE_MOCK_AUTH=false` in `.env` to switch
-/// to the real API.
+/// Set `USE_MOCK_AUTH=false` in `.env` to switch to the real API.
 class MockAuthRemoteDataSource implements AuthRemoteDataSource {
   MockAuthRemoteDataSource({required LocalStorage localStorage})
       : _localStorage = localStorage;
@@ -37,31 +36,26 @@ class MockAuthRemoteDataSource implements AuthRemoteDataSource {
   );
 
   @override
-  Future<void> verifyOtp({required String email, required String code}) async {
+  Future<void> requestOtp({required String phoneNumber}) async {
     await Future<void>.delayed(_delay);
-
-    if (code != '123456') {
-      throw const ServerException(message: 'Invalid OTP. Use 123456');
-    }
   }
 
   @override
-  Future<({UserModel user, TokensModel tokens})> loginWithPhone({
+  Future<AuthResult> verifyOtp({
     required String phoneNumber,
     required String code,
+    bool? ageConfirmed,
   }) async {
     await Future<void>.delayed(_delay);
 
     if (code != '123456') {
-      throw const ServerException(message: 'Invalid OTP. Use 123456');
+      throw const ServerException(message: 'Code invalide. Utilisez 123456.');
     }
 
     return (
       user: UserModel(
         id: 'mock-user-phone',
-        email: '$phoneNumber@vyba.app',
-        name: 'Vyba User',
-        phoneNumber: phoneNumber,
+        phone: phoneNumber,
         role: _savedRole(),
       ),
       tokens: _mockTokens,
@@ -69,7 +63,15 @@ class MockAuthRemoteDataSource implements AuthRemoteDataSource {
   }
 
   @override
-  Future<void> logout() async {
+  Future<AuthResult> refresh({required String refreshToken}) async {
     await Future<void>.delayed(_delay);
+    return (
+      user: UserModel(
+        id: 'mock-user-phone',
+        phone: '+2250000000000',
+        role: _savedRole(),
+      ),
+      tokens: _mockTokens,
+    );
   }
 }

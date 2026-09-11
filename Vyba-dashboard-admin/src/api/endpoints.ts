@@ -9,4 +9,9 @@ export const ENDPOINTS = {
     LIST: '/users',
     DETAIL: (id: string) => `/users/${id}`,
   },
+  VENUES: {
+    LIST: '/venues',
+    DETAIL: (id: string) => `/venues/${id}`,
+    OWNER: (id: string) => `/venues/${id}/owner`,
+  },
 } as const

@@ -2,12 +2,52 @@ import { HttpStatus } from '@nestjs/common';
 import { AuthErrorCode } from '../constants/error-codes';
 import { BaseAppException } from './base.exception';
 
-export class InvalidCredentialsError extends BaseAppException {
+export class InvalidOtpError extends BaseAppException {
   constructor() {
     super(
-      'Invalid email or password',
+      'The code is incorrect',
       HttpStatus.UNAUTHORIZED,
-      AuthErrorCode.INVALID_CREDENTIALS,
+      AuthErrorCode.INVALID_VERIFICATION_CODE,
+    );
+  }
+}
+
+export class OtpExpiredError extends BaseAppException {
+  constructor() {
+    super(
+      'The code has expired. Request a new one.',
+      HttpStatus.UNAUTHORIZED,
+      AuthErrorCode.VERIFICATION_CODE_EXPIRED,
+    );
+  }
+}
+
+export class OtpRateLimitedError extends BaseAppException {
+  constructor() {
+    super(
+      'Too many attempts. Try again later.',
+      HttpStatus.TOO_MANY_REQUESTS,
+      AuthErrorCode.OTP_RATE_LIMITED,
+    );
+  }
+}
+
+export class AccountInactiveError extends BaseAppException {
+  constructor() {
+    super(
+      'This account is deactivated',
+      HttpStatus.FORBIDDEN,
+      AuthErrorCode.ACCOUNT_DEACTIVATED,
+    );
+  }
+}
+
+export class AgeConfirmationRequiredError extends BaseAppException {
+  constructor() {
+    super(
+      'Confirm you are 18 or older to continue',
+      HttpStatus.BAD_REQUEST,
+      AuthErrorCode.AGE_CONFIRMATION_REQUIRED,
     );
   }
 }

@@ -12,7 +12,7 @@ String _$authRemoteDataSourceHash() =>
 /// Provides the [AuthRemoteDataSource].
 ///
 /// Set `USE_MOCK_AUTH=true` in `.env` to use mock data for testing.
-/// TODO(dev): Remove the mock branch when switching to the real API.
+/// Defaults to `false` — a real build must never ship with mock auth on.
 ///
 /// Copied from [authRemoteDataSource].
 @ProviderFor(authRemoteDataSource)
@@ -70,28 +70,26 @@ final authRepositoryProvider = AutoDisposeProvider<AuthRepository>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef AuthRepositoryRef = AutoDisposeProviderRef<AuthRepository>;
-String _$loginWithPhoneUseCaseHash() =>
-    r'5811ecc6288d3e98a0c8e15d50d79e209fb6aff4';
+String _$requestOtpUseCaseHash() => r'65e0782e10c2c7621090fe810d84fa2728dc3199';
 
-/// Provides the [LoginWithPhoneUseCase].
+/// Provides the [RequestOtpUseCase].
 ///
-/// Copied from [loginWithPhoneUseCase].
-@ProviderFor(loginWithPhoneUseCase)
-final loginWithPhoneUseCaseProvider =
-    AutoDisposeProvider<LoginWithPhoneUseCase>.internal(
-  loginWithPhoneUseCase,
-  name: r'loginWithPhoneUseCaseProvider',
+/// Copied from [requestOtpUseCase].
+@ProviderFor(requestOtpUseCase)
+final requestOtpUseCaseProvider =
+    AutoDisposeProvider<RequestOtpUseCase>.internal(
+  requestOtpUseCase,
+  name: r'requestOtpUseCaseProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$loginWithPhoneUseCaseHash,
+      : _$requestOtpUseCaseHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef LoginWithPhoneUseCaseRef
-    = AutoDisposeProviderRef<LoginWithPhoneUseCase>;
+typedef RequestOtpUseCaseRef = AutoDisposeProviderRef<RequestOtpUseCase>;
 String _$verifyOtpUseCaseHash() => r'031122716f3e2b5d80082d3460d7dab6ab4998f1';
 
 /// Provides the [VerifyOtpUseCase].
@@ -151,5 +149,27 @@ final getCachedUserUseCaseProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef GetCachedUserUseCaseRef = AutoDisposeProviderRef<GetCachedUserUseCase>;
+String _$restoreSessionUseCaseHash() =>
+    r'344e3ede5bce5ab261ccc5888a24be03d82595ef';
+
+/// Provides the [RestoreSessionUseCase].
+///
+/// Copied from [restoreSessionUseCase].
+@ProviderFor(restoreSessionUseCase)
+final restoreSessionUseCaseProvider =
+    AutoDisposeProvider<RestoreSessionUseCase>.internal(
+  restoreSessionUseCase,
+  name: r'restoreSessionUseCaseProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$restoreSessionUseCaseHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef RestoreSessionUseCaseRef
+    = AutoDisposeProviderRef<RestoreSessionUseCase>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

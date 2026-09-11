@@ -1,4 +1,6 @@
 import 'package:flutter_templates/features/venues/domain/entities/venue.dart';
+import 'package:flutter_templates/features/venues/data/models/venue_promo_model.dart';
+import 'package:flutter_templates/features/venues/data/models/venue_tonight_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'venue_model.freezed.dart';
@@ -15,10 +17,10 @@ abstract class VenueModel with _$VenueModel {
     required String address,
     required double latitude,
     required double longitude,
-    @JsonKey(name: 'hero_images') required List<String> heroImages,
-    required double rating,
-    @JsonKey(name: 'review_count') required int reviewCount,
-    @JsonKey(name: 'is_open') required bool isOpen,
+    @JsonKey(name: 'photos') required List<String> heroImages,
+    @Default(0) double rating,
+    @Default(0) @JsonKey(name: 'review_count') int reviewCount,
+    @Default(false) @JsonKey(name: 'is_open') bool isOpen,
     @JsonKey(name: 'venue_type') required String venueType,
     String? phone,
     @JsonKey(name: 'price_level') @Default(2) int priceLevel,
@@ -26,6 +28,9 @@ abstract class VenueModel with _$VenueModel {
     @JsonKey(name: 'is_premium') @Default(false) bool isPremium,
     double? distance,
     @JsonKey(name: 'active_promo_label') String? activePromoLabel,
+    @Default(true) bool inLaunchArea,
+    VenueTonightModel? tonight,
+    @Default([]) List<VenuePromoModel> promos,
   }) = _VenueModel;
 
   factory VenueModel.fromJson(Map<String, dynamic> json) =>
@@ -43,7 +48,7 @@ abstract class VenueModel with _$VenueModel {
         reviewCount: reviewCount,
         isOpen: isOpen,
         venueType: VenueType.values.firstWhere(
-          (t) => t.name == venueType,
+          (t) => t.name.toLowerCase() == venueType.toLowerCase(),
           orElse: () => VenueType.bar,
         ),
         phone: phone,
@@ -52,5 +57,8 @@ abstract class VenueModel with _$VenueModel {
         isPremium: isPremium,
         distance: distance,
         activePromoLabel: activePromoLabel,
+        inLaunchArea: inLaunchArea,
+        tonight: tonight?.toEntity(),
+        promos: promos.map((p) => p.toEntity()).toList(),
       );
 }

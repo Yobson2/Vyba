@@ -8,6 +8,7 @@ import 'package:flutter_templates/core/widgets/buttons/app_gradient_button.dart'
 import 'package:flutter_templates/core/widgets/inputs/app_phone_field.dart';
 import 'package:flutter_templates/features/auth/presentation/providers/auth_notifier.dart';
 import 'package:flutter_templates/features/auth/presentation/providers/auth_state.dart';
+import 'package:flutter_templates/features/auth/presentation/utils/otp_error_copy.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -29,12 +30,18 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     super.dispose();
   }
 
+  String get _normalizedPhone {
+    final digits = _phoneController.text.replaceAll(RegExp(r'\D'), '');
+    return '$_countryCode$digits';
+  }
+
   void _onContinue() {
-    final phone = _phoneController.text.trim();
-    if (phone.isEmpty) return;
+    final digits = _phoneController.text.replaceAll(RegExp(r'\D'), '');
+    if (digits.isEmpty) return;
     context.unfocus();
-    // Navigate to OTP verification with phone number
-    context.push('/otp-verification', extra: '$_countryCode $phone');
+    ref
+        .read(authNotifierProvider.notifier)
+        .requestOtp(phoneNumber: _normalizedPhone);
   }
 
   @override
@@ -44,7 +51,16 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
     ref.listen<AuthState>(authNotifierProvider, (_, state) {
       if (state is AuthError) {
-        context.showSnackBar(state.message, isError: true);
+        context.showSnackBar(otpErrorMessage(state.code), isError: true);
+      }
+      if (state is AuthCodeRequested) {
+        context.push(
+          '/otp-verification',
+          extra: (
+            phoneNumber: state.phoneNumber,
+            isFirstSignIn: state.isFirstSignIn,
+          ),
+        );
       }
       if (state is AuthAuthenticated) {
         // Router redirect handles role-based navigation automatically.
@@ -98,12 +114,11 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     ),
                   ),
                   const SizedBox(height: 32),
-                  // "Join the Pulse" headline
                   Text.rich(
                     TextSpan(
                       children: [
                         TextSpan(
-                          text: 'Welcome to ',
+                          text: 'Bienvenue sur ',
                           style: GoogleFonts.epilogue(
                             fontSize: 40,
                             fontWeight: FontWeight.w800,
@@ -125,7 +140,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   ),
                   AppSpacing.verticalMd,
                   Text(
-                    'Access the most exclusive nights in West Africa.',
+                    'Découvrez les meilleures soirées de la Zone 4.',
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           color: AppColors.onSurfaceVariant,
                         ),
@@ -133,7 +148,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   const SizedBox(height: 40),
                   // Phone number section
                   Text(
-                    'PHONE NUMBER',
+                    'NUMÉRO DE TÉLÉPHONE',
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
                           color: AppColors.onSurfaceVariant,
                           letterSpacing: 2,
@@ -151,14 +166,14 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   // Continue button
                   AppGradientButton(
                     onPressed: isLoading ? null : _onContinue,
-                    label: 'Continue',
+                    label: 'Continuer',
                     isLoading: isLoading,
                   ),
                   const SizedBox(height: 48),
                   // Disclaimer
                   Center(
                     child: Text(
-                      'BY CONTINUING, YOU AGREE TO OUR\nPRIVACY RITUALS & TERMS OF ACCESS',
+                      "EN CONTINUANT, VOUS ACCEPTEZ NOS CONDITIONS\nD'UTILISATION ET NOTRE POLITIQUE DE CONFIDENTIALITÉ",
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
                             color: AppColors.onSurfaceVariant

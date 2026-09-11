@@ -4,19 +4,23 @@ import 'package:flutter_templates/core/network/api_endpoints.dart';
 import 'package:flutter_templates/features/auth/data/models/tokens_model.dart';
 import 'package:flutter_templates/features/auth/data/models/user_model.dart';
 
-/// Remote data source for authentication API calls.
-abstract class AuthRemoteDataSource {
-  /// POST verify OTP.
-  Future<void> verifyOtp({required String email, required String code});
+/// Result of a successful verify or refresh call.
+typedef AuthResult = ({UserModel user, TokensModel tokens});
 
-  /// POST login with phone number + OTP code.
-  Future<({UserModel user, TokensModel tokens})> loginWithPhone({
+/// Remote data source for the phone-OTP auth API (ADR-0003).
+abstract class AuthRemoteDataSource {
+  /// POST request (or resend) an OTP code.
+  Future<void> requestOtp({required String phoneNumber});
+
+  /// POST verify an OTP code; returns the user and a fresh token pair.
+  Future<AuthResult> verifyOtp({
     required String phoneNumber,
     required String code,
+    bool? ageConfirmed,
   });
 
-  /// POST logout.
-  Future<void> logout();
+  /// POST rotate the access token.
+  Future<AuthResult> refresh({required String refreshToken});
 }
 
 /// Implementation of [AuthRemoteDataSource] using [Dio].
@@ -27,69 +31,72 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final Dio _dio;
 
   @override
-  Future<void> verifyOtp({
-    required String email,
-    required String code,
-  }) async {
+  Future<void> requestOtp({required String phoneNumber}) async {
     try {
       await _dio.post<void>(
-        ApiEndpoints.verifyOtp,
-        data: {'email': email, 'code': code},
+        ApiEndpoints.requestOtp,
+        data: {'phone': phoneNumber},
       );
-    } on DioException {
-      rethrow;
-    } catch (e) {
-      throw ServerException(message: e.toString());
+    } on DioException catch (e) {
+      _throwMapped(e);
     }
   }
 
   @override
-  Future<({UserModel user, TokensModel tokens})> loginWithPhone({
+  Future<AuthResult> verifyOtp({
     required String phoneNumber,
     required String code,
+    bool? ageConfirmed,
   }) async {
     try {
       final response = await _dio.post<Map<String, dynamic>>(
-        ApiEndpoints.loginWithPhone,
-        data: {'phone_number': phoneNumber, 'code': code},
+        ApiEndpoints.verifyOtp,
+        data: {
+          'phone': phoneNumber,
+          'code': code,
+          if (ageConfirmed != null) 'ageConfirmed': ageConfirmed,
+        },
       );
-      final data = response.data;
-      if (data == null) {
-        throw const ServerException(message: 'Empty response from server');
-      }
-      return _parseAuthResponse(data);
-    } on DioException {
-      rethrow;
-    } catch (e) {
-      throw ServerException(message: e.toString());
+      return _parseAuthResponse(response.data);
+    } on DioException catch (e) {
+      _throwMapped(e);
     }
   }
 
   @override
-  Future<void> logout() async {
+  Future<AuthResult> refresh({required String refreshToken}) async {
     try {
-      await _dio.post<void>(ApiEndpoints.logout);
-    } on DioException {
-      rethrow;
-    } catch (e) {
-      throw ServerException(message: e.toString());
+      final response = await _dio.post<Map<String, dynamic>>(
+        ApiEndpoints.refreshToken,
+        data: {'refreshToken': refreshToken},
+      );
+      return _parseAuthResponse(response.data);
+    } on DioException catch (e) {
+      _throwMapped(e);
     }
   }
 
-  ({UserModel user, TokensModel tokens}) _parseAuthResponse(
-    Map<String, dynamic> data,
-  ) {
-    final userData = data['user'];
-    final tokensData = data['tokens'];
-    if (userData is! Map<String, dynamic>) {
-      throw const ServerException(message: 'Invalid user data in response');
+  AuthResult _parseAuthResponse(Map<String, dynamic>? data) {
+    if (data == null) {
+      throw const ServerException(message: 'Réponse vide du serveur');
     }
-    if (tokensData is! Map<String, dynamic>) {
-      throw const ServerException(message: 'Invalid tokens data in response');
+    final userData = data['user'];
+    if (userData is! Map<String, dynamic>) {
+      throw const ServerException(message: 'Données utilisateur invalides');
     }
     return (
       user: UserModel.fromJson(userData),
-      tokens: TokensModel.fromJson(tokensData),
+      tokens: TokensModel.fromJson(data),
     );
+  }
+
+  /// Unwraps the typed exception [ErrorInterceptor] attaches to
+  /// [DioException.error] and throws it directly, so repository-layer
+  /// `on ServerException` / `on UnauthorizedException` catches actually fire
+  /// instead of only ever seeing a raw [DioException].
+  Never _throwMapped(DioException e) {
+    final wrapped = e.error;
+    if (wrapped is Exception) throw wrapped;
+    throw ServerException(message: e.message ?? 'Erreur réseau');
   }
 }

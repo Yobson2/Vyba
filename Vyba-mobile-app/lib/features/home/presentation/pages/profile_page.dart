@@ -78,8 +78,8 @@ class ProfilePage extends ConsumerWidget {
                             radius: 38,
                             backgroundColor: AppColors.surfaceContainerHigh,
                             child: Text(
-                              user?.name.isNotEmpty == true
-                                  ? user!.name[0].toUpperCase()
+                              user?.displayName.isNotEmpty == true
+                                  ? user!.displayName[0].toUpperCase()
                                   : 'U',
                               style: GoogleFonts.epilogue(
                                 fontSize: 32,
@@ -91,7 +91,7 @@ class ProfilePage extends ConsumerWidget {
                         ),
                         AppSpacing.verticalMd,
                         Text(
-                          user?.name ?? 'Guest',
+                          user?.displayName ?? 'Invité',
                           style: GoogleFonts.epilogue(
                             fontSize: 24,
                             fontWeight: FontWeight.w800,
@@ -143,16 +143,12 @@ class ProfilePage extends ConsumerWidget {
                   ),
                   AppSpacing.verticalLg,
                   _InfoField(
-                    label: 'Full Name',
-                    value: user?.name ?? '',
+                    label: 'Nom complet',
+                    value: user?.displayName ?? '',
                   ),
                   _InfoField(
-                    label: 'Email',
-                    value: user?.email ?? '',
-                  ),
-                  _InfoField(
-                    label: 'Phone',
-                    value: user?.phoneNumber ?? '+234 XXX XXX XXXX',
+                    label: 'Téléphone',
+                    value: user?.phoneNumber ?? '',
                   ),
                   AppSpacing.verticalXl,
                   _MenuItem(

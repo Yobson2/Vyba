@@ -15,9 +15,7 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$TokensModel {
-  @JsonKey(name: 'access_token')
   String get accessToken;
-  @JsonKey(name: 'refresh_token')
   String get refreshToken;
 
   /// Create a copy of TokensModel
@@ -57,9 +55,7 @@ abstract mixin class $TokensModelCopyWith<$Res> {
           TokensModel value, $Res Function(TokensModel) _then) =
       _$TokensModelCopyWithImpl;
   @useResult
-  $Res call(
-      {@JsonKey(name: 'access_token') String accessToken,
-      @JsonKey(name: 'refresh_token') String refreshToken});
+  $Res call({String accessToken, String refreshToken});
 }
 
 /// @nodoc
@@ -93,18 +89,14 @@ class _$TokensModelCopyWithImpl<$Res> implements $TokensModelCopyWith<$Res> {
 /// @nodoc
 @JsonSerializable()
 class _TokensModel extends TokensModel {
-  const _TokensModel(
-      {@JsonKey(name: 'access_token') required this.accessToken,
-      @JsonKey(name: 'refresh_token') required this.refreshToken})
+  const _TokensModel({required this.accessToken, required this.refreshToken})
       : super._();
   factory _TokensModel.fromJson(Map<String, dynamic> json) =>
       _$TokensModelFromJson(json);
 
   @override
-  @JsonKey(name: 'access_token')
   final String accessToken;
   @override
-  @JsonKey(name: 'refresh_token')
   final String refreshToken;
 
   /// Create a copy of TokensModel
@@ -151,9 +143,7 @@ abstract mixin class _$TokensModelCopyWith<$Res>
       __$TokensModelCopyWithImpl;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(name: 'access_token') String accessToken,
-      @JsonKey(name: 'refresh_token') String refreshToken});
+  $Res call({String accessToken, String refreshToken});
 }
 
 /// @nodoc

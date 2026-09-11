@@ -2,7 +2,12 @@ import React, { useState } from 'react'
 import useDialogState from '@/hooks/use-dialog-state'
 import { Venue } from '../data/schema'
 
-type VenuesDialogType = 'add' | 'edit' | 'delete' | 'approve' | 'reject'
+type VenuesDialogType =
+  | 'add'
+  | 'edit'
+  | 'delete'
+  | 'bind-owner'
+  | 'unbind-owner'
 
 interface VenuesContextType {
   open: VenuesDialogType | null

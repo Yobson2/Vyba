@@ -7,18 +7,29 @@ import 'package:flutter_templates/core/theme/app_colors.dart';
 import 'package:flutter_templates/core/theme/app_spacing.dart';
 import 'package:flutter_templates/core/widgets/buttons/app_gradient_button.dart';
 import 'package:flutter_templates/core/widgets/data_display/app_glass_card.dart';
+import 'package:flutter_templates/core/widgets/inputs/app_checkbox.dart';
 import 'package:flutter_templates/core/widgets/inputs/app_otp_field.dart';
 import 'package:flutter_templates/features/auth/presentation/providers/auth_notifier.dart';
 import 'package:flutter_templates/features/auth/presentation/providers/auth_state.dart';
+import 'package:flutter_templates/features/auth/presentation/utils/otp_error_copy.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// OTP verification page with countdown timer and security message.
+/// OTP verification page with countdown timer, resend and — on a first
+/// sign-in only — the 18+ confirmation required by the nightlife context.
 class OtpVerificationPage extends ConsumerStatefulWidget {
-  const OtpVerificationPage({required this.email, super.key});
+  const OtpVerificationPage({
+    required this.phoneNumber,
+    required this.isFirstSignIn,
+    super.key,
+  });
 
-  /// Phone number or email the OTP was sent to.
-  final String email;
+  /// The phone number the code was sent to.
+  final String phoneNumber;
+
+  /// Whether this device has never completed a sign-in — shows the 18+
+  /// confirmation when true.
+  final bool isFirstSignIn;
 
   @override
   ConsumerState<OtpVerificationPage> createState() =>
@@ -26,8 +37,11 @@ class OtpVerificationPage extends ConsumerStatefulWidget {
 }
 
 class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
+  static const _cooldownSeconds = 60;
+
   String _otpCode = '';
-  int _resendCountdown = 60;
+  bool _ageConfirmed = false;
+  int _resendCountdown = _cooldownSeconds;
   Timer? _timer;
 
   @override
@@ -37,7 +51,7 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
   }
 
   void _startCountdown() {
-    _resendCountdown = 60;
+    _resendCountdown = _cooldownSeconds;
     _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (_resendCountdown > 0) {
@@ -54,19 +68,25 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
     super.dispose();
   }
 
+  bool get _canSubmit =>
+      _otpCode.length == 6 && (!widget.isFirstSignIn || _ageConfirmed);
+
   Future<void> _onVerify() async {
-    if (_otpCode.length < 6) return;
+    if (!_canSubmit) return;
     context.unfocus();
-    await ref.read(authNotifierProvider.notifier).loginWithPhone(
-          phoneNumber: widget.email,
+    await ref.read(authNotifierProvider.notifier).verifyOtp(
+          phoneNumber: widget.phoneNumber,
           code: _otpCode,
+          ageConfirmed: widget.isFirstSignIn ? _ageConfirmed : null,
         );
   }
 
   void _onResend() {
     if (_resendCountdown > 0) return;
     _startCountdown();
-    context.showSnackBar('Code resent to ${widget.email}');
+    ref
+        .read(authNotifierProvider.notifier)
+        .requestOtp(phoneNumber: widget.phoneNumber);
   }
 
   String get _formattedCountdown {
@@ -82,7 +102,7 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
 
     ref.listen<AuthState>(authNotifierProvider, (_, state) {
       if (state is AuthError) {
-        context.showSnackBar(state.message, isError: true);
+        context.showSnackBar(otpErrorMessage(state.code), isError: true);
       }
       if (state is AuthAuthenticated) {
         // Router redirect handles role-based navigation automatically.
@@ -114,9 +134,8 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 24),
-              // Headline
               Text(
-                'Verify Your\nNumber',
+                'Vérifiez votre\nnuméro',
                 style: GoogleFonts.epilogue(
                   fontSize: 36,
                   fontWeight: FontWeight.w800,
@@ -126,7 +145,7 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
               ),
               AppSpacing.verticalMd,
               Text(
-                'We sent a 6-digit code to ${widget.email}',
+                'Un code à 6 chiffres a été envoyé au ${widget.phoneNumber}',
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: AppColors.onSurfaceVariant,
                     ),
@@ -135,20 +154,31 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
               // OTP field
               AppOtpField(
                 onChanged: (code) => setState(() => _otpCode = code),
-                onCompleted: (_) => _onVerify(),
+                onCompleted: (_) {
+                  if (_canSubmit) _onVerify();
+                },
               ),
+              if (widget.isFirstSignIn) ...[
+                const SizedBox(height: 16),
+                AppCheckbox(
+                  value: _ageConfirmed,
+                  onChanged: (value) =>
+                      setState(() => _ageConfirmed = value ?? false),
+                  label: "J'ai 18 ans ou plus.",
+                ),
+              ],
               const SizedBox(height: 24),
               // Confirm button
               AppGradientButton(
-                onPressed: isLoading ? null : _onVerify,
-                label: 'Confirm Identity',
+                onPressed: isLoading || !_canSubmit ? null : _onVerify,
+                label: 'Confirmer',
                 isLoading: isLoading,
               ),
               const SizedBox(height: 24),
               // Resend section
               Center(
                 child: Text(
-                  "Didn't receive a code?",
+                  "Vous n'avez pas reçu de code ?",
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: AppColors.onSurfaceVariant,
                       ),
@@ -162,7 +192,7 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
                     GestureDetector(
                       onTap: _resendCountdown == 0 ? _onResend : null,
                       child: Text(
-                        'RESEND CODE',
+                        'RENVOYER LE CODE',
                         style: Theme.of(context).textTheme.labelSmall?.copyWith(
                               color: _resendCountdown == 0
                                   ? AppColors.primary
@@ -221,7 +251,7 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Encrypted Connection',
+                            'Connexion chiffrée',
                             style: Theme.of(context)
                                 .textTheme
                                 .titleSmall
@@ -229,7 +259,7 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            'Your verification is processed through a secure high-end channel for Vyba VIP members.',
+                            'Votre vérification passe par un canal sécurisé.',
                             style:
                                 Theme.of(context).textTheme.bodySmall?.copyWith(
                                       color: AppColors.onSurfaceVariant,
@@ -245,7 +275,7 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
               // Footer
               Center(
                 child: Text(
-                  'VYBA © 2024',
+                  'VYBA © 2026',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
                         color:

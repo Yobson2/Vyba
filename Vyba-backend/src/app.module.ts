@@ -9,6 +9,7 @@ import { getEnvironmentConfig } from '@common/config/environment.loader';
 import { buildDbConfig } from '@common/database/database.config';
 import { getJWTSecret, JWT_EXPIRES_IN } from '@common/config/auth.config';
 import { RedisModule } from '@common/redis/redis.module';
+import { ClockModule } from '@common/clock/clock.module';
 import { FirebaseModule } from '@common/firebase/firebase.module';
 import { MailModule } from '@common/mail/mail.module';
 import { StorageModule } from '@common/storage/storage.module';
@@ -19,6 +20,10 @@ import { AuthGuard } from '@common/guards/auth.guard';
 
 import { UsersModule } from '@modules/users/users.module';
 import { AuthModule } from '@modules/auth/auth.module';
+import { VenuesModule } from '@modules/venues/venues.module';
+import { VenueNightsModule } from '@modules/venue-nights/venue-nights.module';
+import { FeedModule } from '@modules/feed/feed.module';
+import { GoingModule } from '@modules/going/going.module';
 import { HealthModule } from '@modules/health/health.module';
 
 @Module({
@@ -62,6 +67,7 @@ import { HealthModule } from '@modules/health/health.module';
     }),
 
     // ─── Infrastructure ─────────────────────────────────────
+    ClockModule,
     RedisModule,
     FirebaseModule,
     MailModule,
@@ -72,6 +78,10 @@ import { HealthModule } from '@modules/health/health.module';
     // ─── Feature Modules ────────────────────────────────────
     UsersModule,
     AuthModule,
+    VenuesModule,
+    VenueNightsModule,
+    FeedModule,
+    GoingModule,
     HealthModule,
   ],
   providers: [

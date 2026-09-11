@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_templates/core/error/failures.dart';
+import 'package:flutter_templates/core/providers/analytics_provider.dart';
 import 'package:flutter_templates/core/theme/app_colors.dart';
-import 'package:flutter_templates/core/theme/app_gradients.dart';
 import 'package:flutter_templates/core/theme/app_radius.dart';
 import 'package:flutter_templates/core/theme/app_spacing.dart';
-import 'package:flutter_templates/core/widgets/buttons/app_gradient_button.dart';
 import 'package:flutter_templates/core/widgets/loading/app_shimmer.dart';
+import 'package:flutter_templates/core/widgets/states/app_empty_state.dart';
 import 'package:flutter_templates/features/feed/domain/entities/feed_item.dart';
-import 'package:flutter_templates/features/feed/presentation/providers/feed_providers.dart';
+import 'package:flutter_templates/features/feed/presentation/providers/feed_notifier.dart';
+import 'package:flutter_templates/features/feed/presentation/providers/feed_state.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
-/// Pull-to-refresh feed with promo and event cards.
+/// The Zone 4 feed — live-tonight and editorial cards, in the server's order.
 class FeedPage extends ConsumerStatefulWidget {
   const FeedPage({super.key});
 
@@ -21,107 +22,148 @@ class FeedPage extends ConsumerStatefulWidget {
 }
 
 class _FeedPageState extends ConsumerState<FeedPage> {
-  List<FeedItem>? _feedItems;
-  bool _isLoading = true;
-  String? _error;
+  final _scrollController = ScrollController();
+  final _viewedItemIds = <String>{};
 
   @override
   void initState() {
     super.initState();
-    _loadFeed();
+    ref.read(analyticsServiceProvider).logEvent('feed_opened');
+    _scrollController.addListener(_onScroll);
   }
 
-  Future<void> _loadFeed() async {
-    setState(() {
-      _isLoading = true;
-      _error = null;
-    });
+  @override
+  void dispose() {
+    _scrollController.removeListener(_onScroll);
+    _scrollController.dispose();
+    super.dispose();
+  }
 
-    final repository = ref.read(feedRepositoryProvider);
-    final result = await repository.getFeed();
+  void _onScroll() {
+    if (!_scrollController.hasClients) return;
+    final threshold = _scrollController.position.maxScrollExtent - 300;
+    if (_scrollController.position.pixels >= threshold) {
+      ref.read(feedNotifierProvider.notifier).loadMore();
+    }
+  }
 
-    if (!mounted) return;
-    result.fold(
-      (Failure failure) => setState(() {
-        _error = failure.message;
-        _isLoading = false;
-      }),
-      (List<FeedItem> items) => setState(() {
-        _feedItems = items;
-        _isLoading = false;
-      }),
-    );
+  void _onItemBuilt(FeedItem item) {
+    if (_viewedItemIds.add(item.id)) {
+      ref.read(analyticsServiceProvider).logEvent('feed_item_viewed', {
+        'item_id': item.id,
+        'item_type': item.runtimeType.toString(),
+      });
+    }
+  }
+
+  void _openVenue(String? venueId) {
+    if (venueId == null) return;
+    context.push('/explore/venue/$venueId');
   }
 
   @override
   Widget build(BuildContext context) {
+    final state = ref.watch(feedNotifierProvider);
+
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
-          'Feed',
+          'Zone 4',
           style: GoogleFonts.epilogue(
             color: AppColors.onSurface,
             fontWeight: FontWeight.w700,
           ),
         ),
       ),
-      body: _buildBody(),
+      body: switch (state) {
+        FeedLoading() => _buildShimmerLoading(),
+        FeedError(:final message) => _buildError(message),
+        FeedLoaded(:final items) when items.isEmpty => _buildEmpty(state),
+        FeedLoaded() => _buildList(state),
+      },
     );
   }
 
-  Widget _buildBody() {
-    if (_isLoading) {
-      return _buildShimmerLoading();
-    }
+  Widget _buildError(String message) {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(message, style: const TextStyle(color: AppColors.error)),
+          AppSpacing.verticalMd,
+          TextButton(
+            onPressed: () => ref.read(feedNotifierProvider.notifier).refresh(),
+            child: const Text('Réessayer'),
+          ),
+        ],
+      ),
+    );
+  }
 
-    if (_error != null) {
-      return Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              _error!,
-              style: const TextStyle(color: AppColors.error),
-            ),
-            AppSpacing.verticalMd,
-            TextButton(
-              onPressed: _loadFeed,
-              child: const Text('Retry'),
-            ),
-          ],
-        ),
-      );
-    }
-
-    final items = _feedItems ?? [];
-    if (items.isEmpty) {
-      return const Center(
-        child: Text(
-          'No feed items yet',
-          style: TextStyle(color: AppColors.onSurfaceVariant),
-        ),
-      );
-    }
-
+  Widget _buildEmpty(FeedLoaded state) {
     return RefreshIndicator(
-      onRefresh: _loadFeed,
+      onRefresh: () => ref.read(feedNotifierProvider.notifier).refresh(),
+      color: AppColors.primary,
+      backgroundColor: AppColors.surfaceContainerHigh,
+      child: ListView(
+        children: [
+          if (state.isFromCache) const _OfflineBanner(),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.6,
+            child: const AppEmptyState(
+              icon: Icons.nightlife_outlined,
+              title: "C'est calme ce soir à Zone 4",
+              subtitle:
+                  'Revenez plus tard, ou explorez les venues du quartier.',
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildList(FeedLoaded state) {
+    return RefreshIndicator(
+      onRefresh: () => ref.read(feedNotifierProvider.notifier).refresh(),
       color: AppColors.primary,
       backgroundColor: AppColors.surfaceContainerHigh,
       child: ListView.separated(
+        controller: _scrollController,
         padding: const EdgeInsets.all(AppSpacing.lg),
-        itemCount: items.length,
+        itemCount: state.items.length +
+            (state.isFromCache ? 1 : 0) +
+            (state.isLoadingMore ? 1 : 0),
         separatorBuilder: (_, __) => AppSpacing.verticalLg,
         itemBuilder: (context, index) {
-          final item = items[index];
-          return switch (item) {
-            PromoFeedItem() => _PromoCard(promo: item),
-            EventFeedItem() => _EventCard(
-                event: item,
-                onInterested: () => _toggleInterested(item.id),
+          if (state.isFromCache) {
+            if (index == 0) return const _OfflineBanner();
+            index -= 1;
+          }
+          if (index >= state.items.length) {
+            return const Padding(
+              padding: EdgeInsets.symmetric(vertical: AppSpacing.md),
+              child: Center(
+                child: CircularProgressIndicator(color: AppColors.primary),
               ),
+            );
+          }
+
+          final item = state.items[index];
+          _onItemBuilt(item);
+          return switch (item) {
+            LiveTonightFeedItem() => _LiveTonightCard(
+                item: item,
+                onTap: () => _openVenue(item.venueId),
+              ),
+            PromoFeedItem() => _PromoCard(
+                item: item,
+                onTap: () => _openVenue(item.venueId),
+              ),
+            EditorialFeedItem() => _EditorialCard(item: item),
+            UnknownFeedItem() => const SizedBox.shrink(),
           };
         },
       ),
@@ -133,319 +175,170 @@ class _FeedPageState extends ConsumerState<FeedPage> {
       padding: const EdgeInsets.all(AppSpacing.lg),
       itemCount: 4,
       separatorBuilder: (_, __) => AppSpacing.verticalLg,
-      itemBuilder: (_, index) {
-        final isPromo = index.isEven;
-        return AppShimmer(
-          height: isPromo ? 240 : 320,
-          borderRadius: AppRadius.borderRadiusMd,
-        );
-      },
-    );
-  }
-
-  Future<void> _toggleInterested(String eventId) async {
-    final repository = ref.read(feedRepositoryProvider);
-    await repository.markInterested(eventId);
-    await _loadFeed();
-  }
-}
-
-// ── Promo Card ───────────��─────────────────────────────────────────
-
-class _PromoCard extends StatelessWidget {
-  const _PromoCard({required this.promo});
-
-  final PromoFeedItem promo;
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: AppRadius.borderRadiusMd,
-      child: SizedBox(
-        height: 240,
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            // Full-bleed image
-            Image.network(
-              promo.imageUrl,
-              fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) => Container(
-                color: AppColors.surfaceContainerHigh,
-              ),
-            ),
-            // Scrim overlay
-            const DecoratedBox(
-              decoration: BoxDecoration(gradient: AppGradients.scrimOverlay),
-            ),
-            // Content
-            Padding(
-              padding: AppSpacing.paddingLg,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Promo badge
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppSpacing.sm,
-                      vertical: AppSpacing.xs,
-                    ),
-                    decoration: BoxDecoration(
-                      gradient: AppGradients.tertiaryPromo,
-                      borderRadius: AppRadius.borderRadiusXs,
-                    ),
-                    child: Text(
-                      promo.promoType.toUpperCase(),
-                      style: const TextStyle(
-                        color: AppColors.onTertiaryFixed,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w700,
-                        letterSpacing: 1.0,
-                      ),
-                    ),
-                  ),
-                  const Spacer(),
-                  Text(
-                    promo.title,
-                    style: GoogleFonts.epilogue(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  AppSpacing.verticalXs,
-                  Text(
-                    promo.description,
-                    style: TextStyle(
-                      color: Colors.white.withValues(alpha: 0.8),
-                      fontSize: 13,
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  AppSpacing.verticalSm,
-                  Row(
-                    children: [
-                      Text(
-                        promo.venueName,
-                        style: const TextStyle(
-                          color: AppColors.tertiary,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      const Spacer(),
-                      if (promo.validUntil != null) _buildCountdown(),
-                    ],
-                  ),
-                  AppSpacing.verticalMd,
-                  SizedBox(
-                    height: 36,
-                    child: AppGradientButton(
-                      onPressed: () {
-                        // Navigate to promo details
-                      },
-                      label: 'View Promo',
-                      height: 36,
-                      width: 120,
-                      borderRadius: AppRadius.borderRadiusFull,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+      itemBuilder: (_, __) => AppShimmer(
+        height: 160,
+        borderRadius: AppRadius.borderRadiusMd,
       ),
     );
   }
+}
 
-  Widget _buildCountdown() {
-    final remaining = promo.validUntil!.difference(DateTime.now());
-    final text = remaining.isNegative
-        ? 'Expired'
-        : remaining.inDays > 0
-            ? '${remaining.inDays}d left'
-            : '${remaining.inHours}h left';
+class _OfflineBanner extends StatelessWidget {
+  const _OfflineBanner();
 
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const Icon(Icons.timer_outlined, size: 14, color: AppColors.tertiary),
-        const SizedBox(width: 4),
-        Text(
-          text,
-          style: const TextStyle(
-            color: AppColors.tertiary,
-            fontSize: 11,
-            fontWeight: FontWeight.w600,
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: AppSpacing.lg),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: AppSpacing.sm,
+      ),
+      decoration: BoxDecoration(
+        color: AppColors.surfaceContainerHighest,
+        borderRadius: AppRadius.borderRadiusSm,
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(Icons.cloud_off_outlined,
+              size: 16, color: AppColors.onSurfaceVariant),
+          const SizedBox(width: 8),
+          Text(
+            'Hors ligne · dernière version affichée',
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: AppColors.onSurfaceVariant,
+                ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
 
-// ── Event Card ──────────────────────────���──────────────────────────
+class _LiveTonightCard extends StatelessWidget {
+  const _LiveTonightCard({required this.item, required this.onTap});
 
-class _EventCard extends StatelessWidget {
-  const _EventCard({
-    required this.event,
-    required this.onInterested,
-  });
-
-  final EventFeedItem event;
-  final VoidCallback onInterested;
+  final LiveTonightFeedItem item;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    final dateFormatted = DateFormat('EEE, dd MMM').format(event.date);
-
-    return ClipRRect(
-      borderRadius: AppRadius.borderRadiusMd,
-      child: AspectRatio(
-        aspectRatio: 4 / 5,
-        child: Stack(
-          fit: StackFit.expand,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(AppSpacing.md),
+        decoration: BoxDecoration(
+          color: AppColors.success.withValues(alpha: 0.12),
+          borderRadius: AppRadius.borderRadiusMd,
+        ),
+        child: Row(
           children: [
-            // Image
-            Image.network(
-              event.imageUrl,
-              fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) => Container(
-                color: AppColors.surfaceContainerHigh,
+            Container(
+              width: 10,
+              height: 10,
+              decoration: const BoxDecoration(
+                color: AppColors.success,
+                shape: BoxShape.circle,
               ),
             ),
-            // Scrim
-            const DecoratedBox(
-              decoration: BoxDecoration(gradient: AppGradients.scrimOverlay),
-            ),
-            // Date badge (top-left)
-            Positioned(
-              top: AppSpacing.md,
-              left: AppSpacing.md,
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSpacing.sm,
-                  vertical: AppSpacing.xs,
-                ),
-                decoration: BoxDecoration(
-                  color: AppColors.surfaceContainer.withValues(alpha: 0.85),
-                  borderRadius: AppRadius.borderRadiusXs,
-                ),
-                child: Text(
-                  dateFormatted,
-                  style: const TextStyle(
-                    color: AppColors.onSurface,
-                    fontSize: 11,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            ),
-            // Favorite heart (top-right)
-            Positioned(
-              top: AppSpacing.md,
-              right: AppSpacing.md,
-              child: GestureDetector(
-                onTap: onInterested,
-                child: Container(
-                  width: 36,
-                  height: 36,
-                  decoration: BoxDecoration(
-                    color: AppColors.surfaceContainer.withValues(alpha: 0.85),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    event.isInterested
-                        ? Icons.favorite
-                        : Icons.favorite_border,
-                    color: event.isInterested
-                        ? AppColors.error
-                        : AppColors.onSurface,
-                    size: 18,
-                  ),
-                ),
-              ),
-            ),
-            // Bottom content
-            Positioned(
-              left: AppSpacing.lg,
-              right: AppSpacing.lg,
-              bottom: AppSpacing.lg,
+            AppSpacing.horizontalMd,
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    event.title,
-                    style: GoogleFonts.epilogue(
-                      color: Colors.white,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w700,
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
+                    'EN CE MOMENT',
+                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                          color: AppColors.success,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 1.2,
+                        ),
                   ),
-                  AppSpacing.verticalXs,
+                  const SizedBox(height: 2),
                   Text(
-                    event.venueName,
-                    style: const TextStyle(
-                      color: AppColors.primary,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600,
+                    item.venueName ?? 'Une venue',
+                    style: GoogleFonts.epilogue(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.onSurface,
                     ),
                   ),
-                  AppSpacing.verticalMd,
-                  Row(
-                    children: [
-                      // Avatar stack
-                      if (event.attendeeAvatars.isNotEmpty)
-                        _AppAvatarStack(avatarUrls: event.attendeeAvatars),
-                      if (event.attendeeAvatars.isNotEmpty)
-                        AppSpacing.horizontalSm,
-                      Text(
-                        '${event.attendeeCount} interested',
-                        style: TextStyle(
-                          color: Colors.white.withValues(alpha: 0.7),
-                          fontSize: 12,
-                        ),
-                      ),
-                      const Spacer(),
-                      GestureDetector(
-                        onTap: onInterested,
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: AppSpacing.lg,
-                            vertical: AppSpacing.sm,
-                          ),
-                          decoration: BoxDecoration(
-                            gradient: event.isInterested
-                                ? AppGradients.primaryButton
-                                : null,
-                            color: event.isInterested
-                                ? null
-                                : Colors.white.withValues(alpha: 0.15),
-                            borderRadius: AppRadius.borderRadiusFull,
-                          ),
-                          child: Text(
-                            event.isInterested ? 'Interested' : 'Interested?',
-                            style: TextStyle(
-                              color: event.isInterested
-                                  ? AppColors.onPrimaryFixed
-                                  : Colors.white,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                  const Text(
+                    "C'est live ce soir",
+                    style: TextStyle(color: AppColors.onSurfaceVariant),
                   ),
                 ],
               ),
+            ),
+            const Icon(Icons.chevron_right, color: AppColors.onSurfaceVariant),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Distinct promo card (ticket 09) — Golden Hour is the promo/VIP-only
+/// brand color (design system), so it's what sets this apart from the
+/// live-tonight (success/emerald) and editorial (primary/indigo) cards.
+class _PromoCard extends StatelessWidget {
+  const _PromoCard({required this.item, required this.onTap});
+
+  final PromoFeedItem item;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(AppSpacing.md),
+        decoration: BoxDecoration(
+          color: AppColors.tertiary.withValues(alpha: 0.12),
+          borderRadius: AppRadius.borderRadiusMd,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                const Icon(Icons.local_offer_rounded,
+                    size: 16, color: AppColors.tertiary),
+                const SizedBox(width: 6),
+                Text(
+                  'PROMO',
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        color: AppColors.tertiary,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 1.2,
+                      ),
+                ),
+                const Spacer(),
+                if (item.venueName != null)
+                  Text(
+                    item.venueName!,
+                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                          color: AppColors.onSurfaceVariant,
+                        ),
+                  ),
+              ],
+            ),
+            AppSpacing.verticalSm,
+            Text(
+              item.title,
+              style: GoogleFonts.epilogue(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                color: AppColors.onSurface,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              item.description,
+              style: const TextStyle(color: AppColors.onSurfaceVariant),
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),
@@ -454,54 +347,61 @@ class _EventCard extends StatelessWidget {
   }
 }
 
-// ── Avatar Stack ──────��────────────────────────────────────────────
+class _EditorialCard extends StatelessWidget {
+  const _EditorialCard({required this.item});
 
-class _AppAvatarStack extends StatelessWidget {
-  const _AppAvatarStack({required this.avatarUrls});
-
-  final List<String> avatarUrls;
+  final EditorialFeedItem item;
 
   @override
   Widget build(BuildContext context) {
-    const size = 24.0;
-    const overlap = 8.0;
-    final count = avatarUrls.length.clamp(0, 3);
-    final width = count * (size - overlap) + overlap;
-
-    return SizedBox(
-      width: width,
-      height: size,
-      child: Stack(
-        children: List.generate(count, (index) {
-          return Positioned(
-            left: index * (size - overlap),
-            child: Container(
-              width: size,
-              height: size,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: AppColors.background,
-                  width: 1.5,
-                ),
-              ),
-              child: ClipOval(
-                child: Image.network(
-                  avatarUrls[index],
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => Container(
-                    color: AppColors.primaryContainer,
-                    child: const Icon(
-                      Icons.person,
-                      size: 12,
-                      color: AppColors.onPrimaryContainer,
+    return Container(
+      padding: const EdgeInsets.all(AppSpacing.md),
+      decoration: BoxDecoration(
+        color: AppColors.surfaceContainerHigh,
+        borderRadius: AppRadius.borderRadiusMd,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(Icons.auto_awesome_outlined,
+                  size: 16, color: AppColors.primary),
+              const SizedBox(width: 6),
+              Text(
+                'VYBA',
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: AppColors.primary,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 1.2,
                     ),
-                  ),
-                ),
               ),
+              const Spacer(),
+              Text(
+                DateFormat('EEE HH:mm').format(item.publishedAt.toLocal()),
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: AppColors.onSurfaceVariant,
+                    ),
+              ),
+            ],
+          ),
+          AppSpacing.verticalSm,
+          Text(
+            item.title,
+            style: GoogleFonts.epilogue(
+              fontSize: 16,
+              fontWeight: FontWeight.w700,
+              color: AppColors.onSurface,
             ),
-          );
-        }),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            item.body,
+            style: const TextStyle(color: AppColors.onSurfaceVariant),
+            maxLines: 4,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
       ),
     );
   }

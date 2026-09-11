@@ -1,5 +1,6 @@
 import 'package:flutter_templates/core/usecase/usecase.dart';
-import 'package:flutter_templates/features/auth/domain/usecases/login_with_phone_usecase.dart';
+import 'package:flutter_templates/features/auth/domain/usecases/request_otp_usecase.dart';
+import 'package:flutter_templates/features/auth/domain/usecases/restore_session_usecase.dart';
 import 'package:flutter_templates/features/auth/domain/usecases/verify_otp_usecase.dart';
 import 'package:flutter_templates/features/auth/presentation/providers/auth_providers.dart';
 import 'package:flutter_templates/features/auth/presentation/providers/auth_state.dart';
@@ -18,43 +19,42 @@ class AuthNotifier extends _$AuthNotifier {
     return const AuthState.initial();
   }
 
-  /// Attempts to log in with phone number and OTP code.
-  Future<void> loginWithPhone({
-    required String phoneNumber,
-    required String code,
-  }) async {
+  /// Requests (or resends) a code for [phoneNumber].
+  Future<void> requestOtp({required String phoneNumber}) async {
     state = const AuthState.loading();
-    try {
-      final result = await ref.read(loginWithPhoneUseCaseProvider).call(
-            LoginWithPhoneParams(phoneNumber: phoneNumber, code: code),
-          );
-      state = result.fold(
-        (failure) => AuthState.error(failure.message),
-        AuthState.authenticated,
-      );
-    } catch (e) {
-      state = AuthState.error(e.toString());
-    }
+    final result = await ref.read(requestOtpUseCaseProvider).call(
+          RequestOtpParams(phoneNumber: phoneNumber),
+        );
+    state = await result.fold(
+      (failure) async => AuthState.error(failure.message, code: failure.code),
+      (_) async {
+        final hasSignedInBefore =
+            await ref.read(authLocalDataSourceProvider).hasEverSignedIn();
+        return AuthState.codeRequested(
+          phoneNumber: phoneNumber,
+          isFirstSignIn: !hasSignedInBefore,
+        );
+      },
+    );
   }
 
-  /// Verifies the OTP code.
-  Future<bool> verifyOtp({
-    required String email,
+  /// Verifies the OTP code and, on success, signs the user in.
+  Future<void> verifyOtp({
+    required String phoneNumber,
     required String code,
+    bool? ageConfirmed,
   }) async {
     state = const AuthState.loading();
     final result = await ref.read(verifyOtpUseCaseProvider).call(
-          VerifyOtpParams(email: email, code: code),
+          VerifyOtpParams(
+            phoneNumber: phoneNumber,
+            code: code,
+            ageConfirmed: ageConfirmed,
+          ),
         );
-    return result.fold(
-      (failure) {
-        state = AuthState.error(failure.message);
-        return false;
-      },
-      (_) {
-        state = const AuthState.unauthenticated();
-        return true;
-      },
+    state = result.fold(
+      (failure) => AuthState.error(failure.message, code: failure.code),
+      AuthState.authenticated,
     );
   }
 
@@ -74,11 +74,13 @@ class AuthNotifier extends _$AuthNotifier {
     }
   }
 
-  /// Checks for a cached user session on app launch.
+  /// Restores the session on app launch: cached user if the access token is
+  /// still valid, refreshed first if it has expired, unauthenticated
+  /// otherwise.
   Future<void> checkAuthStatus() async {
     state = const AuthState.loading();
     final result =
-        await ref.read(getCachedUserUseCaseProvider).call(const NoParams());
+        await ref.read(restoreSessionUseCaseProvider).call(const NoParams());
     state = result.fold(
       (_) => const AuthState.unauthenticated(),
       AuthState.authenticated,

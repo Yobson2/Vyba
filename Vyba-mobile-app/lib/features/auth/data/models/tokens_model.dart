@@ -11,8 +11,8 @@ abstract class TokensModel with _$TokensModel {
   const TokensModel._();
 
   const factory TokensModel({
-    @JsonKey(name: 'access_token') required String accessToken,
-    @JsonKey(name: 'refresh_token') required String refreshToken,
+    required String accessToken,
+    required String refreshToken,
   }) = _TokensModel;
 
   /// Creates a [TokensModel] from JSON.

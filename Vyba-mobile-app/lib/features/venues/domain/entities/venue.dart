@@ -1,4 +1,6 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_templates/features/venues/domain/entities/venue_promo.dart';
+import 'package:flutter_templates/features/venues/domain/entities/venue_tonight.dart';
 
 /// Domain entity representing a venue.
 @immutable
@@ -21,6 +23,9 @@ class Venue {
     this.isPremium = false,
     this.distance,
     this.activePromoLabel,
+    this.inLaunchArea = true,
+    this.tonight,
+    this.promos = const [],
   });
 
   final String id;
@@ -32,6 +37,10 @@ class Venue {
   final List<String> heroImages;
   final double rating;
   final int reviewCount;
+
+  /// Legacy "open now" flag from the template. Superseded by
+  /// `tonight?.isLive` wherever tonight data is available (spec 02: the
+  /// live signal replaces "open now" — see `Venue.isLiveTonight`).
   final bool isOpen;
   final VenueType venueType;
   final String? phone;
@@ -40,6 +49,17 @@ class Venue {
   final bool isPremium;
   final double? distance;
   final String? activePromoLabel;
+  final bool inLaunchArea;
+
+  /// Tonight's state (ticket 06). `null` = "rien d'annoncé ce soir".
+  final VenueTonight? tonight;
+
+  /// Active promotions for this venue's page (ticket 09).
+  final List<VenuePromo> promos;
+
+  /// The live signal to actually render — prefers `tonight`, falls back to
+  /// the legacy `isOpen` flag for venues fetched without tonight data.
+  bool get isLiveTonight => tonight?.isLive ?? isOpen;
 
   String get firstImage => heroImages.isNotEmpty ? heroImages.first : '';
 

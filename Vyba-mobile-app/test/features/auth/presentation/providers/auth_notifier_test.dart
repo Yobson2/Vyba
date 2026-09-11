@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_templates/core/error/failures.dart';
 import 'package:flutter_templates/core/usecase/usecase.dart';
 import 'package:flutter_templates/features/auth/domain/entities/user.dart';
-import 'package:flutter_templates/features/auth/domain/usecases/login_with_phone_usecase.dart';
+import 'package:flutter_templates/features/auth/domain/usecases/request_otp_usecase.dart';
 import 'package:flutter_templates/features/auth/domain/usecases/verify_otp_usecase.dart';
 import 'package:flutter_templates/features/auth/presentation/providers/auth_notifier.dart';
 import 'package:flutter_templates/features/auth/presentation/providers/auth_providers.dart';
@@ -13,47 +13,42 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../../helpers/mock_providers.dart';
 
-class MockLoginWithPhoneUseCase extends Mock implements LoginWithPhoneUseCase {}
-
 void main() {
-  late MockLoginWithPhoneUseCase mockLoginWithPhoneUseCase;
+  late MockRequestOtpUseCase mockRequestOtpUseCase;
   late MockVerifyOtpUseCase mockVerifyOtpUseCase;
   late MockLogoutUseCase mockLogoutUseCase;
   late MockGetCachedUserUseCase mockGetCachedUserUseCase;
+  late MockRestoreSessionUseCase mockRestoreSessionUseCase;
+  late MockAuthLocalDataSource mockAuthLocalDataSource;
 
   setUp(() {
-    mockLoginWithPhoneUseCase = MockLoginWithPhoneUseCase();
+    mockRequestOtpUseCase = MockRequestOtpUseCase();
     mockVerifyOtpUseCase = MockVerifyOtpUseCase();
     mockLogoutUseCase = MockLogoutUseCase();
     mockGetCachedUserUseCase = MockGetCachedUserUseCase();
+    mockRestoreSessionUseCase = MockRestoreSessionUseCase();
+    mockAuthLocalDataSource = MockAuthLocalDataSource();
   });
 
   setUpAll(() {
-    registerFallbackValue(
-      const LoginWithPhoneParams(phoneNumber: '', code: ''),
-    );
-    registerFallbackValue(
-      const VerifyOtpParams(email: '', code: ''),
-    );
+    registerFallbackValue(const RequestOtpParams(phoneNumber: ''));
+    registerFallbackValue(const VerifyOtpParams(phoneNumber: '', code: ''));
     registerFallbackValue(const NoParams());
   });
 
-  const tUser = User(
-    id: '1',
-    email: 'test@example.com',
-    name: 'Test User',
-  );
+  const tUser = User(id: '1', phoneNumber: '+2250102030405');
 
   ProviderContainer createContainer() {
     return ProviderContainer(
       overrides: [
-        loginWithPhoneUseCaseProvider.overrideWithValue(
-          mockLoginWithPhoneUseCase,
-        ),
+        requestOtpUseCaseProvider.overrideWithValue(mockRequestOtpUseCase),
         verifyOtpUseCaseProvider.overrideWithValue(mockVerifyOtpUseCase),
         logoutUseCaseProvider.overrideWithValue(mockLogoutUseCase),
         getCachedUserUseCaseProvider
             .overrideWithValue(mockGetCachedUserUseCase),
+        restoreSessionUseCaseProvider
+            .overrideWithValue(mockRestoreSessionUseCase),
+        authLocalDataSourceProvider.overrideWithValue(mockAuthLocalDataSource),
       ],
     );
   }
@@ -67,59 +62,120 @@ void main() {
       expect(state, isA<AuthInitial>());
     });
 
-    test('loginWithPhone should update state to AuthAuthenticated on success',
+    test('requestOtp moves to AuthCodeRequested, first sign-in flagged',
         () async {
-      // Arrange
-      when(() => mockLoginWithPhoneUseCase(any()))
+      when(() => mockRequestOtpUseCase(any()))
+          .thenAnswer((_) async => const Right(null));
+      when(() => mockAuthLocalDataSource.hasEverSignedIn())
+          .thenAnswer((_) async => false);
+
+      final container = createContainer();
+      final notifier = container.read(authNotifierProvider.notifier);
+
+      await notifier.requestOtp(phoneNumber: '+2250102030405');
+
+      final state = container.read(authNotifierProvider);
+      expect(state, isA<AuthCodeRequested>());
+      expect((state as AuthCodeRequested).phoneNumber, '+2250102030405');
+      expect(state.isFirstSignIn, isTrue);
+    });
+
+    test(
+        'requestOtp updates state to AuthError with the backend code on '
+        'failure', () async {
+      when(() => mockRequestOtpUseCase(any())).thenAnswer(
+        (_) async => const Left(
+          ServerFailure(message: 'Too many attempts', code: 'AUTH_RATE_002'),
+        ),
+      );
+
+      final container = createContainer();
+      final notifier = container.read(authNotifierProvider.notifier);
+
+      await notifier.requestOtp(phoneNumber: '+2250102030405');
+
+      final state = container.read(authNotifierProvider);
+      expect(state, isA<AuthError>());
+      expect((state as AuthError).code, 'AUTH_RATE_002');
+    });
+
+    test('verifyOtp updates state to AuthAuthenticated on success', () async {
+      when(() => mockVerifyOtpUseCase(any()))
           .thenAnswer((_) async => const Right(tUser));
 
       final container = createContainer();
       final notifier = container.read(authNotifierProvider.notifier);
 
-      // Act
-      await notifier.loginWithPhone(
+      await notifier.verifyOtp(
         phoneNumber: '+2250102030405',
         code: '123456',
+        ageConfirmed: true,
       );
 
-      // Assert
       final state = container.read(authNotifierProvider);
       expect(state, isA<AuthAuthenticated>());
       expect((state as AuthAuthenticated).user, tUser);
     });
 
-    test('loginWithPhone should update state to AuthError on failure',
-        () async {
-      // Arrange
-      when(() => mockLoginWithPhoneUseCase(any()))
-          .thenAnswer((_) async => const Left(ServerFailure(message: 'Error')));
+    test(
+        'verifyOtp updates state to AuthError with the mapped code on a '
+        'wrong code', () async {
+      when(() => mockVerifyOtpUseCase(any())).thenAnswer(
+        (_) async => const Left(
+          ServerFailure(
+              message: 'The code is incorrect', code: 'AUTH_VERIFY_001'),
+        ),
+      );
 
       final container = createContainer();
       final notifier = container.read(authNotifierProvider.notifier);
 
-      // Act
-      await notifier.loginWithPhone(
-        phoneNumber: '+2250102030405',
-        code: 'wrong',
-      );
+      await notifier.verifyOtp(phoneNumber: '+2250102030405', code: 'wrong0');
 
-      // Assert
       final state = container.read(authNotifierProvider);
       expect(state, isA<AuthError>());
+      expect((state as AuthError).code, 'AUTH_VERIFY_001');
     });
 
     test('logout should update state to AuthUnauthenticated', () async {
-      // Arrange
       when(() => mockLogoutUseCase(any()))
           .thenAnswer((_) async => const Right(null));
 
       final container = createContainer();
       final notifier = container.read(authNotifierProvider.notifier);
 
-      // Act
       await notifier.logout();
 
-      // Assert
+      final state = container.read(authNotifierProvider);
+      expect(state, isA<AuthUnauthenticated>());
+    });
+
+    test('checkAuthStatus authenticates from a restored session', () async {
+      when(() => mockRestoreSessionUseCase(any()))
+          .thenAnswer((_) async => const Right(tUser));
+
+      final container = createContainer();
+      final notifier = container.read(authNotifierProvider.notifier);
+
+      await notifier.checkAuthStatus();
+
+      final state = container.read(authNotifierProvider);
+      expect(state, isA<AuthAuthenticated>());
+      expect((state as AuthAuthenticated).user, tUser);
+    });
+
+    test(
+        'checkAuthStatus is unauthenticated when the session cannot be '
+        'restored', () async {
+      when(() => mockRestoreSessionUseCase(any())).thenAnswer(
+        (_) async => const Left(UnauthorizedFailure()),
+      );
+
+      final container = createContainer();
+      final notifier = container.read(authNotifierProvider.notifier);
+
+      await notifier.checkAuthStatus();
+
       final state = container.read(authNotifierProvider);
       expect(state, isA<AuthUnauthenticated>());
     });

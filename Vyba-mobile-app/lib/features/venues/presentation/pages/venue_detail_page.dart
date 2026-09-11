@@ -2,22 +2,36 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_templates/core/extensions/live_since_extension.dart';
 import 'package:flutter_templates/core/theme/app_colors.dart';
 import 'package:flutter_templates/core/theme/app_radius.dart';
 import 'package:flutter_templates/core/theme/app_spacing.dart';
-import 'package:flutter_templates/core/widgets/buttons/app_gradient_button.dart';
+import 'package:flutter_templates/core/utils/maps_launcher.dart';
 import 'package:flutter_templates/core/widgets/data_display/app_image_carousel.dart';
-import 'package:flutter_templates/core/widgets/data_display/app_rating_badge.dart';
-import 'package:flutter_templates/core/widgets/data_display/app_status_chip.dart';
+import 'package:flutter_templates/features/going/presentation/widgets/going_section.dart';
+import 'package:flutter_templates/features/venues/domain/entities/venue.dart';
+import 'package:flutter_templates/features/venues/domain/entities/venue_promo.dart';
+import 'package:flutter_templates/features/venues/domain/entities/venue_tonight.dart';
 import 'package:flutter_templates/features/venues/presentation/providers/venue_detail_notifier.dart';
 import 'package:flutter_templates/features/venues/presentation/providers/venue_detail_state.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class VenueDetailPage extends ConsumerWidget {
   const VenueDetailPage({required this.venueId, super.key});
 
   final String venueId;
+
+  Future<void> _openInMaps(BuildContext context, Venue venue) async {
+    final uri = buildGoogleMapsUri(venue.latitude, venue.longitude);
+    final launched = await launchUrl(uri, mode: LaunchMode.externalApplication);
+    if (!launched && context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Impossible d'ouvrir Google Maps.")),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -29,251 +43,172 @@ class VenueDetailPage extends ConsumerWidget {
         VenueDetailLoading() => const Center(
             child: CircularProgressIndicator(color: AppColors.primary)),
         VenueDetailError(:final message) => Center(child: Text(message)),
-        VenueDetailLoaded(:final venue) => Stack(
-            children: [
-              CustomScrollView(
-                slivers: [
-                  // Hero Image Carousel
-                  SliverToBoxAdapter(
-                    child: Stack(
-                      children: [
-                        AppImageCarousel(
-                          imageUrls: venue.heroImages,
-                          height: 320,
-                        ),
-                        // Back & actions
-                        Positioned(
-                          top: MediaQuery.of(context).padding.top + 8,
-                          left: 8,
-                          child: IconButton(
-                            onPressed: () => context.pop(),
-                            style: IconButton.styleFrom(
-                              backgroundColor:
-                                  Colors.black.withValues(alpha: 0.3),
-                            ),
-                            icon: const Icon(Icons.arrow_back,
-                                color: Colors.white),
-                          ),
-                        ),
-                        Positioned(
-                          top: MediaQuery.of(context).padding.top + 8,
-                          right: 8,
-                          child: Row(
-                            children: [
-                              IconButton(
-                                onPressed: () {},
-                                style: IconButton.styleFrom(
-                                  backgroundColor:
-                                      Colors.black.withValues(alpha: 0.3),
-                                ),
-                                icon: const Icon(Icons.share_outlined,
-                                    color: Colors.white),
-                              ),
-                              IconButton(
-                                onPressed: () {},
-                                style: IconButton.styleFrom(
-                                  backgroundColor:
-                                      Colors.black.withValues(alpha: 0.3),
-                                ),
-                                icon: const Icon(Icons.favorite_border,
-                                    color: Colors.white),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+        VenueDetailLoaded(:final venue) => CustomScrollView(
+            slivers: [
+              // Hero Image Carousel
+              SliverToBoxAdapter(
+                child: Stack(
+                  children: [
+                    AppImageCarousel(
+                      imageUrls: venue.heroImages,
+                      height: 320,
                     ),
-                  ),
-                  // Floating info card
-                  SliverToBoxAdapter(
-                    child: Transform.translate(
-                      offset: const Offset(0, -32),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24),
-                        child: ClipRRect(
-                          borderRadius: AppRadius.borderRadiusMd,
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-                            child: Container(
-                              padding: const EdgeInsets.all(20),
-                              decoration: BoxDecoration(
-                                color: AppColors.glassBg,
-                                borderRadius: AppRadius.borderRadiusMd,
+                    Positioned(
+                      top: MediaQuery.of(context).padding.top + 8,
+                      left: 8,
+                      child: IconButton(
+                        onPressed: () => context.pop(),
+                        style: IconButton.styleFrom(
+                          backgroundColor: Colors.black.withValues(alpha: 0.3),
+                        ),
+                        icon: const Icon(Icons.arrow_back, color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // Floating info card
+              SliverToBoxAdapter(
+                child: Transform.translate(
+                  offset: const Offset(0, -32),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: ClipRRect(
+                      borderRadius: AppRadius.borderRadiusMd,
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+                        child: Container(
+                          padding: const EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            color: AppColors.glassBg,
+                            borderRadius: AppRadius.borderRadiusMd,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                venue.name,
+                                style: GoogleFonts.epilogue(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w800,
+                                  color: AppColors.onSurface,
+                                ),
                               ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              AppSpacing.verticalXs,
+                              Row(
                                 children: [
-                                  if (venue.isPremium)
-                                    Padding(
-                                      padding: const EdgeInsets.only(bottom: 6),
-                                      child: Text(
-                                        'PREMIUM VENUE',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelSmall
-                                            ?.copyWith(
-                                              color: AppColors.tertiaryFixed,
-                                              letterSpacing: 2,
-                                            ),
-                                      ),
-                                    ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Text(
-                                          venue.name,
-                                          style: GoogleFonts.epilogue(
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.w800,
-                                            color: AppColors.onSurface,
-                                          ),
+                                  Text(
+                                    _venueTypeLabel(venue.venueType),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall
+                                        ?.copyWith(
+                                          color: AppColors.onSurfaceVariant,
                                         ),
-                                      ),
-                                      AppRatingBadge(
-                                        rating: venue.rating,
-                                        reviewCount: venue.reviewCount,
-                                      ),
-                                    ],
                                   ),
-                                  AppSpacing.verticalSm,
-                                  Row(
-                                    children: [
-                                      const Icon(Icons.location_on_outlined,
-                                          size: 16,
-                                          color: AppColors.onSurfaceVariant),
-                                      const SizedBox(width: 4),
-                                      Text(
-                                        venue.address,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall
-                                            ?.copyWith(
-                                              color: AppColors.onSurfaceVariant,
-                                            ),
-                                      ),
-                                      const Spacer(),
-                                      AppStatusChip(
-                                        label: venue.isOpen
-                                            ? 'OPEN NOW'
-                                            : 'CLOSED',
-                                        status: venue.isOpen
-                                            ? VenueStatus.open
-                                            : VenueStatus.closed,
-                                      ),
-                                    ],
-                                  ),
-                                  AppSpacing.verticalLg,
-                                  // Quick actions
-                                  Row(
-                                    children: [
-                                      _QuickAction(
-                                        icon: Icons.calendar_today,
-                                        label: 'Reserve',
-                                        onTap: () {},
-                                      ),
-                                      const SizedBox(width: 12),
-                                      _QuickAction(
-                                        icon: Icons.phone_outlined,
-                                        label: 'Call',
-                                        onTap: () {},
-                                      ),
-                                      const SizedBox(width: 12),
-                                      _QuickAction(
-                                        icon: Icons.directions_outlined,
-                                        label: 'Go',
-                                        onTap: () {},
-                                      ),
-                                    ],
+                                  const Text(' · '),
+                                  Text(
+                                    venue.priceLevelLabel,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall
+                                        ?.copyWith(
+                                          color: AppColors.onSurfaceVariant,
+                                        ),
                                   ),
                                 ],
                               ),
-                            ),
+                              AppSpacing.verticalSm,
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Icon(Icons.location_on_outlined,
+                                      size: 16,
+                                      color: AppColors.onSurfaceVariant),
+                                  const SizedBox(width: 4),
+                                  Expanded(
+                                    child: Text(
+                                      venue.address,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall
+                                          ?.copyWith(
+                                            color: AppColors.onSurfaceVariant,
+                                          ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              AppSpacing.verticalSm,
+                              OutlinedButton.icon(
+                                onPressed: () => _openInMaps(context, venue),
+                                icon: const Icon(Icons.map_outlined, size: 18),
+                                label: const Text('Ouvrir dans Google Maps'),
+                              ),
+                              AppSpacing.verticalLg,
+                              _TonightBlock(tonight: venue.tonight),
+                              AppSpacing.verticalMd,
+                              GoingSection(venueId: venue.id),
+                              if (venue.promos.isNotEmpty) ...[
+                                AppSpacing.verticalMd,
+                                _PromoSection(promos: venue.promos),
+                              ],
+                            ],
                           ),
                         ),
                       ),
                     ),
                   ),
-                  // About section
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('The Experience',
-                              style: Theme.of(context).textTheme.titleLarge),
-                          AppSpacing.verticalSm,
-                          Text(
-                            venue.description,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
-                                ?.copyWith(
-                                  color: AppColors.onSurfaceVariant,
-                                  height: 1.6,
-                                ),
-                          ),
-                          AppSpacing.verticalXl,
-                          // Amenities
-                          if (venue.amenities.isNotEmpty) ...[
-                            Text('Amenities',
-                                style: Theme.of(context).textTheme.titleMedium),
-                            AppSpacing.verticalMd,
-                            Wrap(
-                              spacing: 8,
-                              runSpacing: 8,
-                              children: venue.amenities
-                                  .map((a) => Chip(
-                                        label: Text(a),
-                                        avatar: Icon(
-                                          _amenityIcon(a),
-                                          size: 16,
-                                          color: AppColors.primary,
-                                        ),
-                                      ))
-                                  .toList(),
-                            ),
-                          ],
-                          AppSpacing.verticalXl,
-                          // Gallery
-                          Text('Gallery',
-                              style: Theme.of(context).textTheme.titleMedium),
-                          AppSpacing.verticalMd,
-                          SizedBox(
-                            height: 120,
-                            child: ListView.separated(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: venue.heroImages.length,
-                              separatorBuilder: (_, __) =>
-                                  const SizedBox(width: 8),
-                              itemBuilder: (context, index) {
-                                return ClipRRect(
-                                  borderRadius: AppRadius.borderRadiusSm,
-                                  child: Image.network(
-                                    venue.heroImages[index],
-                                    width: 160,
-                                    fit: BoxFit.cover,
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                          const SizedBox(height: 120),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
-              // Sticky Reserve button
-              Positioned(
-                left: 24,
-                right: 24,
-                bottom: MediaQuery.of(context).padding.bottom + 16,
-                child: AppGradientButton(
-                  onPressed: () {},
-                  label: 'RESERVE A TABLE',
-                  icon: Icons.arrow_forward,
+              // About section
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (venue.description.isNotEmpty) ...[
+                        Text('À propos',
+                            style: Theme.of(context).textTheme.titleLarge),
+                        AppSpacing.verticalSm,
+                        Text(
+                          venue.description,
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: AppColors.onSurfaceVariant,
+                                    height: 1.6,
+                                  ),
+                        ),
+                        AppSpacing.verticalXl,
+                      ],
+                      if (venue.heroImages.length > 1) ...[
+                        Text('Galerie',
+                            style: Theme.of(context).textTheme.titleMedium),
+                        AppSpacing.verticalMd,
+                        SizedBox(
+                          height: 120,
+                          child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: venue.heroImages.length,
+                            separatorBuilder: (_, __) =>
+                                const SizedBox(width: 8),
+                            itemBuilder: (context, index) {
+                              return ClipRRect(
+                                borderRadius: AppRadius.borderRadiusSm,
+                                child: Image.network(
+                                  venue.heroImages[index],
+                                  width: 160,
+                                  fit: BoxFit.cover,
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                      const SizedBox(height: 48),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -282,59 +217,161 @@ class VenueDetailPage extends ConsumerWidget {
     );
   }
 
-  IconData _amenityIcon(String amenity) {
-    return switch (amenity.toLowerCase()) {
-      'wifi' => Icons.wifi,
-      'parking' => Icons.local_parking,
-      'outdoor deck' || 'outdoor seating' => Icons.deck,
-      'full kitchen' => Icons.restaurant,
-      'vip booths' => Icons.star,
-      'live music' => Icons.music_note,
-      'beach access' => Icons.beach_access,
-      'full bar' => Icons.local_bar,
-      'lounge seating' => Icons.weekend,
-      'dance floor' => Icons.nightlife,
-      'private dining' => Icons.dining,
-      _ => Icons.check_circle_outline,
-    };
-  }
+  String _venueTypeLabel(VenueType type) => switch (type) {
+        VenueType.club => 'Club',
+        VenueType.bar => 'Bar',
+        VenueType.lounge => 'Lounge',
+        VenueType.maquis => 'Maquis',
+      };
 }
 
-class _QuickAction extends StatelessWidget {
-  const _QuickAction({
-    required this.icon,
-    required this.label,
-    required this.onTap,
-  });
+/// Active promotions section (ticket 09) — distinct from the tonight/going
+/// blocks, Golden Hour tinted to match the promo/VIP brand color.
+class _PromoSection extends StatelessWidget {
+  const _PromoSection({required this.promos});
 
-  final IconData icon;
-  final String label;
-  final VoidCallback onTap;
+  final List<VenuePromo> promos;
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 12),
-          decoration: BoxDecoration(
-            color: AppColors.surfaceContainerHighest,
-            borderRadius: AppRadius.borderRadiusSm,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        for (final promo in promos) ...[
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            decoration: BoxDecoration(
+              color: AppColors.tertiary.withValues(alpha: 0.12),
+              borderRadius: AppRadius.borderRadiusSm,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    const Icon(Icons.local_offer_rounded,
+                        size: 16, color: AppColors.tertiary),
+                    const SizedBox(width: 6),
+                    Text(
+                      promo.title,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium
+                          ?.copyWith(
+                            color: AppColors.tertiary,
+                            fontWeight: FontWeight.w700,
+                          ),
+                    ),
+                  ],
+                ),
+                if (promo.description.isNotEmpty) ...[
+                  const SizedBox(height: 4),
+                  Text(
+                    promo.description,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: AppColors.onSurfaceVariant,
+                        ),
+                  ),
+                ],
+              ],
+            ),
           ),
-          child: Column(
-            children: [
-              Icon(icon, color: AppColors.primary, size: 20),
-              const SizedBox(height: 4),
-              Text(
-                label,
-                style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      color: AppColors.onSurface,
+          if (promo != promos.last) const SizedBox(height: 8),
+        ],
+      ],
+    );
+  }
+}
+
+/// Live status + headline, or "rien d'annoncé ce soir" when there's no
+/// activity tonight (spec 02 / ADR-0001: tonight's state is never inferred,
+/// only ever `VenueNight` or absent).
+class _TonightBlock extends StatelessWidget {
+  const _TonightBlock({required this.tonight});
+
+  final VenueTonight? tonight;
+
+  @override
+  Widget build(BuildContext context) {
+    if (tonight == null || !tonight!.isLive) {
+      final goingCount = tonight?.goingCount ?? 0;
+      return Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        decoration: BoxDecoration(
+          color: AppColors.surfaceContainerHighest,
+          borderRadius: AppRadius.borderRadiusSm,
+        ),
+        child: Row(
+          children: [
+            const Icon(Icons.nightlight_outlined,
+                size: 16, color: AppColors.onSurfaceVariant),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Text(
+                "Rien d'annoncé ce soir",
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: AppColors.onSurfaceVariant,
                     ),
               ),
-            ],
-          ),
+            ),
+            if (goingCount > 0)
+              Text(
+                '$goingCount y vont',
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: AppColors.onSurfaceVariant,
+                      fontWeight: FontWeight.w700,
+                    ),
+              ),
+          ],
         ),
+      );
+    }
+
+    final night = tonight!;
+    final parts = <String>[
+      "C'est live",
+      if (night.liveSince != null) night.liveSince!.liveSinceLabel,
+      if (night.headline != null && night.headline!.isNotEmpty)
+        night.headline!
+      else if (night.djName != null && night.djName!.isNotEmpty)
+        night.djName!,
+    ];
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      decoration: BoxDecoration(
+        color: AppColors.success.withValues(alpha: 0.12),
+        borderRadius: AppRadius.borderRadiusSm,
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 8,
+            height: 8,
+            decoration: const BoxDecoration(
+              color: AppColors.success,
+              shape: BoxShape.circle,
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              parts.join(' · '),
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: AppColors.success,
+                    fontWeight: FontWeight.w700,
+                  ),
+            ),
+          ),
+          if (night.goingCount > 0)
+            Text(
+              '${night.goingCount} y vont',
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: AppColors.onSurfaceVariant,
+                  ),
+            ),
+        ],
       ),
     );
   }

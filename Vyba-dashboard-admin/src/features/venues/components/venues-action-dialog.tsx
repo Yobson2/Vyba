@@ -23,21 +23,37 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { Switch } from '@/components/ui/switch'
 import { SelectDropdown } from '@/components/select-dropdown'
-import { venueTypes, priceLevels } from '../data/data'
+import {
+  useCreateVenueMutation,
+  useUpdateVenueMutation,
+} from '../api/venues-api'
+import { priceLevels, statusOptions, venueTypes } from '../data/data'
 import { Venue } from '../data/schema'
 
 const formSchema = z.object({
   name: z.string().min(2, { message: 'Name is required.' }),
-  description: z.string().min(1, { message: 'Description is required.' }),
-  address: z.string().min(1, { message: 'Address is required.' }),
+  description: z.string().optional(),
+  address: z.string().optional(),
+  latitude: z
+    .string()
+    .min(1, { message: 'Latitude is required.' })
+    .refine(
+      (v) => !Number.isNaN(Number(v)) && Number(v) >= -90 && Number(v) <= 90,
+      {
+        message: 'Enter a valid latitude (-90 to 90).',
+      }
+    ),
+  longitude: z
+    .string()
+    .min(1, { message: 'Longitude is required.' })
+    .refine(
+      (v) => !Number.isNaN(Number(v)) && Number(v) >= -180 && Number(v) <= 180,
+      { message: 'Enter a valid longitude (-180 to 180).' }
+    ),
   venueType: z.string().min(1, { message: 'Venue type is required.' }),
   priceLevel: z.string().min(1, { message: 'Price level is required.' }),
-  city: z.string().min(1, { message: 'City is required.' }),
-  isPremium: z.boolean(),
-  status: z.string().min(1, { message: 'Status is required.' }),
-  ownerName: z.string().min(1, { message: 'Owner name is required.' }),
+  validationStatus: z.string().min(1, { message: 'Status is required.' }),
 })
 type VenueForm = z.infer<typeof formSchema>
 
@@ -49,40 +65,70 @@ interface Props {
 
 export function VenuesActionDialog({ currentRow, open, onOpenChange }: Props) {
   const isEdit = !!currentRow
+  const createVenue = useCreateVenueMutation()
+  const updateVenue = useUpdateVenueMutation()
+  const isPending = createVenue.isPending || updateVenue.isPending
+
   const form = useForm<VenueForm>({
     resolver: zodResolver(formSchema),
     defaultValues: isEdit
       ? {
           name: currentRow.name,
-          description: currentRow.description,
-          address: currentRow.address,
+          description: currentRow.description ?? '',
+          address: currentRow.address ?? '',
+          latitude: String(currentRow.latitude),
+          longitude: String(currentRow.longitude),
           venueType: currentRow.venueType,
           priceLevel: String(currentRow.priceLevel),
-          city: currentRow.city,
-          isPremium: currentRow.isPremium,
-          status: currentRow.status,
-          ownerName: currentRow.ownerName,
+          validationStatus: currentRow.validationStatus,
         }
       : {
           name: '',
           description: '',
           address: '',
+          latitude: '',
+          longitude: '',
           venueType: '',
           priceLevel: '',
-          city: 'Abidjan',
-          isPremium: false,
-          status: 'active',
-          ownerName: '',
+          validationStatus: 'ONBOARDING',
         },
   })
 
   const onSubmit = (values: VenueForm) => {
-    // TODO: Replace with real API call
-    form.reset()
-    toast.success(isEdit ? 'Venue updated' : 'Venue created', {
-      description: `${values.name} (${values.venueType})`,
-    })
-    onOpenChange(false)
+    const payload = {
+      name: values.name,
+      description: values.description || undefined,
+      address: values.address || undefined,
+      latitude: Number(values.latitude),
+      longitude: Number(values.longitude),
+      venueType: values.venueType as Venue['venueType'],
+      priceLevel: Number(values.priceLevel),
+    }
+
+    const onSuccess = () => {
+      form.reset()
+      toast.success(isEdit ? 'Venue updated' : 'Venue created', {
+        description: `${values.name} (${values.venueType})`,
+      })
+      onOpenChange(false)
+    }
+    const onError = () => {
+      toast.error(isEdit ? 'Failed to update venue' : 'Failed to create venue')
+    }
+
+    if (isEdit) {
+      updateVenue.mutate(
+        {
+          id: currentRow.id,
+          ...payload,
+          validationStatus:
+            values.validationStatus as Venue['validationStatus'],
+        },
+        { onSuccess, onError }
+      )
+    } else {
+      createVenue.mutate(payload, { onSuccess, onError })
+    }
   }
 
   return (
@@ -119,7 +165,7 @@ export function VenuesActionDialog({ currentRow, open, onOpenChange }: Props) {
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder='Club Quilox'
+                        placeholder='Le Boony'
                         className='col-span-4'
                         autoComplete='off'
                         {...field}
@@ -158,7 +204,47 @@ export function VenuesActionDialog({ currentRow, open, onOpenChange }: Props) {
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder='123 Admiralty Way, Lekki'
+                        placeholder='Rue du Canal, Zone 4, Marcory'
+                        className='col-span-4'
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage className='col-span-4 col-start-3' />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name='latitude'
+                render={({ field }) => (
+                  <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
+                    <FormLabel className='col-span-2 text-right'>
+                      Latitude
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder='5.286'
+                        inputMode='decimal'
+                        className='col-span-4'
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage className='col-span-4 col-start-3' />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name='longitude'
+                render={({ field }) => (
+                  <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
+                    <FormLabel className='col-span-2 text-right'>
+                      Longitude
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder='-3.986'
+                        inputMode='decimal'
                         className='col-span-4'
                         {...field}
                       />
@@ -211,97 +297,35 @@ export function VenuesActionDialog({ currentRow, open, onOpenChange }: Props) {
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name='city'
-                render={({ field }) => (
-                  <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
-                    <FormLabel className='col-span-2 text-right'>
-                      City
-                    </FormLabel>
-                    <SelectDropdown
-                      defaultValue={field.value}
-                      onValueChange={field.onChange}
-                      placeholder='Select city'
-                      className='col-span-4'
-                      items={[
-                        { label: 'Abidjan', value: 'Abidjan' },
-                        { label: 'Abuja', value: 'Abuja' },
-                        { label: 'Port Harcourt', value: 'Port Harcourt' },
-                        { label: 'Ibadan', value: 'Ibadan' },
-                        { label: 'Kano', value: 'Kano' },
-                      ]}
-                    />
-                    <FormMessage className='col-span-4 col-start-3' />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name='status'
-                render={({ field }) => (
-                  <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
-                    <FormLabel className='col-span-2 text-right'>
-                      Status
-                    </FormLabel>
-                    <SelectDropdown
-                      defaultValue={field.value}
-                      onValueChange={field.onChange}
-                      placeholder='Select status'
-                      className='col-span-4'
-                      items={[
-                        { label: 'Active', value: 'active' },
-                        { label: 'Pending', value: 'pending' },
-                        { label: 'Suspended', value: 'suspended' },
-                        { label: 'Rejected', value: 'rejected' },
-                      ]}
-                    />
-                    <FormMessage className='col-span-4 col-start-3' />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name='ownerName'
-                render={({ field }) => (
-                  <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
-                    <FormLabel className='col-span-2 text-right'>
-                      Owner
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder='Adeola Johnson'
+              {isEdit && (
+                <FormField
+                  control={form.control}
+                  name='validationStatus'
+                  render={({ field }) => (
+                    <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
+                      <FormLabel className='col-span-2 text-right'>
+                        Status
+                      </FormLabel>
+                      <SelectDropdown
+                        defaultValue={field.value}
+                        onValueChange={field.onChange}
+                        placeholder='Select status'
                         className='col-span-4'
-                        {...field}
+                        items={statusOptions.map(({ label, value }) => ({
+                          label,
+                          value,
+                        }))}
                       />
-                    </FormControl>
-                    <FormMessage className='col-span-4 col-start-3' />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name='isPremium'
-                render={({ field }) => (
-                  <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
-                    <FormLabel className='col-span-2 text-right'>
-                      Premium
-                    </FormLabel>
-                    <FormControl>
-                      <Switch
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                      />
-                    </FormControl>
-                    <FormMessage className='col-span-4 col-start-3' />
-                  </FormItem>
-                )}
-              />
+                      <FormMessage className='col-span-4 col-start-3' />
+                    </FormItem>
+                  )}
+                />
+              )}
             </form>
           </Form>
         </div>
         <DialogFooter>
-          <Button type='submit' form='venue-form'>
+          <Button type='submit' form='venue-form' disabled={isPending}>
             {isEdit ? 'Save changes' : 'Create venue'}
           </Button>
         </DialogFooter>

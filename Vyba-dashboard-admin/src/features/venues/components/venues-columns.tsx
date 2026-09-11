@@ -1,44 +1,13 @@
 import { ColumnDef } from '@tanstack/react-table'
 import { cn } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
-import { Checkbox } from '@/components/ui/checkbox'
+import { DataTableColumnHeader } from '@/components/ui/data-table'
 import LongText from '@/components/long-text'
-import { statusTypes, venueTypes, priceLevels } from '../data/data'
+import { priceLevels, statusTypes, venueTypes } from '../data/data'
 import { Venue } from '../data/schema'
-import { DataTableColumnHeader } from './data-table-column-header'
-import { DataTableRowActions } from './data-table-row-actions'
+import { VenuesRowActionsCell } from './venues-row-actions-cell'
 
 export const columns: ColumnDef<Venue>[] = [
-  {
-    id: 'select',
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && 'indeterminate')
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label='Select all'
-        className='translate-y-[2px]'
-      />
-    ),
-    meta: {
-      className: cn(
-        'sticky md:table-cell left-0 z-10 rounded-tl',
-        'bg-background transition-colors duration-200 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted'
-      ),
-    },
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label='Select row'
-        className='translate-y-[2px]'
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
   {
     accessorKey: 'name',
     header: ({ column }) => (
@@ -51,7 +20,7 @@ export const columns: ColumnDef<Venue>[] = [
       className: cn(
         'drop-shadow-[0_1px_2px_rgb(0_0_0_/_0.1)] dark:drop-shadow-[0_1px_2px_rgb(255_255_255_/_0.1)] lg:drop-shadow-none',
         'bg-background transition-colors duration-200 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted',
-        'sticky left-6 md:table-cell'
+        'sticky left-0 md:table-cell'
       ),
     },
     enableHiding: false,
@@ -80,42 +49,16 @@ export const columns: ColumnDef<Venue>[] = [
       return value.includes(row.getValue(id))
     },
     enableSorting: false,
-    enableHiding: false,
   },
   {
-    accessorKey: 'city',
+    accessorKey: 'address',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='City' />
-    ),
-    cell: ({ row }) => <div>{row.getValue('city')}</div>,
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
-    },
-    enableSorting: false,
-  },
-  {
-    accessorKey: 'rating',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Rating' />
-    ),
-    cell: ({ row }) => {
-      const rating = row.getValue('rating') as number
-      return (
-        <div className='flex items-center gap-x-1'>
-          <span className='text-amber-500'>&#9733;</span>
-          <span className='text-sm'>{rating.toFixed(1)}</span>
-        </div>
-      )
-    },
-  },
-  {
-    accessorKey: 'reviewCount',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Reviews' />
+      <DataTableColumnHeader column={column} title='Address' />
     ),
     cell: ({ row }) => (
-      <div className='text-center'>{row.getValue('reviewCount')}</div>
+      <LongText className='max-w-48'>{row.getValue('address') ?? '—'}</LongText>
     ),
+    enableSorting: false,
   },
   {
     accessorKey: 'priceLevel',
@@ -125,26 +68,23 @@ export const columns: ColumnDef<Venue>[] = [
     cell: ({ row }) => {
       const level = row.getValue('priceLevel') as number
       const priceLabel =
-        priceLevels.find((p) => p.value === String(level))?.label ??
-        '\u20A6'
+        priceLevels.find((p) => p.value === String(level))?.label ?? 'F'
       return <div className='text-sm'>{priceLabel}</div>
     },
     enableSorting: false,
   },
   {
-    accessorKey: 'status',
+    accessorKey: 'validationStatus',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Status' />
     ),
     cell: ({ row }) => {
-      const { status } = row.original
-      const badgeColor = statusTypes.get(status)
+      const { validationStatus } = row.original
+      const badgeColor = statusTypes.get(validationStatus)
       return (
-        <div className='flex space-x-2'>
-          <Badge variant='outline' className={cn('capitalize', badgeColor)}>
-            {status}
-          </Badge>
-        </div>
+        <Badge variant='outline' className={cn('capitalize', badgeColor)}>
+          {validationStatus.toLowerCase()}
+        </Badge>
       )
     },
     filterFn: (row, id, value) => {
@@ -154,54 +94,59 @@ export const columns: ColumnDef<Venue>[] = [
     enableSorting: false,
   },
   {
-    accessorKey: 'isPremium',
+    accessorKey: 'inLaunchArea',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Premium' />
+      <DataTableColumnHeader column={column} title='Zone 4' />
     ),
     cell: ({ row }) => {
-      const isPremium = row.getValue('isPremium') as boolean
-      return isPremium ? (
+      const inLaunchArea = row.getValue('inLaunchArea') as boolean
+      return inLaunchArea ? (
         <Badge
           variant='outline'
-          className='bg-amber-100/30 text-amber-900 dark:text-amber-200 border-amber-200'
+          className='border-emerald-200 bg-emerald-100/30 text-emerald-900 dark:text-emerald-200'
         >
-          Premium
+          Zone 4
         </Badge>
       ) : (
-        <span className='text-muted-foreground'>&mdash;</span>
+        <Badge
+          variant='outline'
+          className='border-neutral-300 bg-neutral-300/40'
+        >
+          Hors zone
+        </Badge>
       )
     },
     enableSorting: false,
   },
   {
-    accessorKey: 'ownerName',
+    accessorKey: 'owner',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Owner' />
     ),
-    cell: ({ row }) => (
-      <LongText className='max-w-36'>{row.getValue('ownerName')}</LongText>
-    ),
-  },
-  {
-    accessorKey: 'createdAt',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Created' />
-    ),
     cell: ({ row }) => {
-      const date = row.getValue('createdAt') as Date
+      const owner = row.original.owner
+      if (!owner) {
+        return <span className='text-muted-foreground'>Not bound</span>
+      }
+      const name = [owner.firstName, owner.lastName].filter(Boolean).join(' ')
       return (
-        <div className='text-nowrap'>
-          {date.toLocaleDateString('en-NG', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-          })}
+        <div className='text-sm'>
+          {name ? <div>{name}</div> : null}
+          <div
+            className={cn(
+              'text-nowrap',
+              name && 'text-muted-foreground text-xs'
+            )}
+          >
+            {owner.phone}
+          </div>
         </div>
       )
     },
+    enableSorting: false,
   },
   {
     id: 'actions',
-    cell: DataTableRowActions,
+    cell: VenuesRowActionsCell,
   },
 ]

@@ -20,6 +20,19 @@ abstract class AuthLocalDataSource {
   /// Whether a valid access token exists.
   Future<bool> hasToken();
 
+  /// Reads the raw cached access token, if any.
+  Future<String?> getAccessToken();
+
+  /// Reads the raw cached refresh token, if any.
+  Future<String?> getRefreshToken();
+
+  /// Whether this device has ever completed a sign-in. Drives whether the
+  /// OTP screen shows the 18+ confirmation (first sign-in only).
+  Future<bool> hasEverSignedIn();
+
+  /// Marks this device as having completed a sign-in.
+  Future<void> markSignedIn();
+
   /// Clears all cached auth data.
   Future<void> clearAll();
 }
@@ -37,6 +50,7 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   final LocalStorage _localStorage;
 
   static const _cachedUserKey = 'cached_user';
+  static const _hasSignedInKey = 'has_completed_first_signin';
 
   @override
   Future<void> cacheUser(UserModel user) async {
@@ -64,6 +78,21 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   Future<bool> hasToken() async {
     final token = await _secureStorage.getAccessToken();
     return token != null && token.isNotEmpty;
+  }
+
+  @override
+  Future<String?> getAccessToken() => _secureStorage.getAccessToken();
+
+  @override
+  Future<String?> getRefreshToken() => _secureStorage.getRefreshToken();
+
+  @override
+  Future<bool> hasEverSignedIn() async =>
+      _localStorage.getBool(_hasSignedInKey) ?? false;
+
+  @override
+  Future<void> markSignedIn() async {
+    await _localStorage.setBool(_hasSignedInKey, value: true);
   }
 
   @override

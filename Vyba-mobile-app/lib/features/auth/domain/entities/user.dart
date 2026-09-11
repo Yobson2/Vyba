@@ -3,36 +3,42 @@ import 'package:flutter_templates/core/enums/user_role.dart';
 
 /// Domain entity representing an authenticated user.
 ///
+/// Identity is the phone number (ADR-0003) — there is no email or password.
 /// This is a pure domain object with no framework dependencies.
 @immutable
 class User {
   /// Creates a [User].
   const User({
     required this.id,
-    required this.email,
-    required this.name,
-    this.avatarUrl,
-    this.phoneNumber,
+    required this.phoneNumber,
+    this.firstName,
+    this.lastName,
     this.role = UserRole.client,
   });
 
   /// Unique identifier.
   final String id;
 
-  /// User email address.
-  final String email;
+  /// E.164 phone number — the canonical identity.
+  final String phoneNumber;
 
-  /// Display name.
-  final String name;
+  /// Optional first name.
+  final String? firstName;
 
-  /// Optional avatar image URL.
-  final String? avatarUrl;
-
-  /// Optional phone number.
-  final String? phoneNumber;
+  /// Optional last name.
+  final String? lastName;
 
   /// User role (client or venue owner).
   final UserRole role;
+
+  /// Full name if set, falling back to the phone number.
+  String get displayName {
+    final joined = [firstName, lastName]
+        .whereType<String>()
+        .where((part) => part.trim().isNotEmpty)
+        .join(' ');
+    return joined.isNotEmpty ? joined : phoneNumber;
+  }
 
   @override
   bool operator ==(Object other) =>
@@ -40,17 +46,14 @@ class User {
       other is User &&
           runtimeType == other.runtimeType &&
           id == other.id &&
-          email == other.email &&
-          name == other.name &&
-          avatarUrl == other.avatarUrl &&
           phoneNumber == other.phoneNumber &&
+          firstName == other.firstName &&
+          lastName == other.lastName &&
           role == other.role;
 
   @override
-  int get hashCode =>
-      Object.hash(id, email, name, avatarUrl, phoneNumber, role);
+  int get hashCode => Object.hash(id, phoneNumber, firstName, lastName, role);
 
   @override
-  String toString() =>
-      'User(id: $id, email: $email, name: $name, role: $role)';
+  String toString() => 'User(id: $id, phoneNumber: $phoneNumber, role: $role)';
 }

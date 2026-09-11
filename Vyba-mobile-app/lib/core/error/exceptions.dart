@@ -6,7 +6,8 @@
 /// Exception thrown when a server request fails.
 class ServerException implements Exception {
   /// Creates a [ServerException].
-  const ServerException({this.message = 'Server error', this.statusCode});
+  const ServerException(
+      {this.message = 'Server error', this.statusCode, this.code});
 
   /// Error message from the server.
   final String message;
@@ -14,9 +15,12 @@ class ServerException implements Exception {
   /// HTTP status code.
   final int? statusCode;
 
+  /// Backend typed error code (e.g. `AUTH_VERIFY_002`), when present.
+  final String? code;
+
   @override
   String toString() =>
-      'ServerException(message: $message, statusCode: $statusCode)';
+      'ServerException(message: $message, statusCode: $statusCode, code: $code)';
 }
 
 /// Exception thrown when a cache operation fails.
@@ -46,11 +50,14 @@ class NetworkException implements Exception {
 /// Exception thrown for unauthorized access (401/403).
 class UnauthorizedException implements Exception {
   /// Creates an [UnauthorizedException].
-  const UnauthorizedException({this.message = 'Unauthorized'});
+  const UnauthorizedException({this.message = 'Unauthorized', this.code});
 
   /// Error message.
   final String message;
 
+  /// Backend typed error code (e.g. `AUTH_ACCOUNT_003`), when present.
+  final String? code;
+
   @override
-  String toString() => 'UnauthorizedException(message: $message)';
+  String toString() => 'UnauthorizedException(message: $message, code: $code)';
 }

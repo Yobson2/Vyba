@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_templates/core/router/route_names.dart';
 import 'package:flutter_templates/core/theme/app_colors.dart';
 import 'package:flutter_templates/core/theme/app_gradients.dart';
 import 'package:flutter_templates/core/theme/app_radius.dart';
 import 'package:flutter_templates/core/theme/app_spacing.dart';
 import 'package:flutter_templates/features/owner_dashboard/domain/entities/activity_item.dart';
 import 'package:flutter_templates/features/owner_dashboard/presentation/providers/owner_dashboard_providers.dart';
+import 'package:flutter_templates/features/promotions/presentation/providers/create_promo_notifier.dart';
+import 'package:flutter_templates/features/venue_night/presentation/widgets/live_tonight_card.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -16,6 +20,7 @@ class OwnerDashboardPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final statsAsync = ref.watch(dashboardStatsProvider);
     final activityAsync = ref.watch(recentActivityProvider);
+    final lastPromo = ref.watch(createPromoNotifierProvider).lastPublished;
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -30,6 +35,11 @@ class OwnerDashboardPage extends ConsumerWidget {
             children: [
               // Greeting header
               _GreetingHeader(),
+
+              AppSpacing.verticalXl,
+
+              // On est live ce soir ?
+              const LiveTonightCard(),
 
               AppSpacing.verticalXl,
 
@@ -67,7 +77,15 @@ class OwnerDashboardPage extends ConsumerWidget {
                 ),
               ),
               AppSpacing.verticalLg,
-              const _QuickActionsGrid(),
+              _QuickActionsGrid(
+                onAddPromo: () =>
+                    context.pushNamed(RouteNames.createPromotionName),
+              ),
+
+              if (lastPromo != null) ...[
+                AppSpacing.verticalXl,
+                _LastPromoCard(title: lastPromo.title),
+              ],
 
               AppSpacing.verticalXl,
 
@@ -309,7 +327,9 @@ class _TrendBadge extends StatelessWidget {
 }
 
 class _QuickActionsGrid extends StatelessWidget {
-  const _QuickActionsGrid();
+  const _QuickActionsGrid({required this.onAddPromo});
+
+  final VoidCallback onAddPromo;
 
   @override
   Widget build(BuildContext context) {
@@ -320,9 +340,9 @@ class _QuickActionsGrid extends StatelessWidget {
             Expanded(
               child: _ActionButton(
                 icon: Icons.local_offer_rounded,
-                label: 'Add Promo',
+                label: 'Nouvelle promo',
                 gradient: AppGradients.primaryButton,
-                onTap: () {},
+                onTap: onAddPromo,
               ),
             ),
             AppSpacing.horizontalSm,
@@ -408,6 +428,53 @@ class _ActionButton extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// Confirms a just-published promo right on Accueil (ticket 09: "publish →
+/// returns to home with the item listed under recent activity").
+class _LastPromoCard extends StatelessWidget {
+  const _LastPromoCard({required this.title});
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(AppSpacing.md),
+      decoration: BoxDecoration(
+        color: AppColors.success.withValues(alpha: 0.12),
+        borderRadius: AppRadius.borderRadiusMd,
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.check_circle, color: AppColors.success, size: 20),
+          AppSpacing.horizontalSm,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Promo publiée',
+                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                        color: AppColors.success,
+                        fontWeight: FontWeight.w700,
+                      ),
+                ),
+                Text(
+                  title,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: AppColors.onSurfaceVariant,
+                      ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
