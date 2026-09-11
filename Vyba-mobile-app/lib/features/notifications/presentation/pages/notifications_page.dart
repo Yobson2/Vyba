@@ -120,7 +120,8 @@ class _NotificationsList extends ConsumerWidget {
                 ),
                 AppSpacing.horizontalMd,
                 const Expanded(
-                  child: Divider(color: AppColors.outlineVariant, thickness: 0.5),
+                  child:
+                      Divider(color: AppColors.outlineVariant, thickness: 0.5),
                 ),
               ],
             ),
@@ -157,7 +158,8 @@ class _NotificationsList extends ConsumerWidget {
     final earlierList = <AppNotification>[];
 
     for (final n in items) {
-      final date = DateTime(n.createdAt.year, n.createdAt.month, n.createdAt.day);
+      final date =
+          DateTime(n.createdAt.year, n.createdAt.month, n.createdAt.day);
       if (date == today) {
         todayList.add(n);
       } else if (date == yesterday) {
@@ -281,8 +283,14 @@ class _TypeIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final (IconData icon, Color color) = switch (type) {
-      NotificationType.bookingConfirmed => (Icons.check_circle, AppColors.secondary),
-      NotificationType.bookingCompleted => (Icons.check_circle, AppColors.secondary),
+      NotificationType.bookingConfirmed => (
+          Icons.check_circle,
+          AppColors.secondary
+        ),
+      NotificationType.bookingCompleted => (
+          Icons.check_circle,
+          AppColors.secondary
+        ),
       NotificationType.promoNew => (Icons.campaign_rounded, AppColors.tertiary),
       NotificationType.reviewReply => (Icons.reply_rounded, AppColors.primary),
       NotificationType.badgeEarned => (Icons.star_rounded, AppColors.tertiary),
@@ -349,7 +357,8 @@ class _HighlightedBody extends StatelessWidget {
       }
 
       if (earliestIndex > 0) {
-        spans.add(TextSpan(text: remaining.substring(0, earliestIndex), style: baseStyle));
+        spans.add(TextSpan(
+            text: remaining.substring(0, earliestIndex), style: baseStyle));
       }
       spans.add(TextSpan(text: matchedName, style: highlightStyle));
       remaining = remaining.substring(earliestIndex + matchedName.length);
@@ -384,9 +393,12 @@ class _BottomNavBar extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _NavItem(icon: Icons.explore_outlined, label: 'Explore', isActive: false),
-              _NavItem(icon: Icons.feed_outlined, label: 'Feed', isActive: false),
-              _NavItem(icon: Icons.calendar_today_outlined, label: 'Bookings', isActive: false),
+              _NavItem(
+                  icon: Icons.explore_outlined,
+                  label: 'Explore',
+                  isActive: false),
+              _NavItem(
+                  icon: Icons.feed_outlined, label: 'Feed', isActive: false),
               _NavItem(icon: Icons.person, label: 'Profile', isActive: true),
             ],
           ),

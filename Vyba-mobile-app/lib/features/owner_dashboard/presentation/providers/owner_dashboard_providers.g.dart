@@ -80,24 +80,5 @@ final recentActivityProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef RecentActivityRef = AutoDisposeFutureProviderRef<List<ActivityItem>>;
-String _$upcomingOwnerBookingsHash() =>
-    r'd3d988ca49cab666620b8f5b7fe5b45dc562e7b1';
-
-/// See also [upcomingOwnerBookings].
-@ProviderFor(upcomingOwnerBookings)
-final upcomingOwnerBookingsProvider =
-    AutoDisposeFutureProvider<List<Booking>>.internal(
-  upcomingOwnerBookings,
-  name: r'upcomingOwnerBookingsProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$upcomingOwnerBookingsHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef UpcomingOwnerBookingsRef = AutoDisposeFutureProviderRef<List<Booking>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

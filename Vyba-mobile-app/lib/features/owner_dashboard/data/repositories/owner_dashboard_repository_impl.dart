@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_templates/core/error/exceptions.dart';
 import 'package:flutter_templates/core/error/failures.dart';
-import 'package:flutter_templates/features/bookings/domain/entities/booking.dart';
 import 'package:flutter_templates/features/owner_dashboard/data/datasources/mock_owner_dashboard_datasource.dart';
 import 'package:flutter_templates/features/owner_dashboard/domain/entities/activity_item.dart';
 import 'package:flutter_templates/features/owner_dashboard/domain/entities/dashboard_stats.dart';
@@ -29,18 +28,6 @@ class OwnerDashboardRepositoryImpl implements OwnerDashboardRepository {
     try {
       final activity = await _dataSource.getRecentActivity();
       return Right(activity);
-    } on ServerException catch (e) {
-      return Left(ServerFailure(message: e.message));
-    } catch (e) {
-      return Left(ServerFailure(message: e.toString()));
-    }
-  }
-
-  @override
-  Future<Either<Failure, List<Booking>>> getUpcomingBookings() async {
-    try {
-      final bookings = await _dataSource.getUpcomingBookings();
-      return Right(bookings);
     } on ServerException catch (e) {
       return Left(ServerFailure(message: e.message));
     } catch (e) {

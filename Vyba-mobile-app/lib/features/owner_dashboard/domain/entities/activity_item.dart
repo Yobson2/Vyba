@@ -15,4 +15,4 @@ class ActivityItem {
   final DateTime timestamp;
 }
 
-enum ActivityType { booking, review, promo, system }
+enum ActivityType { checkIn, review, promo, system }

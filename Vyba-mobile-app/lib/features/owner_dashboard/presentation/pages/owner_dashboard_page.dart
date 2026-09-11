@@ -16,7 +16,6 @@ class OwnerDashboardPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final statsAsync = ref.watch(dashboardStatsProvider);
     final activityAsync = ref.watch(recentActivityProvider);
-    final bookingsAsync = ref.watch(upcomingOwnerBookingsProvider);
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -37,10 +36,10 @@ class OwnerDashboardPage extends ConsumerWidget {
               // Stats row
               statsAsync.when(
                 data: (stats) => _StatsRow(
-                  todayBookings: stats.todayBookings,
+                  todayVisits: stats.todayVisits,
                   activePromos: stats.activePromos,
                   weekViews: stats.formattedViews,
-                  bookingsTrend: stats.bookingsTrend,
+                  visitsTrend: stats.visitsTrend,
                 ),
                 loading: () => const SizedBox(
                   height: 120,
@@ -69,46 +68,6 @@ class OwnerDashboardPage extends ConsumerWidget {
               ),
               AppSpacing.verticalLg,
               const _QuickActionsGrid(),
-
-              AppSpacing.verticalXl,
-
-              // Upcoming Bookings
-              Text(
-                'Upcoming Bookings',
-                style: GoogleFonts.epilogue(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.onSurface,
-                ),
-              ),
-              AppSpacing.verticalLg,
-              bookingsAsync.when(
-                data: (bookings) => Column(
-                  children: bookings
-                      .map((booking) => Padding(
-                            padding:
-                                const EdgeInsets.only(bottom: AppSpacing.sm),
-                            child: _UpcomingBookingCard(
-                              guestName: booking.bookingReference ?? 'Guest',
-                              time: booking.timeSlot,
-                              guestCount: booking.guestCount,
-                            ),
-                          ))
-                      .toList(),
-                ),
-                loading: () => const SizedBox(
-                  height: 80,
-                  child: Center(
-                    child: CircularProgressIndicator(
-                      color: AppColors.primary,
-                    ),
-                  ),
-                ),
-                error: (e, _) => Text(
-                  'Failed to load bookings',
-                  style: TextStyle(color: AppColors.error),
-                ),
-              ),
 
               AppSpacing.verticalXl,
 
@@ -190,16 +149,16 @@ class _GreetingHeader extends StatelessWidget {
 
 class _StatsRow extends StatelessWidget {
   const _StatsRow({
-    required this.todayBookings,
+    required this.todayVisits,
     required this.activePromos,
     required this.weekViews,
-    required this.bookingsTrend,
+    required this.visitsTrend,
   });
 
-  final int todayBookings;
+  final int todayVisits;
   final int activePromos;
   final String weekViews;
-  final double bookingsTrend;
+  final double visitsTrend;
 
   @override
   Widget build(BuildContext context) {
@@ -207,9 +166,9 @@ class _StatsRow extends StatelessWidget {
       children: [
         Expanded(
           child: _StatCard(
-            value: '$todayBookings',
-            label: "Today's Bookings",
-            trailing: _TrendBadge(value: bookingsTrend),
+            value: '$todayVisits',
+            label: "Today's Visits",
+            trailing: _TrendBadge(value: visitsTrend),
           ),
         ),
         AppSpacing.horizontalSm,
@@ -328,7 +287,9 @@ class _TrendBadge extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(
-            isPositive ? Icons.trending_up_rounded : Icons.trending_down_rounded,
+            isPositive
+                ? Icons.trending_up_rounded
+                : Icons.trending_down_rounded,
             size: 12,
             color: isPositive ? AppColors.success : AppColors.error,
           ),
@@ -452,88 +413,6 @@ class _ActionButton extends StatelessWidget {
   }
 }
 
-class _UpcomingBookingCard extends StatelessWidget {
-  const _UpcomingBookingCard({
-    required this.guestName,
-    required this.time,
-    required this.guestCount,
-  });
-
-  final String guestName;
-  final String time;
-  final int guestCount;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(AppSpacing.md),
-      decoration: BoxDecoration(
-        color: AppColors.surfaceContainerHigh,
-        borderRadius: AppRadius.borderRadiusMd,
-      ),
-      child: Row(
-        children: [
-          CircleAvatar(
-            radius: 20,
-            backgroundColor: AppColors.primaryDim.withValues(alpha: 0.3),
-            child: const Icon(
-              Icons.person_rounded,
-              color: AppColors.primary,
-              size: 20,
-            ),
-          ),
-          AppSpacing.horizontalMd,
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  guestName,
-                  style: Theme.of(context).textTheme.titleSmall,
-                ),
-                AppSpacing.verticalXs,
-                Text(
-                  'Today at $time',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: AppColors.onSurfaceVariant,
-                      ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppSpacing.sm,
-              vertical: AppSpacing.xs,
-            ),
-            decoration: BoxDecoration(
-              color: AppColors.surfaceContainerHighest,
-              borderRadius: AppRadius.borderRadiusFull,
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(
-                  Icons.people_rounded,
-                  size: 14,
-                  color: AppColors.onSurfaceVariant,
-                ),
-                const SizedBox(width: 4),
-                Text(
-                  '$guestCount',
-                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        color: AppColors.onSurfaceVariant,
-                      ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class _ActivityTimelineItem extends StatelessWidget {
   const _ActivityTimelineItem({required this.item});
 
@@ -541,7 +420,7 @@ class _ActivityTimelineItem extends StatelessWidget {
 
   IconData get _icon {
     switch (item.type) {
-      case ActivityType.booking:
+      case ActivityType.checkIn:
         return Icons.event_available_rounded;
       case ActivityType.review:
         return Icons.star_rounded;
@@ -554,7 +433,7 @@ class _ActivityTimelineItem extends StatelessWidget {
 
   Color get _iconColor {
     switch (item.type) {
-      case ActivityType.booking:
+      case ActivityType.checkIn:
         return AppColors.success;
       case ActivityType.review:
         return AppColors.tertiary;
