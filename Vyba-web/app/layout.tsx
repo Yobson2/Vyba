@@ -13,7 +13,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
-      <body>{children}</body>
+      {/* suppressHydrationWarning: browser extensions (e.g. ColorZilla's
+          cz-shortcut-listen) inject attributes onto <body> before React
+          hydrates; this only ignores mismatches on this element's own
+          attributes, not on its children. */}
+      <body suppressHydrationWarning>{children}</body>
     </html>
   );
 }
