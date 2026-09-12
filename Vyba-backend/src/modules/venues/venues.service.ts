@@ -142,6 +142,17 @@ export class VenuesService {
     });
   }
 
+  /**
+   * Batch lookup, any status — for "mes lieux suivis" (ticket 10): a
+   * followed venue that later goes inactive should still show up in a
+   * client's own list (unfollowing is an explicit action), unlike
+   * `findEligibleByIds`'s feed-candidate filtering.
+   */
+  async findByIds(ids: string[]): Promise<Venue[]> {
+    if (ids.length === 0) return [];
+    return this.venueRepository.find({ where: { id: In(ids) } });
+  }
+
   /** The venue bound to this owner — lets the owner app discover its venueId (the JWT carries none). */
   async findMine(ownerUserId: string): Promise<VenueWithOwner> {
     const venue = await this.venueRepository.findOne({
@@ -152,6 +163,13 @@ export class VenuesService {
     }
     const [withOwner] = await this.attachOwners([venue]);
     return withOwner;
+  }
+
+  /** Appends an uploaded image ref to the venue's `photos` list (`media` unit, ticket 14). */
+  async appendPhoto(id: string, url: string): Promise<Venue> {
+    const venue = await this.findVenueOrThrow(id);
+    venue.photos = [...venue.photos, url];
+    return this.venueRepository.save(venue);
   }
 
   /**

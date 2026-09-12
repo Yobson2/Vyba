@@ -19,6 +19,7 @@ abstract class AuthRepository {
     required String phoneNumber,
     required String code,
     bool? ageConfirmed,
+    String? clientId,
   });
 
   /// Logs out the current user and clears local session state.

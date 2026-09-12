@@ -31,6 +31,7 @@ abstract class VenueModel with _$VenueModel {
     @Default(true) bool inLaunchArea,
     VenueTonightModel? tonight,
     @Default([]) List<VenuePromoModel> promos,
+    @Default(0) int followerCount,
   }) = _VenueModel;
 
   factory VenueModel.fromJson(Map<String, dynamic> json) =>
@@ -60,5 +61,6 @@ abstract class VenueModel with _$VenueModel {
         inLaunchArea: inLaunchArea,
         tonight: tonight?.toEntity(),
         promos: promos.map((p) => p.toEntity()).toList(),
+        followerCount: followerCount,
       );
 }

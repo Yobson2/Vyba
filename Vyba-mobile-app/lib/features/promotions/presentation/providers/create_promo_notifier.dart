@@ -1,4 +1,3 @@
-import 'package:flutter_templates/core/providers/analytics_provider.dart';
 import 'package:flutter_templates/features/promotions/domain/usecases/create_promo_usecase.dart';
 import 'package:flutter_templates/features/promotions/presentation/providers/create_promo_state.dart';
 import 'package:flutter_templates/features/promotions/presentation/providers/promo_providers.dart';
@@ -41,16 +40,8 @@ class CreatePromoNotifier extends _$CreatePromoNotifier {
         return false;
       },
       (promo) {
-        ref.read(analyticsServiceProvider)
-          ..logEvent('promo_created', {'venue_id': promo.venueId})
-          ..logEvent(
-            'post_created',
-            {'venue_id': promo.venueId, 'type': 'promo'},
-          )
-          ..logEvent(
-            'post_created_organically',
-            {'venue_id': promo.venueId, 'type': 'promo'},
-          );
+        // promo_created / post_created / post_created_organically are
+        // emitted server-side by `FeedItemsService.createPromo` (ticket 11).
         state = CreatePromoState(lastPublished: promo);
         return true;
       },

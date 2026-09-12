@@ -71,21 +71,40 @@ export function computeTier(
 }
 
 /**
+ * Bounded follow-lift (ticket 10, spec 03 §"Score"): a followed venue's
+ * item sorts as if published this much more recently — enough to beat an
+ * "equivalent" (similarly-timed) non-followed item within the same tier,
+ * never enough to let a stale followed item beat a genuinely more recent
+ * non-followed one, and it never crosses a tier boundary (tier compares
+ * first). No going-count boost here — no ticket in the validation-MVP
+ * breakdown claims it (ticket 07 stubbed it "for ticket 08", ticket 08's
+ * own checklist never picked it up); left for a future ticket.
+ */
+const FOLLOW_LIFT_MS = 3 * 60 * 60 * 1000;
+
+/**
  * Ranks candidates: tier ascending, then most-recently-published first
- * within a tier. No boost/follow-lift in this unit (ticket 07 scope —
- * see spec 03's "Out of Scope" for boosts/precomputation; the going-count
- * boost lands with ticket 08).
+ * within a tier (with the bounded follow-lift folded into the effective
+ * publish time). `isFollowedVenue` is omitted (or always-false) for an
+ * unauthenticated read — no follow concept without a signed-in user.
  */
 export function rankFeedItems(
   items: FeedItem[],
   todayISO: string,
   nowMs: number,
+  isFollowedVenue: (venueId: string | null) => boolean = () => false,
 ): FeedItem[] {
   return [...items]
-    .map((item) => ({ item, tier: computeTier(item, todayISO, nowMs) }))
+    .map((item) => ({
+      item,
+      tier: computeTier(item, todayISO, nowMs),
+      effectiveMs:
+        item.publishedAt.getTime() +
+        (isFollowedVenue(item.venueId) ? FOLLOW_LIFT_MS : 0),
+    }))
     .sort((a, b) => {
       if (a.tier !== b.tier) return a.tier - b.tier;
-      return b.item.publishedAt.getTime() - a.item.publishedAt.getTime();
+      return b.effectiveMs - a.effectiveMs;
     })
     .map(({ item }) => item);
 }

@@ -47,5 +47,9 @@
 		<true/>
 		<key>UIStatusBarHidden</key>
 		<false/>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>Vyba a besoin d'accéder à vos photos pour ajouter une photo à un lieu.</string>
+		<key>NSCameraUsageDescription</key>
+		<string>Vyba a besoin d'accéder à votre appareil photo pour ajouter une photo à un lieu.</string>
 	</dict>
 </plist>

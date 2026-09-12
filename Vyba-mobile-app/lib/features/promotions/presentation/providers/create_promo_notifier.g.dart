@@ -7,7 +7,7 @@ part of 'create_promo_notifier.dart';
 // **************************************************************************
 
 String _$createPromoNotifierHash() =>
-    r'0f3f937408e6d8ed9f92d3f2565b32ca8c81ff1b';
+    r'dbfc7b15059adf8dea0f9bc77f7ecc308fbb9d37';
 
 /// Drives the owner's create-promo form (ticket 09) — title + description,
 /// published for the owner's own venue (known from

@@ -1,17 +1,20 @@
 import { motion } from 'framer-motion'
-import { useReducedMotion } from '@/hooks/use-reduced-motion'
 import {
   staggerContainer,
   staggerItem as staggerItemVariant,
 } from '@/lib/motion'
 import { cn } from '@/lib/utils'
+import { useReducedMotion } from '@/hooks/use-reduced-motion'
 
 interface StaggerContainerProps {
   className?: string
   children: React.ReactNode
 }
 
-export function StaggerContainer({ className, children }: StaggerContainerProps) {
+export function StaggerContainer({
+  className,
+  children,
+}: StaggerContainerProps) {
   const prefersReducedMotion = useReducedMotion()
 
   if (prefersReducedMotion) {

@@ -6,6 +6,7 @@ import { GoingController } from './going.controller';
 import { VenuesModule } from '../venues/venues.module';
 import { VenueNightsModule } from '../venue-nights/venue-nights.module';
 import { FeedModule } from '../feed/feed.module';
+import { AnalyticsModule } from '../analytics/analytics.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { FeedModule } from '../feed/feed.module';
     VenuesModule,
     VenueNightsModule,
     FeedModule,
+    AnalyticsModule,
   ],
   controllers: [GoingController],
   providers: [GoingService],

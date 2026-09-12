@@ -16,7 +16,6 @@ import './index.css'
 // Generated Routes
 import { routeTree } from './routeTree.gen'
 
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {

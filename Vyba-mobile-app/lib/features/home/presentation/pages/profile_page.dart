@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_templates/core/theme/app_colors.dart';
 import 'package:flutter_templates/core/theme/app_radius.dart';
 import 'package:flutter_templates/core/theme/app_spacing.dart';
+import 'package:flutter_templates/core/router/route_names.dart';
 import 'package:flutter_templates/features/auth/presentation/providers/auth_notifier.dart';
 import 'package:flutter_templates/features/auth/presentation/providers/auth_state.dart';
 import 'package:go_router/go_router.dart';
@@ -120,7 +121,7 @@ class ProfilePage extends ConsumerWidget {
                 children: [
                   _StatCard(value: '12', label: 'Sorties'),
                   const SizedBox(width: 8),
-                  _StatCard(value: '8', label: 'Favorites'),
+                  _StatCard(value: '8', label: 'Suivis'),
                   const SizedBox(width: 8),
                   _StatCard(value: '5', label: 'Reviews'),
                 ],
@@ -151,6 +152,11 @@ class ProfilePage extends ConsumerWidget {
                     value: user?.phoneNumber ?? '',
                   ),
                   AppSpacing.verticalXl,
+                  _MenuItem(
+                    icon: Icons.notifications_active_outlined,
+                    label: 'Mes lieux suivis',
+                    onTap: () => context.pushNamed(RouteNames.followsName),
+                  ),
                   _MenuItem(
                     icon: Icons.edit_outlined,
                     label: 'Edit Profile',

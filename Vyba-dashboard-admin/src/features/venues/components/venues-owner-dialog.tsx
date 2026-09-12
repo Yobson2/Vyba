@@ -29,11 +29,9 @@ import { Venue } from '../data/schema'
 const E164_REGEX = /^\+[1-9]\d{6,14}$/
 
 const formSchema = z.object({
-  phone: z
-    .string()
-    .regex(E164_REGEX, {
-      message: 'Enter a valid E.164 phone number, e.g. +2250700000001.',
-    }),
+  phone: z.string().regex(E164_REGEX, {
+    message: 'Enter a valid E.164 phone number, e.g. +2250700000001.',
+  }),
   firstName: z.string().optional(),
   lastName: z.string().optional(),
 })

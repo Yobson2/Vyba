@@ -36,19 +36,45 @@ export class User extends BaseEntity {
   @Column({ type: 'timestamptz', nullable: true })
   ageConfirmedAt: Date | null;
 
-  // ─── Acquisition snapshot (first-touch; populated by `attribution` later) ──
+  // ─── Acquisition snapshot (first-touch; ticket 11 / spec 07) ──
+  /** The `src` of the first landing matched at signup: 'qr' | 'promoter' | 'social' | 'organic'. */
   @Column({ type: 'varchar', nullable: true })
   acquisitionSource: string | null;
 
+  /** Unused placeholder from an earlier ticket — spec 07 has no "medium" concept. */
   @Column({ type: 'varchar', nullable: true })
   acquisitionMedium: string | null;
 
   @Column({ type: 'varchar', nullable: true })
   acquisitionCampaign: string | null;
 
+  @Column({ type: 'uuid', nullable: true })
+  acquisitionVenueId: string | null;
+
+  @Column({ type: 'uuid', nullable: true })
+  acquisitionPromoterId: string | null;
+
+  /** 'zone_4' | 'other' | null — where this user came FROM. Never conflate with `activeZone`. */
   @Column({ type: 'varchar', nullable: true })
   acquisitionZone: string | null;
 
+  /** The matched first-touch `LandingEvent.createdAt`, not this snapshot's write time. */
+  @Column({ type: 'timestamptz', nullable: true })
+  firstLandingAt: Date | null;
+
+  /** When this acquisition snapshot was written (~ signup time). */
   @Column({ type: 'timestamptz', nullable: true })
   acquisitionCapturedAt: Date | null;
+
+  /**
+   * 'zone_4' | null — whether this user ENGAGES with Zone 4 (a meaningful
+   * action involving a launch-area venue). Never conflate with
+   * `acquisitionZone` (where they came from) — spec 07 invariant.
+   */
+  @Column({ type: 'varchar', nullable: true })
+  activeZone: string | null;
+
+  /** Updated alongside `activeZone` on every meaningful action — drives the rolling-7-day WAU query. */
+  @Column({ type: 'timestamptz', nullable: true })
+  lastActiveAt: Date | null;
 }

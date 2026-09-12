@@ -33,9 +33,9 @@ abstract final class RouteNames {
   static const String venueDetail = 'venue/:venueId';
   static const String venueDetailName = 'venueDetail';
 
-  // -- Favorites --
-  static const String favorites = 'favorites';
-  static const String favoritesName = 'favorites';
+  // -- Follows ("mes lieux suivis" — absorbs the old favorites concept) --
+  static const String follows = 'follows';
+  static const String followsName = 'follows';
 
   // -- Notifications --
   static const String notifications = 'notifications';
@@ -44,6 +44,10 @@ abstract final class RouteNames {
   // -- Settings --
   static const String settings = 'settings';
   static const String settingsName = 'settings';
+
+  // -- Notification preferences (nested under settings, ticket 15) --
+  static const String notificationPreferences = 'notification-preferences';
+  static const String notificationPreferencesName = 'notificationPreferences';
 
   // -- Owner Shell --
   static const String ownerDashboard = '/owner/dashboard';

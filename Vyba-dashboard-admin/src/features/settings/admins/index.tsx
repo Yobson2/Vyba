@@ -19,8 +19,8 @@ import ContentSection from '../components/content-section'
 import { adminsColumns } from './components/admins-columns'
 import { AdminsDialogs } from './components/admins-dialogs'
 import AdminsProvider, { useAdmins } from './context/admins-context'
-import { adminListSchema } from './data/schema'
 import { mockAdmins } from './data/mock-admins'
+import { adminListSchema } from './data/schema'
 
 function AdminsContent() {
   const { setOpen } = useAdmins()
@@ -47,15 +47,13 @@ function AdminsContent() {
       <div className='space-y-4'>
         <Input
           placeholder='Search by name or email...'
-          value={
-            (table.getColumn('name')?.getFilterValue() as string) ?? ''
-          }
+          value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
           onChange={(e) =>
             table.getColumn('name')?.setFilterValue(e.target.value)
           }
           className='max-w-sm'
         />
-        <div className='rounded-xl bg-muted/20 overflow-hidden'>
+        <div className='bg-muted/20 overflow-hidden rounded-xl'>
           <Table>
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (

@@ -1,20 +1,26 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { FindOptionsWhere, Repository } from 'typeorm';
 import {
   FeedItem,
   FeedItemOrigin,
   FeedItemStatus,
   FeedItemType,
 } from './entities/feed-item.entity';
-import { CreateEditorialDto } from './dto/create-editorial.dto';
+import {
+  CreateEditorialDto,
+  UpdateEditorialDto,
+} from './dto/create-editorial.dto';
 import { CreatePromoDto } from './dto/create-promo.dto';
+import { AdminFeedQueryDto } from './dto/admin-feed-query.dto';
 import { FeedItemNotFoundError } from '@common/exceptions/feed.exceptions';
 import { VenueOwnershipError } from '@common/exceptions/venue.exceptions';
 import { abidjanToday } from '@common/config/abidjan-time.config';
 import { rankFeedItems } from './feed-ranking.util';
 import { VenuesService } from '@modules/venues/venues.service';
 import { VenueType } from '@modules/venues/entities/venue.entity';
+import { FollowsService } from '@modules/follows/follows.service';
+import { AnalyticsService } from '@modules/analytics/analytics.service';
 
 export interface PublicFeedItem {
   id: string;
@@ -42,6 +48,8 @@ export class FeedItemsService {
     @InjectRepository(FeedItem)
     private readonly feedItemRepository: Repository<FeedItem>,
     private readonly venuesService: VenuesService,
+    private readonly followsService: FollowsService,
+    private readonly analyticsService: AnalyticsService,
   ) {}
 
   /**
@@ -99,7 +107,7 @@ export class FeedItemsService {
   ): Promise<FeedItem> {
     const item = this.feedItemRepository.create({
       type: FeedItemType.EDITORIAL,
-      venueId: null,
+      venueId: dto.venueId ?? null,
       venueNightId: null,
       createdByUserId: adminUserId,
       origin: FeedItemOrigin.FOUNDER,
@@ -107,10 +115,43 @@ export class FeedItemsService {
       startsAt: null,
       expiresAt: new Date(dto.expiresAt),
       publishedAt: dto.publishedAt ? new Date(dto.publishedAt) : new Date(),
-      status: FeedItemStatus.PUBLISHED,
+      status: dto.draft ? FeedItemStatus.DRAFT : FeedItemStatus.PUBLISHED,
       payload: { title: dto.title, body: dto.body },
     });
     return this.feedItemRepository.save(item);
+  }
+
+  /** Edit an editorial item's fields (ticket 13) — does not touch status. */
+  async updateEditorial(
+    id: string,
+    dto: UpdateEditorialDto,
+  ): Promise<FeedItem> {
+    const item = await this.findOrThrow(id);
+    if (item.type !== FeedItemType.EDITORIAL) {
+      throw new FeedItemNotFoundError(id);
+    }
+
+    const payload = { ...(item.payload as Record<string, unknown>) };
+    if (dto.title !== undefined) payload.title = dto.title;
+    if (dto.body !== undefined) payload.body = dto.body;
+    item.payload = payload;
+
+    if (dto.publishedAt !== undefined)
+      item.publishedAt = new Date(dto.publishedAt);
+    if (dto.expiresAt !== undefined) item.expiresAt = new Date(dto.expiresAt);
+    if (dto.venueId !== undefined) item.venueId = dto.venueId;
+
+    return this.feedItemRepository.save(item);
+  }
+
+  /** A draft becomes visible (ticket 13) — no-op if it's already published. */
+  async publish(id: string): Promise<FeedItem> {
+    const item = await this.findOrThrow(id);
+    if (item.status === FeedItemStatus.DRAFT) {
+      item.status = FeedItemStatus.PUBLISHED;
+      await this.feedItemRepository.save(item);
+    }
+    return item;
   }
 
   /**
@@ -132,21 +173,83 @@ export class FeedItemsService {
       throw new VenueOwnershipError(venueId);
     }
 
+    return this.savePromoItem(
+      venueId,
+      ownerId,
+      FeedItemOrigin.VENUE,
+      false,
+      dto,
+    );
+  }
+
+  /**
+   * Team-for-venue assist path (ticket 13): the Vyba team creates a promo
+   * on behalf of a venue that hasn't posted. Stamped `origin =
+   * founder_assisted`, `assisted = true`, `createdByUserId` = the admin —
+   * never a client-supplied field, and `ADMIN` doesn't need to own the
+   * venue (unlike the owner path).
+   */
+  async createAssistedPromo(
+    venueId: string,
+    adminUserId: string,
+    dto: CreatePromoDto,
+  ): Promise<FeedItem> {
+    await this.venuesService.findRawOrThrow(venueId);
+    return this.savePromoItem(
+      venueId,
+      adminUserId,
+      FeedItemOrigin.FOUNDER_ASSISTED,
+      true,
+      dto,
+    );
+  }
+
+  private async savePromoItem(
+    venueId: string,
+    creatorUserId: string,
+    origin: FeedItemOrigin,
+    assisted: boolean,
+    dto: CreatePromoDto,
+  ): Promise<FeedItem> {
     const today = abidjanToday();
     const item = this.feedItemRepository.create({
       type: FeedItemType.PROMO,
       venueId,
       venueNightId: null,
-      createdByUserId: ownerId,
-      origin: FeedItemOrigin.VENUE,
-      assisted: false,
+      createdByUserId: creatorUserId,
+      origin,
+      assisted,
       startsAt: new Date(`${today}T00:00:00Z`),
       expiresAt: morningAfter(today),
       publishedAt: new Date(),
       status: FeedItemStatus.PUBLISHED,
       payload: { title: dto.title, description: dto.description },
     });
-    return this.feedItemRepository.save(item);
+    const saved = await this.feedItemRepository.save(item);
+
+    // Ticket 11 / spec 07: `post_created_organically` /
+    // `post_created_founder_assisted` are emitted here, from `assisted` —
+    // the `FeedItem` row is the source of truth for the organic/assisted
+    // gate; these events just mirror it for PostHog funnels.
+    await this.analyticsService.track({
+      event: 'promo_created',
+      userId: creatorUserId,
+      properties: { venue_id: venueId },
+    });
+    await this.analyticsService.track({
+      event: 'post_created',
+      userId: creatorUserId,
+      properties: { venue_id: venueId, type: 'promo' },
+    });
+    await this.analyticsService.track({
+      event: assisted
+        ? 'post_created_founder_assisted'
+        : 'post_created_organically',
+      userId: creatorUserId,
+      properties: { venue_id: venueId, type: 'promo' },
+    });
+
+    return saved;
   }
 
   /** Active (published, non-expired) promos for a venue's page (ticket 09). */
@@ -190,6 +293,7 @@ export class FeedItemsService {
    * then sliced — simple and correct, no need to page the ranking itself.
    */
   async listFeed(
+    userId: string | null,
     limit = DEFAULT_FEED_LIMIT,
     offset = 0,
   ): Promise<PublicFeedItem[]> {
@@ -216,11 +320,19 @@ export class FeedItemsService {
       (item) => item.venueId === null || venueById.has(item.venueId),
     );
 
+    const followed = userId
+      ? await this.followsService.followedVenueIds(userId)
+      : new Set<string>();
+    const isFollowedVenue = (venueId: string | null) =>
+      venueId !== null && followed.has(venueId);
+
     const today = abidjanToday();
-    const ranked = rankFeedItems(eligible, today, now.getTime()).slice(
-      offset,
-      offset + limit,
-    );
+    const ranked = rankFeedItems(
+      eligible,
+      today,
+      now.getTime(),
+      isFollowedVenue,
+    ).slice(offset, offset + limit);
 
     return ranked.map((item) => ({
       id: item.id,
@@ -231,6 +343,40 @@ export class FeedItemsService {
       publishedAt: item.publishedAt,
       payload: item.payload,
     }));
+  }
+
+  /**
+   * Team promotes a curated user photo into the main feed (ticket 14 / spec
+   * 06): `feed` decides the origin value so it stays consistent with every
+   * other item — `origin = USER` (the client took the photo), not
+   * `founder`/`founder_assisted` (the team only curated it, didn't create
+   * it). Night-scoped like `live_tonight`/`promo`: clears the next morning.
+   */
+  async promoteMediaAsset(params: {
+    venueId: string;
+    venueNightId: string;
+    venueNightDate: string;
+    uploadedByUserId: string;
+    mediaAssetId: string;
+    imageUrl: string;
+  }): Promise<FeedItem> {
+    const item = this.feedItemRepository.create({
+      type: FeedItemType.PHOTO,
+      venueId: params.venueId,
+      venueNightId: params.venueNightId,
+      createdByUserId: params.uploadedByUserId,
+      origin: FeedItemOrigin.USER,
+      assisted: false,
+      startsAt: null,
+      expiresAt: morningAfter(params.venueNightDate),
+      publishedAt: new Date(),
+      status: FeedItemStatus.PUBLISHED,
+      payload: {
+        mediaAssetId: params.mediaAssetId,
+        imageUrl: params.imageUrl,
+      },
+    });
+    return this.feedItemRepository.save(item);
   }
 
   /**
@@ -269,6 +415,29 @@ export class FeedItemsService {
     });
     await this.feedItemRepository.save(item);
     return true;
+  }
+
+  /**
+   * Admin list (ticket 13) — every status, not just published/non-expired
+   * (the dashboard needs to see drafts and expired items to manage them).
+   * Optionally filtered by type/venue. Raw entities — safe only behind
+   * `ADMIN`, unlike `PublicFeedItem`.
+   */
+  async listAdmin(query: AdminFeedQueryDto): Promise<FeedItem[]> {
+    const where: FindOptionsWhere<FeedItem> = {};
+    if (query.type) where.type = query.type;
+    if (query.venueId) where.venueId = query.venueId;
+
+    return this.feedItemRepository.find({
+      where,
+      order: { createdAt: 'DESC' },
+    });
+  }
+
+  /** Hard delete (ticket 13) — distinct from the reversible `hide`. */
+  async remove(id: string): Promise<void> {
+    const item = await this.findOrThrow(id);
+    await this.feedItemRepository.remove(item);
   }
 
   private async findOrThrow(id: string): Promise<FeedItem> {

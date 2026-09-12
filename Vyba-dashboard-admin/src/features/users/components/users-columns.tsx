@@ -38,7 +38,9 @@ export const columns: ColumnDef<User>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Phone' />
     ),
-    cell: ({ row }) => <div className='text-nowrap'>{row.getValue('phone')}</div>,
+    cell: ({ row }) => (
+      <div className='text-nowrap'>{row.getValue('phone')}</div>
+    ),
     enableSorting: false,
   },
   {

@@ -3,6 +3,8 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link, useNavigate } from '@tanstack/react-router'
+import { toast } from 'sonner'
+import { useAuthStore } from '@/stores/authStore'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import {
@@ -15,8 +17,6 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { PasswordInput } from '@/components/password-input'
-import { toast } from 'sonner'
-import { useAuthStore } from '@/stores/authStore'
 
 type UserAuthFormProps = HTMLAttributes<HTMLFormElement>
 
@@ -150,9 +150,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         <Button className='mt-2' disabled={isLoading}>
           Login
         </Button>
-
-       
-     
       </form>
     </Form>
   )

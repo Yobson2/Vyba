@@ -17,6 +17,7 @@ abstract class AuthRemoteDataSource {
     required String phoneNumber,
     required String code,
     bool? ageConfirmed,
+    String? clientId,
   });
 
   /// POST rotate the access token.
@@ -47,6 +48,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     required String phoneNumber,
     required String code,
     bool? ageConfirmed,
+    String? clientId,
   }) async {
     try {
       final response = await _dio.post<Map<String, dynamic>>(
@@ -55,6 +57,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
           'phone': phoneNumber,
           'code': code,
           if (ageConfirmed != null) 'ageConfirmed': ageConfirmed,
+          if (clientId != null) 'clientId': clientId,
         },
       );
       return _parseAuthResponse(response.data);

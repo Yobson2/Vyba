@@ -11,12 +11,13 @@ import 'package:flutter_templates/features/auth/presentation/pages/login_page.da
 import 'package:flutter_templates/features/auth/presentation/pages/otp_verification_page.dart';
 import 'package:flutter_templates/features/auth/presentation/providers/auth_notifier.dart';
 import 'package:flutter_templates/features/auth/presentation/providers/auth_state.dart';
-import 'package:flutter_templates/features/favorites/presentation/pages/favorites_page.dart';
 import 'package:flutter_templates/features/feed/presentation/pages/feed_page.dart';
+import 'package:flutter_templates/features/follow/presentation/pages/followed_venues_page.dart';
 import 'package:flutter_templates/features/home/presentation/pages/client_shell.dart';
 import 'package:flutter_templates/features/home/presentation/pages/owner_shell.dart';
 import 'package:flutter_templates/features/home/presentation/pages/profile_page.dart';
 import 'package:flutter_templates/features/home/presentation/pages/settings_page.dart';
+import 'package:flutter_templates/features/notification_preferences/presentation/pages/notification_preferences_page.dart';
 import 'package:flutter_templates/features/notifications/presentation/pages/notifications_page.dart';
 import 'package:flutter_templates/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:flutter_templates/features/owner_dashboard/presentation/pages/owner_dashboard_page.dart';
@@ -179,11 +180,11 @@ GoRouter appRouter(Ref ref) {
                       return VenueDetailPage(venueId: venueId);
                     },
                   ),
-                  // Favorites
+                  // Follows ("mes lieux suivis")
                   GoRoute(
-                    path: RouteNames.favorites,
-                    name: RouteNames.favoritesName,
-                    builder: (context, state) => const FavoritesPage(),
+                    path: RouteNames.follows,
+                    name: RouteNames.followsName,
+                    builder: (context, state) => const FollowedVenuesPage(),
                   ),
                 ],
               ),
@@ -213,6 +214,14 @@ GoRouter appRouter(Ref ref) {
                     path: RouteNames.settings,
                     name: '${RouteNames.settingsName}Client',
                     builder: (context, state) => const SettingsPage(),
+                    routes: [
+                      GoRoute(
+                        path: RouteNames.notificationPreferences,
+                        name: RouteNames.notificationPreferencesName,
+                        builder: (context, state) =>
+                            const NotificationPreferencesPage(),
+                      ),
+                    ],
                   ),
                   GoRoute(
                     path: RouteNames.notifications,

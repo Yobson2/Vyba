@@ -5,6 +5,7 @@ import 'package:flutter_templates/core/theme/app_colors.dart';
 import 'package:flutter_templates/core/theme/app_radius.dart';
 import 'package:flutter_templates/core/theme/app_spacing.dart';
 import 'package:flutter_templates/features/going/presentation/providers/owner_going_summary_provider.dart';
+import 'package:flutter_templates/features/owner_broadcast/presentation/widgets/owner_broadcast_action.dart';
 import 'package:flutter_templates/features/venue_night/presentation/providers/venue_night_notifier.dart';
 import 'package:flutter_templates/features/venue_night/presentation/providers/venue_night_state.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -170,6 +171,8 @@ class _LiveTonightCardState extends ConsumerState<LiveTonightCard> {
               AppSpacing.verticalMd,
               _GoingSummaryRow(
                   venueId: venue.id, goingCount: tonight.goingCount),
+              AppSpacing.verticalMd,
+              const OwnerBroadcastAction(),
             ],
           ),
       },

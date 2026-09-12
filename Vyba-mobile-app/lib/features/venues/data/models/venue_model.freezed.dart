@@ -42,6 +42,7 @@ mixin _$VenueModel {
   bool get inLaunchArea;
   VenueTonightModel? get tonight;
   List<VenuePromoModel> get promos;
+  int get followerCount;
 
   /// Create a copy of VenueModel
   /// with the given fields replaced by the non-null parameter values.
@@ -88,7 +89,9 @@ mixin _$VenueModel {
             (identical(other.inLaunchArea, inLaunchArea) ||
                 other.inLaunchArea == inLaunchArea) &&
             (identical(other.tonight, tonight) || other.tonight == tonight) &&
-            const DeepCollectionEquality().equals(other.promos, promos));
+            const DeepCollectionEquality().equals(other.promos, promos) &&
+            (identical(other.followerCount, followerCount) ||
+                other.followerCount == followerCount));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -114,12 +117,13 @@ mixin _$VenueModel {
         activePromoLabel,
         inLaunchArea,
         tonight,
-        const DeepCollectionEquality().hash(promos)
+        const DeepCollectionEquality().hash(promos),
+        followerCount
       ]);
 
   @override
   String toString() {
-    return 'VenueModel(id: $id, name: $name, description: $description, address: $address, latitude: $latitude, longitude: $longitude, heroImages: $heroImages, rating: $rating, reviewCount: $reviewCount, isOpen: $isOpen, venueType: $venueType, phone: $phone, priceLevel: $priceLevel, amenities: $amenities, isPremium: $isPremium, distance: $distance, activePromoLabel: $activePromoLabel, inLaunchArea: $inLaunchArea, tonight: $tonight, promos: $promos)';
+    return 'VenueModel(id: $id, name: $name, description: $description, address: $address, latitude: $latitude, longitude: $longitude, heroImages: $heroImages, rating: $rating, reviewCount: $reviewCount, isOpen: $isOpen, venueType: $venueType, phone: $phone, priceLevel: $priceLevel, amenities: $amenities, isPremium: $isPremium, distance: $distance, activePromoLabel: $activePromoLabel, inLaunchArea: $inLaunchArea, tonight: $tonight, promos: $promos, followerCount: $followerCount)';
   }
 }
 
@@ -149,7 +153,8 @@ abstract mixin class $VenueModelCopyWith<$Res> {
       @JsonKey(name: 'active_promo_label') String? activePromoLabel,
       bool inLaunchArea,
       VenueTonightModel? tonight,
-      List<VenuePromoModel> promos});
+      List<VenuePromoModel> promos,
+      int followerCount});
 
   $VenueTonightModelCopyWith<$Res>? get tonight;
 }
@@ -186,6 +191,7 @@ class _$VenueModelCopyWithImpl<$Res> implements $VenueModelCopyWith<$Res> {
     Object? inLaunchArea = null,
     Object? tonight = freezed,
     Object? promos = null,
+    Object? followerCount = null,
   }) {
     return _then(_self.copyWith(
       id: null == id
@@ -268,6 +274,10 @@ class _$VenueModelCopyWithImpl<$Res> implements $VenueModelCopyWith<$Res> {
           ? _self.promos
           : promos // ignore: cast_nullable_to_non_nullable
               as List<VenuePromoModel>,
+      followerCount: null == followerCount
+          ? _self.followerCount
+          : followerCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 
@@ -309,7 +319,8 @@ class _VenueModel extends VenueModel {
       @JsonKey(name: 'active_promo_label') this.activePromoLabel,
       this.inLaunchArea = true,
       this.tonight,
-      final List<VenuePromoModel> promos = const []})
+      final List<VenuePromoModel> promos = const [],
+      this.followerCount = 0})
       : _heroImages = heroImages,
         _amenities = amenities,
         _promos = promos,
@@ -386,6 +397,10 @@ class _VenueModel extends VenueModel {
     return EqualUnmodifiableListView(_promos);
   }
 
+  @override
+  @JsonKey()
+  final int followerCount;
+
   /// Create a copy of VenueModel
   /// with the given fields replaced by the non-null parameter values.
   @override
@@ -437,7 +452,9 @@ class _VenueModel extends VenueModel {
             (identical(other.inLaunchArea, inLaunchArea) ||
                 other.inLaunchArea == inLaunchArea) &&
             (identical(other.tonight, tonight) || other.tonight == tonight) &&
-            const DeepCollectionEquality().equals(other._promos, _promos));
+            const DeepCollectionEquality().equals(other._promos, _promos) &&
+            (identical(other.followerCount, followerCount) ||
+                other.followerCount == followerCount));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -463,12 +480,13 @@ class _VenueModel extends VenueModel {
         activePromoLabel,
         inLaunchArea,
         tonight,
-        const DeepCollectionEquality().hash(_promos)
+        const DeepCollectionEquality().hash(_promos),
+        followerCount
       ]);
 
   @override
   String toString() {
-    return 'VenueModel(id: $id, name: $name, description: $description, address: $address, latitude: $latitude, longitude: $longitude, heroImages: $heroImages, rating: $rating, reviewCount: $reviewCount, isOpen: $isOpen, venueType: $venueType, phone: $phone, priceLevel: $priceLevel, amenities: $amenities, isPremium: $isPremium, distance: $distance, activePromoLabel: $activePromoLabel, inLaunchArea: $inLaunchArea, tonight: $tonight, promos: $promos)';
+    return 'VenueModel(id: $id, name: $name, description: $description, address: $address, latitude: $latitude, longitude: $longitude, heroImages: $heroImages, rating: $rating, reviewCount: $reviewCount, isOpen: $isOpen, venueType: $venueType, phone: $phone, priceLevel: $priceLevel, amenities: $amenities, isPremium: $isPremium, distance: $distance, activePromoLabel: $activePromoLabel, inLaunchArea: $inLaunchArea, tonight: $tonight, promos: $promos, followerCount: $followerCount)';
   }
 }
 
@@ -500,7 +518,8 @@ abstract mixin class _$VenueModelCopyWith<$Res>
       @JsonKey(name: 'active_promo_label') String? activePromoLabel,
       bool inLaunchArea,
       VenueTonightModel? tonight,
-      List<VenuePromoModel> promos});
+      List<VenuePromoModel> promos,
+      int followerCount});
 
   @override
   $VenueTonightModelCopyWith<$Res>? get tonight;
@@ -538,6 +557,7 @@ class __$VenueModelCopyWithImpl<$Res> implements _$VenueModelCopyWith<$Res> {
     Object? inLaunchArea = null,
     Object? tonight = freezed,
     Object? promos = null,
+    Object? followerCount = null,
   }) {
     return _then(_VenueModel(
       id: null == id
@@ -620,6 +640,10 @@ class __$VenueModelCopyWithImpl<$Res> implements _$VenueModelCopyWith<$Res> {
           ? _self._promos
           : promos // ignore: cast_nullable_to_non_nullable
               as List<VenuePromoModel>,
+      followerCount: null == followerCount
+          ? _self.followerCount
+          : followerCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 

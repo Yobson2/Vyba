@@ -1,5 +1,8 @@
 import { Table } from '@tanstack/react-table'
-import { DataTableFacetedFilter, DataTableToolbar } from '@/components/ui/data-table'
+import {
+  DataTableFacetedFilter,
+  DataTableToolbar,
+} from '@/components/ui/data-table'
 import { acquisitionSourceTypes, roleTypes } from '../data/data'
 
 interface UsersTableToolbarProps<TData> {

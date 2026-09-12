@@ -46,8 +46,7 @@ const themeOptions = [
     label: 'System',
     previewClass:
       'bg-gradient-to-r from-[hsl(210_40%_96.1%)] to-[hsl(218_50%_8%)]',
-    cardClass:
-      'bg-gradient-to-r from-white to-[hsl(218_50%_15%)]',
+    cardClass: 'bg-gradient-to-r from-white to-[hsl(218_50%_15%)]',
     skeletonClass:
       'bg-gradient-to-r from-[hsl(210_40%_90%)] to-[hsl(218_30%_30%)]',
   },
@@ -90,7 +89,7 @@ export function AppearanceForm() {
                 >
                   {themeOptions.map((option) => (
                     <FormItem key={option.value}>
-                      <FormLabel className='cursor-pointer [&:has([data-state=checked])>div]:ring-primary [&:has([data-state=checked])>div]:ring-2'>
+                      <FormLabel className='[&:has([data-state=checked])>div]:ring-primary cursor-pointer [&:has([data-state=checked])>div]:ring-2'>
                         <FormControl>
                           <RadioGroupItem
                             value={option.value}
@@ -145,7 +144,10 @@ export function AppearanceForm() {
                           </div>
                           {field.value === option.value && (
                             <div className='bg-primary absolute top-2 right-2 rounded-full p-0.5'>
-                              <IconCheck size={12} className='text-primary-foreground' />
+                              <IconCheck
+                                size={12}
+                                className='text-primary-foreground'
+                              />
                             </div>
                           )}
                         </div>

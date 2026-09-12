@@ -2,19 +2,19 @@ import type { Variants } from 'framer-motion'
 
 // Durations aligned with mobile AppMotion
 export const duration = {
-  instant: 0.1,   // 100ms — ripples, icon state changes
-  fast: 0.2,      // 200ms — chip selection, toggle, color change
-  normal: 0.3,    // 300ms — card expand, page fade, tab switch
-  slow: 0.45,     // 450ms — modal enter, bottom sheet, success anim
-  dramatic: 0.6,  // 600ms — onboarding, first-launch, hero animations
+  instant: 0.1, // 100ms — ripples, icon state changes
+  fast: 0.2, // 200ms — chip selection, toggle, color change
+  normal: 0.3, // 300ms — card expand, page fade, tab switch
+  slow: 0.45, // 450ms — modal enter, bottom sheet, success anim
+  dramatic: 0.6, // 600ms — onboarding, first-launch, hero animations
 } as const
 
 // Easings aligned with mobile AppMotion curves
 export const ease = {
-  default: [0.33, 0, 0.67, 1] as const,      // easeOutCubic (mobile default)
-  enter: [0.25, 0, 0.5, 1] as const,          // easeOutQuart (mobile enter)
-  exit: [0.4, 0, 1, 1] as const,              // easeInCubic (mobile exit)
-  emphasized: [0.2, 0, 0, 1] as const,        // mobile emphasized curve
+  default: [0.33, 0, 0.67, 1] as const, // easeOutCubic (mobile default)
+  enter: [0.25, 0, 0.5, 1] as const, // easeOutQuart (mobile enter)
+  exit: [0.4, 0, 1, 1] as const, // easeInCubic (mobile exit)
+  emphasized: [0.2, 0, 0, 1] as const, // mobile emphasized curve
   bounce: [0.68, -0.55, 0.265, 1.55] as const,
   in: [0.4, 0, 1, 1] as const,
   out: [0, 0, 0.2, 1] as const,
@@ -61,7 +61,7 @@ export const staggerContainer: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.05,   // 50ms stagger delay (mobile AppMotion)
+      staggerChildren: 0.05, // 50ms stagger delay (mobile AppMotion)
       delayChildren: 0.05,
     },
   },

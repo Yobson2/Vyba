@@ -51,9 +51,7 @@ export function BookingsDeleteDialog({
         <div className='space-y-4'>
           <p className='mb-2'>
             Are you sure you want to delete booking{' '}
-            <span className='font-bold font-mono'>
-              {currentRow.reference}
-            </span>
+            <span className='font-mono font-bold'>{currentRow.reference}</span>
             ?
             <br />
             This action will permanently remove the booking for{' '}

@@ -7,7 +7,7 @@ export function showSubmittedData(
   toast.message(title, {
     description: (
       // w-[340px]
-      <pre className='mt-2 w-full overflow-x-auto rounded-md bg-foreground p-4'>
+      <pre className='bg-foreground mt-2 w-full overflow-x-auto rounded-md p-4'>
         <code className='text-background'>{JSON.stringify(data, null, 2)}</code>
       </pre>
     ),

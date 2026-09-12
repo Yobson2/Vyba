@@ -7,8 +7,8 @@ import { columns } from './components/bookings-columns'
 import { BookingsDialogs } from './components/bookings-dialogs'
 import { BookingsTable } from './components/bookings-table'
 import BookingsProvider from './context/bookings-context'
-import { bookingListSchema } from './data/schema'
 import { bookings } from './data/bookings'
+import { bookingListSchema } from './data/schema'
 
 export default function Bookings() {
   // Parse booking list

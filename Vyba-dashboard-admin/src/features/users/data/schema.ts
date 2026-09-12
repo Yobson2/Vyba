@@ -9,10 +9,7 @@ const userStatusSchema = z.union([
 export type UserStatus = z.infer<typeof userStatusSchema>
 
 // App users are clients or venue owners. Team members (ADMIN) live in settings/admins.
-const userRoleSchema = z.union([
-  z.literal('CLIENT'),
-  z.literal('VENUE_OWNER'),
-])
+const userRoleSchema = z.union([z.literal('CLIENT'), z.literal('VENUE_OWNER')])
 export type UserRole = z.infer<typeof userRoleSchema>
 
 const acquisitionSourceSchema = z.union([

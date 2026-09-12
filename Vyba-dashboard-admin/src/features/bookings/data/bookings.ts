@@ -84,8 +84,7 @@ export const bookings = Array.from({ length: 30 }, (_, i) => {
       'completed',
       'cancelled',
     ] as const),
-    depositAmount:
-      faker.number.int({ min: 5, max: 50 }) * 1000,
+    depositAmount: faker.number.int({ min: 5, max: 50 }) * 1000,
     createdAt: faker.date.past({ years: 1 }),
   }
 })

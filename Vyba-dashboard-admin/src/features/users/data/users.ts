@@ -34,9 +34,10 @@ export const users = Array.from({ length: 20 }, (_, i) => ({
     })
     .toLowerCase(),
   phone: `+234${faker.string.numeric(10)}`,
-  avatarUrl: faker.helpers.maybe(() => faker.image.avatar(), {
-    probability: 0.6,
-  }) ?? null,
+  avatarUrl:
+    faker.helpers.maybe(() => faker.image.avatar(), {
+      probability: 0.6,
+    }) ?? null,
   role: faker.helpers.arrayElement(['CLIENT', 'VENUE_OWNER'] as const),
   status: faker.helpers.arrayElement([
     'active',

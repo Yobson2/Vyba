@@ -4,8 +4,8 @@ import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
-import { SETTINGS_NAV_ITEMS } from './data/nav-items'
 import SidebarNav from './components/sidebar-nav'
+import { SETTINGS_NAV_ITEMS } from './data/nav-items'
 
 export default function Settings() {
   return (

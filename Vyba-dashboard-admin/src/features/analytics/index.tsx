@@ -23,16 +23,16 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
+import { AnimatedContainer } from '@/components/motion/animated-container'
 import {
   StaggerContainer,
   StaggerItem,
 } from '@/components/motion/stagger-container'
-import { AnimatedContainer } from '@/components/motion/animated-container'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { ThemeSwitch } from '@/components/theme-switch'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 // --- Mock Data ---
 
@@ -133,11 +133,9 @@ const topVenues = [
   { name: 'Sky Lounge', bookings: 198, revenue: 1900000 },
 ]
 
-const formatNaira = (value: number) =>
-  `\u20A6${(value / 1000000).toFixed(1)}M`
+const formatNaira = (value: number) => `\u20A6${(value / 1000000).toFixed(1)}M`
 
-const formatNairaFull = (value: number) =>
-  `\u20A6${value.toLocaleString()}`
+const formatNairaFull = (value: number) => `\u20A6${value.toLocaleString()}`
 
 export default function Analytics() {
   return (
@@ -172,9 +170,7 @@ export default function Analytics() {
                 </CardHeader>
                 <CardContent>
                   <div className='text-2xl font-bold'>{stat.value}</div>
-                  <p className='text-muted-foreground text-xs'>
-                    {stat.change}
-                  </p>
+                  <p className='text-muted-foreground text-xs'>{stat.change}</p>
                 </CardContent>
               </Card>
             </StaggerItem>

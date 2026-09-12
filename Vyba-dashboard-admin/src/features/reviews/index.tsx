@@ -7,8 +7,8 @@ import { columns } from './components/reviews-columns'
 import { ReviewsDialogs } from './components/reviews-dialogs'
 import { ReviewsTable } from './components/reviews-table'
 import ReviewsProvider from './context/reviews-context'
-import { reviewListSchema } from './data/schema'
 import { reviews } from './data/reviews'
+import { reviewListSchema } from './data/schema'
 
 export default function Reviews() {
   // Parse review list

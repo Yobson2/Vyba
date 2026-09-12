@@ -1,9 +1,8 @@
 import Cookies from 'js-cookie'
-import { create } from 'zustand'
 import type { UserRole } from '@/types/roles'
+import { create } from 'zustand'
 
-const ACCESS_TOKEN =
-  import.meta.env.VITE_AUTH_TOKEN_KEY ?? 'app_access_token'
+const ACCESS_TOKEN = import.meta.env.VITE_AUTH_TOKEN_KEY ?? 'app_access_token'
 
 interface AuthUser {
   accountNo: string

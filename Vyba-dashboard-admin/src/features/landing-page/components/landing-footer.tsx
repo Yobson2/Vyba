@@ -1,5 +1,5 @@
-import { Logo } from '@/components/logo'
 import { APP_CONFIG } from '@/config/app'
+import { Logo } from '@/components/logo'
 
 export function LandingFooter() {
   return (
@@ -10,7 +10,8 @@ export function LandingFooter() {
           <span className='text-sm font-medium'>{APP_CONFIG.name}</span>
         </div>
         <p className='text-muted-foreground text-sm'>
-          &copy; {new Date().getFullYear()} {APP_CONFIG.name}. All rights reserved.
+          &copy; {new Date().getFullYear()} {APP_CONFIG.name}. All rights
+          reserved.
         </p>
         <div className='flex gap-4'>
           <a

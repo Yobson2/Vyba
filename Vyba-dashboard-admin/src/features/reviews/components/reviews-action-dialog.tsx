@@ -37,11 +37,7 @@ interface Props {
   onOpenChange: (open: boolean) => void
 }
 
-export function ReviewsActionDialog({
-  currentRow,
-  open,
-  onOpenChange,
-}: Props) {
+export function ReviewsActionDialog({ currentRow, open, onOpenChange }: Props) {
   const form = useForm<ReviewForm>({
     resolver: zodResolver(formSchema),
     defaultValues: {

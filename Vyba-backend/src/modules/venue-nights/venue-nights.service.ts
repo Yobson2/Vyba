@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { VenueNight } from './entities/venue-night.entity';
 import { SetHeadlineDto } from './dto/set-headline.dto';
 import { VenuesService } from '@modules/venues/venues.service';
@@ -14,6 +14,7 @@ import {
   FeedItemsService,
   PromoSummary,
 } from '@modules/feed/feed-items.service';
+import { FollowsService } from '@modules/follows/follows.service';
 
 export interface VenueTonight {
   isLive: boolean;
@@ -36,6 +37,8 @@ export interface VenueDetail {
   inLaunchArea: boolean;
   tonight: VenueTonight | null;
   promos: PromoSummary[];
+  followerCount: number;
+  isFollowing: boolean;
 }
 
 @Injectable()
@@ -45,6 +48,7 @@ export class VenueNightsService {
     private readonly venueNightRepository: Repository<VenueNight>,
     private readonly venuesService: VenuesService,
     private readonly feedItemsService: FeedItemsService,
+    private readonly followsService: FollowsService,
   ) {}
 
   /** Idempotent: toggling to the same state is a no-op that doesn't touch `liveSince`. */
@@ -128,13 +132,20 @@ export class VenueNightsService {
    * this is the shared shape behind both the authenticated and the
    * unauthenticated read paths; never include owner data here.
    */
-  async getPublicDetail(venueId: string): Promise<VenueDetail> {
+  async getPublicDetail(
+    venueId: string,
+    userId?: string,
+  ): Promise<VenueDetail> {
     const venue = await this.venuesService.findActiveOrThrow(venueId);
     const night = await this.venueNightRepository.findOne({
       where: { venueId, date: abidjanToday() },
     });
     const promos =
       await this.feedItemsService.listActivePromosForVenue(venueId);
+    const followerCount = await this.followsService.getFollowerCount(venueId);
+    const isFollowing = userId
+      ? await this.followsService.isFollowing(userId, venueId)
+      : false;
 
     return {
       id: venue.id,
@@ -148,6 +159,8 @@ export class VenueNightsService {
       photos: venue.photos,
       inLaunchArea: venue.inLaunchArea,
       promos,
+      followerCount,
+      isFollowing,
       tonight: night
         ? {
             isLive: night.isLive,
@@ -188,6 +201,30 @@ export class VenueNightsService {
       throw new VenueNightNotFoundError(id);
     }
     return night;
+  }
+
+  /** Batch lookup — used by `media`'s curation queue to show a photo's night date. */
+  async findByIds(ids: string[]): Promise<VenueNight[]> {
+    if (ids.length === 0) return [];
+    return this.venueNightRepository.find({ where: { id: In(ids) } });
+  }
+
+  /** Peeks at tonight's `VenueNight` id without creating one (`media`'s night-photos read). */
+  async findTonightId(venueId: string): Promise<string | null> {
+    const night = await this.venueNightRepository.findOne({
+      where: { venueId, date: abidjanToday() },
+      select: ['id'],
+    });
+    return night?.id ?? null;
+  }
+
+  /** Every `VenueNight` id for a calendar date (`media`'s curation-queue date filter). */
+  async findIdsByDate(date: string): Promise<string[]> {
+    const nights = await this.venueNightRepository.find({
+      where: { date },
+      select: ['id'],
+    });
+    return nights.map((n) => n.id);
   }
 
   /** Maintained by `GoingService` on every mark/cancel — recomputed, not incremented, to avoid drift. */

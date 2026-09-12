@@ -26,6 +26,7 @@ class Venue {
     this.inLaunchArea = true,
     this.tonight,
     this.promos = const [],
+    this.followerCount = 0,
   });
 
   final String id;
@@ -56,6 +57,9 @@ class Venue {
 
   /// Active promotions for this venue's page (ticket 09).
   final List<VenuePromo> promos;
+
+  /// Follower count (ticket 10) — a count only, never identities.
+  final int followerCount;
 
   /// The live signal to actually render — prefers `tonight`, falls back to
   /// the legacy `isOpen` flag for venues fetched without tonight data.

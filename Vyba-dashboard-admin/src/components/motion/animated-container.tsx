@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
-import { useReducedMotion } from '@/hooks/use-reduced-motion'
 import { variants, type VariantName } from '@/lib/motion'
 import { cn } from '@/lib/utils'
+import { useReducedMotion } from '@/hooks/use-reduced-motion'
 
 interface AnimatedContainerProps {
   variant?: VariantName

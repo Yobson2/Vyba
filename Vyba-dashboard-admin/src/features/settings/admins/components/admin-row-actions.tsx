@@ -7,8 +7,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import type { Admin } from '../data/schema'
 import { useAdmins } from '../context/admins-context'
+import type { Admin } from '../data/schema'
 
 export function AdminRowActions({ admin }: { admin: Admin }) {
   const { setOpen, setCurrentRow } = useAdmins()

@@ -17,6 +17,7 @@ class VerifyOtpUseCase extends UseCase<User, VerifyOtpParams> {
       phoneNumber: params.phoneNumber,
       code: params.code,
       ageConfirmed: params.ageConfirmed,
+      clientId: params.clientId,
     );
   }
 }
@@ -28,6 +29,7 @@ class VerifyOtpParams {
     required this.phoneNumber,
     required this.code,
     this.ageConfirmed,
+    this.clientId,
   });
 
   /// E.164 phone number.
@@ -38,4 +40,9 @@ class VerifyOtpParams {
 
   /// 18+ confirmation. Required on a first-ever verify.
   final bool? ageConfirmed;
+
+  /// Anonymous per-install client id — lets a first-ever signup be matched
+  /// to a pending landing (ticket 11 / spec 07). Ignored on a resumed
+  /// session (the backend only reads it on a brand-new account).
+  final String? clientId;
 }

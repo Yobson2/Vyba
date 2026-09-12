@@ -1,5 +1,16 @@
 import { useState } from 'react'
+import { ADMIN_ROLES, ROLE_LABELS, type AdminRole } from '@/types/admin'
 import { toast } from 'sonner'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -18,17 +29,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from '@/components/ui/alert-dialog'
-import { ADMIN_ROLES, ROLE_LABELS, type AdminRole } from '@/types/admin'
 import { useAdmins } from '../context/admins-context'
 
 export function AdminsDialogs() {
@@ -98,10 +98,7 @@ function InviteDialog({
           </div>
           <div className='space-y-2'>
             <Label htmlFor='invite-role'>Role</Label>
-            <Select
-              value={role}
-              onValueChange={(v) => setRole(v as AdminRole)}
-            >
+            <Select value={role} onValueChange={(v) => setRole(v as AdminRole)}>
               <SelectTrigger id='invite-role'>
                 <SelectValue />
               </SelectTrigger>
@@ -155,10 +152,7 @@ function EditRoleDialog({
         </DialogHeader>
         <div className='space-y-2 py-4'>
           <Label>Role</Label>
-          <Select
-            value={role}
-            onValueChange={(v) => setRole(v as AdminRole)}
-          >
+          <Select value={role} onValueChange={(v) => setRole(v as AdminRole)}>
             <SelectTrigger>
               <SelectValue />
             </SelectTrigger>

@@ -10,7 +10,9 @@
     "preview": "vite preview",
     "format:check": "prettier --check .",
     "format": "prettier --write .",
-    "knip": "knip"
+    "knip": "knip",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
@@ -36,7 +38,7 @@
     "@tanstack/react-query": "^5.74.3",
     "@tanstack/react-router": "^1.116.0",
     "@tanstack/react-table": "^8.21.3",
-    "axios": "^1.8.4",
+    "axios": "^1.20.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "1.1.1",
@@ -63,6 +65,9 @@
   "devDependencies": {
     "@eslint/js": "^9.24.0",
     "@faker-js/faker": "^9.7.0",
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^14.6.1",
     "@tanstack/eslint-plugin-query": "^5.73.3",
     "@tanstack/react-query-devtools": "^5.74.3",
     "@tanstack/router-devtools": "^1.116.0",
@@ -77,11 +82,14 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
+    "jsdom": "^25.0.1",
     "knip": "^5.50.4",
+    "msw": "^2.7.0",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.30.1",
+    "vitest": "^3.0.4",
     "vite": "^6.2.6"
   }
 }

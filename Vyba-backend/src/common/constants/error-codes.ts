@@ -64,6 +64,19 @@ export enum GoingErrorCode {
   GOING_LOCKED = 'GOING_004',
 }
 
+export enum AnalyticsErrorCode {
+  UNKNOWN_EVENT = 'ANALYTICS_TRACK_001',
+}
+
+export enum MediaErrorCode {
+  MEDIA_ASSET_NOT_FOUND = 'MEDIA_ASSET_001',
+  MEDIA_FORBIDDEN = 'MEDIA_ASSET_002',
+}
+
+export enum NotificationErrorCode {
+  BROADCAST_ALREADY_SENT = 'NOTIFICATION_BROADCAST_001',
+}
+
 export enum SystemErrorCode {
   DATABASE_CONNECTION_FAILED = 'SYSTEM_DB_001',
   DATABASE_QUERY_ERROR = 'SYSTEM_DB_002',
@@ -93,6 +106,9 @@ export type ErrorCode =
   | VenueErrorCode
   | FeedErrorCode
   | GoingErrorCode
+  | AnalyticsErrorCode
+  | MediaErrorCode
+  | NotificationErrorCode
   | SystemErrorCode;
 
 export interface ErrorCodeMetadata {

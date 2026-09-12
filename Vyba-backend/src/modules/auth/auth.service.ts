@@ -20,6 +20,7 @@ import {
 import { SMS_PROVIDER, SmsProvider } from '@common/sms/sms-provider.interface';
 import { OtpStoreService } from './otp-store.service';
 import { OTP_CODE_LENGTH, OTP_MAX_VERIFY_ATTEMPTS } from './otp.constants';
+import { AttributionService } from '@modules/attribution/attribution.service';
 
 interface TokenPayload {
   userId: string;
@@ -42,6 +43,7 @@ export class AuthService {
     private readonly configService: ConfigService,
     private readonly otpStore: OtpStoreService,
     @Inject(SMS_PROVIDER) private readonly smsProvider: SmsProvider,
+    private readonly attributionService: AttributionService,
   ) {}
 
   /**
@@ -83,6 +85,7 @@ export class AuthService {
     phone: string,
     code: string,
     ageConfirmed: boolean | undefined,
+    clientId?: string,
   ): Promise<{
     user: Record<string, unknown>;
     accessToken: string;
@@ -116,6 +119,12 @@ export class AuthService {
         throw new AgeConfirmationRequiredError();
       }
       confirmedUser = await this.usersService.confirmAge(user.id);
+      // First-ever verify for this account — the one moment a signup
+      // attribution snapshot makes sense (ticket 11 / spec 07).
+      await this.attributionService.recordSignupAttribution(
+        confirmedUser.id,
+        clientId,
+      );
     }
 
     const tokens = this.generateTokens(

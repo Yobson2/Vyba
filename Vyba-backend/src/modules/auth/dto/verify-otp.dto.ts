@@ -23,4 +23,12 @@ export class VerifyOtpDto {
   @IsOptional()
   @IsBoolean()
   ageConfirmed?: boolean;
+
+  @ApiPropertyOptional({
+    description:
+      'Anonymous per-install client id — forwarded so a first-ever signup can be matched to a pending landing (ticket 11 / spec 07). Ignored on a resumed session.',
+  })
+  @IsOptional()
+  @IsString()
+  clientId?: string;
 }

@@ -1,3 +1,4 @@
+import 'package:flutter_templates/core/providers/storage_providers.dart';
 import 'package:flutter_templates/core/usecase/usecase.dart';
 import 'package:flutter_templates/features/auth/domain/usecases/request_otp_usecase.dart';
 import 'package:flutter_templates/features/auth/domain/usecases/restore_session_usecase.dart';
@@ -45,11 +46,13 @@ class AuthNotifier extends _$AuthNotifier {
     bool? ageConfirmed,
   }) async {
     state = const AuthState.loading();
+    final clientId = ref.read(localStorageProvider).getOrCreateClientId();
     final result = await ref.read(verifyOtpUseCaseProvider).call(
           VerifyOtpParams(
             phoneNumber: phoneNumber,
             code: code,
             ageConfirmed: ageConfirmed,
+            clientId: clientId,
           ),
         );
     state = result.fold(

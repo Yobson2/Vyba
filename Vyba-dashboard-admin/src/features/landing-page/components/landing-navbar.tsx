@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import { IconMenu2, IconX } from '@tabler/icons-react'
-import { Logo } from '@/components/logo'
 import { APP_CONFIG } from '@/config/app'
 import { Button } from '@/components/ui/button'
 import {
@@ -11,10 +10,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet'
+import { Logo } from '@/components/logo'
 
-const navLinks = [
-  { label: 'Features', href: '#features' },
-]
+const navLinks = [{ label: 'Features', href: '#features' }]
 
 export function LandingNavbar() {
   const [open, setOpen] = useState(false)
@@ -51,7 +49,12 @@ export function LandingNavbar() {
 
         <div className='flex items-center gap-2'>
           {/* <ThemeSwitch /> */}
-          <Button variant='ghost' size='sm' asChild className='hidden md:inline-flex'>
+          <Button
+            variant='ghost'
+            size='sm'
+            asChild
+            className='hidden md:inline-flex'
+          >
             <Link to='/sign-in'>Sign In</Link>
           </Button>
           <Button size='sm' asChild className='hidden md:inline-flex'>
@@ -62,7 +65,11 @@ export function LandingNavbar() {
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
               <Button variant='ghost' size='icon' className='md:hidden'>
-                {open ? <IconX className='h-5 w-5' /> : <IconMenu2 className='h-5 w-5' />}
+                {open ? (
+                  <IconX className='h-5 w-5' />
+                ) : (
+                  <IconMenu2 className='h-5 w-5' />
+                )}
                 <span className='sr-only'>Toggle menu</span>
               </Button>
             </SheetTrigger>
@@ -86,11 +93,20 @@ export function LandingNavbar() {
                 ))}
                 <hr className='my-4' />
                 <div className='flex flex-col gap-3 px-3'>
-                  <Button variant='outline' size='lg' className='w-full' asChild>
-                    <Link to='/sign-in' onClick={() => setOpen(false)}>Sign In</Link>
+                  <Button
+                    variant='outline'
+                    size='lg'
+                    className='w-full'
+                    asChild
+                  >
+                    <Link to='/sign-in' onClick={() => setOpen(false)}>
+                      Sign In
+                    </Link>
                   </Button>
                   <Button size='lg' className='w-full' asChild>
-                    <Link to='/sign-in' onClick={() => setOpen(false)}>Get Started</Link>
+                    <Link to='/sign-in' onClick={() => setOpen(false)}>
+                      Get Started
+                    </Link>
                   </Button>
                 </div>
               </nav>

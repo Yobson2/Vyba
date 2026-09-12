@@ -18,6 +18,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { AnimatedContainer } from '@/components/motion/animated-container'
@@ -28,7 +29,6 @@ import {
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 const stats = [
   {
@@ -121,8 +121,7 @@ const recentActivity = [
   },
 ]
 
-const formatNaira = (value: number) =>
-  `\u20A6${(value / 1000).toFixed(0)}K`
+const formatNaira = (value: number) => `\u20A6${(value / 1000).toFixed(0)}K`
 
 export default function Dashboard() {
   return (
@@ -292,7 +291,7 @@ export default function Dashboard() {
                     className='flex items-center justify-between border-b pb-3 last:border-0 last:pb-0'
                   >
                     <div className='space-y-1'>
-                      <p className='text-sm font-medium leading-none'>
+                      <p className='text-sm leading-none font-medium'>
                         {item.actor}
                       </p>
                       <p className='text-muted-foreground text-sm'>

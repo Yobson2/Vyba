@@ -7,11 +7,6 @@ import {
   IconShieldLock,
   IconSpeakerphone,
 } from '@tabler/icons-react'
-import { AnimatedContainer } from '@/components/motion/animated-container'
-import {
-  StaggerContainer,
-  StaggerItem,
-} from '@/components/motion/stagger-container'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -20,6 +15,11 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { AnimatedContainer } from '@/components/motion/animated-container'
+import {
+  StaggerContainer,
+  StaggerItem,
+} from '@/components/motion/stagger-container'
 
 const features = [
   {

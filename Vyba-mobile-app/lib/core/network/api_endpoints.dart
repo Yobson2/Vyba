@@ -38,13 +38,36 @@ class ApiEndpoints {
   // -- Promo create (real backend; ticket 09) --
   static const String venuePromoCreate = '/api/feed/venue/{venueId}/promo';
 
+  // -- Attribution + analytics (real backend; ticket 11) --
+  static const String attributionLanding = '/api/attribution/landing';
+  static const String analyticsTrack = '/api/analytics/track';
+
   static const String promos = '/promos';
   static const String events = '/events';
   static const String eventInterest = '/events/{id}/interest';
 
-  // -- Favorites --
-  static const String favorites = '/favorites';
-  static const String favoriteToggle = '/favorites/{venueId}';
+  // -- Media / photo curation (real backend; ticket 14) --
+  static const String mediaVenueNightPhoto = '/api/media/venue-night-photo';
+  static const String mediaVenueNightPhotos =
+      '/api/media/venue/{venueId}/night-photos';
+
+  // -- Notifications (real backend; ticket 15) --
+  static const String notificationsDeviceToken =
+      '/api/notifications/device-token';
+  static const String notificationsPreferences =
+      '/api/notifications/preferences';
+
+  // -- Venue broadcast opt-in + owner broadcast (real backend; ticket 17) --
+  static const String broadcastOptIn =
+      '/api/notifications/venue/{venueId}/opt-in';
+  static const String broadcastOptIns = '/api/notifications/venue-opt-ins/mine';
+  static const String venueBroadcast =
+      '/api/notifications/venue/{venueId}/broadcast';
+
+  // -- Follows ("mes lieux suivis", real backend; ticket 10) --
+  static const String followByVenue = '/api/follows/venue/{venueId}';
+  static const String followMine = '/api/follows/venue/{venueId}/mine';
+  static const String followedVenues = '/api/follows/mine';
 
   // -- Reviews --
   static const String reviews = '/reviews';

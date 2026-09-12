@@ -17,6 +17,7 @@ import {
   GoingSelfMarkError,
 } from '@common/exceptions/going.exceptions';
 import { VenueOwnershipError } from '@common/exceptions/venue.exceptions';
+import { AnalyticsService } from '@modules/analytics/analytics.service';
 
 /** Recommended thresholds (spec 04) — one milestone feed item each, idempotent. */
 const MILESTONE_THRESHOLDS = [10, 25, 50];
@@ -40,6 +41,7 @@ export class GoingService {
     private readonly venueNightsService: VenueNightsService,
     private readonly feedItemsService: FeedItemsService,
     private readonly clock: ClockService,
+    private readonly analyticsService: AnalyticsService,
     @Inject(REDIS_CLIENT) private readonly redis: Redis,
   ) {}
 
@@ -85,6 +87,12 @@ export class GoingService {
     const count = await this.recomputeGoingCount(night.id);
     await this.checkMilestones(dto.venueId, night.id, night.date, count);
 
+    await this.analyticsService.track({
+      event: 'going_marked',
+      userId,
+      properties: { venue_id: dto.venueId, venue_night_id: night.id },
+    });
+
     return saved;
   }
 
@@ -111,6 +119,12 @@ export class GoingService {
     going.canceledAt = this.clock.now();
     await this.goingRepository.save(going);
     await this.recomputeGoingCount(going.venueNightId);
+
+    await this.analyticsService.track({
+      event: 'going_cancelled',
+      userId,
+      properties: { venue_id: venueId, venue_night_id: going.venueNightId },
+    });
   }
 
   /** My current mark for this venue tonight, or `null` if I haven't marked. */
@@ -154,6 +168,22 @@ export class GoingService {
       .select(['going.userId AS "userId"', 'going.venueId AS "venueId"'])
       .getRawMany<{ userId: string; venueId: string }>();
     return rows;
+  }
+
+  /** Internal only (spec 08 / ticket 17) — tonight's active "going" for one venue, for the owner broadcast's recipient set. */
+  async getActiveGoingUserIdsForVenue(
+    venueId: string,
+    dateISO: string,
+  ): Promise<string[]> {
+    const rows = await this.goingRepository
+      .createQueryBuilder('going')
+      .innerJoin('venue_nights', 'night', 'night.id = going.venueNightId')
+      .where('night.date = :date', { date: dateISO })
+      .andWhere('going.venueId = :venueId', { venueId })
+      .andWhere('going.canceledAt IS NULL')
+      .select('going.userId', 'userId')
+      .getRawMany<{ userId: string }>();
+    return rows.map((r) => r.userId);
   }
 
   private async findMyActiveTonightOrThrow(

@@ -53,7 +53,11 @@ export async function mintTokensForRole(
 /** Drives the real request-code -> verify-code HTTP flow for a fresh CLIENT phone. */
 export async function signInClient(
   app: INestApplication,
-  overrides: { phone?: string; ageConfirmed?: boolean } = {},
+  overrides: {
+    phone?: string;
+    ageConfirmed?: boolean;
+    clientId?: string;
+  } = {},
 ): Promise<{
   accessToken: string;
   refreshToken: string;
@@ -76,7 +80,12 @@ export async function signInClient(
 
   const res = await request(http)
     .post('/api/auth/verify-code')
-    .send({ phone, code, ageConfirmed: overrides.ageConfirmed ?? true })
+    .send({
+      phone,
+      code,
+      ageConfirmed: overrides.ageConfirmed ?? true,
+      ...(overrides.clientId ? { clientId: overrides.clientId } : {}),
+    })
     .expect(200);
 
   return {

@@ -51,6 +51,7 @@ class AuthRepositoryImpl implements AuthRepository {
     required String phoneNumber,
     required String code,
     bool? ageConfirmed,
+    String? clientId,
   }) async {
     if (!await _networkInfo.isConnected) {
       return const Left(NetworkFailure());
@@ -60,6 +61,7 @@ class AuthRepositoryImpl implements AuthRepository {
         phoneNumber: phoneNumber,
         code: code,
         ageConfirmed: ageConfirmed,
+        clientId: clientId,
       );
       await _local.cacheTokens(result.tokens);
       await _local.cacheUser(result.user);

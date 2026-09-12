@@ -18,7 +18,9 @@ export function ThemeSwitch() {
   useEffect(() => {
     const metaThemeColor = document.querySelector("meta[name='theme-color']")
     if (metaThemeColor) {
-      const bg = getComputedStyle(document.documentElement).getPropertyValue('--background').trim()
+      const bg = getComputedStyle(document.documentElement)
+        .getPropertyValue('--background')
+        .trim()
       metaThemeColor.setAttribute('content', bg)
     }
   }, [theme])

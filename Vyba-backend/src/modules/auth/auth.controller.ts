@@ -39,7 +39,12 @@ export class AuthController {
   @ApiResponse({ status: 200, description: 'Verified, tokens issued' })
   @ApiResponse({ status: 401, description: 'Invalid or expired code' })
   verifyCode(@Body() dto: VerifyOtpDto) {
-    return this.authService.verifyCode(dto.phone, dto.code, dto.ageConfirmed);
+    return this.authService.verifyCode(
+      dto.phone,
+      dto.code,
+      dto.ageConfirmed,
+      dto.clientId,
+    );
   }
 
   @Post('refresh')

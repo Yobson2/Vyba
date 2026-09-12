@@ -5,9 +5,15 @@ import { VenueNightsService } from './venue-nights.service';
 import { VenueNightsController } from './venue-nights.controller';
 import { VenuesModule } from '../venues/venues.module';
 import { FeedModule } from '../feed/feed.module';
+import { FollowsModule } from '../follows/follows.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([VenueNight]), VenuesModule, FeedModule],
+  imports: [
+    TypeOrmModule.forFeature([VenueNight]),
+    VenuesModule,
+    FeedModule,
+    FollowsModule,
+  ],
   controllers: [VenueNightsController],
   providers: [VenueNightsService],
   exports: [VenueNightsService],

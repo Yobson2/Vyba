@@ -170,8 +170,9 @@ export const columns: ColumnDef<Booking>[] = [
     cell: ({ row }) => {
       const amount = row.getValue('depositAmount') as number
       return (
-        <div className='text-nowrap font-medium'>
-          {'\u20A6'}{amount.toLocaleString()}
+        <div className='font-medium text-nowrap'>
+          {'\u20A6'}
+          {amount.toLocaleString()}
         </div>
       )
     },

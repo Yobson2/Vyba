@@ -116,6 +116,89 @@ export class UsersService {
     return user;
   }
 
+  /**
+   * Writes the first-touch acquisition snapshot at signup (ticket 11 /
+   * spec 07). Called once, from `attribution`'s
+   * `recordSignupAttribution` — never overwritten afterwards, since raw
+   * `LandingEvent`/`AcquisitionEvent` rows (not this snapshot) are the
+   * record of truth for multi-touch history.
+   */
+  async writeAcquisitionSnapshot(
+    id: string,
+    snapshot: {
+      acquisitionSource: string;
+      acquisitionVenueId: string | null;
+      acquisitionPromoterId: string | null;
+      acquisitionCampaign: string | null;
+      acquisitionZone: string | null;
+      firstLandingAt: Date;
+    },
+  ): Promise<User> {
+    const user = await this.findOne(id);
+    user.acquisitionSource = snapshot.acquisitionSource;
+    user.acquisitionVenueId = snapshot.acquisitionVenueId;
+    user.acquisitionPromoterId = snapshot.acquisitionPromoterId;
+    user.acquisitionCampaign = snapshot.acquisitionCampaign;
+    user.acquisitionZone = snapshot.acquisitionZone;
+    user.firstLandingAt = snapshot.firstLandingAt;
+    user.acquisitionCapturedAt = new Date();
+    return this.userRepository.save(user);
+  }
+
+  /**
+   * `activeZone` — whether this user ENGAGES with Zone 4, never conflated
+   * with `acquisitionZone` (where they came from). Set/refreshed on every
+   * meaningful action involving a launch-area venue (ticket 11 / spec 07).
+   */
+  async updateActiveZone(id: string, zone: string): Promise<void> {
+    await this.userRepository.update(id, {
+      activeZone: zone,
+      lastActiveAt: new Date(),
+    });
+  }
+
+  /** Zone 4 WAU (ticket 11 / spec 07): active in the rolling window, engaging with Zone 4. */
+  async countActiveInWindow(zone: string, sinceMs: number): Promise<number> {
+    return this.userRepository
+      .createQueryBuilder('user')
+      .where('user.activeZone = :zone', { zone })
+      .andWhere('user.lastActiveAt >= :since', { since: new Date(sinceMs) })
+      .getCount();
+  }
+
+  /**
+   * Raw signup/last-activity fields for the retention gate (ticket 18 /
+   * spec 23) — PII-free (no phone), one row per user, cohorted and computed
+   * in the caller since retention compares each user's own signup date to
+   * their own last activity, not a shared calendar window.
+   */
+  async findRetentionCohortData(): Promise<
+    {
+      createdAt: Date;
+      lastActiveAt: Date | null;
+      acquisitionSource: string | null;
+    }[]
+  > {
+    return this.userRepository.find({
+      select: ['createdAt', 'lastActiveAt', 'acquisitionSource'],
+    });
+  }
+
+  /**
+   * The weekend-digest cohort (ticket 15 / spec 08): engaged with OR
+   * acquired in the launch area — kept broad on purpose (the digest's own
+   * preference filter narrows it further), unlike the stricter WAU query.
+   */
+  async findLaunchAreaCohortUserIds(zone: string): Promise<string[]> {
+    const rows = await this.userRepository
+      .createQueryBuilder('user')
+      .where('user.activeZone = :zone', { zone })
+      .orWhere('user.acquisitionZone = :zone', { zone })
+      .select('user.id', 'id')
+      .getRawMany<{ id: string }>();
+    return rows.map((r) => r.id);
+  }
+
   async findAll(
     query: PaginationQueryDto,
   ): Promise<PaginatedResponseDto<User>> {

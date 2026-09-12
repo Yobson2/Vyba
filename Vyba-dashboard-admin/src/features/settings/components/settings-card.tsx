@@ -25,9 +25,7 @@ export function SettingsCard({
         <div className='flex items-center justify-between'>
           <div className='space-y-1'>
             <CardTitle className='text-base'>{title}</CardTitle>
-            {description && (
-              <CardDescription>{description}</CardDescription>
-            )}
+            {description && <CardDescription>{description}</CardDescription>}
           </div>
           {actions}
         </div>

@@ -1,5 +1,4 @@
 import 'package:flutter_templates/core/error/failures.dart';
-import 'package:flutter_templates/core/providers/analytics_provider.dart';
 import 'package:flutter_templates/features/going/domain/usecases/mark_going_usecase.dart';
 import 'package:flutter_templates/features/going/presentation/providers/going_providers.dart';
 import 'package:flutter_templates/features/going/presentation/providers/going_state.dart';
@@ -40,10 +39,8 @@ class GoingNotifier extends _$GoingNotifier {
           ),
         );
     state = result.fold(_mapFailure, (going) {
-      ref.read(analyticsServiceProvider).logEvent('going_marked', {
-        'venue_id': venueId,
-        'party_size': going.partySize,
-      });
+      // going_marked is emitted server-side by `GoingService` (ticket 11) —
+      // not duplicated here, so the event can't be spoofed or double-counted.
       _refreshVenueDetail();
       return GoingState.marked(going);
     });
@@ -67,9 +64,7 @@ class GoingNotifier extends _$GoingNotifier {
     state = const GoingState.loading();
     final result = await ref.read(cancelGoingUseCaseProvider).call(venueId);
     state = result.fold(_mapFailure, (_) {
-      ref
-          .read(analyticsServiceProvider)
-          .logEvent('going_cancelled', {'venue_id': venueId});
+      // going_cancelled is emitted server-side by `GoingService` (ticket 11).
       _refreshVenueDetail();
       return const GoingState.notMarked();
     });

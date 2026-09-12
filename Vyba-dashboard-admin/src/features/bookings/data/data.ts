@@ -1,8 +1,4 @@
-import {
-  IconArmchair,
-  IconTrees,
-  IconDiamond,
-} from '@tabler/icons-react'
+import { IconArmchair, IconTrees, IconDiamond } from '@tabler/icons-react'
 import { BookingStatus } from './schema'
 
 export const statusTypes = new Map<BookingStatus, string>([
@@ -18,10 +14,7 @@ export const statusTypes = new Map<BookingStatus, string>([
     'cancelled',
     'bg-destructive/10 dark:bg-destructive/50 text-destructive dark:text-primary border-destructive/10',
   ],
-  [
-    'completed',
-    'bg-sky-100/30 text-sky-900 dark:text-sky-200 border-sky-200',
-  ],
+  ['completed', 'bg-sky-100/30 text-sky-900 dark:text-sky-200 border-sky-200'],
 ])
 
 export const zoneTypes = [

@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_templates/core/error/failures.dart';
+import 'package:flutter_templates/core/providers/storage_providers.dart';
 import 'package:flutter_templates/core/usecase/usecase.dart';
 import 'package:flutter_templates/features/auth/domain/entities/user.dart';
 import 'package:flutter_templates/features/auth/domain/usecases/request_otp_usecase.dart';
@@ -20,6 +21,7 @@ void main() {
   late MockGetCachedUserUseCase mockGetCachedUserUseCase;
   late MockRestoreSessionUseCase mockRestoreSessionUseCase;
   late MockAuthLocalDataSource mockAuthLocalDataSource;
+  late MockLocalStorage mockLocalStorage;
 
   setUp(() {
     mockRequestOtpUseCase = MockRequestOtpUseCase();
@@ -28,6 +30,9 @@ void main() {
     mockGetCachedUserUseCase = MockGetCachedUserUseCase();
     mockRestoreSessionUseCase = MockRestoreSessionUseCase();
     mockAuthLocalDataSource = MockAuthLocalDataSource();
+    mockLocalStorage = MockLocalStorage();
+    when(() => mockLocalStorage.getOrCreateClientId())
+        .thenReturn('test-client-id');
   });
 
   setUpAll(() {
@@ -49,6 +54,7 @@ void main() {
         restoreSessionUseCaseProvider
             .overrideWithValue(mockRestoreSessionUseCase),
         authLocalDataSourceProvider.overrideWithValue(mockAuthLocalDataSource),
+        localStorageProvider.overrideWithValue(mockLocalStorage),
       ],
     );
   }

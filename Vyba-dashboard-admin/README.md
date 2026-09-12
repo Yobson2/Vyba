@@ -100,11 +100,11 @@ pnpm knip             # Check for unused dependencies
 
 See `.env.example` for all available variables:
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `VITE_API_URL` | Backend API base URL | `http://localhost:3000/api` |
-| `VITE_AUTH_TOKEN_KEY` | Cookie key for auth token | `app_access_token` |
-| `VITE_APP_NAME` | Application display name | `React Admin Template` |
+| Variable              | Description               | Default                     |
+| --------------------- | ------------------------- | --------------------------- |
+| `VITE_API_URL`        | Backend API base URL      | `http://localhost:3000/api` |
+| `VITE_AUTH_TOKEN_KEY` | Cookie key for auth token | `app_access_token`          |
+| `VITE_APP_NAME`       | Application display name  | `React Admin Template`      |
 
 ## Docker
 

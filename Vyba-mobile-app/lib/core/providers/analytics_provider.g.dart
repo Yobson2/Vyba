@@ -6,19 +6,10 @@ part of 'analytics_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$analyticsServiceHash() => r'a0023711ac2463aabfd253fa191a148257db9a94';
+String _$analyticsServiceHash() => r'2ba0f2aa51fca4024c48b8cd2a2e6bb1a96f4680';
 
-/// Provides the [AnalyticsService] instance.
-///
-/// Override this provider to swap in a real analytics service:
-/// ```dart
-/// ProviderScope(
-///   overrides: [
-///     analyticsServiceProvider.overrideWithValue(FirebaseAnalyticsService()),
-///   ],
-///   child: const App(),
-/// )
-/// ```
+/// Provides the [AnalyticsService] instance — forwards to the backend's
+/// PostHog proxy (ticket 11) using the persisted anonymous client id.
 ///
 /// Copied from [analyticsService].
 @ProviderFor(analyticsService)

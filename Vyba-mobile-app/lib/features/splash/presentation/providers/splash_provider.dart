@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_templates/core/providers/analytics_provider.dart';
 import 'package:flutter_templates/core/providers/storage_providers.dart';
 import 'package:flutter_templates/core/usecase/usecase.dart';
 import 'package:flutter_templates/core/utils/logger.dart';
@@ -41,6 +42,9 @@ Future<SplashResult> _resolve(Ref ref) async {
 
     // Check first launch
     if (localStorage.isFirstLaunch) {
+      // Not a deep-link/QR landing (ticket 16 wires those) — just "the app
+      // was opened for the first time ever" (ticket 11 / spec 07).
+      ref.read(analyticsServiceProvider).logEvent('app_install_started');
       return SplashResult.onboarding;
     }
 

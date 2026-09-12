@@ -3,12 +3,16 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_templates/core/extensions/live_since_extension.dart';
+import 'package:flutter_templates/core/providers/analytics_provider.dart';
 import 'package:flutter_templates/core/theme/app_colors.dart';
 import 'package:flutter_templates/core/theme/app_radius.dart';
 import 'package:flutter_templates/core/theme/app_spacing.dart';
 import 'package:flutter_templates/core/utils/maps_launcher.dart';
 import 'package:flutter_templates/core/widgets/data_display/app_image_carousel.dart';
+import 'package:flutter_templates/features/broadcast_opt_in/presentation/widgets/broadcast_opt_in_toggle.dart';
+import 'package:flutter_templates/features/follow/presentation/widgets/follow_button.dart';
 import 'package:flutter_templates/features/going/presentation/widgets/going_section.dart';
+import 'package:flutter_templates/features/media/presentation/widgets/night_photos_section.dart';
 import 'package:flutter_templates/features/venues/domain/entities/venue.dart';
 import 'package:flutter_templates/features/venues/domain/entities/venue_promo.dart';
 import 'package:flutter_templates/features/venues/domain/entities/venue_tonight.dart';
@@ -18,10 +22,23 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class VenueDetailPage extends ConsumerWidget {
+class VenueDetailPage extends ConsumerStatefulWidget {
   const VenueDetailPage({required this.venueId, super.key});
 
   final String venueId;
+
+  @override
+  ConsumerState<VenueDetailPage> createState() => _VenueDetailPageState();
+}
+
+class _VenueDetailPageState extends ConsumerState<VenueDetailPage> {
+  @override
+  void initState() {
+    super.initState();
+    ref.read(analyticsServiceProvider).logEvent('venue_viewed', {
+      'venue_id': widget.venueId,
+    });
+  }
 
   Future<void> _openInMaps(BuildContext context, Venue venue) async {
     final uri = buildGoogleMapsUri(venue.latitude, venue.longitude);
@@ -34,7 +51,8 @@ class VenueDetailPage extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
+    final venueId = widget.venueId;
     final state = ref.watch(venueDetailNotifierProvider(venueId));
 
     return Scaffold(
@@ -86,13 +104,21 @@ class VenueDetailPage extends ConsumerWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                venue.name,
-                                style: GoogleFonts.epilogue(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w800,
-                                  color: AppColors.onSurface,
-                                ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      venue.name,
+                                      style: GoogleFonts.epilogue(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.w800,
+                                        color: AppColors.onSurface,
+                                      ),
+                                    ),
+                                  ),
+                                  FollowButton(venueId: venue.id),
+                                ],
                               ),
                               AppSpacing.verticalXs,
                               Row(
@@ -116,6 +142,18 @@ class VenueDetailPage extends ConsumerWidget {
                                           color: AppColors.onSurfaceVariant,
                                         ),
                                   ),
+                                  if (venue.followerCount > 0) ...[
+                                    const Text(' · '),
+                                    Text(
+                                      '${venue.followerCount} abonnés',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall
+                                          ?.copyWith(
+                                            color: AppColors.onSurfaceVariant,
+                                          ),
+                                    ),
+                                  ],
                                 ],
                               ),
                               AppSpacing.verticalSm,
@@ -149,10 +187,14 @@ class VenueDetailPage extends ConsumerWidget {
                               _TonightBlock(tonight: venue.tonight),
                               AppSpacing.verticalMd,
                               GoingSection(venueId: venue.id),
+                              AppSpacing.verticalSm,
+                              BroadcastOptInToggle(venueId: venue.id),
                               if (venue.promos.isNotEmpty) ...[
                                 AppSpacing.verticalMd,
                                 _PromoSection(promos: venue.promos),
                               ],
+                              AppSpacing.verticalMd,
+                              NightPhotosSection(venueId: venue.id),
                             ],
                           ),
                         ),
@@ -255,10 +297,7 @@ class _PromoSection extends StatelessWidget {
                     const SizedBox(width: 6),
                     Text(
                       promo.title,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium
-                          ?.copyWith(
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: AppColors.tertiary,
                             fontWeight: FontWeight.w700,
                           ),

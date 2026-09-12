@@ -21,9 +21,15 @@ import { AuthGuard } from '@common/guards/auth.guard';
 import { UsersModule } from '@modules/users/users.module';
 import { AuthModule } from '@modules/auth/auth.module';
 import { VenuesModule } from '@modules/venues/venues.module';
+import { FollowsModule } from '@modules/follows/follows.module';
 import { VenueNightsModule } from '@modules/venue-nights/venue-nights.module';
 import { FeedModule } from '@modules/feed/feed.module';
 import { GoingModule } from '@modules/going/going.module';
+import { AttributionModule } from '@modules/attribution/attribution.module';
+import { AnalyticsModule } from '@modules/analytics/analytics.module';
+import { MetricsModule } from '@modules/metrics/metrics.module';
+import { MediaModule } from '@modules/media/media.module';
+import { NotificationsModule } from '@modules/notifications/notifications.module';
 import { HealthModule } from '@modules/health/health.module';
 
 @Module({
@@ -79,9 +85,15 @@ import { HealthModule } from '@modules/health/health.module';
     UsersModule,
     AuthModule,
     VenuesModule,
+    FollowsModule,
     VenueNightsModule,
     FeedModule,
     GoingModule,
+    AttributionModule,
+    AnalyticsModule,
+    MetricsModule,
+    MediaModule,
+    NotificationsModule,
     HealthModule,
   ],
   providers: [

@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:math';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Wrapper around [SharedPreferences] for non-sensitive local data.
@@ -13,6 +16,7 @@ class LocalStorage {
   static const _localeKey = 'locale';
   static const _onboardingCompleteKey = 'onboarding_complete';
   static const _firstLaunchKey = 'first_launch';
+  static const _attributionClientIdKey = 'attribution_client_id';
 
   // -- Theme --
 
@@ -48,6 +52,27 @@ class LocalStorage {
 
   /// Marks the first launch as done.
   Future<bool> setFirstLaunchDone() => _prefs.setBool(_firstLaunchKey, false);
+
+  // -- Attribution client id (ticket 11) --
+
+  /// A stable, anonymous per-install id — generated once, held until signup,
+  /// then forwarded so a first-ever signup can be matched to a pending
+  /// landing (spec 07). Never a device identifier, just a random string.
+  String getOrCreateClientId() {
+    final existing = _prefs.getString(_attributionClientIdKey);
+    if (existing != null) return existing;
+    final id = _randomHex(32);
+    unawaited(_prefs.setString(_attributionClientIdKey, id));
+    return id;
+  }
+
+  static String _randomHex(int length) {
+    final random = Random.secure();
+    return List.generate(
+      length,
+      (_) => random.nextInt(16).toRadixString(16),
+    ).join();
+  }
 
   // -- Generic --
 

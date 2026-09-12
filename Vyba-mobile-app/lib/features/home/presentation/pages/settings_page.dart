@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_templates/core/config/env_provider.dart';
+import 'package:flutter_templates/core/router/route_names.dart';
 import 'package:flutter_templates/core/theme/app_colors.dart';
 import 'package:flutter_templates/core/theme/app_radius.dart';
 import 'package:flutter_templates/core/theme/app_spacing.dart';
 import 'package:flutter_templates/features/auth/presentation/providers/auth_notifier.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -64,7 +66,8 @@ class SettingsPage extends ConsumerWidget {
             _SettingsTile(
               icon: Icons.notifications_outlined,
               title: 'Préférences de notification',
-              onTap: () {},
+              onTap: () =>
+                  context.pushNamed(RouteNames.notificationPreferencesName),
             ),
             AppSpacing.verticalXl,
             // Support section

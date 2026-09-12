@@ -45,6 +45,7 @@ class MockAuthRemoteDataSource implements AuthRemoteDataSource {
     required String phoneNumber,
     required String code,
     bool? ageConfirmed,
+    String? clientId,
   }) async {
     await Future<void>.delayed(_delay);
 

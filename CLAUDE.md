@@ -10,15 +10,16 @@ d'Ivoire: discover venues, see what's happening tonight, signal intent to go out
 ("J'y vais"), leave reviews, run venue promotions. In a **validation phase** scoped
 to one commune (Zone 4 / Marcory).
 
-Monorepo, three deployables, each adapted from a starter template. Each has its own
-toolchain, README and conventions — work within the one you're editing, don't
-cross-wire them.
+Monorepo, four deployables — three adapted from a starter template plus a
+purpose-built web surface (ADR-0004). Each has its own toolchain, README and
+conventions — work within the one you're editing, don't cross-wire them.
 
 | Path | Role | Stack |
 |------|------|-------|
 | `Vyba-mobile-app/` | Client + venue-owner mobile app | Flutter, Riverpod, GoRouter, Dio, Freezed |
 | `Vyba-dashboard-admin/` | Vyba team operations dashboard | React 19, TanStack Router/Query/Table, Zustand, shadcn/ui |
 | `Vyba-backend/` | REST API | NestJS 11, TypeORM + PostgreSQL, Redis, S3, Socket.IO, JWT |
+| `Vyba-web/` | QR-scan acquisition surface (read-only; ADR-0004) | Next.js (App Router), React Server Components, vitest + MSW |
 
 ## Start here
 
@@ -40,7 +41,7 @@ cross-wire them.
 
 ## Non-negotiable rules
 
-### Design (all UI, both frontends) — full detail in `docs/design-system.md`
+### Design (all UI, all frontends) — full detail in `docs/design-system.md`
 
 - Dark-first. **Never** pure black `#000000` — use tonal dark surfaces.
 - **No-line rule**: express boundaries through surface-tone shifts, not 1px
@@ -53,7 +54,7 @@ cross-wire them.
   Emerald `#69F6B8` = success/availability only · Golden Hour `#FFB148` = promos/VIP
   only · Error `#FF6E84`.
 
-### Security (all three projects) — full framework in `docs/security.md`
+### Security (all projects) — full framework in `docs/security.md`
 
 - HTTPS only, no cleartext fallback. Never commit secrets or `.env` files.
 - Never log tokens, passwords, OTPs, or PII — in interceptors, or crash reports.

@@ -1,7 +1,7 @@
 import { useNavigate, useRouter } from '@tanstack/react-router'
-import { AnimatedContainer } from '@/components/motion/animated-container'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
+import { AnimatedContainer } from '@/components/motion/animated-container'
 
 interface GeneralErrorProps extends React.HTMLAttributes<HTMLDivElement> {
   minimal?: boolean
@@ -15,7 +15,10 @@ export default function GeneralError({
   const { history } = useRouter()
   return (
     <div className={cn('h-svh w-full', className)}>
-      <AnimatedContainer variant='fadeSlideUp' className='m-auto flex h-full w-full flex-col items-center justify-center gap-2'>
+      <AnimatedContainer
+        variant='fadeSlideUp'
+        className='m-auto flex h-full w-full flex-col items-center justify-center gap-2'
+      >
         {!minimal && (
           <h1 className='text-[7rem] leading-tight font-bold'>500</h1>
         )}

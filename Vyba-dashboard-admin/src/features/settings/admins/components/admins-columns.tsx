@@ -1,7 +1,7 @@
 import { ColumnDef } from '@tanstack/react-table'
+import { ROLE_LABELS } from '@/types/admin'
 import { cn } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
-import { ROLE_LABELS } from '@/types/admin'
 import type { Admin } from '../data/schema'
 import { AdminRowActions } from './admin-row-actions'
 
@@ -26,9 +26,7 @@ export const adminsColumns: ColumnDef<Admin>[] = [
     accessorKey: 'role',
     header: 'Role',
     cell: ({ row }) => (
-      <span className='text-sm'>
-        {ROLE_LABELS[row.original.role]}
-      </span>
+      <span className='text-sm'>{ROLE_LABELS[row.original.role]}</span>
     ),
     filterFn: (row, id, value) => value.includes(row.getValue(id)),
   },
@@ -53,7 +51,8 @@ export const adminsColumns: ColumnDef<Admin>[] = [
     header: 'Last Active',
     cell: ({ row }) => {
       const date = row.original.lastActive
-      if (!date) return <span className='text-muted-foreground text-sm'>Never</span>
+      if (!date)
+        return <span className='text-muted-foreground text-sm'>Never</span>
       return (
         <span className='text-sm text-nowrap'>
           {date.toLocaleDateString('en-NG', {

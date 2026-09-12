@@ -1,6 +1,6 @@
 import { Link, useRouter } from '@tanstack/react-router'
-import { useAuthStore } from '@/stores/authStore'
 import { ChevronsUpDown, LogOut, Settings } from 'lucide-react'
+import { useAuthStore } from '@/stores/authStore'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   DropdownMenu,

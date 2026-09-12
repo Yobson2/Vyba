@@ -1,16 +1,16 @@
-import { Badge, type badgeVariants } from "@/components/ui/badge"
-import { cn } from "@/lib/utils"
-import type { VariantProps } from "class-variance-authority"
+import type { VariantProps } from 'class-variance-authority'
+import { cn } from '@/lib/utils'
+import { Badge, type badgeVariants } from '@/components/ui/badge'
 
 export type StatusType =
-  | "active"
-  | "pending"
-  | "inactive"
-  | "new"
-  | "completed"
-  | "cancelled"
-  | "approved"
-  | "rejected"
+  | 'active'
+  | 'pending'
+  | 'inactive'
+  | 'new'
+  | 'completed'
+  | 'cancelled'
+  | 'approved'
+  | 'rejected'
   | string
 
 type BadgeVariant = NonNullable<VariantProps<typeof badgeVariants>['variant']>
@@ -37,10 +37,7 @@ export function StatusBadge({ status, className }: StatusBadgeProps) {
   const variant = statusVariantMap[statusKey] || 'secondary'
 
   return (
-    <Badge
-      variant={variant}
-      className={cn("capitalize", className)}
-    >
+    <Badge variant={variant} className={cn('capitalize', className)}>
       {status}
     </Badge>
   )

@@ -82,8 +82,8 @@ export class VenueNightsController {
     summary: "Venue profile + tonight's state (any authenticated user)",
   })
   @ApiResponse({ status: 200, description: 'Venue detail' })
-  getDetail(@Param('id') id: string) {
-    return this.venueNightsService.getPublicDetail(id);
+  getDetail(@Param('id') id: string, @GetUserId() userId: string) {
+    return this.venueNightsService.getPublicDetail(id, userId);
   }
 
   @Get(':id/public')
