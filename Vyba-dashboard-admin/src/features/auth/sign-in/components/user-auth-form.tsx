@@ -4,7 +4,12 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link, useNavigate } from '@tanstack/react-router'
 import { toast } from 'sonner'
+import { isAxiosError } from 'axios'
+import api from '@/api/axios-instance'
+import { ENDPOINTS } from '@/api/endpoints'
 import { useAuthStore } from '@/stores/authStore'
+import type { UserRole } from '@/types/roles'
+import { decodeJwtPayload } from '@/lib/jwt-utils'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import {
@@ -64,45 +69,39 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     setIsLoading(true)
 
     try {
-      // TODO: Replace with real API call — e.g.:
-      // const res = await api.post(ENDPOINTS.AUTH.LOGIN, data)
-      // const { user, tokens } = res.data.data
-
-      // --- MOCK: Remove before deployment ---
-      if (import.meta.env.DEV) {
-        await new Promise((r) => setTimeout(r, 1000))
-        const mockToken =
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.' +
-          btoa(
-            JSON.stringify({
-              sub: '1',
-              email: data.email,
-              role: ['ADMIN'],
-              exp: Math.floor(Date.now() / 1000) + 900,
-            })
-          ) +
-          '.mock-signature'
-
-        setAccessToken(mockToken)
-        setUser({
-          accountNo: '1',
-          email: data.email,
-          role: ['ADMIN'],
-          exp: Math.floor(Date.now() / 1000) + 900,
-        })
-      } else {
-        throw new Error('Real API authentication not yet implemented')
+      const res = await api.post<{ accessToken: string }>(
+        ENDPOINTS.AUTH.LOGIN,
+        data
+      )
+      const { accessToken } = res.data
+      const payload = decodeJwtPayload<{
+        userId: string
+        role: string
+        email?: string
+        exp: number
+      }>(accessToken)
+      if (!payload) {
+        throw new Error('Malformed access token')
       }
-      // --- END MOCK ---
+
+      setAccessToken(accessToken)
+      setUser({
+        accountNo: payload.userId,
+        email: payload.email ?? data.email,
+        role: [payload.role as UserRole],
+        exp: payload.exp,
+      })
 
       toast.success('Login successful', {
         description: 'Redirecting to dashboard...',
       })
       navigate({ to: '/dashboard' })
-    } catch {
-      toast.error('Login failed', {
-        description: 'Invalid email or password.',
-      })
+    } catch (error) {
+      const description = isAxiosError(error)
+        ? ((error.response?.data as { message?: string })?.message ??
+          'Invalid email or password.')
+        : 'Invalid email or password.'
+      toast.error('Login failed', { description })
     } finally {
       setIsLoading(false)
     }

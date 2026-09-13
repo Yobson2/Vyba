@@ -11,9 +11,14 @@ import 'package:flutter_templates/features/venues/presentation/widgets/venue_car
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ExplorePage extends ConsumerWidget {
+class ExplorePage extends ConsumerStatefulWidget {
   const ExplorePage({super.key});
 
+  @override
+  ConsumerState<ExplorePage> createState() => _ExplorePageState();
+}
+
+class _ExplorePageState extends ConsumerState<ExplorePage> {
   static const _filterChips = [
     'Open Now',
     'Top Rated',
@@ -23,8 +28,35 @@ class ExplorePage extends ConsumerWidget {
     'Promo Active',
   ];
 
+  final _searchController = TextEditingController();
+  bool _isSearching = false;
+  bool _nearbyActive = false;
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _toggleSearch() {
+    setState(() => _isSearching = !_isSearching);
+    if (!_isSearching && _searchController.text.isNotEmpty) {
+      _searchController.clear();
+      ref.read(venueListNotifierProvider.notifier).search('');
+    }
+  }
+
+  void _onNearbyTap() {
+    setState(() => _nearbyActive = !_nearbyActive);
+    if (_nearbyActive) {
+      ref.read(venueListNotifierProvider.notifier).useNearbyMe();
+    } else {
+      ref.read(venueListNotifierProvider.notifier).refresh();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final venueState = ref.watch(venueListNotifierProvider);
 
     return Scaffold(
@@ -42,22 +74,42 @@ class ExplorePage extends ConsumerWidget {
                 ),
               ),
             ),
-            title: Row(
-              children: [
-                const Icon(Icons.location_on,
-                    color: AppColors.primary, size: 20),
-                const SizedBox(width: 6),
-                Text(
-                  'Abidjan',
-                  style: GoogleFonts.epilogue(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.onSurfaceVariant,
-                    letterSpacing: 2,
+            title: _isSearching
+                ? TextField(
+                    controller: _searchController,
+                    autofocus: true,
+                    style: GoogleFonts.epilogue(
+                      fontSize: 14,
+                      color: AppColors.onSurface,
+                    ),
+                    decoration: InputDecoration(
+                      hintText: 'Rechercher un lieu, une adresse…',
+                      hintStyle: TextStyle(
+                        color: AppColors.onSurfaceVariant.withValues(alpha: 0.6),
+                      ),
+                      border: InputBorder.none,
+                    ),
+                    textInputAction: TextInputAction.search,
+                    onSubmitted: (value) => ref
+                        .read(venueListNotifierProvider.notifier)
+                        .search(value),
+                  )
+                : Row(
+                    children: [
+                      const Icon(Icons.location_on,
+                          color: AppColors.primary, size: 20),
+                      const SizedBox(width: 6),
+                      Text(
+                        'Abidjan',
+                        style: GoogleFonts.epilogue(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.onSurfaceVariant,
+                          letterSpacing: 2,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
             actions: [
               // View toggle
               Container(
@@ -81,8 +133,9 @@ class ExplorePage extends ConsumerWidget {
                 ),
               ),
               IconButton(
-                icon: const Icon(Icons.search, color: AppColors.onSurface),
-                onPressed: () {},
+                icon: Icon(_isSearching ? Icons.close : Icons.search,
+                    color: AppColors.onSurface),
+                onPressed: _toggleSearch,
               ),
               IconButton(
                 icon: const Icon(Icons.tune, color: AppColors.onSurface),
@@ -113,14 +166,17 @@ class ExplorePage extends ConsumerWidget {
                 itemCount: _filterChips.length,
                 separatorBuilder: (_, __) => const SizedBox(width: 8),
                 itemBuilder: (context, index) {
+                  final label = _filterChips[index];
+                  final isNearby = label == 'Nearby';
+                  final selected = isNearby ? _nearbyActive : index == 0;
                   return FilterChip(
-                    label: Text(_filterChips[index]),
-                    selected: index == 0,
-                    onSelected: (_) {},
+                    label: Text(label),
+                    selected: selected,
+                    onSelected: isNearby ? (_) => _onNearbyTap() : (_) {},
                     selectedColor: AppColors.primary,
                     labelStyle:
                         Theme.of(context).textTheme.labelMedium?.copyWith(
-                              color: index == 0
+                              color: selected
                                   ? AppColors.onPrimaryFixed
                                   : AppColors.onSurfaceVariant,
                             ),

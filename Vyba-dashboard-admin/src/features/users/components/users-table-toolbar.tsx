@@ -15,18 +15,16 @@ export function UsersTableToolbar<TData>({
   return (
     <DataTableToolbar
       table={table}
-      searchColumn='name'
-      searchPlaceholder='Search by name...'
+      searchColumn='phone'
+      searchPlaceholder='Search by phone...'
     >
-      {table.getColumn('status') && (
+      {table.getColumn('isActive') && (
         <DataTableFacetedFilter
-          column={table.getColumn('status')}
+          column={table.getColumn('isActive')}
           title='Status'
           options={[
-            { label: 'Active', value: 'active' },
-            { label: 'Inactive', value: 'inactive' },
-            { label: 'Suspended', value: 'suspended' },
-            { label: 'Banned', value: 'banned' },
+            { label: 'Active', value: 'true' },
+            { label: 'Inactive', value: 'false' },
           ]}
         />
       )}

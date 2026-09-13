@@ -9,6 +9,7 @@ import {
 import { CreateVenueDto } from './dto/create-venue.dto';
 import { UpdateVenueDto } from './dto/update-venue.dto';
 import { BindVenueOwnerDto } from './dto/bind-venue-owner.dto';
+import { SearchVenuesQueryDto } from './dto/search-venues-query.dto';
 import {
   PaginationQueryDto,
   PaginatedResponseDto,
@@ -41,6 +42,20 @@ export interface VenueWithOwner {
   validationStatus: VenueValidationStatus;
   inLaunchArea: boolean;
   owner: VenueOwnerSummary | null;
+}
+
+/** Public discovery read (ADR-0005) — no owner PII, no admin-only fields. */
+export interface VenueDiscoverySummary {
+  id: string;
+  name: string;
+  address: string | null;
+  latitude: number;
+  longitude: number;
+  venueType: VenueType;
+  priceLevel: number;
+  photos: string[];
+  /** km from the caller's position, when `lat`/`lng` were given; null otherwise. */
+  distanceKm: number | null;
 }
 
 @Injectable()
@@ -127,8 +142,9 @@ export class VenuesService {
 
   /**
    * Batch eligibility check for client-facing reads (feed ranking):
-   * active, not deactivated, in the launch area. Silently drops
-   * ineligible ids rather than throwing — callers filter a candidate set.
+   * active, not deactivated. Discovery is not geofenced (ADR-0005) — a
+   * venue's location no longer excludes it. Silently drops ineligible ids
+   * rather than throwing — callers filter a candidate set.
    */
   async findEligibleByIds(ids: string[]): Promise<Venue[]> {
     if (ids.length === 0) return [];
@@ -136,7 +152,6 @@ export class VenuesService {
       where: {
         id: In(ids),
         isActive: true,
-        inLaunchArea: true,
         validationStatus: VenueValidationStatus.ACTIVE,
       },
     });
@@ -151,6 +166,68 @@ export class VenuesService {
   async findByIds(ids: string[]): Promise<Venue[]> {
     if (ids.length === 0) return [];
     return this.venueRepository.find({ where: { id: In(ids) } });
+  }
+
+  /**
+   * Public discovery read (ADR-0005): active + ACTIVE venues anywhere, not
+   * geofenced. Optional `query` matches name/address; optional `lat`/`lng`
+   * compute a distance (km, Haversine) each result is sorted by ascending
+   * and (with `radiusKm`) filtered to — otherwise results sort newest first.
+   */
+  async search(
+    dto: SearchVenuesQueryDto,
+  ): Promise<PaginatedResponseDto<VenueDiscoverySummary>> {
+    const page = dto.page ?? 1;
+    const limit = dto.limit ?? 20;
+    const hasLocation = dto.lat !== undefined && dto.lng !== undefined;
+
+    const qb = this.venueRepository
+      .createQueryBuilder('venue')
+      .where('venue.isActive = :isActive', { isActive: true })
+      .andWhere('venue.validationStatus = :status', {
+        status: VenueValidationStatus.ACTIVE,
+      });
+
+    if (dto.query) {
+      qb.andWhere('(venue.name ILIKE :query OR venue.address ILIKE :query)', {
+        query: `%${dto.query}%`,
+      });
+    }
+
+    if (hasLocation) {
+      // Haversine distance in km — no PostGIS in this stack. Repeated as a
+      // WHERE expression (not HAVING/alias) for the radius cutoff: Postgres
+      // doesn't allow a SELECT alias in WHERE, and HAVING without GROUP BY
+      // wouldn't filter per row.
+      const distanceExpr = `6371 * acos(least(1, greatest(-1,
+        cos(radians(:lat)) * cos(radians(venue.latitude)) *
+        cos(radians(venue.longitude) - radians(:lng)) +
+        sin(radians(:lat)) * sin(radians(venue.latitude))
+      )))`;
+      qb.addSelect(distanceExpr, 'distance_km')
+        .setParameters({ lat: dto.lat, lng: dto.lng })
+        .orderBy('distance_km', 'ASC');
+
+      if (dto.radiusKm !== undefined) {
+        qb.andWhere(`${distanceExpr} <= :radiusKm`, {
+          radiusKm: dto.radiusKm,
+        });
+      }
+    } else {
+      qb.orderBy('venue.createdAt', 'DESC');
+    }
+
+    qb.skip((page - 1) * limit).take(limit);
+
+    const { entities, raw } = await qb.getRawAndEntities();
+    const total = await qb.getCount();
+
+    const summaries = entities.map((venue, i) => ({
+      ...toDiscoverySummary(venue),
+      distanceKm: hasLocation ? Number(raw[i]?.distance_km ?? null) : null,
+    }));
+
+    return new PaginatedResponseDto(summaries, total, page, limit);
   }
 
   /** The venue bound to this owner — lets the owner app discover its venueId (the JWT carries none). */
@@ -226,6 +303,21 @@ export class VenuesService {
         : null,
     }));
   }
+}
+
+function toDiscoverySummary(
+  venue: Venue,
+): Omit<VenueDiscoverySummary, 'distanceKm'> {
+  return {
+    id: venue.id,
+    name: venue.name,
+    address: venue.address,
+    latitude: venue.latitude,
+    longitude: venue.longitude,
+    venueType: venue.venueType,
+    priceLevel: venue.priceLevel,
+    photos: venue.photos,
+  };
 }
 
 function toOwnerSummary(

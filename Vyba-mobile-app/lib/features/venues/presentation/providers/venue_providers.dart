@@ -1,5 +1,4 @@
 import 'package:flutter_templates/core/providers/network_providers.dart';
-import 'package:flutter_templates/features/venues/data/datasources/mock_venue_remote_datasource.dart';
 import 'package:flutter_templates/features/venues/data/datasources/venue_remote_datasource.dart';
 import 'package:flutter_templates/features/venues/data/datasources/venue_remote_datasource_impl.dart';
 import 'package:flutter_templates/features/venues/data/repositories/venue_repository_impl.dart';
@@ -11,12 +10,11 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'venue_providers.g.dart';
 
-/// Backs the Explore listing. Still mock — the backend has no public venue
-/// *list* endpoint yet (a later ticket).
-// TODO(dev): Point this at the real backend once the public list endpoint exists.
+/// Backs the Explore listing — `GET /api/discover/venues` (ADR-0005): text
+/// search and/or geolocated "nearby" sorting, not geofenced.
 @Riverpod(keepAlive: true)
 VenueRemoteDataSource venueRemoteDataSource(VenueRemoteDataSourceRef ref) {
-  return MockVenueRemoteDataSource();
+  return VenueRemoteDataSourceImpl(ref.watch(dioProvider));
 }
 
 @Riverpod(keepAlive: true)

@@ -2,18 +2,20 @@ import { ColumnDef } from '@tanstack/react-table'
 import { cn } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
 import { DataTableColumnHeader } from '@/components/ui/data-table'
-import LongText from '@/components/long-text'
-import { acquisitionSourceTypes, roleTypes, statusTypes } from '../data/data'
+import { acquisitionSourceTypes, roleTypes } from '../data/data'
 import { User } from '../data/schema'
+import { UserRowActions } from './user-row-actions'
 
 export const columns: ColumnDef<User>[] = [
   {
-    accessorKey: 'name',
+    id: 'name',
+    accessorFn: (row) =>
+      [row.firstName, row.lastName].filter(Boolean).join(' '),
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Name' />
     ),
-    cell: ({ row }) => (
-      <LongText className='max-w-36'>{row.getValue('name')}</LongText>
+    cell: ({ getValue }) => (
+      <div className='max-w-36 truncate'>{(getValue() as string) || '—'}</div>
     ),
     meta: {
       className: cn(
@@ -23,15 +25,7 @@ export const columns: ColumnDef<User>[] = [
       ),
     },
     enableHiding: false,
-  },
-  {
-    accessorKey: 'email',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Email' />
-    ),
-    cell: ({ row }) => (
-      <div className='w-fit text-nowrap'>{row.getValue('email')}</div>
-    ),
+    enableSorting: false,
   },
   {
     accessorKey: 'phone',
@@ -42,6 +36,7 @@ export const columns: ColumnDef<User>[] = [
       <div className='text-nowrap'>{row.getValue('phone')}</div>
     ),
     enableSorting: false,
+    enableHiding: false,
   },
   {
     accessorKey: 'role',
@@ -70,36 +65,32 @@ export const columns: ColumnDef<User>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: 'status',
+    accessorKey: 'isActive',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Status' />
     ),
     cell: ({ row }) => {
-      const { status } = row.original
-      const badgeColor = statusTypes.get(status)
+      const isActive = row.getValue('isActive') as boolean
       return (
         <div className='flex space-x-2'>
-          <Badge variant='outline' className={cn('capitalize', badgeColor)}>
-            {status}
+          <Badge
+            variant='outline'
+            className={cn(
+              'capitalize',
+              isActive
+                ? 'border-teal-200 bg-teal-100/30 text-teal-900 dark:text-teal-200'
+                : 'border-neutral-300 bg-neutral-300/40'
+            )}
+          >
+            {isActive ? 'Active' : 'Inactive'}
           </Badge>
         </div>
       )
     },
     filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
+      return value.includes(String(row.getValue(id)))
     },
     enableHiding: false,
-    enableSorting: false,
-  },
-  {
-    accessorKey: 'city',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='City' />
-    ),
-    cell: ({ row }) => <div>{row.getValue('city')}</div>,
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
-    },
     enableSorting: false,
   },
   {
@@ -135,5 +126,9 @@ export const columns: ColumnDef<User>[] = [
         </div>
       )
     },
+  },
+  {
+    id: 'actions',
+    cell: ({ row }) => <UserRowActions user={row.original} />,
   },
 ]

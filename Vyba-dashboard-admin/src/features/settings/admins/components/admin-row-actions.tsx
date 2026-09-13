@@ -1,4 +1,5 @@
 import { IconDotsVertical } from '@tabler/icons-react'
+import { useAuthStore } from '@/stores/authStore'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -12,6 +13,8 @@ import type { Admin } from '../data/schema'
 
 export function AdminRowActions({ admin }: { admin: Admin }) {
   const { setOpen, setCurrentRow } = useAdmins()
+  const currentUserId = useAuthStore((s) => s.auth.user?.accountNo)
+  const isSelf = admin.id === currentUserId
 
   return (
     <DropdownMenu>
@@ -27,18 +30,30 @@ export function AdminRowActions({ admin }: { admin: Admin }) {
             setOpen('edit')
           }}
         >
-          Edit role
+          Edit
         </DropdownMenuItem>
-        <DropdownMenuSeparator />
         <DropdownMenuItem
-          className='text-destructive'
           onClick={() => {
             setCurrentRow(admin)
-            setOpen('delete')
+            setOpen('reset-password')
           }}
         >
-          {admin.status === 'active' ? 'Deactivate' : 'Remove'}
+          Reset password
         </DropdownMenuItem>
+        {!isSelf && (
+          <>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              className='text-destructive'
+              onClick={() => {
+                setCurrentRow(admin)
+                setOpen('deactivate')
+              }}
+            >
+              {admin.isActive ? 'Deactivate' : 'Reactivate'}
+            </DropdownMenuItem>
+          </>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   )

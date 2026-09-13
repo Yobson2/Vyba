@@ -64,6 +64,14 @@ class UnauthorizedFailure extends Failure {
   });
 }
 
+/// Failure to obtain the device's location — permission denied, permission
+/// permanently denied, or the location service is disabled. Distinct from
+/// [ServerFailure]/[NetworkFailure]: nothing was sent over the network.
+class LocationFailure extends Failure {
+  /// Creates a [LocationFailure].
+  const LocationFailure({super.message = 'Unable to determine location'});
+}
+
 /// Failure due to input validation errors.
 class ValidationFailure extends Failure {
   /// Creates a [ValidationFailure] with field-level [errors].

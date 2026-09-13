@@ -31,7 +31,7 @@ export default function Venues() {
             </h2>
             <p className='text-muted-foreground'>
               Create venues, provision owner accounts, and manage validation
-              status for the Zone 4 launch.
+              status — discovery isn't limited to Zone 4 (ADR-0005).
             </p>
           </div>
           <VenuesPrimaryButtons />

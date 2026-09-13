@@ -12,6 +12,7 @@ implementation — code and `docs/` hold the how.
 | [0002](0002-soft-jy-vais-intent-instead-of-reservations.md) | Soft "J'y vais" intent instead of reservations | Accepted |
 | [0003](0003-phone-otp-as-sole-identity.md) | Phone-OTP as the sole identity primitive | Accepted |
 | [0004](0004-separate-lightweight-web-surface.md) | A separate lightweight web surface, not Flutter web | Accepted |
+| [0005](0005-venue-discovery-not-geofenced.md) | Venue discovery is not geofenced to Zone 4 | Accepted |
 
 ## Adding an ADR
 

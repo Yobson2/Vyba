@@ -1,36 +1,33 @@
 import { z } from 'zod'
 
-const userStatusSchema = z.union([
-  z.literal('active'),
-  z.literal('inactive'),
-  z.literal('suspended'),
-  z.literal('banned'),
+// The backend returns every role (see `Vyba-backend` UsersController.findAll,
+// unfiltered) — ADMIN rows are parsed here but filtered out by the query hook
+// before display; team members live in settings/admins, not this screen.
+const userRoleSchema = z.union([
+  z.literal('CLIENT'),
+  z.literal('VENUE_OWNER'),
+  z.literal('ADMIN'),
 ])
-export type UserStatus = z.infer<typeof userStatusSchema>
-
-// App users are clients or venue owners. Team members (ADMIN) live in settings/admins.
-const userRoleSchema = z.union([z.literal('CLIENT'), z.literal('VENUE_OWNER')])
 export type UserRole = z.infer<typeof userRoleSchema>
 
+// Matches spec 07's attribution `src` values (see `capture-landing.dto.ts`).
 const acquisitionSourceSchema = z.union([
   z.literal('qr'),
-  z.literal('web'),
-  z.literal('referral'),
+  z.literal('promoter'),
+  z.literal('social'),
   z.literal('organic'),
-  z.literal('campaign'),
 ])
 export type AcquisitionSource = z.infer<typeof acquisitionSourceSchema>
 
 const userSchema = z.object({
   id: z.string(),
-  name: z.string(),
-  email: z.string(),
   phone: z.string(),
-  avatarUrl: z.string().nullable(),
+  firstName: z.string().nullable(),
+  lastName: z.string().nullable(),
   role: userRoleSchema,
-  status: userStatusSchema,
-  city: z.string(),
-  acquisitionSource: acquisitionSourceSchema,
+  isActive: z.boolean(),
+  acquisitionSource: acquisitionSourceSchema.nullable(),
+  acquisitionZone: z.string().nullable(),
   createdAt: z.coerce.date(),
   updatedAt: z.coerce.date(),
 })

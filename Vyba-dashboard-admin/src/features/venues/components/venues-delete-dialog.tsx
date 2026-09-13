@@ -74,7 +74,7 @@ export function VenuesDeleteDialog({ open, onOpenChange, currentRow }: Props) {
           <Alert variant='destructive'>
             <AlertTitle>Warning!</AlertTitle>
             <AlertDescription>
-              This immediately removes the venue from any Zone 4 listing.
+              This immediately removes the venue from the feed and search.
             </AlertDescription>
           </Alert>
         </div>

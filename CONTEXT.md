@@ -29,7 +29,11 @@ The project is in a **validation phase**, not a general build-out. The goal is t
 prove one core loop works, with real venues and real users, in one dense area
 before expanding.
 
-- **Launch area:** Zone 4 / Marcory (one commune), not all of Abidjan.
+- **Launch area:** the pilot cohort of onboarded venues started in Zone 4 /
+  Marcory, but discovery itself is **not geofenced** (ADR-0005) — any active,
+  registered venue is discoverable anywhere, by text search or by proximity to
+  the user's live location ("nearby"). `inLaunchArea` survives only as an
+  analytics label distinguishing pilot-zone engagement from the rest.
 - **Core loop:** *Découvre → Vois ce qui se passe → Décide → J'y vais → Vis la
   soirée → Reviens la semaine suivante.*
 - **Scope rule:** anything that does not strengthen that loop is out of the
@@ -41,7 +45,7 @@ before expanding.
 
 | Actor | Who | In the product |
 |---|---|---|
-| **Client** | Someone going out in Zone 4 | Browses the feed, follows venues, marks "J'y vais", discovers venues on the map |
+| **Client** | Someone going out | Browses the feed, searches/discovers venues anywhere they're registered (including "nearby" by live location), follows venues, marks "J'y vais" |
 | **Venue owner** | A bar / lounge / nightclub / maquis manager | Posts venue updates and promotions, marks the venue live, sees attendance intent. Accounts are provisioned by the Vyba team, not self-serve. |
 | **Vyba team** | Founding / operations team | Onboards venues, creates editorial content, curates photos, monitors activity, runs the validation experiment. Works through the admin dashboard. |
 
@@ -50,8 +54,9 @@ truth** for identity and permissions.
 
 ## Core domain concepts (glossary)
 
-- **Venue** — a physical nightlife establishment in the launch area. Team-managed
-  during validation (no self-serve claiming).
+- **Venue** — a physical nightlife establishment. Team-managed during validation
+  (no self-serve claiming); discoverable wherever it is, not geofenced to the
+  pilot commune (ADR-0005).
 - **VenueNight** — *one venue + one calendar night.* The temporal spine of the
   product: all night-scoped state (live status, attendance intent, tonight's
   headline/DJ, night-specific promos and photos) belongs to a VenueNight, never to

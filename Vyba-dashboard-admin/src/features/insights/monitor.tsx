@@ -32,7 +32,8 @@ export function MonitorContent() {
             VenueNight monitor
           </h2>
           <p className='text-muted-foreground'>
-            Ce soir, à Zone 4 — les lieux silencieux remontent en premier.
+            Ce soir, tous lieux confondus — les lieux silencieux remontent en
+            premier.
           </p>
         </div>
         <Button

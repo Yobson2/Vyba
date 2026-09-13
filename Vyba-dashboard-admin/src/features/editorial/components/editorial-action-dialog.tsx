@@ -219,7 +219,10 @@ export function EditorialActionDialog({
                       placeholder='Area-wide'
                       className='col-span-4'
                       items={[
-                        { label: 'Area-wide (Zone 4)', value: AREA_WIDE },
+                        {
+                          label: 'Area-wide (not tied to a venue)',
+                          value: AREA_WIDE,
+                        },
                         ...(venues ?? []).map((v) => ({
                           label: v.name,
                           value: v.id,

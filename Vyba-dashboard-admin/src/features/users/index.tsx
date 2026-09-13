@@ -3,16 +3,17 @@ import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
+import { useUsersQuery } from './api/users-api'
 import { columns } from './components/users-columns'
+import { UsersDialogs } from './components/users-dialogs'
 import { UsersTable } from './components/users-table'
-import { userListSchema } from './data/schema'
-import { users } from './data/users'
+import UsersProvider from './context/users-context'
 
 export default function Users() {
-  const userList = userListSchema.parse(users)
+  const { data: userList, isLoading, isError, error } = useUsersQuery()
 
   return (
-    <>
+    <UsersProvider>
       <Header fixed>
         <Search />
         <div className='ml-auto flex items-center space-x-4'>
@@ -26,15 +27,28 @@ export default function Users() {
           <div>
             <h2 className='text-2xl font-bold tracking-tight'>Users</h2>
             <p className='text-muted-foreground'>
-              Read-only view of app users — clients and venue owners — with
-              acquisition source for support lookup.
+              Clients and venue owners — acquisition source for support
+              lookup, deactivate/reactivate access.
             </p>
           </div>
         </div>
         <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-y-0 lg:space-x-12'>
-          <UsersTable data={userList} columns={columns} />
+          {isError ? (
+            <p className='text-destructive py-8 text-center'>
+              Failed to load users
+              {error instanceof Error ? `: ${error.message}` : '.'}
+            </p>
+          ) : isLoading ? (
+            <p className='text-muted-foreground py-8 text-center'>
+              Loading users...
+            </p>
+          ) : (
+            <UsersTable data={userList ?? []} columns={columns} />
+          )}
         </div>
       </Main>
-    </>
+
+      <UsersDialogs />
+    </UsersProvider>
   )
 }

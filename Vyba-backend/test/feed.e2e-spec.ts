@@ -321,7 +321,7 @@ describe('Feed (e2e)', () => {
       expect(items.filter((i) => i.id === onItem!.id)).toHaveLength(1);
     });
 
-    it('a live venue outside the launch area never appears in the feed', async () => {
+    it('a live venue outside the original launch area still appears in the feed (ADR-0005)', async () => {
       const http = app.getHttpServer();
       const createRes = await request(http)
         .post('/api/venues')
@@ -371,7 +371,7 @@ describe('Feed (e2e)', () => {
         (feedRes.body as Array<{ venue?: { id: string } }>).some(
           (i) => i.venue?.id === createRes.body.id,
         ),
-      ).toBe(false);
+      ).toBe(true);
     });
   });
 

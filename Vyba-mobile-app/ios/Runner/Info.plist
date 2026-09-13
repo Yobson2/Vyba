@@ -51,5 +51,7 @@
 		<string>Vyba a besoin d'accéder à vos photos pour ajouter une photo à un lieu.</string>
 		<key>NSCameraUsageDescription</key>
 		<string>Vyba a besoin d'accéder à votre appareil photo pour ajouter une photo à un lieu.</string>
+		<key>NSLocationWhenInUseUsageDescription</key>
+		<string>Vyba a besoin de votre position pour vous montrer les lieux les plus proches.</string>
 	</dict>
 </plist>

@@ -38,7 +38,11 @@ async function bootstrap() {
     origin:
       allowedOrigins && allowedOrigins.length > 0
         ? allowedOrigins
-        : ['http://localhost:3000', 'http://localhost:4200'],
+        : [
+            'http://localhost:3000',
+            'http://localhost:4200',
+            'http://localhost:5173',
+          ],
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
     exposedHeaders: ['Content-Range', 'X-Content-Range'],

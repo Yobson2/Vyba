@@ -1,28 +1,16 @@
 import { z } from 'zod'
-import type { AdminRole } from '@/types/admin'
 
-const adminStatusSchema = z.union([
-  z.literal('active'),
-  z.literal('invited'),
-  z.literal('deactivated'),
-])
-export type AdminStatus = z.infer<typeof adminStatusSchema>
-
-const adminRoleSchema: z.ZodType<AdminRole> = z.union([
-  z.literal('ADMIN'),
-  z.literal('VENUE_OWNER'),
-  z.literal('CLIENT'),
-])
-
+// Every row here is a real ADMIN account (dashboard access) — there is no
+// separate role/status enum: "status" is just `isActive`.
 const adminSchema = z.object({
   id: z.string(),
-  name: z.string(),
   email: z.string().email(),
-  role: adminRoleSchema,
-  status: adminStatusSchema,
-  lastActive: z.coerce.date().nullable(),
+  firstName: z.string().nullable(),
+  lastName: z.string().nullable(),
+  isActive: z.boolean(),
   createdAt: z.coerce.date(),
+  updatedAt: z.coerce.date(),
 })
-
 export type Admin = z.infer<typeof adminSchema>
+
 export const adminListSchema = z.array(adminSchema)

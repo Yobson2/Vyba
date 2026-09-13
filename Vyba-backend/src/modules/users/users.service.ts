@@ -106,6 +106,33 @@ export class UsersService {
     return saved;
   }
 
+  /**
+   * Creates the `User` row backing an email+password ADMIN account (ADR-0003
+   * exemption — see `AdminCredential`). `phone` is a synthetic placeholder,
+   * never used for OTP: the column is NOT NULL/unique but admin login never
+   * touches it.
+   */
+  async createAdminUser(
+    placeholderPhone: string,
+    firstName?: string,
+    lastName?: string,
+  ): Promise<User> {
+    const user = this.userRepository.create({
+      phone: placeholderPhone,
+      firstName: firstName ?? null,
+      lastName: lastName ?? null,
+      role: UserRole.ADMIN,
+      isActive: true,
+      ageConfirmedAt: new Date(),
+    });
+    return this.userRepository.save(user);
+  }
+
+  /** Used to guard "don't deactivate the last admin" (see `AuthService.updateAdmin`). */
+  async countActiveByRole(role: UserRole): Promise<number> {
+    return this.userRepository.count({ where: { role, isActive: true } });
+  }
+
   /** Records the 18+ confirmation on first verify (ADR-0003 / ticket 04). No-op once already set. */
   async confirmAge(id: string): Promise<User> {
     const user = await this.findOne(id);
@@ -224,7 +251,15 @@ export class UsersService {
 
   async update(id: string, dto: UpdateUserDto): Promise<User> {
     const user = await this.findOne(id);
-    Object.assign(user, dto);
+    // Not `Object.assign(user, dto)`: with `useDefineForClassFields` (target
+    // ES2022+), every declared-but-unsent optional field on `dto` is its own
+    // property set to `undefined` — Object.assign would copy that over and
+    // wipe the field on the in-memory `user` returned to the caller (the DB
+    // write itself is unaffected, TypeORM skips `undefined` columns, but the
+    // response lies about the current value until the next fetch).
+    if (dto.firstName !== undefined) user.firstName = dto.firstName;
+    if (dto.lastName !== undefined) user.lastName = dto.lastName;
+    if (dto.isActive !== undefined) user.isActive = dto.isActive;
     return this.userRepository.save(user);
   }
 

@@ -72,6 +72,46 @@ export class InvalidTokenError extends BaseAppException {
   }
 }
 
+export class InvalidAdminCredentialsError extends BaseAppException {
+  constructor() {
+    super(
+      'Invalid email or password',
+      HttpStatus.UNAUTHORIZED,
+      AuthErrorCode.INVALID_CREDENTIALS,
+    );
+  }
+}
+
+export class AdminEmailAlreadyExistsError extends BaseAppException {
+  constructor(email: string) {
+    super(
+      `An admin with email ${email} already exists`,
+      HttpStatus.CONFLICT,
+      AuthErrorCode.ADMIN_EMAIL_ALREADY_EXISTS,
+    );
+  }
+}
+
+export class CannotDeactivateSelfError extends BaseAppException {
+  constructor() {
+    super(
+      'You cannot deactivate your own admin account',
+      HttpStatus.BAD_REQUEST,
+      AuthErrorCode.ADMIN_CANNOT_DEACTIVATE_SELF,
+    );
+  }
+}
+
+export class CannotDeactivateLastAdminError extends BaseAppException {
+  constructor() {
+    super(
+      'Cannot deactivate the last active admin account',
+      HttpStatus.BAD_REQUEST,
+      AuthErrorCode.ADMIN_CANNOT_DEACTIVATE_LAST,
+    );
+  }
+}
+
 export class UnauthorizedRoleError extends BaseAppException {
   constructor(requiredRole: string) {
     super(

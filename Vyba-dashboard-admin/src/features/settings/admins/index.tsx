@@ -16,18 +16,17 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import ContentSection from '../components/content-section'
+import { useAdminsQuery } from './api/admins-api'
 import { adminsColumns } from './components/admins-columns'
 import { AdminsDialogs } from './components/admins-dialogs'
 import AdminsProvider, { useAdmins } from './context/admins-context'
-import { mockAdmins } from './data/mock-admins'
-import { adminListSchema } from './data/schema'
 
 function AdminsContent() {
   const { setOpen } = useAdmins()
-  const adminList = adminListSchema.parse(mockAdmins)
+  const { data: adminList, isLoading, isError, error } = useAdminsQuery()
 
   const table = useReactTable({
-    data: adminList,
+    data: adminList ?? [],
     columns: adminsColumns,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -54,49 +53,60 @@ function AdminsContent() {
           className='max-w-sm'
         />
         <div className='bg-muted/20 overflow-hidden rounded-xl'>
-          <Table>
-            <TableHeader>
-              {table.getHeaderGroups().map((headerGroup) => (
-                <TableRow key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  ))}
-                </TableRow>
-              ))}
-            </TableHeader>
-            <TableBody>
-              {table.getRowModel().rows?.length ? (
-                table.getRowModel().rows.map((row) => (
-                  <TableRow key={row.id}>
-                    {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </TableCell>
+          {isError ? (
+            <p className='text-destructive p-8 text-center text-sm'>
+              Failed to load admins
+              {error instanceof Error ? `: ${error.message}` : '.'}
+            </p>
+          ) : isLoading ? (
+            <p className='text-muted-foreground p-8 text-center text-sm'>
+              Loading admins...
+            </p>
+          ) : (
+            <Table>
+              <TableHeader>
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <TableRow key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => (
+                      <TableHead key={header.id}>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                      </TableHead>
                     ))}
                   </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell
-                    colSpan={adminsColumns.length}
-                    className='h-24 text-center'
-                  >
-                    No admin users found.
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
+                ))}
+              </TableHeader>
+              <TableBody>
+                {table.getRowModel().rows?.length ? (
+                  table.getRowModel().rows.map((row) => (
+                    <TableRow key={row.id}>
+                      {row.getVisibleCells().map((cell) => (
+                        <TableCell key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell
+                      colSpan={adminsColumns.length}
+                      className='h-24 text-center'
+                    >
+                      No admin users found.
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          )}
         </div>
       </div>
     </ContentSection>

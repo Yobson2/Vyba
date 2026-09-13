@@ -30,6 +30,7 @@ import { Route as AuthenticatedEditorialIndexImport } from './routes/_authentica
 import { Route as AuthenticatedDashboardIndexImport } from './routes/_authenticated/dashboard/index'
 import { Route as AuthenticatedCurationIndexImport } from './routes/_authenticated/curation/index'
 import { Route as AuthenticatedAnalyticsIndexImport } from './routes/_authenticated/analytics/index'
+import { Route as AuthenticatedSettingsSecurityImport } from './routes/_authenticated/settings/security'
 import { Route as AuthenticatedSettingsAppearanceImport } from './routes/_authenticated/settings/appearance'
 import { Route as AuthenticatedSettingsAdminsImport } from './routes/_authenticated/settings/admins'
 
@@ -158,6 +159,13 @@ const AuthenticatedAnalyticsIndexRoute =
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
+const AuthenticatedSettingsSecurityRoute =
+  AuthenticatedSettingsSecurityImport.update({
+    id: '/security',
+    path: '/security',
+    getParentRoute: () => AuthenticatedSettingsRouteRoute,
+  } as any)
+
 const AuthenticatedSettingsAppearanceRoute =
   AuthenticatedSettingsAppearanceImport.update({
     id: '/appearance',
@@ -267,6 +275,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsAppearanceImport
       parentRoute: typeof AuthenticatedSettingsRouteImport
     }
+    '/_authenticated/settings/security': {
+      id: '/_authenticated/settings/security'
+      path: '/security'
+      fullPath: '/settings/security'
+      preLoaderRoute: typeof AuthenticatedSettingsSecurityImport
+      parentRoute: typeof AuthenticatedSettingsRouteImport
+    }
     '/_authenticated/analytics/': {
       id: '/_authenticated/analytics/'
       path: '/analytics'
@@ -331,6 +346,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedSettingsRouteRouteChildren {
   AuthenticatedSettingsAdminsRoute: typeof AuthenticatedSettingsAdminsRoute
   AuthenticatedSettingsAppearanceRoute: typeof AuthenticatedSettingsAppearanceRoute
+  AuthenticatedSettingsSecurityRoute: typeof AuthenticatedSettingsSecurityRoute
   AuthenticatedSettingsIndexRoute: typeof AuthenticatedSettingsIndexRoute
 }
 
@@ -338,6 +354,7 @@ const AuthenticatedSettingsRouteRouteChildren: AuthenticatedSettingsRouteRouteCh
   {
     AuthenticatedSettingsAdminsRoute: AuthenticatedSettingsAdminsRoute,
     AuthenticatedSettingsAppearanceRoute: AuthenticatedSettingsAppearanceRoute,
+    AuthenticatedSettingsSecurityRoute: AuthenticatedSettingsSecurityRoute,
     AuthenticatedSettingsIndexRoute: AuthenticatedSettingsIndexRoute,
   }
 
@@ -385,6 +402,7 @@ export interface FileRoutesByFullPath {
   '/503': typeof errors503Route
   '/settings/admins': typeof AuthenticatedSettingsAdminsRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
+  '/settings/security': typeof AuthenticatedSettingsSecurityRoute
   '/analytics': typeof AuthenticatedAnalyticsIndexRoute
   '/curation': typeof AuthenticatedCurationIndexRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
@@ -408,6 +426,7 @@ export interface FileRoutesByTo {
   '/503': typeof errors503Route
   '/settings/admins': typeof AuthenticatedSettingsAdminsRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
+  '/settings/security': typeof AuthenticatedSettingsSecurityRoute
   '/analytics': typeof AuthenticatedAnalyticsIndexRoute
   '/curation': typeof AuthenticatedCurationIndexRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
@@ -433,6 +452,7 @@ export interface FileRoutesById {
   '/(errors)/503': typeof errors503Route
   '/_authenticated/settings/admins': typeof AuthenticatedSettingsAdminsRoute
   '/_authenticated/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
+  '/_authenticated/settings/security': typeof AuthenticatedSettingsSecurityRoute
   '/_authenticated/analytics/': typeof AuthenticatedAnalyticsIndexRoute
   '/_authenticated/curation/': typeof AuthenticatedCurationIndexRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
@@ -459,6 +479,7 @@ export interface FileRouteTypes {
     | '/503'
     | '/settings/admins'
     | '/settings/appearance'
+    | '/settings/security'
     | '/analytics'
     | '/curation'
     | '/dashboard'
@@ -481,6 +502,7 @@ export interface FileRouteTypes {
     | '/503'
     | '/settings/admins'
     | '/settings/appearance'
+    | '/settings/security'
     | '/analytics'
     | '/curation'
     | '/dashboard'
@@ -504,6 +526,7 @@ export interface FileRouteTypes {
     | '/(errors)/503'
     | '/_authenticated/settings/admins'
     | '/_authenticated/settings/appearance'
+    | '/_authenticated/settings/security'
     | '/_authenticated/analytics/'
     | '/_authenticated/curation/'
     | '/_authenticated/dashboard/'
@@ -585,6 +608,7 @@ export const routeTree = rootRoute
       "children": [
         "/_authenticated/settings/admins",
         "/_authenticated/settings/appearance",
+        "/_authenticated/settings/security",
         "/_authenticated/settings/"
       ]
     },
@@ -618,6 +642,10 @@ export const routeTree = rootRoute
     },
     "/_authenticated/settings/appearance": {
       "filePath": "_authenticated/settings/appearance.tsx",
+      "parent": "/_authenticated/settings"
+    },
+    "/_authenticated/settings/security": {
+      "filePath": "_authenticated/settings/security.tsx",
       "parent": "/_authenticated/settings"
     },
     "/_authenticated/analytics/": {

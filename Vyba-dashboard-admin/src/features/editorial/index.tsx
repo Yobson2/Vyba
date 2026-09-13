@@ -30,8 +30,7 @@ export default function Editorial() {
               Editorial composer
             </h2>
             <p className='text-muted-foreground'>
-              Team-authored feed content — keeps the Zone 4 feed alive on quiet
-              nights.
+              Team-authored feed content — keeps the feed alive on quiet nights.
             </p>
           </div>
           <EditorialPrimaryButtons />

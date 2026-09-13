@@ -6,7 +6,7 @@ part of 'venue_list_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$venueListNotifierHash() => r'39ac5c997992a90639d0886468e637ae01cfb6c4';
+String _$venueListNotifierHash() => r'0d55c7e781c31e63dc5095e880946b201d304390';
 
 /// See also [VenueListNotifier].
 @ProviderFor(VenueListNotifier)

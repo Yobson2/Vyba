@@ -7,10 +7,10 @@ part of 'venue_providers.dart';
 // **************************************************************************
 
 String _$venueRemoteDataSourceHash() =>
-    r'1ff7a1c84a4568682c363da993c8bb45d720f870';
+    r'83b806d7249b93d32adf2dbc492944eb1e40167b';
 
-/// Backs the Explore listing. Still mock — the backend has no public venue
-/// *list* endpoint yet (a later ticket).
+/// Backs the Explore listing — `GET /api/discover/venues` (ADR-0005): text
+/// search and/or geolocated "nearby" sorting, not geofenced.
 ///
 /// Copied from [venueRemoteDataSource].
 @ProviderFor(venueRemoteDataSource)

@@ -16,6 +16,8 @@ Treat a violation the same as a design-system violation — fix before merge.
 
 ## Status notes (verify with the audit skill)
 
+- **F01** — resolved. `UserAuthForm` now calls the real
+  `POST /api/auth/admin/login`; see S4.
 - **F02** — a `beforeLoad` guard already exists on
   `src/routes/_authenticated/route.tsx`. Confirm it also covers nested
   `route.tsx` files and the Axios request interceptor.
@@ -188,11 +190,20 @@ customStatement('SELECT * FROM notes WHERE title LIKE "%$query%"');
 
 ### S4. Authentication & Session Security
 
-**Why**: Both apps handle sensitive auth flows (phone+OTP, email/password, JWT sessions). The dashboard currently has mock auth that accepts any credentials.
+**Why**: Both apps handle sensitive auth flows (phone+OTP, email/password, JWT sessions).
 
 **Rules**:
 
-- **Dashboard — replace mock login** (P0): The `UserAuthForm` in `sign-in` uses `setTimeout(() => navigate('/dashboard'))`. Replace with real API call before any deployment.
+- **Dashboard admin auth** (implemented): `UserAuthForm` calls the real
+  `POST /api/auth/admin/login` (email+password — the one exemption ADR-0003
+  allows for this internal-only surface). Passwords are bcrypt-hashed and
+  stored on a separate `AdminCredential` entity, kept off the phone-OTP
+  `User` table. A bootstrap admin is created on boot only when
+  `SEED_ADMIN_EMAIL`/`SEED_ADMIN_PASSWORD` are set and no credential for that
+  email exists yet (`AdminSeedService`) — **never hardcoded, never
+  re-applied once changed**. `PATCH /api/auth/admin/password` (ADMIN-only,
+  requires the current password) rotates it — do this immediately after
+  first login, then unset the env vars.
 
 - **Dashboard — secure cookie flags** (P0):
 
@@ -957,7 +968,7 @@ test('password rejects common patterns', () {
 
 **P0 — Must fix before any deployment:**
 
-- [ ] Replace mock login in dashboard with real API authentication (F01)
+- [x] Replace mock login in dashboard with real API authentication (F01)
 - [ ] Add `beforeLoad` auth guard to `_authenticated` route layout (F02)
 - [ ] Remove `console.log(data)` and `eslint-disable` overrides from auth forms (F03)
 - [ ] Set cookie flags: `secure: true`, `sameSite: 'strict'` on auth token (F04)

@@ -19,6 +19,7 @@ class VenueRepositoryImpl implements VenueRepository {
   }) async {
     try {
       final models = await _remoteDataSource.getVenues(
+        queryParams: _queryParamsFor(filter),
         page: page,
         limit: limit,
       );
@@ -29,6 +30,24 @@ class VenueRepositoryImpl implements VenueRepository {
     } catch (e) {
       return Left(ServerFailure(message: e.toString()));
     }
+  }
+
+  /// Maps [VenueFilter] to the `/api/discover/venues` query params
+  /// (ADR-0005): `query`, and `lat`/`lng`/`radiusKm` when searching nearby.
+  Map<String, dynamic>? _queryParamsFor(VenueFilter? filter) {
+    if (filter == null) return null;
+    final params = <String, dynamic>{};
+    if (filter.query != null && filter.query!.isNotEmpty) {
+      params['query'] = filter.query;
+    }
+    if (filter.latitude != null && filter.longitude != null) {
+      params['lat'] = filter.latitude;
+      params['lng'] = filter.longitude;
+      if (filter.maxDistance != null) {
+        params['radiusKm'] = filter.maxDistance;
+      }
+    }
+    return params.isEmpty ? null : params;
   }
 
   @override

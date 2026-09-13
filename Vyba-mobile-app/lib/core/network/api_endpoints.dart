@@ -16,6 +16,9 @@ class ApiEndpoints {
   static const String venueReviews = '/venues/{id}/reviews';
   static const String venueEvents = '/venues/{id}/events';
 
+  // -- Venue discovery: text search + nearby (real backend; ADR-0005) --
+  static const String venuesDiscover = '/api/discover/venues';
+
   // -- Venue detail + tonight (real backend; ticket 06) --
   static const String venueDetailWithTonight = '/api/venues/{id}/detail';
   static const String ownerMyVenue = '/api/owner/venue';

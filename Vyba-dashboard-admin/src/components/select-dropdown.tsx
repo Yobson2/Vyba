@@ -1,3 +1,4 @@
+import { useFormContext } from 'react-hook-form'
 import { IconLoader } from '@tabler/icons-react'
 import { cn } from '@/lib/utils'
 import { FormControl } from '@/components/ui/form'
@@ -33,13 +34,19 @@ export function SelectDropdown({
   const defaultState = isControlled
     ? { value: defaultValue, onValueChange }
     : { defaultValue, onValueChange }
+  // Reusable both inside a react-hook-form <Form> (e.g. editorial/venues
+  // dialogs) and standalone (e.g. curation's plain status filter) — only
+  // wrap in <FormControl> when an ancestor <Form> actually exists, since it
+  // calls useFormContext() internally and crashes on a null context otherwise.
+  const formContext = useFormContext()
+  const trigger = (
+    <SelectTrigger disabled={disabled} className={cn(className)}>
+      <SelectValue placeholder={placeholder ?? 'Select'} />
+    </SelectTrigger>
+  )
   return (
     <Select {...defaultState}>
-      <FormControl>
-        <SelectTrigger disabled={disabled} className={cn(className)}>
-          <SelectValue placeholder={placeholder ?? 'Select'} />
-        </SelectTrigger>
-      </FormControl>
+      {formContext ? <FormControl>{trigger}</FormControl> : trigger}
       <SelectContent>
         {isPending ? (
           <SelectItem disabled value='loading' className='h-14'>

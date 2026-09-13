@@ -31,6 +31,10 @@ Everything else is secondary until those are answered.
 
 ## 2. Market & launch scope
 
+> **Superseded on discovery visibility by [ADR-0005](../adr/0005-venue-discovery-not-geofenced.md):**
+> venue discovery is no longer geofenced to Zone 4 — this section is kept as
+> the historical record of the original validation-phase launch scope.
+
 - **City:** Abidjan, Côte d'Ivoire.
 - **Launch area:** one high-density nightlife zone — **Zone 4 / Marcory**. Not all of
   Abidjan. Not Côte d'Ivoire.

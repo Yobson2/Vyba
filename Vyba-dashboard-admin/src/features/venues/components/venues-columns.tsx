@@ -94,9 +94,11 @@ export const columns: ColumnDef<Venue>[] = [
     enableSorting: false,
   },
   {
+    // Analytics label only (ADR-0005) — venues are discoverable everywhere;
+    // this just distinguishes the original Zone 4 pilot cohort for metrics.
     accessorKey: 'inLaunchArea',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Zone 4' />
+      <DataTableColumnHeader column={column} title='Pilot cohort' />
     ),
     cell: ({ row }) => {
       const inLaunchArea = row.getValue('inLaunchArea') as boolean
@@ -112,7 +114,7 @@ export const columns: ColumnDef<Venue>[] = [
           variant='outline'
           className='border-neutral-300 bg-neutral-300/40'
         >
-          Hors zone
+          Other area
         </Badge>
       )
     },

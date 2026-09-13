@@ -1,9 +1,16 @@
 export const ENDPOINTS = {
   AUTH: {
-    LOGIN: '/auth/login',
+    LOGIN: '/auth/admin/login',
     REGISTER: '/auth/register',
     LOGOUT: '/auth/logout',
     REFRESH: '/auth/refresh',
+    CHANGE_PASSWORD: '/auth/admin/password',
+  },
+  ADMINS: {
+    LIST: '/auth/admin',
+    CREATE: '/auth/admin',
+    DETAIL: (id: string) => `/auth/admin/${id}`,
+    RESET_PASSWORD: (id: string) => `/auth/admin/${id}/reset-password`,
   },
   USERS: {
     LIST: '/users',

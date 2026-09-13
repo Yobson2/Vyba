@@ -204,7 +204,7 @@ export function VenuesActionDialog({ currentRow, open, onOpenChange }: Props) {
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder='Rue du Canal, Zone 4, Marcory'
+                        placeholder='Rue du Canal, Marcory (any address — not limited to Zone 4)'
                         className='col-span-4'
                         {...field}
                       />
