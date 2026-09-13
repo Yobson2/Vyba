@@ -38,6 +38,17 @@ class ApiEndpoints {
   static const String goingOwnerSummary =
       '/api/going/venue/{venueId}/owner-summary';
 
+  // -- Reservations (opt-in per venue, real backend; ADR-0006) --
+  static const String reservationCreate = '/api/reservations';
+  static const String reservationByVenue = '/api/reservations/venue/{venueId}';
+  static const String reservationMine =
+      '/api/reservations/venue/{venueId}/mine';
+  static const String reservationAvailability =
+      '/api/reservations/venue/{venueId}/availability';
+  static const String reservationOwnerList =
+      '/api/reservations/venue/{venueId}/owner';
+  static const String reservationRespond = '/api/reservations/{id}/respond';
+
   // -- Promo create (real backend; ticket 09) --
   static const String venuePromoCreate = '/api/feed/venue/{venueId}/promo';
 

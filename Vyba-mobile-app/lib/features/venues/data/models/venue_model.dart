@@ -32,6 +32,8 @@ abstract class VenueModel with _$VenueModel {
     VenueTonightModel? tonight,
     @Default([]) List<VenuePromoModel> promos,
     @Default(0) int followerCount,
+    int? capacity,
+    @Default(false) bool reservationsEnabled,
   }) = _VenueModel;
 
   factory VenueModel.fromJson(Map<String, dynamic> json) =>
@@ -62,5 +64,7 @@ abstract class VenueModel with _$VenueModel {
         tonight: tonight?.toEntity(),
         promos: promos.map((p) => p.toEntity()).toList(),
         followerCount: followerCount,
+        capacity: capacity,
+        reservationsEnabled: reservationsEnabled,
       );
 }

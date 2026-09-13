@@ -35,6 +35,8 @@ export interface VenueDetail {
   priceLevel: number;
   photos: string[];
   inLaunchArea: boolean;
+  capacity: number | null;
+  reservationsEnabled: boolean;
   tonight: VenueTonight | null;
   promos: PromoSummary[];
   followerCount: number;
@@ -158,6 +160,8 @@ export class VenueNightsService {
       priceLevel: venue.priceLevel,
       photos: venue.photos,
       inLaunchArea: venue.inLaunchArea,
+      capacity: venue.capacity,
+      reservationsEnabled: venue.reservationsEnabled,
       promos,
       followerCount,
       isFollowing,

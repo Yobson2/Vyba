@@ -22,6 +22,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { Switch } from '@/components/ui/switch'
 import { Textarea } from '@/components/ui/textarea'
 import { SelectDropdown } from '@/components/select-dropdown'
 import {
@@ -54,6 +55,13 @@ const formSchema = z.object({
   venueType: z.string().min(1, { message: 'Venue type is required.' }),
   priceLevel: z.string().min(1, { message: 'Price level is required.' }),
   validationStatus: z.string().min(1, { message: 'Status is required.' }),
+  capacity: z
+    .string()
+    .optional()
+    .refine((v) => !v || (!Number.isNaN(Number(v)) && Number(v) >= 1), {
+      message: 'Enter a positive number.',
+    }),
+  reservationsEnabled: z.boolean(),
 })
 type VenueForm = z.infer<typeof formSchema>
 
@@ -81,6 +89,8 @@ export function VenuesActionDialog({ currentRow, open, onOpenChange }: Props) {
           venueType: currentRow.venueType,
           priceLevel: String(currentRow.priceLevel),
           validationStatus: currentRow.validationStatus,
+          capacity: currentRow.capacity ? String(currentRow.capacity) : '',
+          reservationsEnabled: currentRow.reservationsEnabled,
         }
       : {
           name: '',
@@ -91,6 +101,8 @@ export function VenuesActionDialog({ currentRow, open, onOpenChange }: Props) {
           venueType: '',
           priceLevel: '',
           validationStatus: 'ONBOARDING',
+          capacity: '',
+          reservationsEnabled: false,
         },
   })
 
@@ -103,6 +115,8 @@ export function VenuesActionDialog({ currentRow, open, onOpenChange }: Props) {
       longitude: Number(values.longitude),
       venueType: values.venueType as Venue['venueType'],
       priceLevel: Number(values.priceLevel),
+      capacity: values.capacity ? Number(values.capacity) : undefined,
+      reservationsEnabled: values.reservationsEnabled,
     }
 
     const onSuccess = () => {
@@ -293,6 +307,49 @@ export function VenuesActionDialog({ currentRow, open, onOpenChange }: Props) {
                         value,
                       }))}
                     />
+                    <FormMessage className='col-span-4 col-start-3' />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name='capacity'
+                render={({ field }) => (
+                  <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
+                    <FormLabel className='col-span-2 text-right'>
+                      Capacity
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder='Seating/standing capacity (optional)'
+                        inputMode='numeric'
+                        className='col-span-4'
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage className='col-span-4 col-start-3' />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name='reservationsEnabled'
+                render={({ field }) => (
+                  <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
+                    <FormLabel className='col-span-2 text-right'>
+                      Reservations
+                    </FormLabel>
+                    <div className='col-span-4 flex items-center gap-2'>
+                      <FormControl>
+                        <Switch
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <span className='text-muted-foreground text-sm'>
+                        Opt this venue into real reservations (ADR-0006)
+                      </span>
+                    </div>
                     <FormMessage className='col-span-4 col-start-3' />
                   </FormItem>
                 )}

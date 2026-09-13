@@ -1,4 +1,5 @@
 import {
+  IsBoolean,
   IsEnum,
   IsInt,
   IsNumber,
@@ -56,4 +57,17 @@ export class UpdateVenueDto {
   @IsOptional()
   @IsEnum(VenueValidationStatus)
   validationStatus?: VenueValidationStatus;
+
+  @ApiPropertyOptional({ description: 'Declared seating/standing capacity' })
+  @IsOptional()
+  @IsInt()
+  @Min(1)
+  capacity?: number;
+
+  @ApiPropertyOptional({
+    description: 'Opt this venue into real reservations (ADR-0006)',
+  })
+  @IsOptional()
+  @IsBoolean()
+  reservationsEnabled?: boolean;
 }

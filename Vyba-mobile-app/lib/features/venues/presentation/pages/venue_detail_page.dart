@@ -13,6 +13,7 @@ import 'package:flutter_templates/features/broadcast_opt_in/presentation/widgets
 import 'package:flutter_templates/features/follow/presentation/widgets/follow_button.dart';
 import 'package:flutter_templates/features/going/presentation/widgets/going_section.dart';
 import 'package:flutter_templates/features/media/presentation/widgets/night_photos_section.dart';
+import 'package:flutter_templates/features/reservations/presentation/widgets/reservation_section.dart';
 import 'package:flutter_templates/features/venues/domain/entities/venue.dart';
 import 'package:flutter_templates/features/venues/domain/entities/venue_promo.dart';
 import 'package:flutter_templates/features/venues/domain/entities/venue_tonight.dart';
@@ -184,9 +185,16 @@ class _VenueDetailPageState extends ConsumerState<VenueDetailPage> {
                                 label: const Text('Ouvrir dans Google Maps'),
                               ),
                               AppSpacing.verticalLg,
-                              _TonightBlock(tonight: venue.tonight),
+                              _TonightBlock(
+                                tonight: venue.tonight,
+                                occupancyLevel: venue.occupancyLevel,
+                              ),
                               AppSpacing.verticalMd,
                               GoingSection(venueId: venue.id),
+                              if (venue.reservationsEnabled) ...[
+                                AppSpacing.verticalSm,
+                                ReservationSection(venueId: venue.id),
+                              ],
                               AppSpacing.verticalSm,
                               BroadcastOptInToggle(venueId: venue.id),
                               if (venue.promos.isNotEmpty) ...[
@@ -327,9 +335,10 @@ class _PromoSection extends StatelessWidget {
 /// activity tonight (spec 02 / ADR-0001: tonight's state is never inferred,
 /// only ever `VenueNight` or absent).
 class _TonightBlock extends StatelessWidget {
-  const _TonightBlock({required this.tonight});
+  const _TonightBlock({required this.tonight, this.occupancyLevel});
 
   final VenueTonight? tonight;
+  final OccupancyLevel? occupancyLevel;
 
   @override
   Widget build(BuildContext context) {
@@ -354,6 +363,10 @@ class _TonightBlock extends StatelessWidget {
                     ),
               ),
             ),
+            if (occupancyLevel != null) ...[
+              _OccupancyChip(level: occupancyLevel!),
+              const SizedBox(width: 8),
+            ],
             if (goingCount > 0)
               Text(
                 '$goingCount y vont',
@@ -403,6 +416,10 @@ class _TonightBlock extends StatelessWidget {
                   ),
             ),
           ),
+          if (occupancyLevel != null) ...[
+            _OccupancyChip(level: occupancyLevel!),
+            const SizedBox(width: 8),
+          ],
           if (night.goingCount > 0)
             Text(
               '${night.goingCount} y vont',
@@ -411,6 +428,37 @@ class _TonightBlock extends StatelessWidget {
                   ),
             ),
         ],
+      ),
+    );
+  }
+}
+
+/// Quiet/busy/full gauge from `capacity` vs. tonight's going count — a rough
+/// signal, not an exact seat count.
+class _OccupancyChip extends StatelessWidget {
+  const _OccupancyChip({required this.level});
+
+  final OccupancyLevel level;
+
+  @override
+  Widget build(BuildContext context) {
+    final (label, color) = switch (level) {
+      OccupancyLevel.quiet => ('Calme', AppColors.success),
+      OccupancyLevel.busy => ('Animé', AppColors.onSurfaceVariant),
+      OccupancyLevel.full => ('Complet', AppColors.error),
+    };
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.12),
+        borderRadius: AppRadius.borderRadiusFull,
+      ),
+      child: Text(
+        label,
+        style: Theme.of(context)
+            .textTheme
+            .labelSmall
+            ?.copyWith(color: color, fontWeight: FontWeight.w700),
       ),
     );
   }

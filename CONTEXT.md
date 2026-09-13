@@ -56,7 +56,8 @@ truth** for identity and permissions.
 
 - **Venue** — a physical nightlife establishment. Team-managed during validation
   (no self-serve claiming); discoverable wherever it is, not geofenced to the
-  pilot commune (ADR-0005).
+  pilot commune (ADR-0005). Carries a declared `capacity` and an opt-in
+  `reservationsEnabled` flag (ADR-0006), both admin-set.
 - **VenueNight** — *one venue + one calendar night.* The temporal spine of the
   product: all night-scoped state (live status, attendance intent, tonight's
   headline/DJ, night-specific promos and photos) belongs to a VenueNight, never to
@@ -74,6 +75,11 @@ truth** for identity and permissions.
   (with N people)" signal. It is **not** a guaranteed reservation. Shown publicly
   as an aggregate count ("23 personnes y vont ce soir"); identity is private by
   default. One per user / venue / night, resets daily. See ADR-0002.
+- **Reservation** — a real table/seat request, **opt-in per venue**
+  (`Venue.reservationsEnabled`, admin-set) — most venues keep "J'y vais" as
+  their only signal. The owner confirms or rejects each request; confirming
+  is capacity-gated against the venue's declared `capacity`. Same-night only,
+  same guardrails as "J'y vais". See ADR-0006.
 - **Follow** — a client subscribing to a venue's updates. (Absorbs the older
   "favourites" idea.)
 - **Promotion** — a venue offer or event announcement, shown in the feed, usually

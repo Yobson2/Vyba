@@ -17,6 +17,7 @@ T _$identity<T>(T value) => value;
 mixin _$OwnerVenueModel {
   String get id;
   String get name;
+  bool get reservationsEnabled;
 
   /// Create a copy of OwnerVenueModel
   /// with the given fields replaced by the non-null parameter values.
@@ -35,16 +36,18 @@ mixin _$OwnerVenueModel {
         (other.runtimeType == runtimeType &&
             other is OwnerVenueModel &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.reservationsEnabled, reservationsEnabled) ||
+                other.reservationsEnabled == reservationsEnabled));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name);
+  int get hashCode => Object.hash(runtimeType, id, name, reservationsEnabled);
 
   @override
   String toString() {
-    return 'OwnerVenueModel(id: $id, name: $name)';
+    return 'OwnerVenueModel(id: $id, name: $name, reservationsEnabled: $reservationsEnabled)';
   }
 }
 
@@ -54,7 +57,7 @@ abstract mixin class $OwnerVenueModelCopyWith<$Res> {
           OwnerVenueModel value, $Res Function(OwnerVenueModel) _then) =
       _$OwnerVenueModelCopyWithImpl;
   @useResult
-  $Res call({String id, String name});
+  $Res call({String id, String name, bool reservationsEnabled});
 }
 
 /// @nodoc
@@ -72,6 +75,7 @@ class _$OwnerVenueModelCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? reservationsEnabled = null,
   }) {
     return _then(_self.copyWith(
       id: null == id
@@ -82,6 +86,10 @@ class _$OwnerVenueModelCopyWithImpl<$Res>
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      reservationsEnabled: null == reservationsEnabled
+          ? _self.reservationsEnabled
+          : reservationsEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -89,7 +97,9 @@ class _$OwnerVenueModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _OwnerVenueModel extends OwnerVenueModel {
-  const _OwnerVenueModel({required this.id, required this.name}) : super._();
+  const _OwnerVenueModel(
+      {required this.id, required this.name, this.reservationsEnabled = false})
+      : super._();
   factory _OwnerVenueModel.fromJson(Map<String, dynamic> json) =>
       _$OwnerVenueModelFromJson(json);
 
@@ -97,6 +107,9 @@ class _OwnerVenueModel extends OwnerVenueModel {
   final String id;
   @override
   final String name;
+  @override
+  @JsonKey()
+  final bool reservationsEnabled;
 
   /// Create a copy of OwnerVenueModel
   /// with the given fields replaced by the non-null parameter values.
@@ -119,16 +132,18 @@ class _OwnerVenueModel extends OwnerVenueModel {
         (other.runtimeType == runtimeType &&
             other is _OwnerVenueModel &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.reservationsEnabled, reservationsEnabled) ||
+                other.reservationsEnabled == reservationsEnabled));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name);
+  int get hashCode => Object.hash(runtimeType, id, name, reservationsEnabled);
 
   @override
   String toString() {
-    return 'OwnerVenueModel(id: $id, name: $name)';
+    return 'OwnerVenueModel(id: $id, name: $name, reservationsEnabled: $reservationsEnabled)';
   }
 }
 
@@ -140,7 +155,7 @@ abstract mixin class _$OwnerVenueModelCopyWith<$Res>
       __$OwnerVenueModelCopyWithImpl;
   @override
   @useResult
-  $Res call({String id, String name});
+  $Res call({String id, String name, bool reservationsEnabled});
 }
 
 /// @nodoc
@@ -158,6 +173,7 @@ class __$OwnerVenueModelCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? reservationsEnabled = null,
   }) {
     return _then(_OwnerVenueModel(
       id: null == id
@@ -168,6 +184,10 @@ class __$OwnerVenueModelCopyWithImpl<$Res>
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      reservationsEnabled: null == reservationsEnabled
+          ? _self.reservationsEnabled
+          : reservationsEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }

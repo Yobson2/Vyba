@@ -68,6 +68,15 @@ export enum GoingErrorCode {
   GOING_LOCKED = 'GOING_004',
 }
 
+export enum ReservationErrorCode {
+  RESERVATION_NOT_FOUND = 'RESERVATION_001',
+  RESERVATION_SELF_MARK = 'RESERVATION_002',
+  RESERVATION_RATE_LIMITED = 'RESERVATION_003',
+  RESERVATION_LOCKED = 'RESERVATION_004',
+  RESERVATION_DISABLED = 'RESERVATION_005',
+  RESERVATION_FULL = 'RESERVATION_006',
+}
+
 export enum AnalyticsErrorCode {
   UNKNOWN_EVENT = 'ANALYTICS_TRACK_001',
 }
@@ -110,6 +119,7 @@ export type ErrorCode =
   | VenueErrorCode
   | FeedErrorCode
   | GoingErrorCode
+  | ReservationErrorCode
   | AnalyticsErrorCode
   | MediaErrorCode
   | NotificationErrorCode

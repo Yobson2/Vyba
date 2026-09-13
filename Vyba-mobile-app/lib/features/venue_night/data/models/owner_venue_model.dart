@@ -13,10 +13,15 @@ abstract class OwnerVenueModel with _$OwnerVenueModel {
   const factory OwnerVenueModel({
     required String id,
     required String name,
+    @Default(false) bool reservationsEnabled,
   }) = _OwnerVenueModel;
 
   factory OwnerVenueModel.fromJson(Map<String, dynamic> json) =>
       _$OwnerVenueModelFromJson(json);
 
-  OwnerVenue toEntity() => OwnerVenue(id: id, name: name);
+  OwnerVenue toEntity() => OwnerVenue(
+        id: id,
+        name: name,
+        reservationsEnabled: reservationsEnabled,
+      );
 }

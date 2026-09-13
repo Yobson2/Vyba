@@ -41,6 +41,8 @@ export interface VenueWithOwner {
   ownerUserId: string | null;
   validationStatus: VenueValidationStatus;
   inLaunchArea: boolean;
+  capacity: number | null;
+  reservationsEnabled: boolean;
   owner: VenueOwnerSummary | null;
 }
 
@@ -76,6 +78,8 @@ export class VenuesService {
       venueType: dto.venueType,
       priceLevel: dto.priceLevel ?? 1,
       inLaunchArea: pointInLaunchArea(dto.latitude, dto.longitude),
+      capacity: dto.capacity ?? null,
+      reservationsEnabled: dto.reservationsEnabled ?? false,
     });
     const saved = await this.venueRepository.save(venue);
     return { ...saved, owner: null };
@@ -105,7 +109,24 @@ export class VenuesService {
 
   async update(id: string, dto: UpdateVenueDto): Promise<VenueWithOwner> {
     const venue = await this.findVenueOrThrow(id);
-    Object.assign(venue, dto);
+    // Not `Object.assign(venue, dto)`: with `useDefineForClassFields`, every
+    // declared-but-unsent optional field on `dto` is its own `undefined`
+    // property — Object.assign would copy that over and wipe it on the
+    // in-memory `venue` returned to the caller (see the identical fix in
+    // `UsersService.update`).
+    if (dto.name !== undefined) venue.name = dto.name;
+    if (dto.description !== undefined) venue.description = dto.description;
+    if (dto.address !== undefined) venue.address = dto.address;
+    if (dto.latitude !== undefined) venue.latitude = dto.latitude;
+    if (dto.longitude !== undefined) venue.longitude = dto.longitude;
+    if (dto.venueType !== undefined) venue.venueType = dto.venueType;
+    if (dto.priceLevel !== undefined) venue.priceLevel = dto.priceLevel;
+    if (dto.validationStatus !== undefined)
+      venue.validationStatus = dto.validationStatus;
+    if (dto.capacity !== undefined) venue.capacity = dto.capacity;
+    if (dto.reservationsEnabled !== undefined)
+      venue.reservationsEnabled = dto.reservationsEnabled;
+
     if (dto.latitude !== undefined || dto.longitude !== undefined) {
       venue.inLaunchArea = pointInLaunchArea(venue.latitude, venue.longitude);
     }

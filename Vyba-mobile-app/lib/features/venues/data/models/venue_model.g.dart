@@ -37,6 +37,8 @@ _VenueModel _$VenueModelFromJson(Map<String, dynamic> json) => _VenueModel(
               .toList() ??
           const [],
       followerCount: (json['followerCount'] as num?)?.toInt() ?? 0,
+      capacity: (json['capacity'] as num?)?.toInt(),
+      reservationsEnabled: json['reservationsEnabled'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$VenueModelToJson(_VenueModel instance) =>
@@ -62,4 +64,6 @@ Map<String, dynamic> _$VenueModelToJson(_VenueModel instance) =>
       'tonight': instance.tonight,
       'promos': instance.promos,
       'followerCount': instance.followerCount,
+      'capacity': instance.capacity,
+      'reservationsEnabled': instance.reservationsEnabled,
     };

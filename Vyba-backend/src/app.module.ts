@@ -25,6 +25,7 @@ import { FollowsModule } from '@modules/follows/follows.module';
 import { VenueNightsModule } from '@modules/venue-nights/venue-nights.module';
 import { FeedModule } from '@modules/feed/feed.module';
 import { GoingModule } from '@modules/going/going.module';
+import { ReservationsModule } from '@modules/reservations/reservations.module';
 import { AttributionModule } from '@modules/attribution/attribution.module';
 import { AnalyticsModule } from '@modules/analytics/analytics.module';
 import { MetricsModule } from '@modules/metrics/metrics.module';
@@ -89,6 +90,7 @@ import { HealthModule } from '@modules/health/health.module';
     VenueNightsModule,
     FeedModule,
     GoingModule,
+    ReservationsModule,
     AttributionModule,
     AnalyticsModule,
     MetricsModule,

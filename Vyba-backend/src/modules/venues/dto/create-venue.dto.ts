@@ -1,4 +1,5 @@
 import {
+  IsBoolean,
   IsEnum,
   IsInt,
   IsNumber,
@@ -47,4 +48,18 @@ export class CreateVenueDto {
   @Min(1)
   @Max(4)
   priceLevel?: number;
+
+  @ApiPropertyOptional({ description: 'Declared seating/standing capacity' })
+  @IsOptional()
+  @IsInt()
+  @Min(1)
+  capacity?: number;
+
+  @ApiPropertyOptional({
+    description: 'Opt this venue into real reservations (ADR-0006)',
+    default: false,
+  })
+  @IsOptional()
+  @IsBoolean()
+  reservationsEnabled?: boolean;
 }

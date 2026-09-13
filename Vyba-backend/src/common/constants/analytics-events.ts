@@ -11,6 +11,8 @@ export const ANALYTICS_EVENTS = [
   'venue_unfollowed',
   'going_marked',
   'going_cancelled',
+  'reservation_requested',
+  'reservation_cancelled',
   'promo_viewed',
   'promo_created',
   'event_viewed',
@@ -39,6 +41,7 @@ export const MEANINGFUL_ACTION_EVENTS: ReadonlySet<AnalyticsEvent> = new Set([
   'venue_viewed',
   'going_marked',
   'venue_followed',
+  'reservation_requested',
 ]);
 
 export function isMeaningfulAction(event: string): boolean {

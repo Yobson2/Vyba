@@ -32,6 +32,8 @@ export interface CreateVenuePayload {
   longitude: number
   venueType: VenueType
   priceLevel: number
+  capacity?: number
+  reservationsEnabled?: boolean
 }
 
 export function useCreateVenueMutation() {

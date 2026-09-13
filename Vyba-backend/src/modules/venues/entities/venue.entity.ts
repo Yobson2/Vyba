@@ -64,4 +64,16 @@ export class Venue extends BaseEntity {
   /** Derived from [latitude]/[longitude] via `pointInLaunchArea`; recomputed on coordinate change. */
   @Column({ default: false })
   inLaunchArea: boolean;
+
+  /** Declared seating/standing capacity — admin-set. Null until the team surveys it; drives the client's occupancy gauge (capacity vs. tonight's `VenueNight.goingCount`). */
+  @Column({ type: 'int', nullable: true })
+  capacity: number | null;
+
+  /**
+   * Opt-in real reservations (ADR-0006) — activates the `reservations`
+   * module's request/confirm flow for this venue only. Admin-set; most
+   * venues stay `false` and keep "J'y vais" as their only signal (ADR-0002).
+   */
+  @Column({ default: false })
+  reservationsEnabled: boolean;
 }

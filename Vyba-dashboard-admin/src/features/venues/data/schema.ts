@@ -46,6 +46,8 @@ const venueSchema = z.object({
   owner: venueOwnerSchema,
   validationStatus: validationStatusSchema,
   inLaunchArea: z.boolean(),
+  capacity: z.number().nullable(),
+  reservationsEnabled: z.boolean(),
   isActive: z.boolean(),
   createdAt: z.coerce.date(),
   updatedAt: z.coerce.date(),

@@ -27,6 +27,8 @@ class Venue {
     this.tonight,
     this.promos = const [],
     this.followerCount = 0,
+    this.capacity,
+    this.reservationsEnabled = false,
   });
 
   final String id;
@@ -61,9 +63,28 @@ class Venue {
   /// Follower count (ticket 10) — a count only, never identities.
   final int followerCount;
 
+  /// Declared seating/standing capacity, admin-set. Null = not surveyed yet.
+  final int? capacity;
+
+  /// Opt-in real reservations (ADR-0006) — most venues stay `false` and keep
+  /// "J'y vais" as their only signal (ADR-0002).
+  final bool reservationsEnabled;
+
   /// The live signal to actually render — prefers `tonight`, falls back to
   /// the legacy `isOpen` flag for venues fetched without tonight data.
   bool get isLiveTonight => tonight?.isLive ?? isOpen;
+
+  /// Quiet/busy/full from tonight's going count vs. declared capacity — null
+  /// when no capacity is declared or no `tonight` data was fetched.
+  OccupancyLevel? get occupancyLevel {
+    final cap = capacity;
+    final going = tonight?.goingCount;
+    if (cap == null || cap <= 0 || going == null) return null;
+    final ratio = going / cap;
+    if (ratio >= 0.8) return OccupancyLevel.full;
+    if (ratio >= 0.4) return OccupancyLevel.busy;
+    return OccupancyLevel.quiet;
+  }
 
   String get firstImage => heroImages.isNotEmpty ? heroImages.first : '';
 
@@ -76,6 +97,10 @@ class Venue {
   /// Price level shown as repeated FCFA markers (e.g. "FCFA FCFA").
   String get priceLevelLabel => List.filled(priceLevel, 'FCFA').join(' ');
 }
+
+/// Derived from `capacity` vs. tonight's going count — a rough gauge, not an
+/// exact seat count.
+enum OccupancyLevel { quiet, busy, full }
 
 /// Venue categories in the validation launch market (Zone 4 / Marcory).
 enum VenueType {

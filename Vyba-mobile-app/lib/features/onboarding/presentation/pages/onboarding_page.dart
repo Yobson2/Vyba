@@ -21,25 +21,25 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
 
   static const _steps = [
     _OnboardingData(
-      title: "Discover What's\nHappening ",
-      highlightedTitle: 'Tonight',
+      title: 'Découvre ce qui\nse passe ',
+      highlightedTitle: 'ce soir',
       subtitle:
-          'Explore the hottest venues, live events, and exclusive nights across West Africa.',
-      liveTag: 'Victoria Island',
+          'Explore les meilleurs lieux, événements en direct et soirées exclusives, partout à Abidjan.',
+      liveTag: 'Zone 4',
     ),
     _OnboardingData(
-      title: 'Book Your\n',
-      highlightedTitle: 'Experience',
+      title: 'Réserve ton\n',
+      highlightedTitle: 'expérience',
       subtitle:
-          'Reserve VIP tables, skip the line, and secure your spot at the best venues.',
-      liveTag: 'Lekki Phase 1',
+          "Réserve une table, évite la file d'attente et assure ta place dans les meilleurs lieux qui le proposent.",
+      liveTag: 'Cocody',
     ),
     _OnboardingData(
-      title: 'Own the\n',
-      highlightedTitle: 'Night',
+      title: 'Vis la\n',
+      highlightedTitle: 'nuit',
       subtitle:
-          'Get personalized recommendations and real-time updates on the pulse of the city.',
-      liveTag: 'Ikoyi',
+          'Reçois des recommandations personnalisées et suis en temps réel ce qui anime la ville.',
+      liveTag: 'Plateau',
     ),
   ];
 
@@ -65,8 +65,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
           children: [
             // Top bar: logo + skip
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -99,7 +98,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                   GestureDetector(
                     onTap: _onComplete,
                     child: Text(
-                      'SKIP',
+                      'PASSER',
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
                             color: AppColors.onSurfaceVariant,
                             letterSpacing: 2,
@@ -206,7 +205,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Text(
-                                    'LIVE NOW',
+                                    'EN DIRECT',
                                     style: Theme.of(context)
                                         .textTheme
                                         .labelSmall
@@ -295,16 +294,15 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                     _onComplete();
                   }
                 },
-                label: currentPage == 2 ? 'Get Started' : 'Next Step',
+                label: currentPage == 2 ? 'Commencer' : 'Suivant',
                 icon: Icons.arrow_forward,
               ),
             ),
             // Footer
             Text(
-              'POWERED BY Abidjan PULSE VIP NETWORK',
+              'VYBA — LA NUIT À ABIDJAN',
               style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                    color:
-                        AppColors.onSurfaceVariant.withValues(alpha: 0.4),
+                    color: AppColors.onSurfaceVariant.withValues(alpha: 0.4),
                     letterSpacing: 1.5,
                   ),
             ),

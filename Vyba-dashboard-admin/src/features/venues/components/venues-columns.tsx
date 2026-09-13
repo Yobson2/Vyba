@@ -121,6 +121,27 @@ export const columns: ColumnDef<Venue>[] = [
     enableSorting: false,
   },
   {
+    id: 'reservations',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Reservations' />
+    ),
+    cell: ({ row }) => {
+      const { reservationsEnabled, capacity } = row.original
+      if (!reservationsEnabled) {
+        return <span className='text-muted-foreground text-sm'>—</span>
+      }
+      return (
+        <Badge
+          variant='outline'
+          className='border-amber-200 bg-amber-100/30 text-amber-900 dark:text-amber-200'
+        >
+          On{capacity ? ` · ${capacity}` : ''}
+        </Badge>
+      )
+    },
+    enableSorting: false,
+  },
+  {
     accessorKey: 'owner',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Owner' />
