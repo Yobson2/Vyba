@@ -13,7 +13,7 @@ flutter_launcher_icons:
   min_sdk_android: 21
 
   # Android adaptive icon (Android 8.0+)
-  adaptive_icon_background: "#6C5CE7"
+  adaptive_icon_background: "#1A2550"
   adaptive_icon_foreground: "assets/icon/icon-foreground.png"
 
   # Remove alpha channel for iOS (App Store requirement)

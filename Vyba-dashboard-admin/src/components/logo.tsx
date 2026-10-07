@@ -1,100 +1,58 @@
 import { type SVGProps } from 'react'
 
+const MARK_COLOR = '#B0A3FF'
+const LIVE_DOT_COLOR = '#69F6B8'
+
 /**
- * Vyba pulse mark — V-shaped heartbeat wave with neon pulse dot.
- * Gradient version for dark backgrounds (primary use).
+ * Vyba "Mains en l'air" mark — a rounded V (pin / arms raised) with the
+ * live dot in its opening. Brand colours, for dark surfaces.
  */
 export function Logo({ ...props }: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      viewBox='0 0 140 100'
+      viewBox='12 16 76 76'
       fill='none'
       {...props}
     >
-      <defs>
-        <linearGradient
-          id='vyba-pulse-grad'
-          x1='0'
-          y1='0'
-          x2='140'
-          y2='140'
-          gradientUnits='userSpaceOnUse'
-        >
-          <stop offset='0%' stopColor='#B0A3FF' />
-          <stop offset='100%' stopColor='#6C5CE7' />
-        </linearGradient>
-      </defs>
       <path
-        d='M8 68 L38 68 L64 16 L72 16 L98 68 L128 68 L128 78 L94 78 L69 32 L44 78 L8 78 Z'
-        fill='url(#vyba-pulse-grad)'
+        d='M24 28 L50 76 L76 28'
+        stroke={MARK_COLOR}
+        strokeWidth={16}
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
-      <circle cx='116' cy='46' r='8' fill='#FF2D78' />
+      <circle cx={50} cy={28} r={8} fill={LIVE_DOT_COLOR} />
     </svg>
   )
 }
 
 /**
- * Full wordmark logo (pulse mark + "Vyba" text).
- * Uses currentColor for text to adapt to theme.
+ * Horizontal lockup (mark + outlined "vyba" wordmark).
+ * The wordmark uses currentColor to adapt to light/dark.
  */
 export function LogoFull({ ...props }: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      viewBox='0 0 520 160'
+      viewBox='0 -80 339 104'
       fill='none'
       {...props}
     >
-      <defs>
-        <linearGradient
-          id='vyba-full-grad'
-          x1='0'
-          y1='0'
-          x2='140'
-          y2='140'
-          gradientUnits='userSpaceOnUse'
-        >
-          <stop offset='0%' stopColor='#B0A3FF' />
-          <stop offset='100%' stopColor='#6C5CE7' />
-        </linearGradient>
-      </defs>
-
-      {/* Pulse Mark */}
-      <g transform='translate(0, 10)'>
+      <g transform='translate(-19.2 -102) scale(1.2)'>
         <path
-          d='M8 78 L38 78 L64 26 L72 26 L98 78 L128 78 L128 88 L94 88 L69 42 L44 88 L8 88 Z'
-          fill='url(#vyba-full-grad)'
+          d='M24 28 L50 76 L76 28'
+          stroke={MARK_COLOR}
+          strokeWidth={16}
+          strokeLinecap='round'
+          strokeLinejoin='round'
         />
-        <circle cx='116' cy='56' r='8' fill='#FF2D78' />
+        <circle cx={50} cy={28} r={8} fill={LIVE_DOT_COLOR} />
       </g>
-
-      {/* Wordmark — uses currentColor to adapt to light/dark */}
-      <text
-        x='152'
-        y='105'
+      <path
+        d='M139.50-53.10L157.95-53.10L142.40 0L118.25 0L102.40-53.10L120.80-53.10L130.30-11.05L139.50-53.10ZM166.60 23.15L166.60 23.15Q163.90 23.15 161.85 22.98Q159.80 22.80 159.25 22.60L159.25 22.60L159.25 9.45Q159.90 9.75 161.57 9.90Q163.25 10.05 165.15 10.05L165.15 10.05Q167.40 10.05 169.28 9.18Q171.15 8.30 172.55 6.73Q173.95 5.15 174.70 2.90L174.70 2.90L175.40 0.85L157.10-53.10L175.70-53.10L185.15-14.45L194.20-53.10L212.50-53.10L194.70 2Q192.45 8.80 189.22 13.53Q186 18.25 180.65 20.70Q175.30 23.15 166.60 23.15ZM249.75 1.20L249.75 1.20Q243.45 1.20 238.25-2.25L238.25-2.25Q235.70-3.90 233.70-6.10L233.70-6.10L233.70 0L215.85 0L215.85-78.15L233.70-78.15L233.70-47.20Q235.70-49.30 238.25-50.85L238.25-50.85Q243.45-54.10 249.75-54.10L249.75-54.10Q256.20-54.10 261.88-50.95Q267.55-47.80 271.08-41.73Q274.60-35.65 274.60-26.85L274.60-26.85Q274.60-17.60 271.15-11.38Q267.70-5.15 262.05-1.98Q256.40 1.20 249.75 1.20ZM233.70-28.55L233.70-25.15Q233.70-21.65 235.33-19.13Q236.95-16.60 239.53-15.28Q242.10-13.95 244.85-13.95L244.85-13.95Q249.30-13.95 252.75-17.05Q256.20-20.15 256.20-26.85Q256.20-33.55 252.78-36.52Q249.35-39.50 244.85-39.50L244.85-39.50Q242.15-39.50 239.58-38.23Q237-36.95 235.35-34.52Q233.70-32.10 233.70-28.55L233.70-28.55ZM297.90 1.15L297.90 1.15Q292.15 1.15 287.65-0.68Q283.15-2.50 280.55-6Q277.95-9.50 277.95-14.50L277.95-14.50Q277.95-20.25 281.20-23.83Q284.45-27.40 289.65-29.28Q294.85-31.15 300.65-31.70L300.65-31.70Q309.05-32.50 312.13-33.13Q315.20-33.75 315.20-35.30L315.20-35.30L315.20-35.40Q315.20-37.80 312.68-39.30Q310.15-40.80 305.75-40.80L305.75-40.80Q301.10-40.80 298.73-39.13Q296.35-37.45 296.35-34.05L296.35-34.05L278.75-34.05Q278.75-40.60 282.38-45.08Q286-49.55 292.15-51.85Q298.30-54.15 305.90-54.15L305.90-54.15Q313.10-54.15 319.28-52Q325.45-49.85 329.28-45.45Q333.10-41.05 333.10-34.25L333.10-34.25L333.10-12.45Q333.10-10.35 333.20-8.38Q333.30-6.40 333.75-4.75L333.75-4.75Q334.30-2.95 335.13-1.70Q335.95-0.45 336.45 0L336.45 0L319 0Q318.60-0.40 317.83-1.55Q317.05-2.70 316.50-4.20L316.50-4.20Q316.30-4.85 316.10-5.50L316.10-5.50Q315.35-4.70 314.50-4L314.50-4Q311.30-1.50 307-0.18Q302.70 1.15 297.90 1.15ZM303-11.80L303-11.80Q306.10-11.80 308.95-13.05Q311.80-14.30 313.65-17.05L313.65-17.05Q315.15-19.30 315.45-22.75L315.45-22.75Q314.05-22.40 312.50-22.15L312.50-22.15Q308.30-21.35 304.30-20.95L304.30-20.95Q300.05-20.50 297.95-19.50Q295.85-18.50 295.85-16.20L295.85-16.20Q295.85-14 297.68-12.90Q299.50-11.80 303-11.80Z'
         fill='currentColor'
-        fontFamily="'Epilogue', sans-serif"
-        fontWeight='700'
-        fontSize='72'
-        letterSpacing='-1.5px'
-      >
-        Vyba
-      </text>
-
-      {/* Tagline */}
-      <text
-        x='156'
-        y='132'
-        fill='currentColor'
-        opacity='0.5'
-        fontFamily="'Inter', sans-serif"
-        fontWeight='500'
-        fontSize='16'
-        letterSpacing='4px'
-      >
-        Abidjan PULSE
-      </text>
+      />
     </svg>
   )
 }
