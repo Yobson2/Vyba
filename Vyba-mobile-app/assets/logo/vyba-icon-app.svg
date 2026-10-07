@@ -1,41 +1,4 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
-  <defs>
-    <linearGradient id="pulseGradient" x1="0" y1="0" x2="1024" y2="1024" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#B0A3FF"/>
-      <stop offset="100%" stop-color="#6C5CE7"/>
-    </linearGradient>
-    <!-- Subtle radial glow behind the mark for depth -->
-    <radialGradient id="bgGlow" cx="50%" cy="45%" r="50%">
-      <stop offset="0%" stop-color="#1A1445" stop-opacity="1"/>
-      <stop offset="100%" stop-color="#060E20" stop-opacity="1"/>
-    </radialGradient>
-  </defs>
-
-  <!-- Background -->
-  <rect width="1024" height="1024" fill="url(#bgGlow)"/>
-
-  <!-- V Pulse Wave Mark — centered and scaled up -->
-  <g transform="translate(172, 280)">
-    <!-- The mark scaled to ~680px wide, centered in 1024 -->
-    <path d="
-      M 0 240
-      L 120 240
-      L 280 40
-      L 320 40
-      L 480 240
-      L 600 240
-      L 600 280
-      L 460 280
-      L 302 88
-      L 198 280
-      L 0 280
-      Z
-    " fill="#DEE5FF"/>
-
-    <!-- Pulse Dot -->
-    <circle cx="550" cy="150" r="40" fill="#FF2D78"/>
-
-    <!-- Subtle glow on pulse dot -->
-    <circle cx="550" cy="150" r="56" fill="#FF2D78" opacity="0.15"/>
-  </g>
+<rect width="1024" height="1024" fill="#1A2550"/>
+<g transform="translate(512 512) scale(6.758400000000001) translate(-50 -52)"><path d="M24 28 L50 76 L76 28" fill="none" stroke="#B0A3FF" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/><circle cx="50" cy="28" r="8" fill="#69F6B8"/></g>
 </svg>
