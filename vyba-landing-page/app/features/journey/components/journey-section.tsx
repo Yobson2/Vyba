@@ -86,9 +86,7 @@ export function JourneySection() {
                     <p
                       className={cn(
                         "inline-flex rounded-full px-3 py-1 font-mono text-xs tabular-nums transition-colors duration-500",
-                        isActive
-                          ? "bg-primary text-on-primary"
-                          : "bg-surface-high text-on-surface-variant"
+                        isActive ? "bg-primary text-on-primary" : "bg-surface-high text-on-surface"
                       )}
                     >
                       {t(`steps.${key}.time`)}
