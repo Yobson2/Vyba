@@ -1,0 +1,287 @@
+{
+  "metadata": {
+    "title": "Vyba — On bouge où ce soir ?",
+    "description": "Vyba réunit ce qui se passe ce soir dans les bars, lounges, boîtes et maquis d'Abidjan : qui est live, les soirées, les promos, et combien de personnes y vont."
+  },
+  "nav": {
+    "journey": "Comment ça marche",
+    "going": "J'y vais",
+    "venues": "Pour les lieux",
+    "faq": "Questions",
+    "home": "Vyba, retour à l'accueil",
+    "menuLabel": "Menu principal",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "skipToContent": "Aller au contenu"
+  },
+  "cta": {
+    "playStore": "Télécharger sur Google Play",
+    "playStoreShort": "Google Play",
+    "playStoreSoon": "Bientôt sur Google Play",
+    "whatsapp": "Parler à l'équipe sur WhatsApp",
+    "whatsappShort": "Écrire sur WhatsApp",
+    "whatsappSoon": "WhatsApp bientôt disponible",
+    "newTab": "(nouvel onglet)"
+  },
+  "device": {
+    "caption": "Aperçu de l'app · lieux et contenus d'exemple",
+    "tonight": "Ce soir",
+    "area": "Zone 4",
+    "nearby": "Autour de moi",
+    "search": "Un lieu, un quartier…",
+    "live": "Live ce soir",
+    "promo": "Promo",
+    "event": "Soirée",
+    "editorial": "Sélection Vyba",
+    "going": "{count} personnes y vont ce soir",
+    "goingShort": "{count} y vont",
+    "goingMilestone": "{count} personnes ont dit « j'y vais »",
+    "goCta": "J'y vais",
+    "goneCta": "Tu y vas",
+    "follow": "Suivre",
+    "following": "Suivi",
+    "decks": "Aux platines",
+    "tonightOffer": "L'offre du soir",
+    "partyQuestion": "Tu viens avec combien ?",
+    "confirm": "Confirmer",
+    "yourPlaces": "Tes lieux",
+    "weekend": "Ce week-end",
+    "upcoming": "À venir",
+    "items": {
+      "liveUpdate": "C'est live ! Le son monte, on vous attend.",
+      "promo": "Happy hour jusqu'à 21h sur les cocktails maison.",
+      "event": "Afro house toute la nuit avec un DJ invité.",
+      "editorial": "Où commencer la soirée à Zone 4 ce soir",
+      "maquis": "Braisé, attiéké et musique live dès 20h.",
+      "djStart": "Le DJ attaque à minuit. Venez tôt.",
+      "weekend": "Samedi : soirée zouglou, entrée libre avant 23h.",
+      "upcoming": "Jeudi prochain : karaoké afro, en terrasse.",
+      "decksValue": "DJ invité · Afro house"
+    }
+  },
+  "hero": {
+    "eyebrow": "Phase pilote · Abidjan",
+    "title": "On bouge où ce soir ?",
+    "lead": "Vyba réunit en un seul fil ce qui se passe ce soir dans les bars, lounges, boîtes et maquis d'Abidjan : qui est live, les soirées, les promos, et combien de personnes y vont.",
+    "secondary": "Vous gérez un lieu ?",
+    "note": "Android d'abord. Connexion avec ton numéro de téléphone, sans mot de passe.",
+    "previewLabel": "Aperçu du fil « Ce soir » de l'app Vyba : des lieux live, une promo, une soirée et le nombre de personnes qui y vont, mis à jour en direct."
+  },
+  "problem": {
+    "eyebrow": "Le constat",
+    "title": "Ce soir, l'info est partout. Donc nulle part.",
+    "lead": "L'info d'une soirée circule en morceaux : un statut, une story, un message transféré, un pote qui connaît quelqu'un. Vyba rassemble les trois choses qu'il faut pour décider.",
+    "items": {
+      "discover": {
+        "title": "Découvrir",
+        "body": "Ce qui se passe ce soir, classé par ce qui compte maintenant, partout à Abidjan."
+      },
+      "announce": {
+        "title": "Annoncer",
+        "body": "Les lieux publient eux-mêmes leur soirée, leur DJ, leur offre du jour."
+      },
+      "coordinate": {
+        "title": "Se coordonner",
+        "body": "Tu dis « j'y vais », tu vois l'affluence. Plus besoin de deviner."
+      }
+    }
+  },
+  "journey": {
+    "eyebrow": "Une soirée avec Vyba",
+    "title": "De « on fait quoi ? » à « on y est ».",
+    "lead": "Vyba suit le rythme de la nuit. Voici une soirée, étape par étape.",
+    "stepsLabel": "Étapes d'une soirée avec Vyba",
+    "steps": {
+      "discover": {
+        "time": "19:00",
+        "title": "Découvre",
+        "body": "Le fil « Ce soir » fait remonter ce qui se passe maintenant : lieux live, soirées, promos. Cherche un lieu par son nom ou regarde ce qui est autour de toi."
+      },
+      "see": {
+        "time": "20:30",
+        "title": "Vois ce qui se passe",
+        "body": "Chaque lieu a sa page du soir : s'il est live, qui est aux platines, l'offre du jour et combien de personnes y vont."
+      },
+      "go": {
+        "time": "22:00",
+        "title": "Dis « J'y vais »",
+        "body": "Un geste : « j'y vais, à quatre ». Pas une réservation, juste un signal pour toi et pour le lieu."
+      },
+      "live": {
+        "time": "23:30",
+        "title": "Vis la soirée",
+        "body": "Le lieu annonce qu'il est live et donne des nouvelles. Le fil bouge avec la nuit."
+      },
+      "return": {
+        "time": "Jeudi d'après",
+        "title": "Reviens",
+        "body": "Suis tes lieux préférés : leurs prochaines soirées t'attendent dans ton fil, ce week-end et après."
+      }
+    }
+  },
+  "going": {
+    "eyebrow": "Le cœur de Vyba",
+    "title": "« J'y vais » : un signal, pas une réservation.",
+    "lead": "Tu dis que tu viens ce soir, et avec combien de personnes. Le lieu voit l'intention, les autres voient l'affluence. Personne ne remplit de formulaire.",
+    "demo": {
+      "label": "Démo interactive",
+      "hint": "Essaie : choisis combien vous êtes, puis dis « J'y vais ».",
+      "partyLegend": "Vous êtes combien, toi compris ?",
+      "partyOption": "{count, plural, one {Seul·e} other {# personnes}}",
+      "confirmed": "C'est noté. Tu peux changer d'avis jusqu'à minuit.",
+      "cancel": "Touche à nouveau pour annuler.",
+      "announce": "{count} personnes y vont ce soir.",
+      "countSuffix": "personnes y vont ce soir"
+    },
+    "principles": {
+      "notBooking": {
+        "title": "Pas une réservation",
+        "body": "Aucune table bloquée, aucun acompte. Ça marche pour le maquis du quartier comme pour le lounge."
+      },
+      "private": {
+        "title": "Anonyme par défaut",
+        "body": "Le lieu et les autres voient un total, pas ton nom. C'est toi qui choisis de te montrer."
+      },
+      "oncePerNight": {
+        "title": "Un par soir",
+        "body": "Un seul « j'y vais » par lieu et par soir, modifiable jusqu'à minuit. Le compteur repart à zéro le lendemain."
+      },
+      "honest": {
+        "title": "Un compteur qui dit vrai",
+        "body": "Chaque « j'y vais » est lié à un numéro vérifié, et un lieu ne peut pas gonfler son propre compteur."
+      }
+    }
+  },
+  "venues": {
+    "eyebrow": "Pour les lieux",
+    "title": "Votre soirée, annoncée en un geste.",
+    "lead": "Bar, lounge, boîte ou maquis : Vyba vous donne un canal direct vers les gens qui cherchent où sortir ce soir, sans gérer de réservations.",
+    "features": {
+      "live": {
+        "title": "« On est live ce soir »",
+        "body": "Un bouton pour dire que c'est ouvert et que ça bouge. Pas d'horaires à tenir à jour."
+      },
+      "post": {
+        "title": "Soirées, DJ, promos",
+        "body": "Annoncez l'invité aux platines ou l'happy hour en un tap. Ça remonte dans le fil « Ce soir »."
+      },
+      "intent": {
+        "title": "Voyez qui vient",
+        "body": "Le nombre de personnes qui disent y aller et la taille des groupes, soir après soir."
+      }
+    },
+    "demo": {
+      "label": "Démo interactive · espace gérant",
+      "venueTonight": "Votre soirée",
+      "liveSwitch": "On est live ce soir",
+      "liveOn": "Votre lieu apparaît comme live dans le fil.",
+      "liveOff": "Activez pour apparaître comme live ce soir.",
+      "quickPost": "Publier en un tap",
+      "quickPosted": "Publié dans le fil",
+      "actions": {
+        "dj": "DJ ce soir",
+        "happyHour": "Happy hour",
+        "liveMusic": "Musique live",
+        "photo": "Photo"
+      },
+      "goingLabel": "Personnes qui viennent",
+      "groupsLabel": "Groupes",
+      "groupsValue": "{count} groupes · 2 à 6 pers."
+    },
+    "onboarding": {
+      "title": "Rejoindre Vyba",
+      "steps": {
+        "contact": "Écrivez-nous sur WhatsApp.",
+        "visit": "Quelqu'un de l'équipe passe sur place, vérifie le gérant et crée votre accès.",
+        "publish": "Vous publiez depuis l'app Vyba, côté gérant."
+      },
+      "note": "Rien n'est facturé pendant la phase pilote."
+    }
+  },
+  "where": {
+    "eyebrow": "Où ?",
+    "title": "Ça commence à Zone 4.",
+    "body": "Les premiers lieux partenaires sont à Zone 4 et Marcory. La recherche, elle, couvre tout Abidjan : n'importe quel lieu inscrit sur Vyba se trouve par son nom ou autour de toi.",
+    "kinds": "Bars · Lounges · Boîtes · Maquis"
+  },
+  "faq": {
+    "eyebrow": "Questions",
+    "title": "Ce qu'on nous demande.",
+    "items": {
+      "free": {
+        "question": "Vyba est payant ?",
+        "answer": "Non. Rien n'est facturé pendant la phase pilote, ni aux personnes qui sortent, ni aux lieux."
+      },
+      "booking": {
+        "question": "« J'y vais », c'est une réservation ?",
+        "answer": "Non. C'est un signal d'intention : tu dis que tu viens, et avec combien de personnes. Certains lieux acceptent aussi des demandes de réservation pour le soir même ; dans ce cas, c'est le lieu qui confirme."
+      },
+      "privacy": {
+        "question": "Les autres voient que j'y vais ?",
+        "answer": "Non, pas par défaut. Le lieu et les autres utilisateurs voient seulement un total, par exemple « 23 personnes y vont ce soir ». Ton identité reste privée, sauf si tu choisis de la montrer."
+      },
+      "phone": {
+        "question": "Pourquoi mon numéro de téléphone ?",
+        "answer": "C'est ton seul identifiant : pas de mot de passe, pas de compte Google ou Facebook. Tu reçois un code de vérification pour te connecter. Ça garantit aussi que chaque « j'y vais » vient d'une vraie personne."
+      },
+      "iphone": {
+        "question": "Et sur iPhone ?",
+        "answer": "Vyba sort d'abord sur Android, via Google Play. Dans un lieu partenaire, scanne le QR code sur la table : tu vois sa soirée et tu peux dire « j'y vais » depuis ton navigateur, sans rien installer."
+      },
+      "where": {
+        "question": "Ça marche dans quels quartiers ?",
+        "answer": "Partout à Abidjan où des lieux sont inscrits. Les premiers lieux partenaires sont à Zone 4 et Marcory, et il y en aura d'autres au fil du pilote."
+      },
+      "venue": {
+        "question": "Comment inscrire mon établissement ?",
+        "answer": "Les comptes des lieux sont créés par l'équipe Vyba, après une visite sur place pour vérifier le gérant. Écrivez-nous sur WhatsApp pour organiser ça."
+      }
+    }
+  },
+  "footer": {
+    "tagline": "Ce qui se passe ce soir à Abidjan, au même endroit.",
+    "product": "Produit",
+    "legal": "Légal",
+    "privacy": "Confidentialité",
+    "help": "Un problème ?",
+    "copyright": "© {year} Vyba. Abidjan, Côte d'Ivoire."
+  },
+  "legal": {
+    "title": "Confidentialité",
+    "metaDescription": "Quelles données Vyba collecte, pourquoi, et comment exercer tes droits.",
+    "lastUpdated": "Dernière mise à jour : 28 octobre 2026",
+    "intro": "Cette page explique quelles données Vyba collecte, sur ce site et dans l'app, et ce qu'on en fait. On en collecte le moins possible.",
+    "site": {
+      "title": "Sur ce site",
+      "content": "Ce site ne contient aucun formulaire, ne dépose aucun cookie et n'utilise aucun outil de mesure d'audience tiers. Le serveur qui l'héberge peut conserver brièvement des journaux techniques (adresse IP, navigateur) pour des raisons de sécurité."
+    },
+    "app": {
+      "title": "Dans l'app Vyba",
+      "items": {
+        "phone": "Ton numéro de téléphone : c'est ton identifiant, vérifié par un code. Pas de mot de passe, pas de connexion via un réseau social.",
+        "activity": "Tes « j'y vais », la taille de ton groupe et les lieux que tu suis : pour faire fonctionner le service et classer le fil.",
+        "source": "D'où tu es arrivé (QR code d'un lieu, lien partagé) : pour comprendre comment les gens découvrent Vyba.",
+        "location": "Ta position, seulement si tu l'autorises : pour te montrer les lieux autour de toi."
+      }
+    },
+    "visibility": {
+      "title": "Ce que les autres voient",
+      "content": "Les lieux et les autres utilisateurs voient des totaux (« 23 personnes y vont ce soir »), jamais ton nom ni ton numéro, sauf si tu choisis de montrer ton identité."
+    },
+    "rights": {
+      "title": "Tes droits",
+      "content": "Tu peux demander l'accès à tes données, leur correction ou leur suppression, conformément à la réglementation ivoirienne sur la protection des données personnelles.",
+      "contactWith": "Pour toute demande :",
+      "contactPending": "Les coordonnées de contact seront publiées ici avant le lancement public."
+    }
+  },
+  "errors": {
+    "notFoundCode": "404",
+    "notFoundTitle": "Cette page n'existe pas.",
+    "notFoundDescription": "Le lien est peut-être cassé, ou la soirée est déjà finie.",
+    "notFoundCta": "Retour à l'accueil",
+    "genericTitle": "Quelque chose s'est mal passé.",
+    "genericDescription": "Réessaie dans un instant.",
+    "genericCta": "Réessayer"
+  }
+}

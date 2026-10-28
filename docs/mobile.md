@@ -17,7 +17,7 @@ make run           # flutter run
 make test          # flutter test
 make analyze       # flutter analyze (very_good_analysis + riverpod_lint + custom_lint)
 make format        # dart format .
-make l10n          # flutter gen-l10n
+flutter gen-l10n    # localization (no make target)
 make clean         # clean + pub get
 make icons         # flutter_launcher_icons
 make splash        # flutter_native_splash
@@ -98,7 +98,7 @@ notifiers`.
 ## Localization
 
 Strings are bilingual: every key must exist in both `lib/l10n/app_en.arb` **and**
-`lib/l10n/app_fr.arb`. Run `make l10n` after edits.
+`lib/l10n/app_fr.arb`. Run `flutter gen-l10n` after edits.
 
 ## Design tokens
 

@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+/* ===== VYBA DESIGN TOKENS — "Abidjan Pulse" =====
+ * Mirrors Vyba-mobile-app/lib/core/theme/* (AppColors, AppRadius, AppShadows).
+ * Rules (docs/design-system.md): dark-first, never #000, no 1px borders,
+ * radius >= 8px, shadows only from the tokens below.
+ */
+@theme {
+  --font-display: var(--font-epilogue), "Epilogue", sans-serif;
+  --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
+  --font-mono: var(--font-space-mono), "Space Mono", ui-monospace, monospace;
+
+  /* Brand — semantic, never decorative */
+  --color-primary: #b0a3ff; /* Electric Indigo — interactive / CTA */
+  --color-primary-dim: #6c5ce7;
+  --color-on-primary: #0f00a4;
+  --color-secondary: #69f6b8; /* Abidjan Emerald — live / availability only */
+  --color-on-secondary: #005a3c;
+  --color-tertiary: #ffb148; /* Golden Hour — promos / VIP only */
+  --color-on-tertiary: #573500;
+  --color-error: #ff6e84;
+
+  /* Tonal surfaces — boundaries come from these shifts, not lines */
+  --color-surface: #060e20;
+  --color-surface-low: #0c1a32;
+  --color-surface-container: #111f3a;
+  --color-surface-high: #172742;
+  --color-surface-highest: #1d2f4c;
+  --color-surface-bright: #1f2b49;
+  --color-on-surface: #dee5ff;
+  --color-on-surface-variant: #b0b7d0;
+  --color-muted: #8d95ad;
+
+  /* AppRadius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+  --radius-device: 44px;
+
+  /* AppShadows — tinted, never default */
+  --shadow-floating: 0 0 24px -4px rgb(222 229 255 / 0.08);
+  --shadow-device: 0 16px 32px rgb(3 7 18 / 0.5), 0 48px 96px -24px rgb(108 92 231 / 0.35);
+  --shadow-glow-primary: 0 0 16px -2px rgb(176 163 255 / 0.35);
+  --shadow-glow-secondary: 0 0 12px -2px rgb(105 246 184 / 0.45);
+
+  /* AppMotion */
+  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+
+  /* Composited (transform + opacity only) so it never forces repaints. */
+  --animate-live-ping: live-ping 2s var(--ease-emphasized) infinite;
+
+  @keyframes live-ping {
+    0% {
+      transform: scale(1);
+      opacity: 0.6;
+    }
+    70%,
+    100% {
+      transform: scale(3);
+      opacity: 0;
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
+body {
+  @apply bg-surface text-on-surface font-sans text-base antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  @apply bg-primary text-on-primary;
+}
+
+button,
+[role="button"] {
+  @apply cursor-pointer;
+  touch-action: manipulation;
+}
+
+/* Focus rings are the one sanctioned outline: accessibility over the no-line rule. */
+:focus-visible {
+  @apply outline-primary rounded-sm outline-2 outline-offset-4;
+}
+
+@utility container-page {
+  @apply mx-auto w-full max-w-[1200px] px-5 sm:px-8 lg:px-12;
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@keyframes menu-in {
+  from {
+    transform: translateX(24px);
+    opacity: 0;
+  }
+}

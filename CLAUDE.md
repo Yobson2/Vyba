@@ -10,9 +10,10 @@ d'Ivoire: discover venues, see what's happening tonight, signal intent to go out
 ("J'y vais"), leave reviews, run venue promotions. In a **validation phase** scoped
 to one commune (Zone 4 / Marcory).
 
-Monorepo, four deployables — three adapted from a starter template plus a
-purpose-built web surface (ADR-0004). Each has its own toolchain, README and
-conventions — work within the one you're editing, don't cross-wire them.
+Monorepo, five deployables — three adapted from a starter template, a
+purpose-built web surface (ADR-0004) and a static marketing landing page. Each
+has its own toolchain, README and conventions — work within the one you're
+editing, don't cross-wire them.
 
 | Path | Role | Stack |
 |------|------|-------|
@@ -20,6 +21,7 @@ conventions — work within the one you're editing, don't cross-wire them.
 | `Vyba-dashboard-admin/` | Vyba team operations dashboard | React 19, TanStack Router/Query/Table, Zustand, shadcn/ui |
 | `Vyba-backend/` | REST API | NestJS 11, TypeORM + PostgreSQL, Redis, S3, Socket.IO, JWT |
 | `Vyba-web/` | QR-scan acquisition surface (read-only; ADR-0004) | Next.js (App Router), React Server Components, vitest + MSW |
+| `vyba-landing-page/` | Public marketing site (static, French only) | Next.js 16 (App Router, SSG), Tailwind 4, next-intl, framer-motion |
 
 ## Start here
 
@@ -80,6 +82,7 @@ conventions — work within the one you're editing, don't cross-wire them.
 | Topic | Read |
 |---|---|
 | Product concepts, glossary, actors, invariants | `CONTEXT.md` + sub-project `CONTEXT.md` |
+| System overview, local setup, API map, deployment | `docs/ARCHITECTURE.md`, `docs/SETUP.md`, `docs/API.md`, `docs/DEPLOYMENT.md` |
 | The validation MVP — spec, scope, codebase audit | `docs/validation-mvp/` |
 | Flutter app — commands, layer contracts, DI graph, routing, networking, lint | `docs/mobile.md` |
 | Admin dashboard — commands, routing, state, API layer, table/dialog patterns | `docs/dashboard.md` |
